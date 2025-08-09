@@ -1,0 +1,152 @@
+[
+  {
+    "id": "web-development",
+    "title": "웹사이트 개발",
+    "shortBenefit": "비즈니스 성과를 만드는 전략적 웹사이트",
+    "description": "최신 기술 스택으로 구축하는 고성능 반응형 웹사이트. 사용자 경험과 검색 엔진 최적화를 고려한 전문적인 개발 서비스를 제공합니다.",
+    "icon": "code",
+    "miniCase": {
+      "client": "TechCorp Industries",
+      "result": "리드 생성 +187%",
+      "description": "제조업 B2B 포털 구축으로 해외 바이어 유치 극대화"
+    },
+    "benefits": [
+      "반응형 디자인으로 모든 디바이스 지원",
+      "SEO 최적화로 검색 노출 극대화",
+      "빠른 로딩 속도와 안정적인 성능",
+      "CMS 연동으로 쉬운 콘텐츠 관리",
+      "보안 강화 및 SSL 인증서 적용"
+    ],
+    "features": [
+      "Next.js, React 기반 개발",
+      "TypeScript로 안정성 확보",
+      "클라우드 호스팅 및 CDN 적용",
+      "Google Analytics 연동"
+    ]
+  },
+  {
+    "id": "ui-ux-design",
+    "title": "UI/UX 디자인",
+    "shortBenefit": "전환율을 높이는 사용자 중심 디자인",
+    "description": "사용자 중심의 인터페이스 설계와 브랜드 아이덴티티를 반영한 시각적 디자인. 전환율 향상을 위한 전략적 UX 설계를 제공합니다.",
+    "icon": "palette",
+    "miniCase": {
+      "client": "Organic Kitchen Co.",
+      "result": "CVR 개선 +300%",
+      "description": "감성적 브랜드 스토리텔링으로 젊은 소비층 공략 성공"
+    },
+    "benefits": [
+      "사용자 행동 분석 기반 UX 설계",
+      "브랜드 컬러와 톤앤매너 정립",
+      "와이어프레임부터 고해상도 목업까지",
+      "프로토타이핑으로 사전 테스트",
+      "디자인 시스템 구축 및 가이드라인 제공"
+    ],
+    "features": [
+      "Figma 기반 협업 디자인",
+      "사용성 테스트 및 개선",
+      "접근성 가이드라인 준수",
+      "반응형 디자인 최적화"
+    ]
+  },
+  {
+    "id": "performance-optimization",
+    "title": "성능 최적화",
+    "shortBenefit": "3초 이내 로딩으로 이탈률 최소화",
+    "description": "웹사이트 속도 개선과 사용자 경험 향상을 위한 종합적인 성능 최적화 서비스. Core Web Vitals 기준 충족으로 SEO 효과까지 극대화합니다.",
+    "icon": "zap",
+    "miniCase": {
+      "client": "LogiTech Solutions",
+      "result": "세션 시간 +280%",
+      "description": "복잡한 SaaS 플랫폼의 사용자 경험 혁신으로 데모 전환 급증"
+    },
+    "benefits": [
+      "페이지 로딩 속도 3배 향상",
+      "이미지 최적화 및 WebP 변환",
+      "코드 분할과 지연 로딩 적용",
+      "CDN 적용으로 전세계 빠른 접속",
+      "캐싱 전략으로 반복 방문자 경험 개선"
+    ],
+    "features": [
+      "Lighthouse 성능 점수 90+ 달성",
+      "Bundle 분석 및 최적화",
+      "서버사이드 렌더링 적용",
+      "Progressive Web App 구현"
+    ]
+  },
+  {
+    "id": "digital-marketing",
+    "title": "디지털 마케팅",
+    "shortBenefit": "데이터 기반 마케팅으로 ROI 극대화",
+    "description": "웹사이트 런칭 후 지속적인 성장을 위한 디지털 마케팅 전략 수립 및 실행. SEO, SEM, 소셜미디어 마케팅을 통한 통합 마케팅을 제공합니다.",
+    "icon": "trending",
+    "miniCase": {
+      "client": "PayFlow Solutions",
+      "result": "사용자 등록 +520%",
+      "description": "핀테크 스타트업의 신뢰도 구축과 사용자 획득 전략 성공"
+    },
+    "benefits": [
+      "검색엔진 상위 노출 SEO 전략",
+      "구글 광고 및 네이버 광고 운영",
+      "소셜미디어 마케팅 기획 및 실행",
+      "콘텐츠 마케팅 전략 수립",
+      "마케팅 성과 분석 및 리포팅"
+    ],
+    "features": [
+      "키워드 분석 및 콘텐츠 전략",
+      "Google Ads, Facebook 광고 운영",
+      "유입 경로별 전환율 분석",
+      "A/B 테스트 및 최적화"
+    ]
+  },
+  {
+    "id": "maintenance-support",
+    "title": "유지보수 & 지원",
+    "shortBenefit": "24/7 모니터링으로 안정적인 서비스 운영",
+    "description": "웹사이트 런칭 후 안정적인 운영을 위한 지속적인 관리 서비스. 보안 업데이트, 콘텐츠 관리, 기술 지원까지 원스톱으로 제공합니다.",
+    "icon": "shield",
+    "miniCase": {
+      "client": "MediCare Connect",
+      "result": "진료 효율성 +65%",
+      "description": "헬스케어 플랫폼의 안정성 확보로 의료진과 환자 만족도 향상"
+    },
+    "benefits": [
+      "24/7 모니터링 및 장애 대응",
+      "정기적인 보안 업데이트 및 백업",
+      "콘텐츠 업데이트 및 수정 작업",
+      "성능 모니터링 및 최적화",
+      "기술 지원 및 컨설팅"
+    ],
+    "features": [
+      "월간/분기별 리포트 제공",
+      "긴급 상황 즉시 대응",
+      "백업 및 복구 시스템 운영",
+      "보안 취약점 정기 점검"
+    ]
+  },
+  {
+    "id": "global-expansion",
+    "title": "글로벌 확장",
+    "shortBenefit": "현지화 전략으로 해외 시장 진출 가속화",
+    "description": "해외 진출을 위한 다국어 웹사이트 구축과 현지화 서비스. 각국의 문화와 비즈니스 환경을 고려한 맞춤형 웹 솔루션을 제공합니다.",
+    "icon": "globe",
+    "miniCase": {
+      "client": "Steel Master Inc.",
+      "result": "해외 바이어 문의 +280%",
+      "description": "철강 제조업체의 글로벌 B2B 플랫폼으로 해외 시장 개척 성공"
+    },
+    "benefits": [
+      "다국어 사이트 구축 및 관리",
+      "현지 문화 반영 UX/UI 최적화",
+      "글로벌 SEO 및 현지 검색엔진 최적화",
+      "해외 결제 시스템 연동",
+      "현지 법규 준수 및 개인정보보호"
+    ],
+    "features": [
+      "i18n 국제화 시스템 구축",
+      "현지 호스팅 및 CDN 최적화",
+      "다국가 도메인 전략",
+      "현지 마케팅 채널 연동"
+    ]
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "name": "CHIRO - 프리미엄 웹에이전시",
+  "short_name": "CHIRO",
+  "description": "제조업과 중견기업을 위한 프리미엄 웹사이트 제작 서비스",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "lang": "ko",
+  "scope": "/",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png", 
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512", 
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "포트폴리오",
+      "short_name": "Portfolio",
+      "description": "CHIRO의 프로젝트 사례를 확인하세요",
+      "url": "/portfolio",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "서비스",
+      "short_name": "Services", 
+      "description": "CHIRO의 전문 서비스를 확인하세요",
+      "url": "/services",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "상담 문의",
+      "short_name": "Contact",
+      "description": "프로젝트 상담을 신청하세요",
+      "url": "/contact",
+      "icons": [{ "src": "/favicon-96x96.png", "sizes": "96x96" }]
+    }
+  ]
+}

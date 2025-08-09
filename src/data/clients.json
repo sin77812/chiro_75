@@ -1,0 +1,51 @@
+[
+  {
+    "id": "samsung",
+    "name": "삼성전자",
+    "logo": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=100&fit=crop",
+    "alt": "삼성전자 로고",
+    "url": "https://samsung.com"
+  },
+  {
+    "id": "lg",
+    "name": "LG전자", 
+    "logo": "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&h=100&fit=crop",
+    "alt": "LG전자 로고"
+  },
+  {
+    "id": "hyundai",
+    "name": "현대자동차",
+    "logo": "https://images.unsplash.com/photo-1549924231-f129b911e442?w=200&h=100&fit=crop",
+    "alt": "현대자동차 로고"
+  },
+  {
+    "id": "posco",
+    "name": "포스코",
+    "logo": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=200&h=100&fit=crop",
+    "alt": "포스코 로고"
+  },
+  {
+    "id": "doosan",
+    "name": "두산그룹",
+    "logo": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=200&h=100&fit=crop",
+    "alt": "두산그룹 로고"
+  },
+  {
+    "id": "hanwha",
+    "name": "한화그룹",
+    "logo": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=200&h=100&fit=crop",
+    "alt": "한화그룹 로고"
+  },
+  {
+    "id": "lotte",
+    "name": "롯데그룹",
+    "logo": "https://images.unsplash.com/photo-1567306301408-9b74779a11af?w=200&h=100&fit=crop",
+    "alt": "롯데그룹 로고"
+  },
+  {
+    "id": "sk",
+    "name": "SK그룹",
+    "logo": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=200&h=100&fit=crop",
+    "alt": "SK그룹 로고"
+  }
+]

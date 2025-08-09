@@ -1,0 +1,101 @@
+[
+  {
+    "id": "nexus-manufacturing",
+    "title": "넥서스 제조업 포털",
+    "slug": "nexus-manufacturing",
+    "client": "Nexus Manufacturing",
+    "industry": "manufacturing",
+    "services": ["웹 개발", "UX/UI 디자인", "다국어 지원", "SEO 최적화"],
+    "thumbnail": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=600&fit=crop"
+    ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
+    "year": 2024,
+    "category": "manufacturing",
+    "tags": ["제조업", "B2B", "반응형", "다국어"],
+    "kpis": [
+      {
+        "metric": "리드 생성",
+        "value": "+187%",
+        "improvement": "187%"
+      },
+      {
+        "metric": "페이지 로딩 속도",
+        "value": "LCP 1.6s",
+        "improvement": "65%"
+      },
+      {
+        "metric": "해외 문의",
+        "value": "+320%",
+        "improvement": "320%"
+      }
+    ],
+    "description": "글로벌 제조업 기업의 디지털 전환을 위한 종합 포털 사이트 구축",
+    "problem": "기존 웹사이트가 단순 회사 소개에 그쳐 해외 바이어들의 관심을 끌지 못했습니다",
+    "approach": "다국어 지원 시스템 구축, 제품 카탈로그 최적화, B2B 특화 UX 설계로 글로벌 시장 진출을 지원했습니다",
+    "result": "해외 문의 320% 증가, 리드 생성 187% 향상으로 실질적인 비즈니스 성과를 달성했습니다",
+    "completedAt": "2024-09-15"
+  },
+  {
+    "id": "koretech-solutions",
+    "title": "코리텍 솔루션즈",
+    "slug": "koretech-solutions",
+    "client": "KoreTech Solutions",
+    "industry": "technology",
+    "services": ["SaaS 플랫폼", "대시보드 개발", "API 통합"],
+    "category": "service",
+    "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+    ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    "year": 2024,
+    "tags": ["SaaS", "기술", "대시보드"],
+    "kpis": [
+      {
+        "metric": "사용자 참여",
+        "value": "+250%",
+        "improvement": "250%"
+      }
+    ],
+    "description": "기업용 SaaS 플랫폼의 사용자 경험 개선",
+    "problem": "복잡한 기업용 솔루션이 사용자들에게 직관적이지 않았습니다",
+    "approach": "사용자 중심의 인터페이스 설계와 대시보드 최적화를 진행했습니다",
+    "result": "사용자 참여도 250% 증가와 함께 고객 만족도가 크게 향상되었습니다",
+    "completedAt": "2024-08-20"
+  },
+  {
+    "id": "global-dynamics",
+    "title": "글로벌 다이나믹스",
+    "slug": "global-dynamics", 
+    "client": "Global Dynamics Corp",
+    "industry": "consulting",
+    "services": ["기업 웹사이트", "브랜딩", "SEO"],
+    "category": "corporate",
+    "thumbnail": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop",
+    "gallery": [
+      "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
+    ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop", 
+    "year": 2024,
+    "tags": ["컨설팅", "기업", "글로벌"],
+    "kpis": [
+      {
+        "metric": "브랜드 인지도",
+        "value": "+180%",
+        "improvement": "180%"
+      }
+    ],
+    "description": "글로벌 컨설팅 기업의 브랜드 아이덴티티 구축",
+    "problem": "해외 시장에서 브랜드 인지도가 부족했습니다",
+    "approach": "전문성을 강조한 브랜딩과 SEO 최적화를 통한 온라인 가시성 확보",
+    "result": "브랜드 인지도 180% 증가로 시장 입지를 강화했습니다",
+    "completedAt": "2024-07-10"
+  }
+]

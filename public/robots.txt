@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://chiro.co.kr/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important paths for SEO
+Allow: /portfolio
+Allow: /services
+Allow: /about
+Allow: /contact
+Allow: /case/*
+
+# Crawl delay for better server performance
+Crawl-delay: 1

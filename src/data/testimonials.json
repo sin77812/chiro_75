@@ -1,0 +1,57 @@
+[
+  {
+    "id": "kim-hyunsoo",
+    "quote": "CHIRO와 함께한 웹사이트 리뉴얼 프로젝트로 온라인 문의가 400% 증가했습니다. 특히 모바일 최적화와 사용자 경험 개선 덕분에 해외 바이어들의 관심도 크게 높아졌어요.",
+    "author": {
+      "name": "김현수",
+      "position": "마케팅 이사",
+      "company": "㈜테크놀로지 파트너스",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    "rating": 5
+  },
+  {
+    "id": "park-minji",
+    "quote": "처음에는 디자인만 바꾸는 줄 알았는데, CHIRO는 우리 비즈니스 전체를 이해하고 전략적으로 접근해주셨어요. 결과적으로 매출이 3배 증가했고, 브랜드 인지도도 크게 향상됐습니다.",
+    "author": {
+      "name": "박민지",
+      "position": "대표이사",
+      "company": "프리미엄 푸드 컴퍼니",
+      "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b977?w=150&h=150&fit=crop&crop=face"
+    },
+    "rating": 5
+  },
+  {
+    "id": "choi-seungho",
+    "quote": "20년간 제조업에 종사하면서 디지털화가 필요하다는 것은 알았지만 어떻게 시작해야 할지 막막했습니다. CHIRO의 전문적인 컨설팅으로 단계별 디지털 전환을 성공적으로 완료했어요.",
+    "author": {
+      "name": "최승호",
+      "position": "전무이사", 
+      "company": "대한철강㈜",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    },
+    "rating": 5
+  },
+  {
+    "id": "lee-jiyoung",
+    "quote": "단순히 예쁜 웹사이트를 만드는 것이 아니라, 고객의 구매 여정을 분석하고 전환율을 높이는 전략적 접근이 인상적이었습니다. 덕분에 온라인 예약이 300% 증가했어요.",
+    "author": {
+      "name": "이지영",
+      "position": "브랜드 매니저",
+      "company": "오가닉 키친",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    "rating": 5
+  },
+  {
+    "id": "jung-woosung",
+    "quote": "글로벌 진출을 위해 다국어 사이트가 필요했는데, CHIRO는 단순 번역이 아닌 현지화까지 고려해서 작업해주셨습니다. 해외 클라이언트 문의가 250% 증가하는 성과를 얻었습니다.",
+    "author": {
+      "name": "정우성",
+      "position": "해외사업부장",
+      "company": "글로벌 컨설팅",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+    },
+    "rating": 5
+  }
+]
