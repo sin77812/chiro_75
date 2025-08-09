@@ -33,7 +33,7 @@ export default function ContactForm() {
       if (!formData.name.trim()) newErrors.name = '이름을 입력해주세요'
       if (!formData.email.trim()) newErrors.email = '이메일을 입력해주세요'
       else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = '올바른 이메일 형식을 입력해주세요'
-      if (!formData.company.trim()) newErrors.company = '회사명을 입력해주세요'
+      if (!formData.company?.trim()) newErrors.company = '회사명을 입력해주세요'
     }
 
     if (step === 2) {

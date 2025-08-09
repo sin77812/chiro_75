@@ -13,14 +13,14 @@ interface FooterProps {
 export default function Footer({ className = '' }: FooterProps) {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    ServiceAnalytics.completeForm('newsletter', {
+    ServiceAnalytics.completeForm('contact', {
       page: 'footer',
       form_location: 'global_footer'
     })
   }
 
   const handleSocialClick = (platform: string) => {
-    ServiceAnalytics.clickServiceCTA('footer-social', 'tertiary', `${platform} Social Media`)
+    ServiceAnalytics.clickServiceCTA('footer-social', 'secondary', `${platform} Social Media`)
   }
 
   const currentYear = new Date().getFullYear()
@@ -180,7 +180,7 @@ export default function Footer({ className = '' }: FooterProps) {
                       href={contact.href}
                       className="flex items-center text-text-secondary hover:text-primary transition-colors text-sm"
                       showExternalIcon={contact.href.startsWith('http')}
-                      onClick={() => ServiceAnalytics.clickServiceCTA('footer-contact', 'tertiary', contact.label)}
+                      onClick={() => ServiceAnalytics.clickServiceCTA('footer-contact', 'secondary', contact.label)}
                     >
                       <IconComponent className="w-4 h-4 mr-3 flex-shrink-0" aria-hidden="true" />
                       <span>{contact.value}</span>
@@ -200,7 +200,7 @@ export default function Footer({ className = '' }: FooterProps) {
                       <AccessibleLink
                         href={link.href}
                         className="text-text-secondary hover:text-primary transition-colors text-sm block py-1"
-                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-services', 'tertiary', link.label)}
+                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-services', 'secondary', link.label)}
                       >
                         {link.label}
                       </AccessibleLink>
@@ -220,7 +220,7 @@ export default function Footer({ className = '' }: FooterProps) {
                       <AccessibleLink
                         href={link.href}
                         className="text-text-secondary hover:text-primary transition-colors text-sm block py-1"
-                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-company', 'tertiary', link.label)}
+                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-company', 'secondary', link.label)}
                       >
                         {link.label}
                       </AccessibleLink>
@@ -240,7 +240,7 @@ export default function Footer({ className = '' }: FooterProps) {
                       <AccessibleLink
                         href={link.href}
                         className="text-text-secondary hover:text-primary transition-colors text-sm block py-1"
-                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-legal', 'tertiary', link.label)}
+                        onClick={() => ServiceAnalytics.clickServiceCTA('footer-legal', 'secondary', link.label)}
                       >
                         {link.label}
                       </AccessibleLink>
@@ -302,7 +302,7 @@ export default function Footer({ className = '' }: FooterProps) {
               <AccessibleLink
                 href="/sitemap.xml"
                 className="text-text-tertiary hover:text-primary transition-colors"
-                onClick={() => ServiceAnalytics.clickServiceCTA('footer-utility', 'tertiary', 'Sitemap')}
+                onClick={() => ServiceAnalytics.clickServiceCTA('footer-utility', 'secondary', 'Sitemap')}
               >
                 사이트맵
               </AccessibleLink>
@@ -310,7 +310,7 @@ export default function Footer({ className = '' }: FooterProps) {
               <AccessibleLink
                 href="/rss.xml"
                 className="text-text-tertiary hover:text-primary transition-colors"
-                onClick={() => ServiceAnalytics.clickServiceCTA('footer-utility', 'tertiary', 'RSS Feed')}
+                onClick={() => ServiceAnalytics.clickServiceCTA('footer-utility', 'secondary', 'RSS Feed')}
               >
                 RSS
               </AccessibleLink>

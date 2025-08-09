@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { caseStudies } from '@/data/caseStudies'
 import MetricsCard from '@/components/ui/MetricsCard'
-import CaseStudyStructuredData from '@/components/seo/CaseStudyStructuredData'
+// import CaseStudyStructuredData from '@/components/seo/CaseStudyStructuredData'
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
@@ -55,7 +55,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <>
-      <CaseStudyStructuredData caseStudy={caseStudy} />
+      {/* <CaseStudyStructuredData caseStudy={caseStudy} /> */}
       <main className="min-h-screen bg-white">
       <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

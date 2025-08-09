@@ -72,7 +72,7 @@ export default function DarkModeToggle({
     applyTheme(newTheme)
 
     // Analytics tracking
-    ServiceAnalytics.clickServiceCTA('theme-toggle', 'utility', `Switch to ${newTheme} mode`)
+    ServiceAnalytics.clickServiceCTA('theme-toggle', 'secondary', `Switch to ${newTheme} mode`)
   }
 
   // Prevent hydration mismatch

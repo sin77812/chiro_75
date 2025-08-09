@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { blogPosts, categories } from '@/data/blogPosts'
 import TableOfContents from '@/components/ui/TableOfContents'
 import HighlightCallout from '@/components/ui/HighlightCallout'
-import BlogStructuredData from '@/components/seo/BlogStructuredData'
+// import BlogStructuredData from '@/components/seo/BlogStructuredData'
 
 interface InsightPageProps {
   params: Promise<{ slug: string }>
@@ -173,7 +173,7 @@ export default async function InsightPage({ params }: InsightPageProps) {
 
   return (
     <>
-      <BlogStructuredData post={post} />
+      {/* <BlogStructuredData post={post} /> */}
       <main className="min-h-screen bg-white">
       <article>
         <section className="relative h-[60vh] min-h-[500px] flex items-center">
