@@ -403,3 +403,80 @@ export function AnalyticsProvider({ children }: AnalyticsProviderProps) {
 
   return <>{children}</>
 }
+
+// About Page Analytics
+export const AboutAnalytics = {
+  viewDifferentiator: (differentiatorId: string, title: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_differentiator_view', {
+        event_category: 'About',
+        event_label: differentiatorId,
+        differentiator_title: title,
+        page_section: 'why_chiro'
+      })
+    }
+  },
+
+  expandProcessStep: (stepNumber: number, title: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_process_expand', {
+        event_category: 'About',
+        event_label: `step_${stepNumber}`,
+        step_title: title,
+        page_section: 'process'
+      })
+    }
+  },
+
+  viewAwardLogo: (awardTitle: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_award_view', {
+        event_category: 'About',
+        event_label: awardTitle,
+        page_section: 'awards'
+      })
+    }
+  },
+
+  downloadMediaKit: (itemType: string, format: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_media_download', {
+        event_category: 'About',
+        event_label: itemType,
+        file_format: format,
+        page_section: 'media_kit'
+      })
+    }
+  },
+
+  viewCSRSection: (sectionType: 'accessibility' | 'privacy' | 'security') => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_csr_view', {
+        event_category: 'About',
+        event_label: sectionType,
+        page_section: 'csr_declaration'
+      })
+    }
+  },
+
+  viewTeamMember: (memberName: string, role: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_team_view', {
+        event_category: 'About',
+        event_label: memberName,
+        member_role: role,
+        page_section: 'team'
+      })
+    }
+  },
+
+  viewTechStack: (category: string) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'about_tech_view', {
+        event_category: 'About',
+        event_label: category,
+        page_section: 'tech_stack'
+      })
+    }
+  }
+}
