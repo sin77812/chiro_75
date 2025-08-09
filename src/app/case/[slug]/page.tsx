@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   }
 }
 
-export default function CaseStudyPage({ params }: CaseStudyPageProps) {
+export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   const project = portfolioData.find((p) => p.slug === params.slug)
 
   if (!project) {
