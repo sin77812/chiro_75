@@ -37,8 +37,6 @@ export default function Footer({ className = '' }: FooterProps) {
     company: [
       { href: '/about', label: '회사 소개' },
       { href: '/portfolio', label: '포트폴리오' },
-      { href: '/case-studies', label: '사례 연구' },
-      { href: '/insights', label: '인사이트' },
       { href: '/contact', label: '문의하기' },
       { href: '/careers', label: '채용 정보' }
     ],
@@ -106,7 +104,7 @@ export default function Footer({ className = '' }: FooterProps) {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="font-pretendard font-bold text-text-primary mb-4 text-2xl md:text-3xl">
-                최신 디지털 트렌드와 <span className="text-gradient">인사이트</span>
+                최신 디지털 트렌드와 <span className="text-gradient">전략</span>
               </h2>
               <p className="text-text-secondary leading-relaxed">
                 매월 업계 전문가가 큐레이션한 디지털 마케팅 트렌드, 개발 베스트 프랙티스, 

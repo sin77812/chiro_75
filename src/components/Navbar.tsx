@@ -12,9 +12,7 @@ import MobileMenu from '@/components/ui/MobileMenu'
 const menuItems = [
   { label: '서비스', href: '/services', isHighlighted: false },
   { label: '포트폴리오', href: '/portfolio', isHighlighted: false },
-  { label: '사례 연구', href: '/case-studies', isHighlighted: false }, // 현재 /case/[slug] 라우트 없음
   { label: '회사 소개', href: '/about', isHighlighted: false },
-  { label: '인사이트', href: '/insights', isHighlighted: false }, // 현재 라우트 없음
   { label: '연락하기', href: '/contact', isHighlighted: true } // CTA 버튼
 ]
 
