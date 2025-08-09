@@ -14,16 +14,16 @@ const serviceExtensions: Record<string, any> = {
   'web-development': {
     problemSolution: {
       problems: [
-        'Outdated website that doesn\'t convert visitors into customers',
-        'Poor mobile experience causing 60%+ bounce rate',
-        'Slow loading times (3s+) hurting SEO rankings',
-        'Difficult content management requiring developer intervention'
+        '방문자를 고객으로 전환하지 못하는 구식 웹사이트',
+        '60% 이상의 이탈률을 유발하는 모바일 경험 부족',
+        'SEO 순위에 악영향을 주는 느린 로딩 속도(3초 이상)',
+        '개발자 개입이 필요한 까다로운 콘텐츠 관리'
       ],
       solutions: [
-        'Mobile-first responsive design with proven conversion patterns',
-        'Sub-1-second loading times with optimized Core Web Vitals',
-        'Intuitive CMS integration for easy content updates',
-        'SEO-optimized architecture for organic traffic growth'
+        '검증된 전환 패턴을 적용한 모바일 우선 반응형 디자인',
+        '최적화된 Core Web Vitals로 1초 미만 로딩 시간',
+        '쉬운 콘텐츠 업데이트를 위한 직관적 CMS 통합',
+        '자연 검색 트래픽 증가를 위한 SEO 최적화 아키텍처'
       ]
     },
     deliverables: [

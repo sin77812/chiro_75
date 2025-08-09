@@ -32,48 +32,48 @@ const categoryIcons = {
 
 // Business impact KPIs
 const businessKPIs = [
-  { label: 'Average Conversion Rate Increase', value: '+147%', context: 'Across 50+ B2B clients' },
-  { label: 'Page Load Time Improvement', value: '1.8s → 0.9s', context: 'Core Web Vitals optimization' },
-  { label: 'Search Traffic Growth', value: '+280%', context: 'SEO & technical optimization' },
-  { label: 'Mobile User Engagement', value: '+195%', context: 'Responsive design excellence' }
+  { label: '평균 전환율 향상', value: '+147%', context: '50+ B2B 클라이언트 기준' },
+  { label: '페이지 로딩 속도 개선', value: '1.8초 → 0.9초', context: 'Core Web Vitals 최적화' },
+  { label: '검색 트래픽 증가', value: '+280%', context: 'SEO 및 기술 최적화' },
+  { label: '모바일 사용자 참여도', value: '+195%', context: '반응형 디자인 우수성' }
 ]
 
 // 5-step process
 const processSteps = [
   {
     step: '01',
-    title: 'Discover',
-    description: 'Business audit, competitor analysis, user research',
-    duration: '1-2 weeks',
-    deliverables: ['Market Analysis Report', 'User Journey Maps', 'Technical Audit']
+    title: '발견',
+    description: '비즈니스 감사, 경쟁사 분석, 사용자 리서치',
+    duration: '1-2주',
+    deliverables: ['시장 분석 보고서', '사용자 여정 맵', '기술 감사']
   },
   {
     step: '02',
-    title: 'Define',
-    description: 'Strategy development, technical architecture, content planning',
-    duration: '1 week',
-    deliverables: ['Project Strategy', 'Technical Specification', 'Content Framework']
+    title: '정의',
+    description: '전략 수립, 기술 아키텍처, 콘텐츠 기획',
+    duration: '1주',
+    deliverables: ['프로젝트 전략', '기술 사양서', '콘텐츠 프레임워크']
   },
   {
     step: '03',
-    title: 'Design',
-    description: 'UI/UX design, prototyping, design system creation',
-    duration: '2-3 weeks',
-    deliverables: ['Design System', 'High-fidelity Mockups', 'Interactive Prototype']
+    title: '디자인',
+    description: 'UI/UX 디자인, 프로토타이핑, 디자인 시스템 구축',
+    duration: '2-3주',
+    deliverables: ['디자인 시스템', '고품질 목업', '인터랙티브 프로토타입']
   },
   {
     step: '04',
-    title: 'Build',
-    description: 'Development, testing, optimization, quality assurance',
-    duration: '3-6 weeks',
-    deliverables: ['Production Website', 'Testing Reports', 'Performance Optimization']
+    title: '개발',
+    description: '개발, 테스트, 최적화, 품질 보증',
+    duration: '3-6주',
+    deliverables: ['운영 웹사이트', '테스트 보고서', '성능 최적화']
   },
   {
     step: '05',
-    title: 'Optimize',
-    description: 'Launch support, analytics setup, continuous improvement',
-    duration: 'Ongoing',
-    deliverables: ['Analytics Dashboard', 'Performance Reports', 'Improvement Roadmap']
+    title: '최적화',
+    description: '런칭 지원, 애널리틱스 설정, 지속적 개선',
+    duration: '지속적',
+    deliverables: ['애널리틱스 대시보드', '성능 보고서', '개선 로드맵']
   }
 ]
 
@@ -81,47 +81,47 @@ const processSteps = [
 const differentiationPoints = [
   {
     icon: Search,
-    title: 'AI-Powered Workflow',
-    description: 'Claude Code integration for 40% faster development with higher code quality'
+    title: 'AI 기반 워크플로우',
+    description: 'Claude Code 통합으로 40% 빠른 개발과 높은 코드 품질 보장'
   },
   {
     icon: Shield,
-    title: 'WCAG 2.1 AA Compliance',
-    description: 'Built-in accessibility ensuring inclusive user experiences and legal compliance'
+    title: 'WCAG 2.1 AA 준수',
+    description: '포용적 사용자 경험과 법적 준수를 보장하는 내장 접근성'
   },
   {
     icon: Zap,
-    title: 'Core Web Vitals Excellence',
-    description: 'Guaranteed 90+ Lighthouse scores for superior user experience and SEO'
+    title: 'Core Web Vitals 우수성',
+    description: '뛰어난 사용자 경험과 SEO를 위한 90+ Lighthouse 점수 보장'
   },
   {
     icon: Users,
-    title: 'Comprehensive Documentation',
-    description: 'Detailed technical docs and training for seamless team handover'
+    title: '포괄적 문서화',
+    description: '원활한 팀 인수인계를 위한 상세한 기술 문서 및 교육'
   }
 ]
 
 // FAQ data
 const faqData = [
   {
-    question: 'What is the typical project timeline?',
-    answer: 'Most projects range from 6-12 weeks depending on scope. We provide detailed timelines during the Define phase with clear milestones and deliverables.'
+    question: '일반적인 프로젝트 일정은 어떻게 되나요?',
+    answer: '대부분의 프로젝트는 범위에 따라 6-12주 정도 소요됩니다. 정의 단계에서 명확한 마일스톤과 결과물과 함께 상세한 일정을 제공합니다.'
   },
   {
-    question: 'How do you price your services?',
-    answer: 'We offer flexible pricing based on project scope: Starter ($15K-30K), Standard ($30K-60K), and Enterprise ($60K+). Contact us for a detailed quote.'
+    question: '서비스 가격은 어떻게 책정되나요?',
+    answer: '프로젝트 범위에 따라 유연한 가격을 제공합니다: 스타터 (1500만원-3000만원), 스탠다드 (3000만원-6000만원), 엔터프라이즈 (6000만원+). 상세한 견적은 문의해 주세요.'
   },
   {
-    question: 'Do you provide ongoing maintenance?',
-    answer: 'Yes, we offer comprehensive maintenance packages including 24/7 monitoring, security updates, performance optimization, and content management support.'
+    question: '지속적인 유지보수를 제공하나요?',
+    answer: '네, 24/7 모니터링, 보안 업데이트, 성능 최적화, 콘텐츠 관리 지원을 포함한 포괄적인 유지보수 패키지를 제공합니다.'
   },
   {
-    question: 'Can you work with our existing team?',
-    answer: 'Absolutely. We integrate seamlessly with in-house teams, providing documentation, training, and collaborative workflows using your preferred tools.'
+    question: '기존 팀과 협업할 수 있나요?',
+    answer: '물론입니다. 사내 팀과 원활하게 통합되며, 선호하는 도구를 사용하여 문서화, 교육, 협업 워크플로우를 제공합니다.'
   },
   {
-    question: 'What makes CHIRO different from other agencies?',
-    answer: 'Our AI-powered development workflow, focus on accessibility compliance, guaranteed performance metrics, and comprehensive documentation set us apart in delivering enterprise-grade solutions.'
+    question: 'CHIRO가 다른 에이전시와 다른 점은 무엇인가요?',
+    answer: 'AI 기반 개발 워크플로우, 접근성 준수에 대한 집중, 보장된 성능 지표, 포괄적인 문서화로 엔터프라이즈급 솔루션 제공에서 차별화됩니다.'
   }
 ]
 
@@ -181,41 +181,40 @@ export default function ServicesPage() {
               <div className="space-y-8">
                 <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
                   <Zap className="w-4 h-4 mr-2" />
-                  ENTERPRISE SERVICES
+                  엔터프라이즈 서비스
                 </div>
                 
                 <h1 className="font-pretendard font-bold text-white leading-tight">
-                  Transform Your Business with 
-                  <span className="text-gradient block">AI-Powered Digital Solutions</span>
+                  비즈니스를 혁신하는 
+                  <span className="text-gradient block">AI 기반 디지털 솔루션</span>
                 </h1>
                 
                 <p className="text-xl text-neutral-light/70 leading-relaxed">
-                  From wireframes to production-ready platforms. We deliver enterprise-grade 
-                  web solutions that drive measurable business results through cutting-edge 
-                  technology and strategic design thinking.
+                  와이어프레임부터 운영 플랫폼까지. 최첨단 기술과 전략적 디자인 사고를 통해 
+                  측정 가능한 비즈니스 결과를 이끌어내는 엔터프라이즈급 웹 솔루션을 제공합니다.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <AccessibleButton 
                     variant="primary"
-                    aria-label="Get custom consultation for your project"
+                    aria-label="프로젝트 맞춤 상담 받기"
                     onClick={() => {
                       ServiceAnalytics.clickServiceCTA('services-overview', 'primary', 'Get Custom Consultation')
                       EcommerceTracking.addToCart('consultation', 'Custom Consultation')
                     }}
                   >
-                    Get Custom Consultation
+                    맞춤 상담 받기
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </AccessibleButton>
                   <AccessibleLink 
                     href="/portfolio" 
                     className="btn-secondary group inline-flex items-center"
-                    aria-label="View our portfolio case studies"
+                    aria-label="포트폴리오 사례 연구 보기"
                     onClick={() => {
                       ServiceAnalytics.clickServiceCTA('services-overview', 'secondary', 'View Case Studies')
                     }}
                   >
-                    View Case Studies
+                    사례 연구 보기
                     <Play className="ml-2 h-4 w-4" aria-hidden="true" />
                   </AccessibleLink>
                 </div>
@@ -243,7 +242,7 @@ export default function ServicesPage() {
                       <div className="text-center space-y-4">
                         <Play className="w-16 h-16 text-primary mx-auto opacity-60" aria-hidden="true" />
                         <p className="text-neutral-light/60 text-sm">
-                          Loading demo: Wireframe → Hi-fi UI transformation
+                          데모 로딩 중: 와이어프레임 → 고품질 UI 변환
                         </p>
                       </div>
                     </div>
@@ -268,14 +267,14 @@ export default function ServicesPage() {
           <header className="text-center mb-16">
             <FadeUp>
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
-                OUR EXPERTISE
+                우리의 전문성
               </div>
               <h2 className="font-pretendard font-bold mb-6">
-                Complete Digital <span className="text-gradient">Transformation Suite</span>
+                완벽한 디지털 <span className="text-gradient">혁신 솔루션</span>
               </h2>
               <p className="text-xl text-neutral-light/70 max-w-3xl mx-auto leading-relaxed">
-                From AI-powered development to performance optimization – we handle every aspect 
-                of your digital presence with enterprise-grade quality.
+                AI 기반 개발부터 성능 최적화까지 – 엔터프라이즈급 품질로 
+                디지털 존재감의 모든 측면을 다룹니다.
               </p>
             </FadeUp>
           </header>
@@ -338,9 +337,9 @@ export default function ServicesPage() {
 
                         <div className="pt-4 border-t border-shadow-gray/30">
                           <span className="inline-flex items-center text-primary font-medium group-hover:text-accent-green group-focus:text-accent-green transition-colors">
-                            Learn More
+                            자세히 보기
                             <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 group-focus:translate-x-1 transition-transform" aria-hidden="true" />
-                            <ScreenReaderText>about {service.title}</ScreenReaderText>
+                            <ScreenReaderText>{service.title}에 대해</ScreenReaderText>
                           </span>
                         </div>
                       </div>
@@ -359,10 +358,10 @@ export default function ServicesPage() {
           <FadeUp>
             <div className="text-center mb-16">
               <h2 className="font-pretendard font-bold mb-6">
-                Proven <span className="text-gradient">Business Impact</span>
+                검증된 <span className="text-gradient">비즈니스 임팩트</span>
               </h2>
               <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                Measurable results across 50+ enterprise clients
+                50+ 엔터프라이즈 고객사에서 입증된 측정 가능한 결과
               </p>
             </div>
           </FadeUp>
@@ -387,14 +386,14 @@ export default function ServicesPage() {
           <div className="text-center mb-16">
             <FadeUp>
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
-                OUR PROCESS
+                우리의 프로세스
               </div>
               <h2 className="font-pretendard font-bold mb-6">
-                Strategic <span className="text-gradient">Development Methodology</span>
+                전략적 <span className="text-gradient">개발 방법론</span>
               </h2>
               <p className="text-xl text-neutral-light/70 max-w-3xl mx-auto leading-relaxed">
-                Our proven 5-stage process ensures every project delivers maximum business value 
-                with complete transparency and predictable outcomes.
+                검증된 5단계 프로세스로 모든 프로젝트가 완전한 투명성과 
+                예측 가능한 결과와 함께 최대의 비즈니스 가치를 제공합니다.
               </p>
             </FadeUp>
           </div>
@@ -425,7 +424,7 @@ export default function ServicesPage() {
                         </p>
                         
                         <div className="space-y-2">
-                          <p className="text-white font-medium text-sm mb-3">Key Deliverables:</p>
+                          <p className="text-white font-medium text-sm mb-3">주요 결과물:</p>
                           {step.deliverables.map((deliverable, idx) => (
                             <div key={idx} className="flex items-center text-sm text-neutral-light/70">
                               <CheckCircle className="w-4 h-4 text-accent-green mr-2 flex-shrink-0" />
@@ -443,7 +442,7 @@ export default function ServicesPage() {
                           <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                             <span className="text-2xl font-bold text-primary">{step.step}</span>
                           </div>
-                          <p className="text-neutral-light/60 text-sm">Process Visualization</p>
+                          <p className="text-neutral-light/60 text-sm">프로세스 시각화</p>
                         </div>
                       </div>
                     </div>
@@ -486,10 +485,10 @@ export default function ServicesPage() {
             <div className="text-center mb-16">
               <FadeUp>
                 <h2 className="font-pretendard font-bold mb-6">
-                  Why Choose <span className="text-gradient">CHIRO</span>
+                  왜 <span className="text-gradient">CHIRO</span>를 선택해야 할까요
                 </h2>
                 <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Advanced technology stack and methodologies that set us apart in the industry
+                  업계에서 우리를 차별화시키는 첨단 기술 스택과 방법론
                 </p>
               </FadeUp>
             </div>
@@ -524,10 +523,10 @@ export default function ServicesPage() {
           <header className="text-center mb-16">
             <FadeUp>
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
-                FAQ
+                자주 묻는 질문
               </div>
               <h2 className="font-pretendard font-bold mb-6">
-                Frequently Asked <span className="text-gradient">Questions</span>
+                자주 묻는 <span className="text-gradient">질문들</span>
               </h2>
             </FadeUp>
           </header>
@@ -564,23 +563,23 @@ export default function ServicesPage() {
               <div className="space-y-8">
                 <div className="inline-flex items-center px-4 py-2 bg-primary/20 rounded-full text-primary font-medium text-sm mb-4">
                   <TrendingUp className="w-4 h-4 mr-2" />
-                  READY TO TRANSFORM
+                  혁신할 준비가 되셨나요
                 </div>
                 
                 <h2 className="font-pretendard font-bold text-white leading-tight">
-                  Turn Your Digital Vision Into 
-                  <span className="text-gradient block">Measurable Business Results</span>
+                  디지털 비전을 
+                  <span className="text-gradient block">측정 가능한 비즈니스 결과로</span>
                 </h2>
                 
                 <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Join 50+ enterprise clients who've transformed their digital presence with 
-                  CHIRO's proven methodology and cutting-edge technology.
+                  CHIRO의 검증된 방법론과 최첨단 기술로 디지털 존재감을 혁신한 
+                  50+ 엔터프라이즈 고객사에 합류하세요.
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
                   {/* Quick Contact Form */}
                   <div className="p-6 rounded-xl bg-dark/50 border border-primary/20 backdrop-blur-sm">
-                    <h3 className="text-lg font-semibold text-white mb-4">Get Custom Quote</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">맞춤 견적 받기</h3>
                     <form 
                       className="space-y-4" 
                       aria-label="Quick consultation request form"
@@ -601,73 +600,73 @@ export default function ServicesPage() {
                         <input 
                           id="contact-name"
                           type="text" 
-                          placeholder="Your Name" 
+                          placeholder="이름" 
                           className="input-field"
                           required
                           aria-required="true"
                         />
                       </div>
                       <div>
-                        <label htmlFor="contact-email" className="sr-only">Business Email</label>
+                        <label htmlFor="contact-email" className="sr-only">회사 이메일</label>
                         <input 
                           id="contact-email"
                           type="email" 
-                          placeholder="Business Email" 
+                          placeholder="회사 이메일" 
                           className="input-field"
                           required
                           aria-required="true"
                           aria-describedby="email-help"
                         />
                         <div id="email-help" className="sr-only">
-                          We'll use this email to send your custom quote
+                          맞춤 견적을 보내드릴 이메일 주소입니다
                         </div>
                       </div>
                       <div>
-                        <label htmlFor="budget-range" className="sr-only">Budget Range</label>
+                        <label htmlFor="budget-range" className="sr-only">예산 범위</label>
                         <select 
                           id="budget-range"
                           className="input-field"
                           required
                           aria-required="true"
                         >
-                          <option value="">Select Budget Range</option>
-                          <option value="15k-30k">$15K - $30K</option>
-                          <option value="30k-60k">$30K - $60K</option>
-                          <option value="60k+">$60K+</option>
+                          <option value="">예산 범위 선택</option>
+                          <option value="15k-30k">1,500만원 - 3,000만원</option>
+                          <option value="30k-60k">3,000만원 - 6,000만원</option>
+                          <option value="60k+">6,000만원+</option>
                         </select>
                       </div>
                       <AccessibleButton type="submit" variant="primary" className="w-full">
-                        Get Custom Consultation
+                        맞춤 상담 받기
                       </AccessibleButton>
                     </form>
                   </div>
                   
                   {/* Calendar Booking */}
                   <div className="p-6 rounded-xl bg-dark/50 border border-accent-green/20 backdrop-blur-sm">
-                    <h3 className="text-lg font-semibold text-white mb-4">Book Strategy Call</h3>
+                    <h3 className="text-lg font-semibold text-white mb-4">전략 상담 예약</h3>
                     <div className="space-y-4">
                       <p className="text-neutral-light/70 text-sm">
-                        30-minute consultation to discuss your project goals and requirements.
+                        프로젝트 목표와 요구사항을 논의하는 30분 상담
                       </p>
                       <div className="space-y-2 text-sm text-neutral-light/60">
                         <div className="flex items-center">
                           <CheckCircle className="w-4 h-4 text-accent-green mr-2" />
-                          Free project assessment
+                          무료 프로젝트 평가
                         </div>
                         <div className="flex items-center">
                           <CheckCircle className="w-4 h-4 text-accent-green mr-2" />
-                          Technology recommendations
+                          기술 권장사항
                         </div>
                         <div className="flex items-center">
                           <CheckCircle className="w-4 h-4 text-accent-green mr-2" />
-                          Timeline & budget estimate
+                          일정 및 예산 견적
                         </div>
                       </div>
                       <AccessibleButton 
                         className="w-full bg-accent-green hover:bg-accent-green/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-accent-green focus:ring-offset-2 focus:ring-offset-dark"
-                        aria-label="Schedule a free 30-minute strategy consultation call"
+                        aria-label="무료 30분 전략 상담 통화 예약하기"
                       >
-                        Schedule Free Call
+                        무료 통화 예약
                       </AccessibleButton>
                     </div>
                   </div>

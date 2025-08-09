@@ -597,11 +597,19 @@ export const testimonialSchema = {
   ]
 }
 
+// Import case study schema
+import { caseStudySchema } from './schemas/caseStudy'
+import { authorSchema, categorySchema, blogPostSchema } from './schemas/blog'
+
 // Export all schemas
 export const schemas = [
   servicesSchema,
   serviceCategorySchema, 
-  testimonialSchema
+  testimonialSchema,
+  caseStudySchema,
+  authorSchema,
+  categorySchema,
+  blogPostSchema
 ]
 
 // Sample data seeding structure
