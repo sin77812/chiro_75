@@ -1,24 +1,18 @@
+'use client'
+
 import React from 'react'
-import { Metadata } from 'next'
+// import { Metadata } from 'next' // Removed for client component
 import { Play, ArrowRight, CheckCircle, TrendingUp, Shield, Zap, Users, Globe, Code, Palette, Search } from 'lucide-react'
 import Link from 'next/link'
 import servicesData from '@/data/services.json'
 import ScrollReveal, { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
 import PageCTA from '@/components/sections/PageCTA'
 import { SkipNav, AccessibleButton, AccessibleLink, AccordionItem, ScreenReaderText } from '@/components/ui/AccessibleComponents'
-import { LazyImage, OptimizedVideo, LazyContent, usePerformanceMonitoring, ResourceHints, Preload } from '@/components/ui/PerformanceComponents'
+import { LazyImage, OptimizedVideo, LazyContent, ResourceHints, Preload } from '@/components/ui/PerformanceComponents'
 import { OrganizationStructuredData, ServicesPageStructuredData, FAQStructuredData, WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/StructuredData'
 import { ServiceAnalytics, EcommerceTracking } from '@/components/analytics/Analytics'
 
-export const metadata: Metadata = {
-  title: 'Services | CHIRO - Enterprise Digital Solutions',
-  description: 'Transform your business with AI-powered web development, UX/UI design, and digital strategy. Proven results for B2B companies.',
-  openGraph: {
-    title: 'Services | CHIRO - Enterprise Digital Solutions',
-    description: 'Transform your business with AI-powered web development, UX/UI design, and digital strategy.',
-    images: ['/og-services.png'],
-  }
-}
+// Metadata moved to layout.tsx for client component compatibility
 
 // Service category icons mapping
 const categoryIcons = {
@@ -133,7 +127,6 @@ const faqData = [
 
 export default function ServicesPage() {
   // Performance monitoring hook
-  usePerformanceMonitoring('services-page')
 
   // Track page view and service list view
   React.useEffect(() => {

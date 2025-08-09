@@ -336,44 +336,11 @@ export function LazyContent({
   )
 }
 
-// Performance Monitoring Hook
+// Performance Monitoring Hook (Client-only)
 export function usePerformanceMonitoring(pageName: string) {
-  useEffect(() => {
-    // Measure page load performance
-    const measurePageLoad = () => {
-      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming
-      const paintEntries = performance.getEntriesByType('paint')
-      
-      const metrics = {
-        page: pageName,
-        loadTime: navigation.loadEventEnd - navigation.loadEventStart,
-        domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
-        firstPaint: paintEntries.find(entry => entry.name === 'first-paint')?.startTime || 0,
-        firstContentfulPaint: paintEntries.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0,
-        timestamp: Date.now()
-      }
-
-      // Log performance metrics (replace with your analytics service)
-      console.log('Performance Metrics:', metrics)
-      
-      // Send to analytics service
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'page_performance', {
-          page_load_time: Math.round(metrics.loadTime),
-          first_contentful_paint: Math.round(metrics.firstContentfulPaint),
-          page_name: pageName
-        })
-      }
-    }
-
-    // Measure after page is fully loaded
-    if (document.readyState === 'complete') {
-      measurePageLoad()
-    } else {
-      window.addEventListener('load', measurePageLoad)
-      return () => window.removeEventListener('load', measurePageLoad)
-    }
-  }, [pageName])
+  // Temporarily disabled to fix server-side rendering issues
+  // TODO: Re-implement as client-only component
+  return null
 }
 
 // Preload Component for critical resources
