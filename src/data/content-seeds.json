@@ -1,0 +1,302 @@
+{
+  "services": [
+    {
+      "id": "ai-web-development",
+      "title": "AI Web Development & Design",
+      "slug": "ai-web-development",
+      "shortBenefit": "Build smart, high-converting websites with AI-powered optimization",
+      "description": "Next-generation web development using AI tools for faster delivery, better UX, and measurable business results. From concept to production in record time with enterprise-grade quality.",
+      "category": "development",
+      "icon": "search",
+      "featured": true,
+      "status": "published",
+      "heroSection": {
+        "headline": "Transform Your Business with AI-Powered Digital Solutions",
+        "subheadline": "From wireframes to production-ready platforms. We deliver enterprise-grade web solutions that drive measurable business results through cutting-edge technology and strategic design thinking.",
+        "video": {
+          "url": "/videos/hero/ai-development.mp4",
+          "poster": "/images/hero/ai-development-poster.jpg",
+          "duration": 8
+        },
+        "ctaPrimary": {
+          "text": "Start Your AI Project",
+          "url": "/contact?service=ai-web-development",
+          "style": "primary"
+        }
+      },
+      "miniCase": {
+        "client": "TechFlow Solutions",
+        "result": "Lead quality +340%",
+        "description": "AI-powered B2B SaaS platform with intelligent lead scoring and automated nurturing workflows increased qualified leads by 340% in 6 months"
+      },
+      "benefits": [
+        "40% faster development with Claude Code integration",
+        "AI-optimized user experience and conversion paths",
+        "Intelligent content personalization and A/B testing",
+        "Advanced analytics and predictive insights",
+        "Automated accessibility and performance optimization"
+      ],
+      "features": [
+        "Next.js 14 with AI-enhanced components",
+        "Claude Code workflow integration",
+        "Intelligent design system generation",
+        "Automated testing and optimization",
+        "Real-time performance monitoring"
+      ],
+      "seo": {
+        "metaTitle": "AI Web Development Services | CHIRO - Enterprise Solutions",
+        "metaDescription": "Transform your business with AI-powered web development. 40% faster delivery, intelligent optimization, and measurable results for enterprise clients.",
+        "focusKeyword": "AI web development",
+        "additionalKeywords": ["artificial intelligence web design", "AI-powered websites", "enterprise web development", "Claude Code integration"]
+      }
+    }
+  ],
+  
+  "serviceCategories": [
+    {
+      "name": "Development",
+      "slug": "development",
+      "description": "Custom web development with cutting-edge technology stacks",
+      "icon": "code",
+      "featured": true,
+      "color": "#1DB954"
+    },
+    {
+      "name": "Design",
+      "slug": "design", 
+      "description": "User-centered design and brand experiences that convert",
+      "icon": "palette",
+      "featured": true,
+      "color": "#E11D48"
+    },
+    {
+      "name": "E-commerce",
+      "slug": "ecommerce",
+      "description": "High-converting online stores and marketplace solutions",
+      "icon": "trending",
+      "featured": true,
+      "color": "#F59E0B"
+    },
+    {
+      "name": "Optimization",
+      "slug": "optimization",
+      "description": "Performance, SEO, and conversion rate optimization",
+      "icon": "zap",
+      "featured": false,
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Operations",
+      "slug": "operations",
+      "description": "Business automation and workflow optimization",
+      "icon": "users",
+      "featured": false,
+      "color": "#06B6D4"
+    }
+  ],
+
+  "testimonials": [
+    {
+      "quote": "The AI integration transformed our entire customer journey. We're seeing conversion rates we never thought possible, and the development speed was incredible.",
+      "author": "David Kim",
+      "position": "CEO",
+      "company": "TechFlow Solutions",
+      "avatar": "/testimonials/david-kim.jpg",
+      "rating": 5,
+      "featured": true,
+      "serviceCategory": "ai-web-development"
+    },
+    {
+      "quote": "CHIRO's design system approach saved us months of development time. The consistency across our entire platform is remarkable.",
+      "author": "Sarah Chen",
+      "position": "Design Director",
+      "company": "FinTech Innovations",
+      "avatar": "/testimonials/sarah-chen.jpg", 
+      "rating": 5,
+      "featured": true,
+      "serviceCategory": "ui-ux-strategy"
+    },
+    {
+      "quote": "The performance optimization work exceeded our expectations. Our site loads in under a second now, and our search rankings improved dramatically.",
+      "author": "Michael Rodriguez",
+      "position": "CTO",
+      "company": "Manufacturing Pro Inc.",
+      "avatar": "/testimonials/michael-rodriguez.jpg",
+      "rating": 5,
+      "featured": true,
+      "serviceCategory": "performance-seo"
+    }
+  ],
+
+  "businessKPIs": [
+    {
+      "label": "Average Conversion Rate Increase",
+      "value": "+147%",
+      "context": "Across 50+ B2B clients",
+      "category": "conversion"
+    },
+    {
+      "label": "Page Load Time Improvement", 
+      "value": "1.8s → 0.9s",
+      "context": "Core Web Vitals optimization",
+      "category": "performance"
+    },
+    {
+      "label": "Search Traffic Growth",
+      "value": "+280%",
+      "context": "SEO & technical optimization", 
+      "category": "seo"
+    },
+    {
+      "label": "Mobile User Engagement",
+      "value": "+195%",
+      "context": "Responsive design excellence",
+      "category": "ux"
+    },
+    {
+      "label": "Development Speed Increase",
+      "value": "+40%",
+      "context": "AI-powered development workflow",
+      "category": "efficiency"
+    },
+    {
+      "label": "Client Satisfaction Rate",
+      "value": "98%",
+      "context": "Based on project completion surveys",
+      "category": "satisfaction"
+    }
+  ],
+
+  "processSteps": [
+    {
+      "step": "01",
+      "title": "Discover",
+      "description": "Deep dive into your business goals, target audience, and competitive landscape through comprehensive research and stakeholder interviews",
+      "duration": "1-2 weeks",
+      "deliverables": [
+        "Business Requirements Analysis",
+        "Competitive Research Report", 
+        "User Research & Personas",
+        "Technical Architecture Review",
+        "Project Roadmap & Timeline"
+      ],
+      "tools": ["Figma", "Miro", "Google Analytics", "Hotjar"]
+    },
+    {
+      "step": "02", 
+      "title": "Define",
+      "description": "Transform research insights into actionable strategy, defining technical architecture, user journeys, and success metrics",
+      "duration": "1 week",
+      "deliverables": [
+        "Technical Specification Document",
+        "User Journey Maps",
+        "Content Strategy Framework",
+        "Design System Foundation",
+        "Success Metrics Definition"
+      ],
+      "tools": ["Notion", "Figma", "Whimsical", "Claude Code"]
+    },
+    {
+      "step": "03",
+      "title": "Design", 
+      "description": "Create stunning, conversion-focused designs with comprehensive prototyping and user testing validation",
+      "duration": "2-3 weeks",
+      "deliverables": [
+        "Information Architecture",
+        "Wireframes & User Flows",
+        "High-Fidelity Visual Design",
+        "Interactive Prototypes",
+        "Design System & Components"
+      ],
+      "tools": ["Figma", "Principle", "ProtoPie", "Maze"]
+    },
+    {
+      "step": "04",
+      "title": "Build",
+      "description": "Transform designs into high-performance, scalable web solutions using cutting-edge development practices and AI assistance",
+      "duration": "3-6 weeks", 
+      "deliverables": [
+        "Responsive Website Development",
+        "CMS Integration & Setup",
+        "Performance Optimization",
+        "Security Implementation",
+        "Quality Assurance Testing"
+      ],
+      "tools": ["Next.js", "Claude Code", "Vercel", "Sanity", "Cypress"]
+    },
+    {
+      "step": "05",
+      "title": "Optimize",
+      "description": "Launch with comprehensive monitoring, analytics setup, and continuous optimization based on real user data",
+      "duration": "Ongoing",
+      "deliverables": [
+        "Launch & Deployment",
+        "Analytics & Tracking Setup", 
+        "Performance Monitoring",
+        "SEO Optimization",
+        "Ongoing Support & Maintenance"
+      ],
+      "tools": ["Google Analytics", "Hotjar", "Lighthouse", "Search Console"]
+    }
+  ],
+
+  "differentiationPoints": [
+    {
+      "icon": "search",
+      "title": "AI-Powered Workflow",
+      "description": "Claude Code integration for 40% faster development with higher code quality and intelligent optimization",
+      "metrics": "+40% faster delivery"
+    },
+    {
+      "icon": "shield", 
+      "title": "WCAG 2.1 AA Compliance",
+      "description": "Built-in accessibility ensuring inclusive user experiences and legal compliance from day one",
+      "metrics": "100% compliance rate"
+    },
+    {
+      "icon": "zap",
+      "title": "Core Web Vitals Excellence", 
+      "description": "Guaranteed 90+ Lighthouse scores for superior user experience and search engine performance",
+      "metrics": "Average 94/100 score"
+    },
+    {
+      "icon": "users",
+      "title": "Comprehensive Documentation",
+      "description": "Detailed technical documentation and team training for seamless project handover and maintenance",
+      "metrics": "98% client satisfaction"
+    }
+  ],
+
+  "faqData": [
+    {
+      "question": "What is the typical project timeline?",
+      "answer": "Most projects range from 6-12 weeks depending on scope and complexity. We provide detailed timelines during the Define phase with clear milestones and deliverables. AI-enhanced projects often complete 30-40% faster than traditional development.",
+      "category": "timeline"
+    },
+    {
+      "question": "How do you price your services?",
+      "answer": "We offer flexible pricing based on project scope and complexity. Our packages typically range from $15K-30K (Starter), $30K-60K (Standard), to $60K+ (Enterprise). Each quote is customized based on your specific requirements and business goals.",
+      "category": "pricing"
+    },
+    {
+      "question": "Do you provide ongoing maintenance and support?",
+      "answer": "Yes, we offer comprehensive maintenance packages including 24/7 monitoring, security updates, performance optimization, content management support, and regular backups. Our support plans start at $500/month for basic maintenance.",
+      "category": "support"
+    },
+    {
+      "question": "Can you work with our existing team and tools?",
+      "answer": "Absolutely. We integrate seamlessly with in-house teams and can adapt to your existing workflows. We provide comprehensive documentation, training sessions, and collaborative workflows using tools like Slack, Figma, GitHub, and your preferred project management platform.",
+      "category": "collaboration"
+    },
+    {
+      "question": "What makes CHIRO different from other web development agencies?",
+      "answer": "Our key differentiators include AI-powered development workflows (40% faster delivery), guaranteed accessibility compliance, proven performance optimization (90+ Lighthouse scores), and comprehensive documentation. We focus on measurable business results, not just pretty websites.",
+      "category": "differentiation"
+    },
+    {
+      "question": "Do you work with startups or only enterprise clients?",
+      "answer": "We work with both growing startups and established enterprises. Our flexible package structure accommodates different budget levels and business stages. Startups benefit from our rapid development approach, while enterprises appreciate our scalable architecture and compliance focus.",
+      "category": "client-types"
+    }
+  ]
+}

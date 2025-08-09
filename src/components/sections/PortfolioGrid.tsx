@@ -188,16 +188,6 @@ export default function PortfolioGrid() {
                         <ExternalLink className="h-3 w-3 inline mr-1" />
                         사례 보기
                       </Link>
-                      {project.url && (
-                        <a 
-                          href={project.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="px-3 py-2 bg-white/20 hover:bg-white/30 text-white text-sm rounded-lg transition-colors"
-                        >
-                          사이트 방문
-                        </a>
-                      )}
                     </div>
                   </div>
                 </div>

@@ -1,0 +1,350 @@
+[
+  {
+    "id": "ai-web-development",
+    "title": "AI Web Development & Design",
+    "shortBenefit": "Build smart, high-converting websites with AI-powered optimization",
+    "description": "Next-generation web development using AI tools for faster delivery, better UX, and measurable business results. From concept to production in record time with enterprise-grade quality.",
+    "icon": "search",
+    "category": "Development",
+    "featured": true,
+    "miniCase": {
+      "client": "TechFlow Solutions",
+      "result": "Lead quality +340%",
+      "description": "AI-powered B2B SaaS platform with intelligent lead scoring and automated nurturing workflows"
+    },
+    "benefits": [
+      "40% faster development with Claude Code integration",
+      "AI-optimized user experience and conversion paths",
+      "Intelligent content personalization and A/B testing",
+      "Advanced analytics and predictive insights",
+      "Automated accessibility and performance optimization"
+    ],
+    "features": [
+      "Next.js 14 with AI-enhanced components",
+      "Claude Code workflow integration",
+      "Intelligent design system generation",
+      "Automated testing and optimization",
+      "Real-time performance monitoring"
+    ],
+    "problemSolution": {
+      "problems": [
+        "Traditional development cycles taking 3-6 months for complex projects",
+        "Poor conversion rates due to generic, one-size-fits-all designs",
+        "Lack of data-driven insights for continuous optimization",
+        "Manual testing and debugging consuming 40% of project time"
+      ],
+      "solutions": [
+        "AI-accelerated development reducing timelines by 40% without compromising quality",
+        "Personalized user experiences with intelligent A/B testing and optimization",
+        "Built-in analytics and ML-powered insights for data-driven decision making",
+        "Automated testing, debugging, and performance optimization workflows"
+      ]
+    },
+    "deliverables": [
+      { "item": "AI-Enhanced Custom Website Design & Development", "included": true },
+      { "item": "Claude Code Integration & Workflow Setup", "included": true },
+      { "item": "Intelligent Component Library & Design System", "included": true },
+      { "item": "Automated Testing & Performance Optimization", "included": true },
+      { "item": "ML-Powered Analytics & Conversion Tracking", "included": true },
+      { "item": "Personalization Engine Setup", "included": true },
+      { "item": "AI Content Generation Tools", "included": true },
+      { "item": "Advanced Security & Compliance Framework", "included": true },
+      { "item": "90-Day Optimization & Support Period", "included": true },
+      { "item": "Custom AI Model Training", "included": false, "note": "Enterprise package only" }
+    ],
+    "techStack": [
+      { "name": "Next.js 14", "category": "Framework", "logo": "/tech/nextjs.svg" },
+      { "name": "Claude Code", "category": "AI Development", "logo": "/tech/claude.svg" },
+      { "name": "TypeScript", "category": "Language", "logo": "/tech/typescript.svg" },
+      { "name": "Tailwind CSS", "category": "Styling", "logo": "/tech/tailwind.svg" },
+      { "name": "Vercel AI SDK", "category": "AI Integration", "logo": "/tech/vercel.svg" },
+      { "name": "Sanity CMS", "category": "Content Management", "logo": "/tech/sanity.svg" },
+      { "name": "PostgreSQL", "category": "Database", "logo": "/tech/postgresql.svg" },
+      { "name": "Prisma ORM", "category": "Database ORM", "logo": "/tech/prisma.svg" }
+    ],
+    "packages": [
+      {
+        "name": "Starter AI",
+        "price": "$25,000 - $45,000",
+        "duration": "6-8 weeks",
+        "description": "AI-enhanced website with intelligent optimization and personalization features",
+        "features": [
+          "Up to 15 AI-optimized pages",
+          "Intelligent design system",
+          "Basic personalization engine",
+          "Automated A/B testing",
+          "Performance optimization AI",
+          "Claude Code integration",
+          "60-day optimization period"
+        ]
+      },
+      {
+        "name": "Professional AI",
+        "price": "$45,000 - $85,000", 
+        "duration": "8-12 weeks",
+        "description": "Advanced AI-powered platform with custom ML models and enterprise integrations",
+        "features": [
+          "Up to 30 AI-optimized pages",
+          "Custom AI model training",
+          "Advanced personalization",
+          "Predictive analytics dashboard",
+          "Multi-language AI support",
+          "Enterprise integrations",
+          "API development",
+          "90-day optimization period"
+        ],
+        "popular": true
+      },
+      {
+        "name": "Enterprise AI",
+        "price": "Custom Quote",
+        "duration": "12+ weeks",
+        "description": "Full-scale AI transformation with custom models, integrations, and dedicated team",
+        "features": [
+          "Unlimited AI-optimized pages",
+          "Custom AI model development",
+          "Real-time personalization",
+          "Advanced ML analytics",
+          "Custom AI integrations",
+          "Dedicated AI/ML team",
+          "White-label solutions",
+          "12-month partnership program"
+        ]
+      }
+    ],
+    "beforeAfter": {
+      "title": "AI-Powered Transformation Results",
+      "cases": [
+        {
+          "client": "SaaS Platform Co.",
+          "before": {
+            "metric": "Trial Conversion",
+            "value": "3.2%",
+            "issue": "Generic onboarding, poor user experience"
+          },
+          "after": {
+            "metric": "Trial Conversion",
+            "value": "12.8%",
+            "improvement": "+300%"
+          },
+          "details": "AI-powered personalized onboarding increased trial-to-paid conversion by 300%"
+        },
+        {
+          "client": "E-learning Platform",
+          "before": {
+            "metric": "Course Completion",
+            "value": "28%",
+            "issue": "Static content, no personalization"
+          },
+          "after": {
+            "metric": "Course Completion", 
+            "value": "71%",
+            "improvement": "+154%"
+          },
+          "details": "Personalized learning paths and AI-recommended content boosted engagement"
+        }
+      ]
+    },
+    "testimonials": [
+      {
+        "quote": "The AI integration transformed our entire customer journey. We're seeing conversion rates we never thought possible.",
+        "author": "David Kim",
+        "position": "CEO",
+        "company": "TechFlow Solutions",
+        "avatar": "/testimonials/david-kim.jpg",
+        "rating": 5
+      }
+    ],
+    "relatedServices": ["ui-ux-design", "performance-optimization", "digital-marketing"]
+  },
+  {
+    "id": "ui-ux-strategy",
+    "title": "UX/UI Strategy & Design Systems",
+    "shortBenefit": "Design systems that scale your brand and boost conversions by 200%+",
+    "description": "Strategic UX/UI design with systematic approach to scaling. Create cohesive brand experiences that convert visitors into customers through psychology-driven design principles.",
+    "icon": "palette",
+    "category": "Design",
+    "featured": true,
+    "miniCase": {
+      "client": "FinTech Innovations",
+      "result": "User adoption +520%",
+      "description": "Complete UX overhaul of financial dashboard increased daily active users and reduced support tickets by 60%"
+    },
+    "benefits": [
+      "Psychology-driven design increasing conversions by 200%+",
+      "Scalable design systems reducing future development costs",
+      "WCAG 2.1 AA compliance ensuring legal protection",
+      "User research-backed decisions eliminating guesswork",
+      "Cross-platform consistency building brand trust"
+    ],
+    "features": [
+      "Comprehensive user research and personas",
+      "Design system architecture and documentation",
+      "Conversion-focused UI patterns",
+      "Accessibility-first design approach",
+      "Multi-platform design optimization"
+    ],
+    "problemSolution": {
+      "problems": [
+        "Inconsistent user experience across different pages and platforms",
+        "High bounce rates due to confusing navigation and poor information architecture",
+        "Accessibility compliance issues creating legal risks and excluding users",
+        "Design decisions based on assumptions rather than user research data"
+      ],
+      "solutions": [
+        "Systematic design approach ensuring consistency across all touchpoints",
+        "User research-driven information architecture optimizing conversion funnels",
+        "Built-in WCAG 2.1 AA compliance protecting against legal risks",
+        "Data-driven design decisions backed by user testing and behavioral analytics"
+      ]
+    },
+    "packages": [
+      {
+        "name": "Design Foundation",
+        "price": "$20,000 - $35,000",
+        "duration": "4-6 weeks",
+        "description": "Essential UX/UI redesign with basic design system for growing businesses",
+        "features": [
+          "User research & persona development",
+          "Information architecture redesign",
+          "Up to 15 page designs",
+          "Basic design system",
+          "Mobile-responsive design",
+          "Accessibility compliance (WCAG 2.1 AA)",
+          "Usability testing & iteration"
+        ]
+      },
+      {
+        "name": "Design System Pro",
+        "price": "$35,000 - $65,000",
+        "duration": "6-10 weeks", 
+        "description": "Comprehensive design system with advanced components and documentation",
+        "features": [
+          "Advanced user research",
+          "Complete design system architecture",
+          "Up to 30 page designs",
+          "Interactive prototyping",
+          "Multi-brand system support",
+          "Advanced accessibility features",
+          "Design token documentation",
+          "Team training & handoff"
+        ],
+        "popular": true
+      },
+      {
+        "name": "Enterprise Design",
+        "price": "Custom Quote",
+        "duration": "10+ weeks",
+        "description": "Enterprise-scale design transformation with custom research and ongoing support",
+        "features": [
+          "Extensive user research program",
+          "Multi-platform design system",
+          "Unlimited page designs",
+          "Custom component development",
+          "Brand evolution & guidelines",
+          "Team training program",
+          "Quarterly design audits",
+          "12-month design partnership"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ecommerce-solutions",
+    "title": "E-commerce & Conversion Optimization",
+    "shortBenefit": "High-converting online stores that maximize revenue per visitor",
+    "description": "Complete e-commerce solutions built for conversion. From product catalogs to checkout optimization, create shopping experiences that turn browsers into buyers with advanced conversion psychology.",
+    "icon": "trending",
+    "category": "E-commerce",
+    "featured": false,
+    "miniCase": {
+      "client": "Artisan Crafts Co.",
+      "result": "Revenue +340%",
+      "description": "E-commerce redesign with conversion optimization increased monthly revenue from $50K to $220K in 6 months"
+    },
+    "benefits": [
+      "Conversion-optimized checkout reducing cart abandonment by 40%",
+      "Advanced product recommendation engines increasing AOV",
+      "Mobile-first design capturing 70%+ mobile commerce traffic",
+      "Inventory and order management automation saving 20 hours/week",
+      "Multi-channel selling integration (Amazon, social commerce)"
+    ],
+    "features": [
+      "Shopify Plus or custom e-commerce development",
+      "Advanced product filtering and search",
+      "One-click checkout optimization",
+      "Automated email marketing integration",
+      "Real-time analytics and reporting"
+    ]
+  },
+  {
+    "id": "performance-seo",
+    "title": "Performance & SEO Optimization",
+    "shortBenefit": "Lightning-fast websites that rank #1 and convert 3x better",
+    "description": "Technical excellence meets SEO strategy. Achieve sub-1-second load times and top search rankings through advanced optimization techniques and content strategy.",
+    "icon": "zap",
+    "category": "Optimization",
+    "featured": false,
+    "miniCase": {
+      "client": "Manufacturing Pro Inc.",
+      "result": "Organic traffic +480%",
+      "description": "Technical SEO overhaul and performance optimization resulted in 10x more qualified leads from organic search"
+    },
+    "benefits": [
+      "Sub-1-second load times improving user experience and SEO",
+      "First-page Google rankings for target keywords within 90 days",
+      "Core Web Vitals optimization ensuring search visibility",
+      "Technical SEO foundation supporting long-term growth",
+      "Conversion rate improvements through speed optimization"
+    ],
+    "features": [
+      "Advanced performance optimization",
+      "Technical and on-page SEO",
+      "Core Web Vitals optimization",
+      "Content strategy and optimization",
+      "Local SEO for service businesses"
+    ]
+  },
+  {
+    "id": "design-systems",
+    "title": "Design Systems & Component Libraries",
+    "shortBenefit": "Scalable design systems that unify your brand and accelerate development",
+    "description": "Build once, use everywhere. Create comprehensive design systems that ensure brand consistency while dramatically reducing development time for future projects.",
+    "icon": "palette",
+    "category": "Design",
+    "featured": false,
+    "miniCase": {
+      "client": "Multi-Brand Corp",
+      "result": "Dev speed +250%",
+      "description": "Design system implementation reduced new page development time from 2 weeks to 3 days across 5 brands"
+    },
+    "benefits": [
+      "50% faster development cycles through reusable components",
+      "Perfect brand consistency across all digital touchpoints",
+      "Reduced design and development costs for future projects",
+      "Improved collaboration between design and development teams",
+      "Scalable architecture supporting business growth"
+    ]
+  },
+  {
+    "id": "operations-growth",
+    "title": "Operations & Growth Automation",
+    "shortBenefit": "Automated workflows that scale your business without scaling your team",
+    "description": "Build systems that work while you sleep. From lead nurturing to customer onboarding, create automated workflows that drive growth and improve efficiency.",
+    "icon": "users",
+    "category": "Operations",
+    "featured": false,
+    "miniCase": {
+      "client": "Service Pro Agency",
+      "result": "Efficiency +300%",
+      "description": "Marketing and sales automation reduced manual tasks by 30 hours/week while doubling lead qualification rates"
+    },
+    "benefits": [
+      "Automated lead nurturing increasing conversion by 150%",
+      "Streamlined client onboarding reducing time-to-value",
+      "Data-driven insights supporting strategic decisions",
+      "Scalable processes that grow with your business",
+      "Integration with existing business tools and workflows"
+    ]
+  }
+]

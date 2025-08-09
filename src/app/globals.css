@@ -40,11 +40,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg;
+    @apply bg-primary hover:bg-primary/90 focus:bg-primary/90 text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-dark;
   }
   
   .btn-secondary {
-    @apply bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium px-6 py-3 rounded-lg transition-all duration-300;
+    @apply bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white focus:bg-primary focus:text-white font-medium px-6 py-3 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-dark;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-white hover:bg-white/10 focus:bg-white/10 font-medium px-6 py-3 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-dark;
   }
   
   .section-padding {
@@ -60,11 +64,44 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-within:scale-105 focus-within:shadow-2xl;
   }
 
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-accent-green bg-clip-text text-transparent;
+  }
+
+  /* Accessibility-focused components */
+  .focus-visible {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-dark;
+  }
+
+  .focus-visible-white {
+    @apply focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-dark;
+  }
+
+  .link-underline {
+    @apply underline decoration-2 underline-offset-4 decoration-primary hover:decoration-accent-green transition-colors;
+  }
+
+  .skip-link {
+    @apply absolute -top-40 left-6 bg-primary text-white px-4 py-2 rounded-md z-50 transition-all duration-300 focus:top-6 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2;
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-within:scale-105 focus-within:shadow-2xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-dark rounded-2xl;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg bg-shadow-gray/20 border border-shadow-gray/30 text-white placeholder-neutral-light/50 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  .input-success {
+    @apply border-accent-green focus:border-accent-green focus:ring-accent-green/20;
   }
 }
 
@@ -96,6 +133,74 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe-transform {
+      transform: none !important;
+    }
+    
+    .motion-safe-animate {
+      animation: none !important;
+    }
+    
+    .motion-safe-transition {
+      transition: none !important;
+    }
+
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .btn-primary {
+      border: 2px solid currentColor;
+    }
+    
+    .btn-secondary {
+      border: 3px solid currentColor;
+    }
+    
+    .text-gradient {
+      background: none;
+      color: #1DB954;
+    }
+  }
+
+  /* Focus visible only for keyboard users */
+  .js-focus-visible .focus-visible:not(.focus-visible) {
+    outline: none;
+    box-shadow: none;
   }
 
   /* Navbar specific utilities */
@@ -138,17 +243,8 @@
     border-radius: 6px;
   }
 
-  /* Reduced motion support */
+  /* Additional reduced motion override */
   @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-    
     /* Keep navbar transitions for better UX */
     .navbar-blur,
     .menu-underline::after {
@@ -178,29 +274,7 @@
   }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -30px, 0) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
 @keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(30px, 0, 0) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-@keyframes fadeInRight {
   from {
     opacity: 0;
     transform: translate3d(-30px, 0, 0) scale(0.95);
@@ -211,18 +285,13 @@
   }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-.animate-fade-in-down {
-  animation: fadeInDown 0.5s ease-out forwards;
-}
-
-.animate-fade-in-left {
-  animation: fadeInLeft 0.5s ease-out forwards;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.5s ease-out forwards;
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(30px, 0, 0) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }

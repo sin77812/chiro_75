@@ -9,16 +9,17 @@ import KPICounter from '@/components/ui/KPICounter'
 import PageCTA from '@/components/sections/PageCTA'
 
 interface CaseStudyPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 
 
 export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
-  const project = portfolioData.find((p) => p.slug === params.slug)
+  const { slug } = await params
+  const project = portfolioData.find((p) => p.slug === slug)
 
   if (!project) {
     return {
@@ -33,13 +34,14 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 }
 
 export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
-  const project = portfolioData.find((p) => p.slug === params.slug)
+  const { slug } = await params
+  const project = portfolioData.find((p) => p.slug === slug)
 
   if (!project) {
     notFound()
   }
 
-  const currentIndex = portfolioData.findIndex(p => p.slug === params.slug)
+  const currentIndex = portfolioData.findIndex(p => p.slug === slug)
   const previousProject = currentIndex > 0 ? portfolioData[currentIndex - 1] : null
   const nextProject = currentIndex < portfolioData.length - 1 ? portfolioData[currentIndex + 1] : null
 
@@ -51,7 +53,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
     )
     .slice(0, 3)
 
-  const categoryLabels = {
+  const categoryLabels: Record<string, string> = {
     manufacturing: '제조업',
     food: '식품',
     service: '서비스',
@@ -104,22 +106,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     {new Date(project.completedAt).toLocaleDateString('ko-KR')}
                   </div>
                 </div>
-                {project.url && (
-                  <div>
-                    <div className="flex items-center text-neutral-light/60 mb-2">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      웹사이트
-                    </div>
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-accent-green transition-colors font-medium"
-                    >
-                      사이트 보기
-                    </a>
+                <div>
+                  <div className="flex items-center text-neutral-light/60 mb-2">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    클라이언트
                   </div>
-                )}
+                  <div className="text-white font-medium">
+                    {project.client}
+                  </div>
+                </div>
               </div>
 
               {/* Tags */}
