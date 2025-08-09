@@ -155,7 +155,6 @@ const nextConfig = {
   ...(process.env.NODE_ENV === 'production' && {
     poweredByHeader: false,
     generateEtags: false,
-    optimizeFonts: true,
   })
 }
 
