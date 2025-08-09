@@ -8,8 +8,16 @@ import BeforeAfter from '@/components/ui/BeforeAfter'
 import KPICounter from '@/components/ui/KPICounter'
 import PageCTA from '@/components/sections/PageCTA'
 
+interface CaseStudyPageProps {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+
+
+export async function generateMetadata({ params }: CaseStudyPageProps): Promise<Metadata> {
   const project = portfolioData.find((p) => p.slug === params.slug)
 
   if (!project) {
@@ -24,7 +32,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
+export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   const project = portfolioData.find((p) => p.slug === params.slug)
 
   if (!project) {
