@@ -114,7 +114,6 @@ export default function StickyHelpButton({ className = '' }: StickyHelpButtonPro
                           {option.description}
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-text-tertiary group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                     </div>
                   </AccessibleButton>
                 )

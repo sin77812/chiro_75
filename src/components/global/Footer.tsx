@@ -140,7 +140,6 @@ export default function Footer({ className = '' }: FooterProps) {
                     aria-label="뉴스레터 구독하기"
                   >
                     구독하기
-                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
                   </AccessibleButton>
                 </div>
                 <p className="text-xs text-text-tertiary">

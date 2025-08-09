@@ -97,9 +97,6 @@ function ValueCard({ icon: Icon, title, benefit, description, features }: ValueP
         <ul className="space-y-2">
           {features.map((feature, idx) => (
             <li key={idx} className="flex items-start text-sm text-neutral-light/60">
-              <ArrowRight className={`h-3 w-3 mt-1 mr-2 flex-shrink-0 transition-colors ${
-                isHovered ? 'text-primary' : 'text-primary/70'
-              }`} />
               <span className="flex-1">{feature}</span>
             </li>
           ))}
@@ -111,7 +108,6 @@ function ValueCard({ icon: Icon, title, benefit, description, features }: ValueP
             isHovered ? 'text-accent-green' : 'text-primary hover:text-accent-green'
           }`}>
             자세히 알아보기
-            <ArrowRight className="ml-1 h-4 w-4 group-hover/link:translate-x-1 transition-transform" />
           </button>
         </div>
       </div>
@@ -216,7 +212,6 @@ export default function WhyChiro() {
             </p>
             <button className="btn-primary group">
               무료 성과 분석 받기
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

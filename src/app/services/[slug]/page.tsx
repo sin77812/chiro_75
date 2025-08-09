@@ -262,7 +262,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     href="/services" 
                     className="text-neutral-light/60 hover:text-primary transition-colors flex items-center text-sm"
                   >
-                    Services <ArrowRight className="w-4 h-4 ml-1 mr-2" />
+                    Services
                   </Link>
                   <span className="text-primary font-medium text-sm">{service.title}</span>
                 </div>
@@ -294,7 +294,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="btn-primary group">
                     Start Your Project
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                   <button className="btn-secondary group">
                     View Case Study
@@ -649,7 +648,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                         </p>
                         <div className="flex items-center text-primary text-sm font-medium group-hover:text-accent-green transition-colors">
                           Learn More
-                          <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>
                     </div>
@@ -679,7 +677,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button className="btn-primary group">
                     Start Your Project
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                   <Link href="/contact" className="btn-secondary group">
                     Schedule Consultation
