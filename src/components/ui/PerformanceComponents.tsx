@@ -306,7 +306,7 @@ export function useInView(options = {}) {
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [options])
 
   return { elementRef, isInView, hasBeenInView }
 }
