@@ -128,10 +128,10 @@ const serviceExtensions: Record<string, any> = {
     },
     testimonials: [
       {
-        quote: "CHIRO transformed our online presence completely. Our lead generation increased by 300% within the first month of launch.",
-        author: "Sarah Chen",
-        position: "Marketing Director",
-        company: "TechCorp Industries",
+        quote: "CHIRO는 우리의 온라인 존재감을 완전히 변화시켰습니다. 런칭 첫 달 만에 리드 생성이 300% 증가했습니다.",
+        author: "김서연",
+        position: "마케팅 디렉터",
+        company: "테크코프 인더스트리",
         avatar: "/testimonials/sarah-chen.jpg"
       }
     ]
@@ -139,77 +139,192 @@ const serviceExtensions: Record<string, any> = {
   'ui-ux-design': {
     problemSolution: {
       problems: [
-        'High bounce rate due to confusing navigation and poor user experience',
-        'Low conversion rates from visitors who can\'t find what they need quickly',
-        'Inconsistent brand presentation across different pages and touchpoints',
-        'Accessibility issues excluding potential customers and creating legal risks'
+        '혼란스러운 네비게이션과 열악한 사용자 경험으로 인한 높은 이탈률',
+        '필요한 정보를 빠르게 찾지 못하는 방문자로 인한 낮은 전환율',
+        '다양한 페이지와 터치포인트에서의 일관성 없는 브랜드 표현',
+        '접근성 문제로 인한 잠재 고객 배제 및 법적 위험'
       ],
       solutions: [
-        'User research-driven interface design that guides visitors naturally toward conversion',
-        'Streamlined user journeys with clear calls-to-action and intuitive navigation',
-        'Consistent design system reflecting your brand values and professional image',
-        'WCAG 2.1 AA compliant designs ensuring accessibility for all users'
+        '사용자 연구 기반 인터페이스 디자인으로 자연스러운 전환 유도',
+        '명확한 CTA와 직관적인 네비게이션으로 간소화된 사용자 여정',
+        '브랜드 가치와 전문적인 이미지를 반영하는 일관된 디자인 시스템',
+        'WCAG 2.1 AA 준수로 모든 사용자를 위한 접근성 보장'
       ]
     },
     deliverables: [
-      { item: 'User Research & Persona Development', included: true },
-      { item: 'Information Architecture & User Journey Maps', included: true },
-      { item: 'Wireframes & Interactive Prototypes', included: true },
-      { item: 'High-Fidelity Visual Design', included: true },
-      { item: 'Design System & Component Library', included: true },
-      { item: 'Responsive Design for All Devices', included: true },
-      { item: 'Accessibility Compliance (WCAG 2.1 AA)', included: true },
-      { item: 'Usability Testing & Iteration', included: true },
-      { item: 'Design Handoff & Developer Documentation', included: true },
-      { item: 'Motion Design & Micro-interactions', included: false, note: 'Available as add-on' }
+      { item: '사용자 리서치 및 페르소나 개발', included: true },
+      { item: '정보 아키텍처 및 사용자 여정 맵', included: true },
+      { item: '와이어프레임 및 인터랙티브 프로토타입', included: true },
+      { item: '고품질 비주얼 디자인', included: true },
+      { item: '디자인 시스템 및 컴포넌트 라이브러리', included: true },
+      { item: '모든 기기를 위한 반응형 디자인', included: true },
+      { item: '접근성 규정 준수 (WCAG 2.1 AA)', included: true },
+      { item: '사용성 테스트 및 반복 개선', included: true },
+      { item: '디자인 핸드오프 및 개발자 문서', included: true },
+      { item: '모션 디자인 및 마이크로 인터랙션', included: false, note: '추가 옵션으로 이용 가능' }
     ]
   },
   'performance-optimization': {
     problemSolution: {
       problems: [
-        'Website loading times over 3 seconds causing 40%+ visitor abandonment',
-        'Poor Core Web Vitals scores affecting Google search rankings',
-        'High bounce rates on mobile devices due to slow performance',
-        'Large bundle sizes and unoptimized assets consuming excessive bandwidth'
+        '3초 이상의 웹사이트 로딩 시간으로 40% 이상 방문자 이탈',
+        'Google 검색 순위에 영향을 주는 낮은 Core Web Vitals 점수',
+        '느린 성능으로 인한 모바일 기기의 높은 이탈률',
+        '큰 번들 크기와 최적화되지 않은 자산으로 과도한 대역폭 소비'
       ],
       solutions: [
-        'Advanced optimization techniques achieving sub-1-second load times',
-        'Core Web Vitals scores of 90+ ensuring excellent SEO performance',
-        'Progressive loading and optimization for flawless mobile experience',
-        'Comprehensive asset optimization reducing bandwidth usage by 70%+'
+        '고급 최적화 기술로 1초 미만 로딩 시간 달성',
+        '90점 이상의 Core Web Vitals 점수로 탁월한 SEO 성능 보장',
+        '완벽한 모바일 경험을 위한 점진적 로딩 및 최적화',
+        '포괄적인 자산 최적화로 대역폭 사용량 70% 이상 감소'
       ]
     },
     beforeAfter: {
-      title: 'Performance Transformation Results',
+      title: '성능 개선 결과',
       cases: [
         {
-          client: 'E-commerce Platform',
+          client: '이커머스 플랫폼',
           before: {
-            metric: 'Lighthouse Score',
+            metric: 'Lighthouse 점수',
             value: '34/100',
-            issue: 'Unoptimized images, blocking resources'
+            issue: '최적화되지 않은 이미지, 차단 리소스'
           },
           after: {
-            metric: 'Lighthouse Score', 
+            metric: 'Lighthouse 점수', 
             value: '96/100',
             improvement: '+182%'
           }
         },
         {
-          client: 'SaaS Dashboard',
+          client: 'SaaS 대시보드',
           before: {
-            metric: 'First Contentful Paint',
-            value: '4.2s',
-            issue: 'Large JavaScript bundles'
+            metric: '처음 콘텐츠 페인트',
+            value: '4.2초',
+            issue: '큰 JavaScript 번들'
           },
           after: {
-            metric: 'First Contentful Paint',
-            value: '0.8s',
-            improvement: '81% faster'
+            metric: '처음 콘텐츠 페인트',
+            value: '0.8초',
+            improvement: '81% 빨라짐'
           }
         }
       ]
     }
+  },
+  'digital-marketing': {
+    problemSolution: {
+      problems: [
+        '검색 결과 첫 페이지에 나타나지 않아 놓치는 잠재 고객',
+        '경쟁사 대비 낮은 온라인 가시성과 브랜드 인지도',
+        '체계적인 SEO 전략 부재로 인한 무작위 트래픽',
+        '측정 가능한 ROI 없이 낭비되는 마케팅 예산'
+      ],
+      solutions: [
+        '타겟 키워드 1페이지 랭킹을 위한 검증된 SEO 전략',
+        '경쟁사 분석을 통한 차별화된 포지셔닝',
+        '데이터 기반 콘텐츠 마케팅으로 질적 트래픽 확보',
+        '투명한 성과 추적과 ROI 최적화'
+      ]
+    },
+    deliverables: [
+      { item: 'SEO 현황 진단 및 경쟁사 분석', included: true },
+      { item: '키워드 리서치 및 전략 수립', included: true },
+      { item: '온페이지 SEO 최적화', included: true },
+      { item: '기술적 SEO 개선', included: true },
+      { item: '콘텐츠 마케팅 전략 및 실행', included: true },
+      { item: '백링크 구축 및 관리', included: true },
+      { item: '로컬 SEO 최적화', included: true },
+      { item: '월간 성과 리포트 및 컨설팅', included: true },
+      { item: '전환율 최적화 (CRO)', included: true },
+      { item: '유료 광고 캠페인 관리', included: false, note: 'Premium 패키지에서 이용 가능' }
+    ],
+    packages: [
+      {
+        name: '베이직',
+        price: '월 150만원',
+        duration: '최소 6개월 계약',
+        description: '기본적인 SEO 최적화를 원하는 소규모 비즈니스',
+        features: [
+          '월 10개 타겟 키워드',
+          '온페이지 SEO 최적화',
+          '기술적 SEO 점검',
+          '월 2회 콘텐츠 제작',
+          '기본 성과 리포트',
+          '이메일 지원'
+        ]
+      },
+      {
+        name: '프로페셔널',
+        price: '월 350만원',
+        duration: '최소 6개월 계약',
+        description: '본격적인 온라인 성장을 원하는 중견 기업',
+        features: [
+          '월 30개 타겟 키워드',
+          '고급 SEO 최적화',
+          '경쟁사 모니터링',
+          '월 8회 콘텐츠 제작',
+          '백링크 구축',
+          '상세 성과 분석',
+          '주간 컨설팅 콜'
+        ],
+        popular: true
+      },
+      {
+        name: '엔터프라이즈',
+        price: '맞춤 견적',
+        duration: '연간 계약',
+        description: '종합적인 디지털 마케팅이 필요한 대기업',
+        features: [
+          '무제한 키워드',
+          '전담 SEO 팀 배정',
+          '맞춤형 콘텐츠 전략',
+          '다국어 SEO',
+          'PPC 광고 관리',
+          '전환율 최적화',
+          '24/7 지원'
+        ]
+      }
+    ],
+    beforeAfter: {
+      title: 'SEO 성과 사례',
+      cases: [
+        {
+          client: '이커머스 쇼핑몰',
+          before: {
+            metric: '월 유기적 트래픽',
+            value: '2,100명',
+            issue: '낮은 검색 순위, 최적화 부재'
+          },
+          after: {
+            metric: '월 유기적 트래픽',
+            value: '18,500명',
+            improvement: '+780%'
+          }
+        },
+        {
+          client: 'B2B 소프트웨어',
+          before: {
+            metric: '리드 생성',
+            value: '월 12건',
+            issue: '타겟팅 실패, 낮은 가시성'
+          },
+          after: {
+            metric: '리드 생성',
+            value: '월 89건',
+            improvement: '+641%'
+          }
+        }
+      ]
+    },
+    testimonials: [
+      {
+        quote: "CHIRO의 SEO 전략 덕분에 6개월 만에 매출이 3배 증가했습니다. 검색 1페이지 랭킹은 물론, 실제 구매로 이어지는 트래픽을 확보했습니다.",
+        author: "박준영",
+        position: "대표이사",
+        company: "테크스타트업",
+        avatar: "/testimonials/park-jun.jpg"
+      }
+    ]
   }
 }
 
@@ -262,7 +377,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     href="/services" 
                     className="text-neutral-light/60 hover:text-primary transition-colors flex items-center text-sm"
                   >
-                    Services
+                    서비스
                   </Link>
                   <span className="text-primary font-medium text-sm">{service.title}</span>
                 </div>
@@ -281,7 +396,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-2">
                         <Award className="w-5 h-5 text-accent-green" />
-                        <span className="text-white font-medium">Success Story</span>
+                        <span className="text-white font-medium">성공 사례</span>
                       </div>
                       <span className="text-accent-green font-bold text-lg">{service.miniCase.result}</span>
                     </div>
@@ -293,10 +408,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="btn-primary group">
-                    Start Your Project
+                    프로젝트 시작하기
                   </button>
                   <button className="btn-secondary group">
-                    View Case Study
+                    사례 연구 보기
                     <Play className="ml-2 h-4 w-4" />
                   </button>
                 </div>
@@ -311,7 +426,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       <Code className="w-10 h-10 text-primary" />
                     </div>
                     <p className="text-neutral-light/60 text-sm">
-                      Before/After Comparison Video
+                      전/후 비교 비디오
                     </p>
                   </div>
                 </div>
@@ -334,7 +449,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       <Target className="w-6 h-6 text-red-400" />
                     </div>
                     <h2 className="text-2xl font-pretendard font-bold text-white">
-                      Common <span className="text-red-400">Challenges</span>
+                      일반적인 <span className="text-red-400">문제점</span>
                     </h2>
                   </div>
                   
@@ -359,7 +474,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       <Lightbulb className="w-6 h-6 text-primary" />
                     </div>
                     <h2 className="text-2xl font-pretendard font-bold text-white">
-                      Our <span className="text-gradient">Solutions</span>
+                      우리의 <span className="text-gradient">솔루션</span>
                     </h2>
                   </div>
                   
@@ -387,10 +502,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="text-center mb-16">
               <FadeUp>
                 <h2 className="font-pretendard font-bold mb-6">
-                  Complete <span className="text-gradient">Deliverables</span>
+                  전체 <span className="text-gradient">산출물</span>
                 </h2>
                 <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Everything included in your {service.title.toLowerCase()} project
+                  {service.title} 프로젝트에 포함된 모든 것
                 </p>
               </FadeUp>
             </div>
@@ -437,10 +552,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <div className="text-center mb-16">
               <FadeUp>
                 <h2 className="font-pretendard font-bold mb-6">
-                  Technology <span className="text-gradient">Stack</span>
+                  기술 <span className="text-gradient">스택</span>
                 </h2>
                 <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Cutting-edge tools and frameworks for optimal performance and scalability
+                  최적의 성능과 확장성을 위한 최첨단 도구와 프레임워크
                 </p>
               </FadeUp>
             </div>
@@ -472,7 +587,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   {extensions.beforeAfter.title}
                 </h2>
                 <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Measurable improvements across key performance indicators
+                  핵심 성과 지표의 측정 가능한 개선
                 </p>
               </FadeUp>
             </div>
@@ -484,7 +599,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     <div className="grid lg:grid-cols-3 gap-8 items-center">
                       {/* Before */}
                       <div className="text-center p-6 bg-red-500/10 rounded-xl border border-red-500/20">
-                        <h4 className="text-lg font-semibold text-white mb-3">Before</h4>
+                        <h4 className="text-lg font-semibold text-white mb-3">개선 전</h4>
                         <div className="text-3xl font-bold text-red-400 mb-2">{caseStudy.before.value}</div>
                         <p className="text-red-300 font-medium mb-3">{caseStudy.before.metric}</p>
                         <p className="text-sm text-neutral-light/60">{caseStudy.before.issue}</p>
@@ -499,12 +614,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
                       {/* After */}
                       <div className="text-center p-6 bg-accent-green/10 rounded-xl border border-accent-green/20">
-                        <h4 className="text-lg font-semibold text-white mb-3">After</h4>
+                        <h4 className="text-lg font-semibold text-white mb-3">개선 후</h4>
                         <div className="text-3xl font-bold text-accent-green mb-2">{caseStudy.after.value}</div>
                         <p className="text-accent-green font-medium mb-3">{caseStudy.after.metric}</p>
                         <div className="flex items-center justify-center">
                           <Star className="w-4 h-4 text-accent-green mr-2" />
-                          <span className="text-sm text-neutral-light/80">Optimized Result</span>
+                          <span className="text-sm text-neutral-light/80">최적화된 결과</span>
                         </div>
                       </div>
                     </div>
@@ -620,10 +735,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <div className="text-center mb-16">
             <FadeUp>
               <h2 className="font-pretendard font-bold mb-6">
-                Related <span className="text-gradient">Services</span>
+                관련 <span className="text-gradient">서비스</span>
               </h2>
               <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                Explore other services that complement your {service.title.toLowerCase()} project
+                {service.title} 프로젝트를 보완하는 다른 서비스를 탐색하세요
               </p>
             </FadeUp>
           </div>
@@ -647,7 +762,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                           {relatedService.description.slice(0, 120)}...
                         </p>
                         <div className="flex items-center text-primary text-sm font-medium group-hover:text-accent-green transition-colors">
-                          Learn More
+                          자세히 보기
                         </div>
                       </div>
                     </div>
@@ -670,16 +785,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </h2>
                 
                 <p className="text-xl text-neutral-light/70 leading-relaxed">
-                  Let's discuss how we can help you achieve your business goals with our 
-                  proven {service.title.toLowerCase()} expertise.
+                  검증된 {service.title} 전문성으로 비즈니스 목표를 
+                  달성할 수 있도록 도와드리겠습니다.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button className="btn-primary group">
-                    Start Your Project
+                    프로젝트 시작하기
                   </button>
                   <Link href="/contact" className="btn-secondary group">
-                    Schedule Consultation
+                    상담 예약하기
                     <Clock className="ml-2 h-4 w-4" />
                   </Link>
                 </div>
@@ -688,18 +803,18 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <div className="grid md:grid-cols-3 gap-6 pt-8 border-t border-shadow-gray/20">
                   <div className="text-center">
                     <Clock className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <p className="text-white font-medium mb-1">Fast Delivery</p>
-                    <p className="text-neutral-light/60 text-sm">Project starts in 1 week</p>
+                    <p className="text-white font-medium mb-1">빠른 딜리버리</p>
+                    <p className="text-neutral-light/60 text-sm">1주 내 프로젝트 시작</p>
                   </div>
                   <div className="text-center">
                     <Shield className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <p className="text-white font-medium mb-1">Guaranteed Quality</p>
-                    <p className="text-neutral-light/60 text-sm">100% satisfaction promise</p>
+                    <p className="text-white font-medium mb-1">품질 보증</p>
+                    <p className="text-neutral-light/60 text-sm">100% 만족 약속</p>
                   </div>
                   <div className="text-center">
                     <Users className="w-8 h-8 text-primary mx-auto mb-3" />
-                    <p className="text-white font-medium mb-1">Expert Team</p>
-                    <p className="text-neutral-light/60 text-sm">Senior-level specialists</p>
+                    <p className="text-white font-medium mb-1">전문가 팀</p>
+                    <p className="text-neutral-light/60 text-sm">시니어 레벨 전문가</p>
                   </div>
                 </div>
               </div>

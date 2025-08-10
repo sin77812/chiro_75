@@ -45,7 +45,7 @@ const processSteps: ProcessStep[] = [
     id: 'build',
     number: '04',
     title: 'Build',
-    description: '최신 기술로 안정적이고 확장 가능한 솔루션을 구축합니다',
+    description: '최신 기술로 확장 가능한 솔루션을 구축합니다',
     deliverables: ['개발 & 구현', '품질 테스트', '성능 최적화'],
     icon: Code,
     color: 'text-accent-green'

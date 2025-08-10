@@ -134,7 +134,7 @@ export default function TrustMetrics() {
               검증된 신뢰
             </div>
             <h2 className="font-pretendard font-black text-4xl md:text-6xl text-white mb-6 leading-tight">
-              숫자로 증명하는
+              CHIRO가 증명한
               <br />
               <span className="text-gradient">전문성</span>
             </h2>

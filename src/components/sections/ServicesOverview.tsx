@@ -49,9 +49,9 @@ const services: Service[] = [
   },
   {
     id: 'digital-strategy',
-    title: '디지털 전략',
+    title: 'SEO 최적화',
     value: '데이터로 증명하는 성장 전략',
-    description: '통합적 디지털 마케팅으로 비즈니스 확장',
+    description: '홈페이지 변경으로 시작하는 비즈니스 확장',
     icon: TrendingUp,
     backgroundImage: '/image/webdigital.png',
     stats: '평균 ROI 320% 달성',

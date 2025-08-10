@@ -94,7 +94,7 @@ export default function PortfolioShowcase() {
               검증된 성과
             </div>
             <h2 className="font-pretendard font-black text-4xl md:text-6xl text-white mb-6 leading-tight">
-              결과로 말하는
+              CHIRO가 함께 이룬
               <br />
               <span className="text-gradient">프로젝트</span>
             </h2>
