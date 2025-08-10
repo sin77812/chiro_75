@@ -23,7 +23,7 @@ const services: Service[] = [
     value: '브랜드의 디지털 정체성을 구현합니다',
     description: '최신 기술과 사용자 경험을 결합한 고성능 웹사이트',
     icon: Code,
-    backgroundImage: '/images/services/web-dev-bg.jpg',
+    backgroundImage: '/image/webuild.png',
     stats: '평균 로딩속도 0.8초 달성',
     link: '/services/web-development'
   },
@@ -33,7 +33,7 @@ const services: Service[] = [
     value: '사용자 중심의 직관적 경험을 디자인합니다',
     description: '데이터 기반 디자인으로 전환율을 극대화',
     icon: Palette,
-    backgroundImage: '/images/services/design-bg.jpg',
+    backgroundImage: '/image/webicon.png',
     stats: '평균 전환율 +247% 개선',
     link: '/services/ui-ux-design'
   },
@@ -43,7 +43,7 @@ const services: Service[] = [
     value: '속도가 곧 경쟁력입니다',
     description: 'Core Web Vitals 최적화로 검색 순위 상승',
     icon: Zap,
-    backgroundImage: '/images/services/performance-bg.jpg',
+    backgroundImage: '/image/webebgin.png',
     stats: 'Lighthouse 90+ 점수 보장',
     link: '/services/performance-optimization'
   },
@@ -53,7 +53,7 @@ const services: Service[] = [
     value: '데이터로 증명하는 성장 전략',
     description: '통합적 디지털 마케팅으로 비즈니스 확장',
     icon: TrendingUp,
-    backgroundImage: '/images/services/strategy-bg.jpg',
+    backgroundImage: '/image/webdigital.png',
     stats: '평균 ROI 320% 달성',
     link: '/services/digital-marketing'
   }

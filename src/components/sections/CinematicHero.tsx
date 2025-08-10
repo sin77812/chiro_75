@@ -26,7 +26,7 @@ export default function CinematicHero() {
           onLoadedData={() => setVideoLoaded(true)}
           poster="/images/hero-poster.jpg"
         >
-          <source src="/videos/hero-cinematic.mp4" type="video/mp4" />
+          <source src="/image/backgroundvod.mp4" type="video/mp4" />
           {/* Fallback background image */}
           <div className="absolute inset-0 bg-gradient-to-br from-background-primary via-background-secondary to-background-primary" />
         </video>

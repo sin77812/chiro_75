@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       {/* Preload critical resources */}
-      <link rel="preload" href="/videos/hero-cinematic.mp4" as="video" type="video/mp4" />
+      <link rel="preload" href="/image/backgroundvod.mp4" as="video" type="video/mp4" />
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
       <main className="overflow-x-hidden">
