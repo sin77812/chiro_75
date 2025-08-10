@@ -81,23 +81,23 @@ const processSteps = [
 const differentiationPoints = [
   {
     icon: Search,
-    title: 'AI 기반 워크플로우',
-    description: 'Claude Code 통합으로 40% 빠른 개발과 높은 코드 품질 보장'
+    title: 'AI 기반 개발',
+    description: 'Claude Code 활용으로 개발 속도 40%↑, 코드 품질 강화'
   },
   {
     icon: Shield,
-    title: 'WCAG 2.1 AA 준수',
-    description: '포용적 사용자 경험과 법적 준수를 보장하는 내장 접근성'
+    title: '접근성 표준 준수',
+    description: 'WCAG 2.1 AA 충족으로 모든 사용자가 편하게 이용'
   },
   {
     icon: Zap,
-    title: 'Core Web Vitals 우수성',
-    description: '뛰어난 사용자 경험과 SEO를 위한 90+ Lighthouse 점수 보장'
+    title: '성능 최적화',
+    description: 'Core Web Vitals 90+로 UX와 SEO 동시 향상'
   },
   {
     icon: Users,
-    title: '포괄적 문서화',
-    description: '원활한 팀 인수인계를 위한 상세한 기술 문서 및 교육'
+    title: '완전한 문서화',
+    description: '누구나 이어받아도 빠르게 이해 가능한 기술 문서 제공'
   }
 ]
 
@@ -388,12 +388,11 @@ export default function ServicesPage() {
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
                 우리의 프로세스
               </div>
-              <h2 className="font-pretendard font-bold mb-6">
+              <h2 className="font-pretendard font-bold text-3xl md:text-4xl mb-4">
                 전략적 <span className="text-gradient">개발 방법론</span>
               </h2>
-              <p className="text-xl text-neutral-light/70 max-w-3xl mx-auto leading-relaxed">
-                검증된 5단계 프로세스로 모든 프로젝트가 완전한 투명성과 
-                예측 가능한 결과와 함께 최대의 비즈니스 가치를 제공합니다.
+              <p className="text-lg text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
+                검증된 5단계 프로세스로 투명하고 예측 가능한 결과 제공
               </p>
             </FadeUp>
           </div>
@@ -408,13 +407,13 @@ export default function ServicesPage() {
                   <div className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:gap-16 gap-8`}>
                     {/* Content */}
                     <div className="lg:w-1/2">
-                      <div className={`p-8 rounded-2xl border border-primary/20 bg-primary/5 ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
+                      <div className={`p-6 rounded-2xl border border-primary/20 bg-primary/5 ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
                         <div className="flex items-center mb-4">
                           <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
                             {step.step}
                           </div>
                           <div>
-                            <h3 className="text-2xl font-pretendard font-bold text-white">{step.title}</h3>
+                            <h3 className="text-xl font-pretendard font-bold text-white">{step.title}</h3>
                             <p className="text-primary font-medium">{step.duration}</p>
                           </div>
                         </div>
@@ -484,11 +483,11 @@ export default function ServicesPage() {
           <div className="container-custom">
             <div className="text-center mb-16">
               <FadeUp>
-                <h2 className="font-pretendard font-bold mb-6">
+                <h2 className="font-pretendard font-bold text-3xl md:text-4xl mb-4">
                   왜 <span className="text-gradient">CHIRO</span>를 선택해야 할까요
                 </h2>
-                <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  업계에서 우리를 차별화시키는 첨단 기술 스택과 방법론
+                <p className="text-lg text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
+                  업계를 선도하는 기술과 검증된 방법론
                 </p>
               </FadeUp>
             </div>
@@ -498,14 +497,14 @@ export default function ServicesPage() {
                 const IconComponent = point.icon
                 return (
                   <FadeUp key={index} delay={index * 100}>
-                    <div className="text-center p-6 rounded-xl bg-dark border border-shadow-gray/30 hover:border-primary/30 transition-all duration-300">
+                    <div className="text-center p-4 rounded-xl bg-dark border border-shadow-gray/30 hover:border-primary/30 transition-all duration-300">
                       <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                         <IconComponent className="h-6 w-6 text-primary" />
                       </div>
-                      <h3 className="text-lg font-pretendard font-semibold text-white mb-3">
+                      <h3 className="text-base font-pretendard font-semibold text-white mb-2">
                         {point.title}
                       </h3>
-                      <p className="text-sm text-neutral-light/70 leading-relaxed">
+                      <p className="text-xs text-neutral-light/70 leading-relaxed">
                         {point.description}
                       </p>
                     </div>

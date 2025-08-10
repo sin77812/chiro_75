@@ -25,19 +25,7 @@ const serviceExtensions: Record<string, any> = {
         '쉬운 콘텐츠 업데이트를 위한 직관적 CMS 통합',
         '자연 검색 트래픽 증가를 위한 SEO 최적화 아키텍처'
       ]
-    },
-    deliverables: [
-      { item: 'Custom Website Design & Development', included: true },
-      { item: 'Mobile-First Responsive Implementation', included: true },
-      { item: 'Content Management System Integration', included: true },
-      { item: 'SEO Optimization & Technical Audit', included: true },
-      { item: 'Performance Optimization (Core Web Vitals)', included: true },
-      { item: 'Security Implementation & SSL Setup', included: true },
-      { item: 'Analytics & Tracking Setup', included: true },
-      { item: 'Documentation & Training Materials', included: true },
-      { item: '30-Day Post-Launch Support', included: true },
-      { item: 'Advanced E-commerce Integration', included: false, note: 'Available in Standard+ packages' }
-    ],
+
     techStack: [
       { name: 'Next.js 14', category: 'Framework', logo: '/tech/nextjs.svg' },
       { name: 'TypeScript', category: 'Language', logo: '/tech/typescript.svg' },
@@ -150,19 +138,7 @@ const serviceExtensions: Record<string, any> = {
         '브랜드 가치와 전문적인 이미지를 반영하는 일관된 디자인 시스템',
         'WCAG 2.1 AA 준수로 모든 사용자를 위한 접근성 보장'
       ]
-    },
-    deliverables: [
-      { item: '사용자 리서치 및 페르소나 개발', included: true },
-      { item: '정보 아키텍처 및 사용자 여정 맵', included: true },
-      { item: '와이어프레임 및 인터랙티브 프로토타입', included: true },
-      { item: '고품질 비주얼 디자인', included: true },
-      { item: '디자인 시스템 및 컴포넌트 라이브러리', included: true },
-      { item: '모든 기기를 위한 반응형 디자인', included: true },
-      { item: '접근성 규정 준수 (WCAG 2.1 AA)', included: true },
-      { item: '사용성 테스트 및 반복 개선', included: true },
-      { item: '디자인 핸드오프 및 개발자 문서', included: true },
-      { item: '모션 디자인 및 마이크로 인터랙션', included: false, note: '추가 옵션으로 이용 가능' }
-    ]
+
   },
   'performance-optimization': {
     problemSolution: {
@@ -225,19 +201,7 @@ const serviceExtensions: Record<string, any> = {
         '데이터 기반 콘텐츠 마케팅으로 질적 트래픽 확보',
         '투명한 성과 추적과 ROI 최적화'
       ]
-    },
-    deliverables: [
-      { item: 'SEO 현황 진단 및 경쟁사 분석', included: true },
-      { item: '키워드 리서치 및 전략 수립', included: true },
-      { item: '온페이지 SEO 최적화', included: true },
-      { item: '기술적 SEO 개선', included: true },
-      { item: '콘텐츠 마케팅 전략 및 실행', included: true },
-      { item: '백링크 구축 및 관리', included: true },
-      { item: '로컬 SEO 최적화', included: true },
-      { item: '월간 성과 리포트 및 컨설팅', included: true },
-      { item: '전환율 최적화 (CRO)', included: true },
-      { item: '유료 광고 캠페인 관리', included: false, note: 'Premium 패키지에서 이용 가능' }
-    ],
+
     packages: [
       {
         name: '베이직',
