@@ -43,7 +43,7 @@ const services: Service[] = [
     value: '속도가 곧 경쟁력입니다',
     description: 'Core Web Vitals 최적화로 검색 순위 상승',
     icon: Zap,
-    backgroundImage: '/image/webebgin.png',
+    backgroundImage: '/image/webengin.png',
     stats: 'Lighthouse 90+ 점수 보장',
     link: '/services/performance-optimization'
   },
