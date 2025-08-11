@@ -1,22 +1,23 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 
-// Core sections loaded immediately
-import CinematicHero from '@/components/sections/CinematicHero'
+// Core sections loaded immediately - new premium components
+import HeroSplit from '@/components/sections/HeroSplit'
+import LogoStrip from '@/components/sections/LogoStrip'
+import KpiTiles from '@/components/sections/KpiTiles'
+import BeforeAfter from '@/components/sections/BeforeAfter'
+
+// Existing sections we'll keep and enhance
 import PortfolioShowcase from '@/components/sections/PortfolioShowcase'
 import ServicesOverview from '@/components/sections/ServicesOverview'
 
 // Below-the-fold sections loaded dynamically
-const TrustMetrics = dynamic(() => import('@/components/sections/TrustMetrics'), {
-  loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
+const TestimonialCarousel = dynamic(() => import('@/components/sections/TestimonialCarousel'), {
+  loading: () => <div className="min-h-96 animate-pulse bg-[#0E1111]" />
 })
 
-const ProcessFlow = dynamic(() => import('@/components/sections/ProcessFlow'), {
-  loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
-})
-
-const FinalCTA = dynamic(() => import('@/components/sections/FinalCTA'), {
-  loading: () => <div className="min-h-64 animate-pulse bg-shadow-gray/10" />
+const LeadForm = dynamic(() => import('@/components/sections/LeadForm'), {
+  loading: () => <div className="min-h-96 animate-pulse bg-[#0E1111]" />
 })
 
 export const metadata: Metadata = {
@@ -49,27 +50,33 @@ export default function Home() {
   return (
     <>
       {/* Preload critical resources */}
-      <link rel="preload" href="/image/backgroundvod.mp4" as="video" type="video/mp4" />
+      <link rel="preload" href="/videos/hero-loop.mp4" as="video" type="video/mp4" />
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
-      <main className="overflow-x-hidden">
-        {/* 1. Cinematic Hero - Fullscreen video background with minimal text */}
-        <CinematicHero />
+      <main className="overflow-x-hidden bg-[#0E1111]">
+        {/* 1. Premium Hero Section - Split layout with video */}
+        <HeroSplit />
         
-        {/* 2. Portfolio Teaser - Visual-first project showcase */}
+        {/* 2. Trust Indicators - Logo strip with parallax */}
+        <LogoStrip />
+        
+        {/* 3. KPI Section - Large numbers, minimal text */}
+        <KpiTiles />
+        
+        {/* 4. Before/After Showcase - Interactive comparison */}
+        <BeforeAfter />
+        
+        {/* 5. Portfolio Grid - Enhanced with performance chips */}
         <PortfolioShowcase />
         
-        {/* 3. Services Overview - Image-based service cards */}
+        {/* 6. Services Overview - Premium service cards */}
         <ServicesOverview />
         
-        {/* 4. Trust & KPI Metrics - Data visualization */}
-        <TrustMetrics />
+        {/* 7. Testimonials - Carousel with KPI sidebar */}
+        <TestimonialCarousel />
         
-        {/* 5. Process Flow - 5-step visual journey */}
-        <ProcessFlow />
-        
-        {/* 6. Final CTA - Dark gradient with strong call to action */}
-        <FinalCTA />
+        {/* 8. Final CTA - Consulting form */}
+        <LeadForm />
       </main>
     </>
   )
