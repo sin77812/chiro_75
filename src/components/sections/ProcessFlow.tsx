@@ -97,7 +97,7 @@ export default function ProcessFlow() {
           {/* Connection Line */}
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-primary/20 via-accent-green/40 to-primary/20 transform -translate-y-1/2" />
           
-          <div className="grid lg:grid-cols-5 gap-6 lg:gap-3">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-4">
             {processSteps.map((step, index) => {
               const IconComponent = step.icon
               
@@ -105,40 +105,40 @@ export default function ProcessFlow() {
                 <FadeUp key={step.id} delay={index * 200}>
                   <div className="group relative">
                     {/* Step Card */}
-                    <div className="relative bg-background-surface/50 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-primary/30 transition-all duration-500 hover:transform hover:scale-105">
+                    <div className="relative bg-background-surface/50 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-primary/30 transition-all duration-500 hover:transform hover:scale-105">
                       {/* Step Number */}
-                      <div className="absolute -top-2 left-4">
-                        <div className="w-6 h-6 bg-gradient-to-r from-primary to-accent-green rounded-full flex items-center justify-center text-white text-xs font-bold">
+                      <div className="absolute -top-4 left-8">
+                        <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent-green rounded-full flex items-center justify-center text-white text-sm font-bold">
                           {step.number}
                         </div>
                       </div>
 
                       {/* Icon */}
-                      <div className="mb-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                          <IconComponent className={`w-5 h-5 ${step.color} group-hover:scale-110 transition-transform duration-300`} />
+                      <div className="mb-6">
+                        <div className="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <IconComponent className={`w-7 h-7 ${step.color} group-hover:scale-110 transition-transform duration-300`} />
                         </div>
                       </div>
 
                       {/* Content */}
-                      <div className="space-y-3">
-                        <h3 className="text-lg font-pretendard font-bold text-white">
+                      <div className="space-y-4">
+                        <h3 className="text-xl font-pretendard font-bold text-white">
                           {step.title}
                         </h3>
                         
-                        <p className="text-white/70 text-xs leading-relaxed">
+                        <p className="text-white/70 text-sm leading-relaxed">
                           {step.description}
                         </p>
 
                         {/* Deliverables */}
-                        <div className="space-y-1">
+                        <div className="space-y-2">
                           <p className="text-xs font-medium text-primary uppercase tracking-wide">
                             주요 산출물
                           </p>
-                          <div className="space-y-1">
+                          <div className="space-y-2">
                             {step.deliverables.map((deliverable, idx) => (
                               <div key={idx} className="flex items-center text-xs text-white/60">
-                                <CheckCircle className="w-2.5 h-2.5 text-accent-green mr-1.5 flex-shrink-0" />
+                                <CheckCircle className="w-3 h-3 text-accent-green mr-2 flex-shrink-0" />
                                 {deliverable}
                               </div>
                             ))}
@@ -147,7 +147,7 @@ export default function ProcessFlow() {
                       </div>
 
                       {/* Hover Glow Effect */}
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent-green/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10" />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent-green/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-all duration-500 -z-10" />
                     </div>
 
                     {/* Connection Arrow (Desktop) */}
@@ -164,32 +164,32 @@ export default function ProcessFlow() {
         </div>
 
         {/* Process Benefits */}
-        <div className="mt-12">
+        <div className="mt-20">
           <FadeUp delay={1000}>
             <div className="text-center">
-              <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                <div className="space-y-2">
-                  <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center mx-auto">
-                    <Target className="w-5 h-5 text-primary" />
+              <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div className="space-y-3">
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto">
+                    <Target className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-semibold text-white text-sm">투명한 소통</h4>
-                  <p className="text-xs text-white/60">매 단계별 진행상황을 실시간으로 공유합니다</p>
+                  <h4 className="font-semibold text-white">투명한 소통</h4>
+                  <p className="text-sm text-white/60">매 단계별 진행상황을 실시간으로 공유합니다</p>
                 </div>
                 
-                <div className="space-y-2">
-                  <div className="w-10 h-10 bg-accent-green/20 rounded-lg flex items-center justify-center mx-auto">
-                    <CheckCircle className="w-5 h-5 text-accent-green" />
+                <div className="space-y-3">
+                  <div className="w-12 h-12 bg-accent-green/20 rounded-xl flex items-center justify-center mx-auto">
+                    <CheckCircle className="w-6 h-6 text-accent-green" />
                   </div>
-                  <h4 className="font-semibold text-white text-sm">품질 보장</h4>
-                  <p className="text-xs text-white/60">각 단계별 검수를 통해 최고 품질을 보장합니다</p>
+                  <h4 className="font-semibold text-white">품질 보장</h4>
+                  <p className="text-sm text-white/60">각 단계별 검수를 통해 최고 품질을 보장합니다</p>
                 </div>
                 
-                <div className="space-y-2">
-                  <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center mx-auto">
-                    <TrendingUp className="w-5 h-5 text-primary" />
+                <div className="space-y-3">
+                  <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto">
+                    <TrendingUp className="w-6 h-6 text-primary" />
                   </div>
-                  <h4 className="font-semibold text-white text-sm">지속 성장</h4>
-                  <p className="text-xs text-white/60">런칭 후에도 데이터 기반 개선을 지원합니다</p>
+                  <h4 className="font-semibold text-white">지속 성장</h4>
+                  <p className="text-sm text-white/60">런칭 후에도 데이터 기반 개선을 지원합니다</p>
                 </div>
               </div>
             </div>
