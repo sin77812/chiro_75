@@ -82,6 +82,9 @@ const portfolioProjects: Project[] = [
 
 export default function PortfolioShowcase() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
+  const [showAll, setShowAll] = useState(false)
+  
+  const displayedProjects = showAll ? portfolioProjects : portfolioProjects.slice(0, 3)
 
   return (
     <section className="section-padding bg-background-primary">
@@ -105,8 +108,8 @@ export default function PortfolioShowcase() {
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          {portfolioProjects.map((project, index) => (
+        <div className="grid grid-cols-1 gap-8 lg:gap-12 max-w-4xl mx-auto">
+          {displayedProjects.map((project, index) => (
             <FadeUp key={project.id} delay={index * 150}>
               <Link href={`/portfolio/${project.id}`}>
                 <article 
@@ -202,16 +205,36 @@ export default function PortfolioShowcase() {
           ))}
         </div>
 
-        {/* View All Projects CTA */}
-        <div className="text-center mt-16">
+        {/* Show More / View All CTA */}
+        <div className="text-center mt-16 space-y-4">
           <FadeUp delay={600}>
-            <Link 
-              href="/portfolio"
-              className="inline-flex items-center px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-primary font-semibold rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/50"
-            >
-              <span>전체 프로젝트 보기</span>
-              <div className="ml-3 w-2 h-2 bg-primary rounded-full animate-pulse" />
-            </Link>
+            {!showAll ? (
+              <button
+                onClick={() => setShowAll(true)}
+                className="inline-flex items-center px-8 py-4 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary font-semibold rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/50"
+              >
+                <span>더 많은 프로젝트 보기</span>
+                <div className="ml-3 w-2 h-2 bg-primary rounded-full animate-pulse" />
+              </button>
+            ) : (
+              <div className="space-y-4">
+                <button
+                  onClick={() => setShowAll(false)}
+                  className="inline-flex items-center px-6 py-3 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white border border-white/20 hover:border-white/40 font-medium rounded-lg transition-all duration-300"
+                >
+                  <span>접기</span>
+                </button>
+                <div className="block">
+                  <Link 
+                    href="/portfolio"
+                    className="inline-flex items-center px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-primary font-semibold rounded-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/50"
+                  >
+                    <span>전체 포트폴리오 페이지</span>
+                    <div className="ml-3 w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  </Link>
+                </div>
+              </div>
+            )}
           </FadeUp>
         </div>
       </div>
