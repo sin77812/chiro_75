@@ -105,8 +105,8 @@ export default function PortfolioShowcase() {
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          {portfolioProjects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {portfolioProjects.slice(0, 3).map((project, index) => (
             <FadeUp key={project.id} delay={index * 150}>
               <Link href={`/portfolio/${project.id}`}>
                 <article 
@@ -115,7 +115,7 @@ export default function PortfolioShowcase() {
                   onMouseLeave={() => setHoveredProject(null)}
                 >
                   {/* Project Media */}
-                  <div className="relative overflow-hidden rounded-2xl mb-6 bg-background-secondary">
+                  <div className="relative overflow-hidden rounded-xl mb-4 bg-background-secondary">
                     <div className="aspect-video relative">
                       {project.mediaType === 'video' ? (
                         <>
@@ -134,8 +134,8 @@ export default function PortfolioShowcase() {
                           <div className={`absolute inset-0 flex items-center justify-center bg-black/20 transition-opacity duration-300 ${
                             hoveredProject === project.id ? 'opacity-0' : 'opacity-100'
                           }`}>
-                            <div className="w-16 h-16 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-                              <Play className="w-6 h-6 text-white ml-1" />
+                            <div className="w-12 h-12 bg-primary/90 rounded-full flex items-center justify-center backdrop-blur-sm">
+                              <Play className="w-4 h-4 text-white ml-0.5" />
                             </div>
                           </div>
                         </>
@@ -150,15 +150,15 @@ export default function PortfolioShowcase() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       
                       {/* Device mockups overlay */}
-                      <div className="absolute bottom-4 right-4 flex space-x-2">
+                      <div className="absolute bottom-2 right-2 flex space-x-1">
                         {project.devices.desktop && (
-                          <div className="w-8 h-6 bg-white/20 rounded-sm backdrop-blur-sm" />
+                          <div className="w-6 h-4 bg-white/20 rounded-sm backdrop-blur-sm" />
                         )}
                         {project.devices.tablet && (
-                          <div className="w-6 h-6 bg-white/20 rounded-sm backdrop-blur-sm" />
+                          <div className="w-4 h-4 bg-white/20 rounded-sm backdrop-blur-sm" />
                         )}
                         {project.devices.mobile && (
-                          <div className="w-4 h-6 bg-white/20 rounded-sm backdrop-blur-sm" />
+                          <div className="w-3 h-4 bg-white/20 rounded-sm backdrop-blur-sm" />
                         )}
                       </div>
                     </div>
@@ -168,13 +168,13 @@ export default function PortfolioShowcase() {
                   </div>
 
                   {/* Project Info */}
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {/* Category & Title */}
                     <div>
-                      <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-2">
+                      <span className="inline-block px-2 py-1 text-xs font-medium text-primary bg-primary/10 rounded-full mb-1">
                         {project.category}
                       </span>
-                      <h3 className="text-2xl font-pretendard font-bold text-white group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-lg font-pretendard font-bold text-white group-hover:text-primary transition-colors duration-300">
                         {project.title}
                       </h3>
                     </div>
@@ -182,17 +182,17 @@ export default function PortfolioShowcase() {
                     {/* Results */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
-                        <div className="text-2xl font-bold text-accent-green">
+                        <div className="text-lg font-bold text-accent-green">
                           {project.result}
                         </div>
-                        <div className="text-sm text-white/60">
+                        <div className="text-xs text-white/60">
                           {project.improvement}
                         </div>
                       </div>
 
                       {/* View project arrow */}
-                      <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                        <div className="w-4 h-4 border-t-2 border-r-2 border-white rotate-45 group-hover:border-white transition-colors" />
+                      <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                        <div className="w-3 h-3 border-t-2 border-r-2 border-white rotate-45 group-hover:border-white transition-colors" />
                       </div>
                     </div>
                   </div>
