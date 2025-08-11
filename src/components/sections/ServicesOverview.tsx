@@ -81,7 +81,7 @@ export default function ServicesOverview() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {services.map((service, index) => {
             const IconComponent = service.icon
             const isHovered = hoveredService === service.id
@@ -90,7 +90,7 @@ export default function ServicesOverview() {
               <FadeUp key={service.id} delay={index * 150}>
                 <Link href={service.link}>
                   <article 
-                    className="group relative overflow-hidden rounded-2xl cursor-pointer h-[400px] lg:h-[500px]"
+                    className="group relative overflow-hidden rounded-2xl cursor-pointer h-[350px] lg:h-[400px]"
                     onMouseEnter={() => setHoveredService(service.id)}
                     onMouseLeave={() => setHoveredService(null)}
                   >

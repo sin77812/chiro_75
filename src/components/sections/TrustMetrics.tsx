@@ -191,31 +191,6 @@ export default function TrustMetrics() {
           })}
         </div>
 
-        {/* Trust Indicators */}
-        <div className="mt-20">
-          <FadeUp delay={800}>
-            <div className="text-center mb-12">
-              <h3 className="text-2xl font-pretendard font-bold text-white mb-4">
-                함께한 파트너사
-              </h3>
-              <p className="text-white/60">
-                스타트업부터 대기업까지, 다양한 규모의 기업과 성장해왔습니다
-              </p>
-            </div>
-            
-            {/* Partner Logos Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-60">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div 
-                  key={i} 
-                  className="w-24 h-12 bg-white/10 rounded-lg flex items-center justify-center hover:bg-white/20 transition-colors duration-300 cursor-pointer"
-                >
-                  <div className="w-16 h-8 bg-white/20 rounded" />
-                </div>
-              ))}
-            </div>
-          </FadeUp>
-        </div>
 
         {/* Bottom gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-secondary to-transparent pointer-events-none" />
