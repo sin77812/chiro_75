@@ -53,18 +53,17 @@ export default function FinalCTA() {
               지금 바로 시작하세요
             </div>
 
-            {/* Main Headline - Short and Powerful */}
+            {/* Main Headline - Direct and Action-oriented */}
             <h2 className="font-pretendard font-black text-5xl md:text-7xl lg:text-8xl text-white mb-8 leading-tight">
-              <span className="block">지금</span>
+              <span className="block">지금 시작하면</span>
               <span className="block">
-                <span className="text-gradient">성장</span>을 시작하세요
+                <span className="text-gradient">2주 후</span> 오픈합니다
               </span>
             </h2>
 
             {/* Subtext */}
             <p className="text-xl md:text-2xl text-white/80 font-light mb-12 max-w-3xl mx-auto leading-relaxed">
-              당신의 비즈니스가 다음 단계로 도약할 준비가 되었다면, 
-              우리와 함께 그 여정을 시작하세요.
+              무료 상담으로 시작하세요. 부담 없이 물어보세요.
             </p>
           </FadeUp>
 
@@ -76,7 +75,7 @@ export default function FinalCTA() {
                 <div className="absolute inset-0 bg-gradient-to-r from-accent-green to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <span className="relative flex items-center justify-center">
-                  프로젝트 시작하기
+                  무료 견적 받기
                   <div className="ml-3 w-3 h-3 bg-white rounded-full group-hover:animate-bounce" />
                 </span>
 
@@ -89,7 +88,7 @@ export default function FinalCTA() {
               <button className="group px-10 py-4 border-2 border-white/40 hover:border-white text-white font-semibold text-lg rounded-lg transition-all duration-300 hover:bg-white/10 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/30">
                 <span className="flex items-center justify-center">
                   <Clock className="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                  무료 상담 예약
+                  2주 완성 프로세스 보기
                 </span>
               </button>
             </FadeUp>
@@ -124,22 +123,25 @@ export default function FinalCTA() {
           {/* Contact Info */}
           <div className="mt-16 pt-12 border-t border-white/10">
             <FadeUp delay={900}>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <p className="text-white/60 text-sm">
                   바로 연결하고 싶다면
                 </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-8">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button className="group bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105">
+                    💬 카톡 상담
+                  </button>
                   <a 
-                    href="tel:+82-2-1234-5678" 
-                    className="text-primary hover:text-accent-green transition-colors font-semibold"
+                    href="tel:+82-10-1234-5678" 
+                    className="group bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                   >
-                    📞 02-1234-5678
+                    📞 전화 상담
                   </a>
                   <a 
                     href="mailto:hello@chiro.agency" 
-                    className="text-primary hover:text-accent-green transition-colors font-semibold"
+                    className="group bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                   >
-                    ✉️ hello@chiro.agency
+                    ✉️ 이메일 문의
                   </a>
                 </div>
               </div>

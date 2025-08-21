@@ -12,6 +12,14 @@ const TrustMetrics = dynamic(() => import('@/components/sections/TrustMetrics'),
   loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
 })
 
+const WhyStartupsChoose = dynamic(() => import('@/components/sections/WhyStartupsChoose'), {
+  loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
+})
+
+const PricingTransparency = dynamic(() => import('@/components/sections/PricingTransparency'), {
+  loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
+})
+
 const ProcessFlow = dynamic(() => import('@/components/sections/ProcessFlow'), {
   loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
 })
@@ -69,10 +77,16 @@ export default function Home() {
         {/* 5. Trust & KPI Metrics - Data visualization */}
         <TrustMetrics />
         
-        {/* 6. Process Flow - 5-step visual journey */}
+        {/* 6. Why Startups Choose - Startup focused reasons */}
+        <WhyStartupsChoose />
+        
+        {/* 7. Pricing Transparency - Clear pricing */}
+        <PricingTransparency />
+        
+        {/* 8. Process Flow - 5-step visual journey */}
         <ProcessFlow />
         
-        {/* 7. Final CTA - Dark gradient with strong call to action */}
+        {/* 9. Final CTA - Dark gradient with strong call to action */}
         <FinalCTA />
       </main>
     </>

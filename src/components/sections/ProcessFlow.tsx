@@ -17,47 +17,38 @@ const processSteps: ProcessStep[] = [
   {
     id: 'discover',
     phase: '01',
-    title: '발견',
-    duration: '1-2주',
-    description: '비즈니스 감사, 경쟁사 분석, 사용자 리서치',
-    deliverables: ['시장 분석 보고서', '사용자 여정 맵', '기술 감사'],
+    title: '요구사항 파악',
+    duration: 'Week 1',
+    description: '비즈니스 목표와 타겟 고객 분석, 필요 기능 정의',
+    deliverables: ['사이트맵 설계', '기능 명세서', '디자인 시안'],
     keyActivities: ['비즈니스 목표 정의', '타겟 고객 분석', '경쟁사 벤치마킹', '기술 스택 평가']
   },
   {
     id: 'define',
     phase: '02',
-    title: '정의',
-    duration: '1주',
-    description: '전략 수립, 기술 아키텍처, 콘텐츠 기획',
-    deliverables: ['프로젝트 전략', '기술 사양서', '콘텐츠 프레임워크'],
+    title: '디자인 개발',
+    duration: 'Week 2',
+    description: '디자인 시안 제작 및 개발 시작, 피드백 반영',
+    deliverables: ['최종 디자인', '개발 진행상황', '테스트 페이지'],
     keyActivities: ['정보 아키텍처 설계', '기능 명세 작성', '콘텐츠 전략 수립', '개발 로드맵 작성']
   },
   {
     id: 'design',
     phase: '03',
-    title: '디자인',
-    duration: '2-3주',
-    description: 'UI/UX 디자인, 프로토타이핑, 디자인 시스템 구축',
-    deliverables: ['디자인 시스템', '고품질 목업', '인터랙티브 프로토타입'],
+    title: '최종 테스트',
+    duration: 'Week 3',
+    description: '최종 테스트, 버그 수정, 성능 최적화',
+    deliverables: ['완성된 웹사이트', '테스트 보고서', '사용 가이드'],
     keyActivities: ['와이어프레임 제작', 'UI 디자인', '프로토타입 개발', '사용성 테스트']
   },
   {
     id: 'develop',
     phase: '04',
-    title: '개발',
-    duration: '3-6주',
-    description: '개발, 테스트, 최적화, 품질 보증',
-    deliverables: ['운영 웹사이트', '테스트 보고서', '성능 최적화'],
-    keyActivities: ['프론트엔드 개발', '백엔드 구축', 'API 연동', 'QA 테스트']
-  },
-  {
-    id: 'optimize',
-    phase: '05',
-    title: '최적화',
-    duration: '지속적',
-    description: '런칭 지원, 애널리틱스 설정, 지속적 개선',
-    deliverables: ['애널리틱스 대시보드', '성능 보고서', '개선 로드맵'],
-    keyActivities: ['배포 및 런칭', '모니터링 설정', 'A/B 테스트', '지속적 개선']
+    title: '오픈 & 교육',
+    duration: '런칭일',
+    description: '최종 오픈, 관리자 교육, 1년 무료 관리 시작',
+    deliverables: ['운영 웹사이트', '관리자 가이드', '애널리틱스 설정'],
+    keyActivities: ['사이트 오픈', '관리자 교육', '구글 애널리틱스 연동', '초기 모니터링']
   }
 ]
 

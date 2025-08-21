@@ -45,42 +45,50 @@ export default function CinematicHero() {
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 translate-y-8'
         }`}>
-          {/* Main Headline - Impact in 7-8 words */}
+          {/* Main Headline - Startup focused */}
           <h1 className="font-pretendard font-black text-white mb-6 leading-tight">
             <span className="block text-5xl md:text-7xl lg:text-8xl">
-              브랜드를
+              스타트업이
             </span>
             <span className="block text-5xl md:text-7xl lg:text-8xl">
-              <span className="text-gradient">혁신</span>하다
+              <span className="text-gradient">가장 먼저</span> 찾는
+            </span>
+            <span className="block text-4xl md:text-6xl lg:text-7xl text-primary">
+              웹 에이전시
             </span>
           </h1>
 
-          {/* Subtitle - One powerful line */}
-          <p className="text-xl md:text-2xl text-white/90 font-light mb-12 tracking-wide">
-            디지털 경험의 새로운 기준을 제시합니다
-          </p>
+          {/* Subtitle - Clear value proposition */}
+          <div className="space-y-2 mb-12">
+            <p className="text-xl md:text-2xl text-white/90 font-medium">
+              2주 완성, 합리적 가격, 검증된 품질
+            </p>
+            <p className="text-lg md:text-xl text-white/70 font-light">
+              MVP부터 스케일업까지 함께 성장하는 파트너
+            </p>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {/* Primary CTA - Solid Green */}
+            {/* Primary CTA - Clear action */}
             <button 
               className="group px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 focus:outline-none focus:ring-4 focus:ring-primary/50"
-              aria-label="프로젝트 상담 시작하기"
+              aria-label="무료 견적 받기"
             >
               <span className="flex items-center justify-center">
-                프로젝트 시작하기
+                무료 견적 받기
                 <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
               </span>
             </button>
 
-            {/* Secondary CTA - Outline */}
+            {/* Secondary CTA - Process focused */}
             <button 
               className="group px-8 py-4 border-2 border-white/30 hover:border-white text-white font-semibold rounded-lg transition-all duration-300 hover:bg-white/10 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/30"
-              aria-label="포트폴리오 둘러보기"
+              aria-label="2주 완성 프로세스 보기"
             >
               <span className="flex items-center justify-center">
                 <Play className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />
-                포트폴리오 보기
+                2주 완성 프로세스 보기
               </span>
             </button>
           </div>

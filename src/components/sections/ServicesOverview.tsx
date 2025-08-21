@@ -19,32 +19,32 @@ interface Service {
 const services: Service[] = [
   {
     id: 'web-development',
-    title: '웹 개발',
-    value: '브랜드의 디지털 정체성을 구현합니다',
-    description: '최신 기술과 사용자 경험을 결합한 고성능 웹사이트',
+    title: '웹사이트 제작',
+    value: '2주 안에 완성되는 우리 회사 홈페이지',
+    description: '기획부터 디자인, 개발까지 원스톱 서비스',
     icon: Code,
     backgroundImage: '/image/webuild.png',
-    stats: '평균 로딩속도 0.8초 달성',
+    stats: '2주 완성 + 1년 무료 관리',
     link: '/services/web-development'
   },
   {
     id: 'ui-ux-design',
     title: 'UI/UX 디자인',
-    value: '사용자 중심의 직관적 경험을 디자인합니다',
-    description: '데이터 기반 디자인으로 전환율을 극대화',
+    value: '고객이 바로 이해하는 쉬운 디자인',
+    description: '복잡한 정보도 직관적으로 전달하는 UX 설계',
     icon: Palette,
     backgroundImage: '/image/webicon.png',
-    stats: '평균 전환율 +247% 개선',
+    stats: '방문자 대비 문의율 15%',
     link: '/services/ui-ux-design'
   },
   {
     id: 'performance',
-    title: '성능 최적화',
-    value: '속도가 곧 경쟁력입니다',
-    description: 'Core Web Vitals 최적화로 검색 순위 상승',
+    title: '개발',
+    value: '빠르고 안정적인 홈페이지, 1년 무료 관리',
+    description: '보안부터 속도까지, 수정요청 무제한 대응',
     icon: Zap,
     backgroundImage: '/image/webengin.png',
-    stats: 'Lighthouse 90+ 점수 보장',
+    stats: '평균 0.8초 로딩속도',
     link: '/services/performance-optimization'
   },
   {
@@ -183,7 +183,7 @@ export default function ServicesOverview() {
               href="/services"
               className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary to-accent-green text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 focus:outline-none focus:ring-4 focus:ring-primary/50"
             >
-              <span>모든 서비스 살펴보기</span>
+              <span>무료 견적 받기</span>
               <div className="ml-3 w-2 h-2 bg-white rounded-full group-hover:animate-pulse" />
             </Link>
           </FadeUp>

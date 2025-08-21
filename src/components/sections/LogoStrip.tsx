@@ -57,12 +57,12 @@ export default function LogoStrip() {
       
       <div className="relative z-10 max-w-[1320px] mx-auto px-6 md:px-12">
         <div className="text-center mb-12">
-          <p className="text-sm font-medium text-[#1DB954] mb-2">신뢰받는 파트너십</p>
+          <p className="text-sm font-medium text-[#1DB954] mb-2">함께 성장하는 스타트업들</p>
           <h2 className="text-2xl md:text-3xl font-bold text-[#F5F7FA] mb-4">
-            업계 리더들이 선택한 에이전시
+            5개 스타트업이 선택한 이유가 있습니다
           </h2>
           <p className="text-sm text-[#8B949E]">
-            파트너 로고(예시). 실제 프로젝트 레퍼런스는 문의 시 제공합니다.
+            실제 클라이언트 로고는 문의 시 노출 동의 하에 제공합니다.
           </p>
         </div>
 
@@ -115,18 +115,22 @@ export default function LogoStrip() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">98%</p>
-            <p className="text-sm text-[#8B949E]">재계약률</p>
+            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">5개</p>
+            <p className="text-sm text-[#8B949E]">스타트업과 함께 성장 중</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">150+</p>
-            <p className="text-sm text-[#8B949E]">완료 프로젝트</p>
+            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">2주</p>
+            <p className="text-sm text-[#8B949E]">평균 완성</p>
           </div>
           <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">5년</p>
-            <p className="text-sm text-[#8B949E]">평균 파트너십</p>
+            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">40%</p>
+            <p className="text-sm text-[#8B949E]">견적 대비 절감</p>
+          </div>
+          <div className="text-center">
+            <p className="text-3xl md:text-4xl font-bold text-[#1DB954] mb-1">100%</p>
+            <p className="text-sm text-[#8B949E]">고객 만족</p>
           </div>
         </div>
       </div>
