@@ -164,7 +164,7 @@ export function OrganizationStructuredData() {
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+1-800-CHIRO-AI',
-      email: 'hello@chiro.agency',
+      email: 'chiroweb75@gmail.com',
       contactType: 'customer service',
       availableLanguage: ['English', 'Korean']
     },

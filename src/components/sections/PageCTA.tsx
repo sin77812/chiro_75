@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { ChevronRight, CheckCircle, Calendar, MessageSquare } from 'lucide-react'
+import Link from 'next/link'
 
 export default function PageCTA() {
   const [formData, setFormData] = useState({
@@ -86,10 +87,10 @@ export default function PageCTA() {
 
               {/* Contact Options */}
               <div className="grid grid-cols-2 gap-4">
-                <button className="flex items-center justify-center space-x-2 p-4 bg-shadow-gray/20 rounded-lg hover:bg-primary/10 border border-shadow-gray/30 hover:border-primary/30 transition-all">
+                <Link href="/consultation" className="flex items-center justify-center space-x-2 p-4 bg-shadow-gray/20 rounded-lg hover:bg-primary/10 border border-shadow-gray/30 hover:border-primary/30 transition-all">
                   <Calendar className="h-5 w-5 text-primary" />
-                  <span className="text-white">화상 미팅 예약</span>
-                </button>
+                  <span className="text-white">빠른 견적 받기</span>
+                </Link>
                 <button className="flex items-center justify-center space-x-2 p-4 bg-shadow-gray/20 rounded-lg hover:bg-primary/10 border border-shadow-gray/30 hover:border-primary/30 transition-all">
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span className="text-white">카카오톡 상담</span>
@@ -217,7 +218,7 @@ export default function PageCTA() {
                       더 궁금한 점이 있으시면 언제든 연락주세요.
                     </p>
                     <div className="mt-6 text-primary font-medium">
-                      📞 02-1234-5678
+                      📞 010-6815-0775
                     </div>
                   </div>
                 )}

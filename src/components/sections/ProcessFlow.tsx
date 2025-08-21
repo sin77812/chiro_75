@@ -54,7 +54,7 @@ const processSteps: ProcessStep[] = [
 
 export default function ProcessFlow() {
   return (
-    <section className="section-padding bg-background-primary relative overflow-hidden">
+    <section id="process-flow" className="section-padding bg-background-primary relative overflow-hidden">
       <div className="container-custom relative">
         {/* Section Header */}
         <div className="max-w-3xl mb-20">

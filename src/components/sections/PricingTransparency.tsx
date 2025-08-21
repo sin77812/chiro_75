@@ -1,6 +1,7 @@
 'use client'
 
 import { Check } from 'lucide-react'
+import Link from 'next/link'
 import ScrollReveal, { FadeUp } from '@/components/ui/ScrollReveal'
 
 const pricingPlans = [
@@ -86,13 +87,16 @@ export default function PricingTransparency() {
                   ))}
                 </ul>
 
-                <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
-                  plan.featured
-                    ? 'bg-primary hover:bg-primary/90 text-white'
-                    : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
-                }`}>
+                <Link 
+                  href="/consultation"
+                  className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 inline-block text-center ${
+                    plan.featured
+                      ? 'bg-primary hover:bg-primary/90 text-white'
+                      : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                  }`}
+                >
                   상담 신청
-                </button>
+                </Link>
               </div>
             </FadeUp>
           ))}

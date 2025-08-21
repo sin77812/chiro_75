@@ -29,21 +29,21 @@ export default function StickyHelpButton({ className = '' }: StickyHelpButtonPro
       icon: Phone,
       label: '전화 상담',
       description: '즉시 연결',
-      action: 'tel:+82-2-1234-5678',
+      action: 'tel:010-6815-0775',
       color: 'text-primary'
     },
     {
       icon: Mail,
       label: '이메일 문의',
       description: '24시간 내 답변',
-      action: 'mailto:hello@chiro.agency',
+      action: 'mailto:chiroweb75@gmail.com',
       color: 'text-accent-green'
     },
     {
       icon: Calendar,
       label: '상담 예약',
       description: '무료 30분 컨설팅',
-      action: '/contact',
+      action: '/consultation',
       color: 'text-blue-400'
     }
   ]

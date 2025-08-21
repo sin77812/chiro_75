@@ -30,16 +30,16 @@ export default function ContactPage() {
               {
                 icon: Phone,
                 title: "전화 상담",
-                value: "02-1234-5678",
+                value: "010-6815-0775",
                 description: "평일 09:00 - 18:00",
-                href: "tel:02-1234-5678"
+                href: "tel:010-6815-0775"
               },
               {
                 icon: Mail,
                 title: "이메일 문의",
-                value: "hello@chiro.co.kr",
+                value: "chiroweb75@gmail.com",
                 description: "24시간 접수 가능",
-                href: "mailto:hello@chiro.co.kr"
+                href: "mailto:chiroweb75@gmail.com"
               },
               {
                 icon: MapPin,

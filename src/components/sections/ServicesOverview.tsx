@@ -180,7 +180,7 @@ export default function ServicesOverview() {
         <div className="text-center mt-16">
           <FadeUp delay={600}>
             <Link 
-              href="/services"
+              href="/consultation"
               className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary to-accent-green text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 focus:outline-none focus:ring-4 focus:ring-primary/50"
             >
               <span>무료 견적 받기</span>

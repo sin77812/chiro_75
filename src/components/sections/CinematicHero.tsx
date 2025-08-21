@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Play } from 'lucide-react'
+import Link from 'next/link'
 
 export default function CinematicHero() {
   const [videoLoaded, setVideoLoaded] = useState(false)
@@ -71,7 +72,8 @@ export default function CinematicHero() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             {/* Primary CTA - Clear action */}
-            <button 
+            <Link 
+              href="/consultation"
               className="group px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 focus:outline-none focus:ring-4 focus:ring-primary/50"
               aria-label="무료 견적 받기"
             >
@@ -79,12 +81,16 @@ export default function CinematicHero() {
                 무료 견적 받기
                 <div className="ml-3 w-2 h-2 bg-white rounded-full opacity-60 group-hover:opacity-100 transition-opacity" />
               </span>
-            </button>
+            </Link>
 
             {/* Secondary CTA - Process focused */}
             <button 
               className="group px-8 py-4 border-2 border-white/30 hover:border-white text-white font-semibold rounded-lg transition-all duration-300 hover:bg-white/10 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-white/30"
               aria-label="2주 완성 프로세스 보기"
+              onClick={() => {
+                const processSection = document.getElementById('process-flow')
+                processSection?.scrollIntoView({ behavior: 'smooth' })
+              }}
             >
               <span className="flex items-center justify-center">
                 <Play className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform" />

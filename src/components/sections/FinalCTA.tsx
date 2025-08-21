@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Zap, Clock, CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 import ScrollReveal, { FadeUp } from '@/components/ui/ScrollReveal'
 
 export default function FinalCTA() {
@@ -70,7 +71,7 @@ export default function FinalCTA() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
             <FadeUp delay={300}>
-              <button className="group relative px-12 py-5 bg-gradient-to-r from-primary to-accent-green text-white font-bold text-lg rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-primary/30 focus:outline-none focus:ring-4 focus:ring-primary/50 overflow-hidden">
+              <Link href="/consultation" className="group relative px-12 py-5 bg-gradient-to-r from-primary to-accent-green text-white font-bold text-lg rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-primary/30 focus:outline-none focus:ring-4 focus:ring-primary/50 overflow-hidden inline-block">
                 {/* Button background animation */}
                 <div className="absolute inset-0 bg-gradient-to-r from-accent-green to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -81,7 +82,7 @@ export default function FinalCTA() {
 
                 {/* Shine effect */}
                 <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000 -translate-x-full" />
-              </button>
+              </Link>
             </FadeUp>
 
             <FadeUp delay={500}>
@@ -132,13 +133,13 @@ export default function FinalCTA() {
                     💬 카톡 상담
                   </button>
                   <a 
-                    href="tel:+82-10-1234-5678" 
+                    href="tel:010-6815-0775" 
                     className="group bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                   >
                     📞 전화 상담
                   </a>
                   <a 
-                    href="mailto:hello@chiro.agency" 
+                    href="mailto:chiroweb75@gmail.com" 
                     className="group bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105"
                   >
                     ✉️ 이메일 문의

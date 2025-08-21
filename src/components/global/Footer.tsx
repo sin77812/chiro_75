@@ -52,14 +52,14 @@ export default function Footer({ className = '' }: FooterProps) {
     {
       icon: Phone,
       label: '전화',
-      value: '+82-2-1234-5678',
-      href: 'tel:+82-2-1234-5678'
+      value: '010-6815-0775',
+      href: 'tel:010-6815-0775'
     },
     {
       icon: Mail,
       label: '이메일',
-      value: 'hello@chiro.agency',
-      href: 'mailto:hello@chiro.agency'
+      value: 'chiroweb75@gmail.com',
+      href: 'mailto:chiroweb75@gmail.com'
     },
     {
       icon: MapPin,

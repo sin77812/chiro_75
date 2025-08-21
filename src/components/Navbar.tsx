@@ -13,7 +13,7 @@ const menuItems = [
   { label: '서비스', href: '/services', isHighlighted: false },
   { label: '포트폴리오', href: '/portfolio', isHighlighted: false },
   { label: '회사 소개', href: '/about', isHighlighted: false },
-  { label: '연락하기', href: '/contact', isHighlighted: true } // CTA 버튼
+  { label: '무료 견적', href: '/consultation', isHighlighted: true } // CTA 버튼
 ]
 
 export default function Navbar() {

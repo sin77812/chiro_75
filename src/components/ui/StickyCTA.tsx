@@ -90,7 +90,7 @@ export default function StickyCTA() {
               </a>
 
               <a
-                href="mailto:hello@chiro.co.kr"
+                href="mailto:chiroweb75@gmail.com"
                 className="flex items-center space-x-4 p-4 bg-shadow-gray/20 rounded-lg hover:bg-primary/10 border border-shadow-gray/30 hover:border-primary/30 transition-all group"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all">
@@ -98,7 +98,7 @@ export default function StickyCTA() {
                 </div>
                 <div>
                   <div className="font-semibold text-white">이메일 문의</div>
-                  <div className="text-neutral-light/60 text-sm">hello@chiro.co.kr</div>
+                  <div className="text-neutral-light/60 text-sm">chiroweb75@gmail.com</div>
                 </div>
               </a>
 
@@ -126,7 +126,7 @@ export default function StickyCTA() {
               <button
                 onClick={() => {
                   setIsOpen(false)
-                  router.push('/contact')
+                  router.push('/consultation')
                 }}
                 className="flex items-center justify-between w-full p-4 bg-primary/10 hover:bg-primary/20 border border-primary/20 hover:border-primary/30 rounded-lg transition-all group"
               >
