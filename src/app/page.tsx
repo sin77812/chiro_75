@@ -24,6 +24,10 @@ const ProcessFlow = dynamic(() => import('@/components/sections/ProcessFlow'), {
   loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
 })
 
+const TechStack = dynamic(() => import('@/components/sections/TechStack'), {
+  loading: () => <div className="min-h-96 animate-pulse bg-shadow-gray/10" />
+})
+
 const FinalCTA = dynamic(() => import('@/components/sections/FinalCTA'), {
   loading: () => <div className="min-h-64 animate-pulse bg-shadow-gray/10" />
 })
@@ -86,7 +90,10 @@ export default function Home() {
         {/* 8. Process Flow - 5-step visual journey */}
         <ProcessFlow />
         
-        {/* 9. Final CTA - Dark gradient with strong call to action */}
+        {/* 9. Tech Stack - Technology showcase */}
+        <TechStack />
+        
+        {/* 10. Final CTA - Dark gradient with strong call to action */}
         <FinalCTA />
       </main>
     </>
