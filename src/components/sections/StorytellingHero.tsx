@@ -29,8 +29,12 @@ const Scene = ({ children, id, className = '' }: SceneProps) => (
 export default function StorytellingHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
+  const portfolioRef = useRef<HTMLDivElement>(null)
   const [currentScene, setCurrentScene] = useState(0)
+  const [currentProject, setCurrentProject] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   useEffect(() => {
     // Mouse tracking for Scene 1 title interaction
@@ -48,13 +52,43 @@ export default function StorytellingHero() {
       const scenes = containerRef.current.querySelectorAll('[data-scene]')
       
       scenes.forEach((scene, index) => {
-        ScrollTrigger.create({
-          trigger: scene,
-          start: 'top center',
-          end: 'bottom center',
-          onEnter: () => setCurrentScene(index),
-          onEnterBack: () => setCurrentScene(index),
-        })
+        if (index === 4) {
+          // Scene 5 (Portfolio) - Horizontal Scroll
+          ScrollTrigger.create({
+            trigger: scene,
+            start: 'top top',
+            end: '+=400%', // 4 projects worth of scroll
+            pin: true,
+            scrub: 1,
+            onUpdate: (self) => {
+              const progress = self.progress
+              const projectIndex = Math.floor(progress * 4)
+              setCurrentProject(Math.min(projectIndex, 3))
+              
+              if (portfolioRef.current) {
+                const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                if (slider) {
+                  gsap.to(slider, {
+                    x: -progress * 300 + '%',
+                    duration: 0.3,
+                    ease: 'power2.out'
+                  })
+                }
+              }
+            },
+            onEnter: () => setCurrentScene(index),
+            onEnterBack: () => setCurrentScene(index),
+          })
+        } else {
+          // Regular vertical scroll scenes
+          ScrollTrigger.create({
+            trigger: scene,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: () => setCurrentScene(index),
+            onEnterBack: () => setCurrentScene(index),
+          })
+        }
       })
     }
 
@@ -63,6 +97,52 @@ export default function StorytellingHero() {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (currentScene === 4) { // Portfolio scene
+      if (isLeftSwipe && currentProject < 3) {
+        // Swipe left - next project
+        const newProject = currentProject + 1
+        setCurrentProject(newProject)
+        updatePortfolioPosition(newProject / 3)
+      }
+      if (isRightSwipe && currentProject > 0) {
+        // Swipe right - previous project
+        const newProject = currentProject - 1
+        setCurrentProject(newProject)
+        updatePortfolioPosition(newProject / 3)
+      }
+    }
+  }
+
+  const updatePortfolioPosition = (progress: number) => {
+    if (portfolioRef.current) {
+      const slider = portfolioRef.current.querySelector('#portfolio-slider')
+      if (slider) {
+        gsap.to(slider, {
+          x: -progress * 300 + '%',
+          duration: 0.5,
+          ease: 'power2.out'
+        })
+      }
+    }
+  }
 
   // Scene 1: CHIRO Title with mouse interaction
   useEffect(() => {
@@ -211,30 +291,124 @@ export default function StorytellingHero() {
 
       {/* Scene 5: "증명" - Portfolio */}
       <Scene id="scene-5" className="z-10 relative">
-        <div data-scene="4" className="w-full">
-          <div className="text-center mb-16">
+        <div data-scene="4" className="w-full h-screen flex flex-col">
+          <div className="text-center mb-8 md:mb-16 flex-shrink-0">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white">
               <span className="text-gradient">진짜 잘하나?</span>
             </h2>
           </div>
           
-          <div className="flex overflow-x-auto gap-4 md:gap-8 px-4 pb-8">
-            {[1, 2, 3].map((project) => (
-              <div 
-                key={project} 
-                className="min-w-[280px] sm:min-w-[350px] md:min-w-[500px] h-64 md:h-80 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl flex items-center justify-center border border-primary/30"
-              >
-                <div className="text-center">
-                  <div className="text-6xl mb-4">🚀</div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    Project {project}
-                  </h3>
-                  <p className="text-white/70">
-                    성과 기반 실제 케이스
-                  </p>
+          {/* Horizontal Scroll Container */}
+          <div 
+            ref={portfolioRef}
+            id="portfolio-scroll-container"
+            className="flex-1 relative overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div 
+              id="portfolio-slider"
+              className="flex h-full items-center gap-8 transition-transform duration-300 ease-out"
+              style={{ width: 'calc(100vw * 4)' }}
+            >
+              {/* Portfolio Items */}
+              {[
+                {
+                  title: "넥서스 제조업 포털",
+                  client: "Nexus Manufacturing",
+                  image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+                  results: ["해외 문의 +320%", "리드 생성 +187%", "LCP 1.6s"],
+                  category: "제조업 B2B"
+                },
+                {
+                  title: "코리텍 솔루션즈",
+                  client: "KoreTech Solutions", 
+                  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+                  results: ["사용자 증가 +250%", "전환율 +180%", "로딩속도 40% 개선"],
+                  category: "SaaS 플랫폼"
+                },
+                {
+                  title: "글로벌 스타트업 플랫폼",
+                  client: "StartupHub Global",
+                  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+                  results: ["투자 유치 +400%", "글로벌 진출", "MVP 2주 완성"],
+                  category: "스타트업 투자"
+                },
+                {
+                  title: "AI 의료 진단 시스템",
+                  client: "MedTech Innovations",
+                  image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop",
+                  results: ["진단 정확도 +95%", "의료진 만족도 98%", "FDA 승인"],
+                  category: "의료 AI"
+                }
+              ].map((project, index) => (
+                <div 
+                  key={index}
+                  className="w-screen h-full flex items-center justify-center px-4 md:px-16 flex-shrink-0"
+                >
+                  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center h-full">
+                    {/* Project Image */}
+                    <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl transform rotate-3 group-hover:rotate-1 transition-transform duration-500"></div>
+                      <div className="relative">
+                        <div 
+                          className="w-full h-64 md:h-80 bg-cover bg-center rounded-2xl border border-primary/30 group-hover:scale-105 transition-transform duration-500"
+                          style={{ backgroundImage: `url(${project.image})` }}
+                        />
+                        <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm rounded-lg px-3 py-1">
+                          <span className="text-primary text-sm font-medium">{project.category}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="space-y-6 text-center md:text-left">
+                      <div>
+                        <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                          {project.title}
+                        </h3>
+                        <p className="text-xl text-primary font-medium">
+                          {project.client}
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h4 className="text-xl font-semibold text-white mb-4">핵심 성과</h4>
+                        {project.results.map((result, idx) => (
+                          <div key={idx} className="flex items-center justify-center md:justify-start">
+                            <div className="w-2 h-2 bg-accent-green rounded-full mr-3"></div>
+                            <span className="text-lg text-white/80">{result}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="pt-6">
+                        <button className="inline-flex items-center px-6 py-3 bg-primary/20 border border-primary rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all duration-300">
+                          케이스 스터디 보기
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Horizontal Scroll Indicator */}
+          <div className="flex-shrink-0 flex justify-center items-center space-x-2 pb-8">
+            {[0, 1, 2, 3].map((index) => (
+              <div
+                key={index}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentProject ? 'w-8 bg-primary' : 'w-2 bg-white/30'
+                }`}
+              />
             ))}
+            <div className="ml-4 text-white/60 text-sm">
+              스크롤하여 프로젝트 보기
+            </div>
           </div>
         </div>
       </Scene>

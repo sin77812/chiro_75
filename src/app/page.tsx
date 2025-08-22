@@ -72,11 +72,11 @@ export default function Home() {
         {/* 2. Trust Indicators - Logo strip with parallax */}
         <LogoStrip />
         
-        {/* 3. Portfolio Teaser - Visual-first project showcase */}
-        <PortfolioShowcase />
-        
-        {/* 4. Services Overview - Image-based service cards */}
+        {/* 3. Services Overview - Image-based service cards */}
         <ServicesOverview />
+        
+        {/* 4. Portfolio Teaser - Visual-first project showcase */}
+        <PortfolioShowcase />
         
         {/* 5. Trust & KPI Metrics - Data visualization */}
         <TrustMetrics />
