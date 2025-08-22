@@ -22,7 +22,11 @@ const Scene = ({ children, id, className = '', style }: SceneProps) => (
   <div 
     id={id}
     className={`${id === 'scene-5' ? 'min-h-screen' : 'h-screen'} flex items-center justify-center relative ${className}`}
-    style={style}
+    style={{
+      ...style,
+      ...(id === 'scene-4' ? { paddingBottom: '2rem' } : {}),
+      ...(id === 'scene-5' ? { paddingTop: '1rem' } : {})
+    }}
   >
     {children}
   </div>
@@ -32,11 +36,14 @@ export default function StorytellingHero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const portfolioRef = useRef<HTMLDivElement>(null)
+  const navRef = useRef<HTMLElement>(null)
   const [currentScene, setCurrentScene] = useState(0)
   const [currentProject, setCurrentProject] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [hasScrolled, setHasScrolled] = useState(false)
+  const [showNav, setShowNav] = useState(false)
 
   useEffect(() => {
     // Mouse tracking for Scene 1 title interaction
@@ -47,7 +54,24 @@ export default function StorytellingHero() {
       })
     }
 
+    // Navigation visibility logic
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 100
+      setHasScrolled(scrolled)
+    }
+
+    const handleMouseMoveNav = (e: MouseEvent) => {
+      // Show nav when mouse is in top 60px of screen
+      if (e.clientY < 60) {
+        setShowNav(true)
+      } else if (e.clientY > 120) {
+        setShowNav(false)
+      }
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('mousemove', handleMouseMoveNav)
 
     // Scene transition triggers
     if (typeof window !== 'undefined' && containerRef.current) {
@@ -80,11 +104,12 @@ export default function StorytellingHero() {
                   })
                 }
                 
-                // Hide title as portfolio scrolls
+                // Hide title completely when portfolio scrolls
                 if (titleElement) {
                   gsap.to(titleElement, {
-                    opacity: Math.max(0, 1 - progress * 2),
-                    y: -progress * 50,
+                    opacity: progress > 0.1 ? 0 : 1,
+                    y: progress > 0.1 ? -100 : 0,
+                    scale: progress > 0.1 ? 0.8 : 1,
                     duration: 0.3,
                     ease: 'power2.out'
                   })
@@ -137,6 +162,8 @@ export default function StorytellingHero() {
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('mousemove', handleMouseMoveNav)
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
@@ -201,6 +228,26 @@ export default function StorytellingHero() {
 
   return (
     <div ref={containerRef} className="relative">
+      {/* Smart Navigation */}
+      <nav 
+        ref={navRef}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          hasScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+        } ${
+          !hasScrolled || showNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="text-white font-bold text-xl">CHIRO</div>
+            <div className="hidden md:flex space-x-6">
+              <a href="#scene-1" className="text-white hover:text-primary transition-colors">Home</a>
+              <a href="#scene-5" className="text-white hover:text-primary transition-colors">Portfolio</a>
+              <a href="/consultation" className="text-white hover:text-primary transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </nav>
       {/* Background Video - Always present */}
       <div className="fixed inset-0 w-full h-full z-0">
         <video
