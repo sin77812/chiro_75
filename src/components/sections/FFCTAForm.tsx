@@ -7,27 +7,22 @@ import { ArrowRight } from 'lucide-react'
 // CTA 링크 상수 - 필요시 변경 가능
 const CTA_HREF = '/consultation'
 
-// 애니메이션 변형 - 쿵쿵쿵 효과 강화 (settle 효과 통합)
-const slideInVariants = {
+// 애니메이션 변형 - 화면 밖에서 평행으로 날아와서 꽝하고 착지
+const characterVariants = {
   hidden: {
-    x: 300,
+    x: 800, // 화면 오른쪽 밖에서 시작
     opacity: 0,
-    skewX: 15,
-    scale: 0.7,
-    rotateZ: 5
+    scale: 0.5
   },
   visible: (index: number) => ({
     x: 0,
     opacity: 1,
-    skewX: 0,
-    scale: [0.7, 1.1, 0.95, 1.05, 1], // 슬라이드 인 + 쿵 효과 통합
-    rotateZ: 0,
-    y: [0, 0, -6, 0], // 살짝 튕기는 효과
+    scale: [0.5, 1.4, 0.9, 1.1, 1], // 착지 후 바운스
     transition: {
-      duration: 1.2,
-      delay: index * 0.15, // 스태거 딜레이
-      ease: [0.17, 0.67, 0.83, 0.67], // easeOutBack
-      times: [0, 0.6, 0.75, 0.9, 1] // 각 키프레임 타이밍
+      duration: 0.6,
+      delay: index * 0.5, // 0.5초 간격
+      ease: [0.25, 0.46, 0.45, 0.94],
+      times: [0, 0.4, 0.7, 0.85, 1]
     }
   })
 }
@@ -40,7 +35,7 @@ const buttonVariants = {
     scale: 1,
     transition: {
       duration: 0.8,
-      delay: 1.8, // 모든 텍스트 완성 후 등장 (마지막 텍스트 완료: 0.3 + 1.2 = 1.5초 + 여유 0.3초)
+      delay: 5.0, // 모든 글자 완성 후 등장 (10글자 * 0.5초 = 5초)
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -53,12 +48,9 @@ export default function FFCTAForm() {
     margin: '-30%' // 30% 이상 뷰포트에 들어올 때
   })
 
-  // 텍스트를 의미 단위로 분할
-  const textParts = [
-    "한 번의 클릭으로",
-    "고객을",
-    "사로잡는"
-  ]
+  // 텍스트를 한 글자씩 분할
+  const fullText = "한번의클릭으로고객을사로잡는"
+  const characters = fullText.split("")
 
   // GA4 이벤트 트래킹
   const handleCTAClick = () => {
@@ -110,22 +102,23 @@ export default function FFCTAForm() {
               }
             `}</style>
             
-            <div className="flex flex-wrap justify-center items-center gap-3 md:gap-6">
-              {textParts.map((part, index) => (
+            <div className="flex flex-wrap justify-center items-center">
+              {characters.map((char, index) => (
                 <div key={index} className="overflow-hidden">
                   <motion.span
                     className="motion-text"
-                    variants={slideInVariants}
+                    variants={characterVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                     custom={index}
                     style={{
                       display: 'inline-block',
                       filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
-                      transformOrigin: 'center bottom' // 애니메이션 원점 설정
+                      transformOrigin: 'center bottom',
+                      marginRight: char === ' ' ? '1rem' : '0.1rem' // 공백 처리
                     }}
                   >
-                    {part}
+                    {char}
                   </motion.span>
                 </div>
               ))}
