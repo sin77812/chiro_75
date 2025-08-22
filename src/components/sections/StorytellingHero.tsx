@@ -15,12 +15,14 @@ interface SceneProps {
   children: React.ReactNode
   id: string
   className?: string
+  style?: React.CSSProperties
 }
 
-const Scene = ({ children, id, className = '' }: SceneProps) => (
+const Scene = ({ children, id, className = '', style }: SceneProps) => (
   <div 
     id={id}
     className={`min-h-screen flex items-center justify-center relative ${className}`}
+    style={style}
   >
     {children}
   </div>
@@ -57,9 +59,10 @@ export default function StorytellingHero() {
           ScrollTrigger.create({
             trigger: scene,
             start: 'top top',
-            end: '+=400%', // 4 projects worth of scroll
+            end: '+=500%', // Extended scroll distance for complete pin
             pin: true,
             scrub: 1,
+            anticipatePin: 1,
             onUpdate: (self) => {
               const progress = self.progress
               const projectIndex = Math.floor(progress * 4)
@@ -77,7 +80,25 @@ export default function StorytellingHero() {
               }
             },
             onEnter: () => setCurrentScene(index),
-            onEnterBack: () => setCurrentScene(index),
+            onLeave: () => {
+              // Ensure proper cleanup when leaving the section
+              if (portfolioRef.current) {
+                const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                if (slider) {
+                  gsap.set(slider, { x: '-300%' })
+                }
+              }
+            },
+            onEnterBack: () => {
+              setCurrentScene(index)
+              // Reset position when entering back
+              if (portfolioRef.current) {
+                const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                if (slider) {
+                  gsap.set(slider, { x: '0%' })
+                }
+              }
+            }
           })
         } else {
           // Regular vertical scroll scenes
@@ -290,8 +311,8 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 5: "증명" - Portfolio */}
-      <Scene id="scene-5" className="z-10 relative">
-        <div data-scene="4" className="w-full h-screen flex flex-col">
+      <Scene id="scene-5" className="z-10 relative" style={{ height: '500vh' }}>
+        <div data-scene="4" className="w-full h-screen flex flex-col sticky top-0">
           <div className="text-center mb-8 md:mb-16 flex-shrink-0">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white">
               <span className="text-gradient">진짜 잘하나?</span>
