@@ -7,10 +7,10 @@ import { ArrowRight } from 'lucide-react'
 // CTA 링크 상수 - 필요시 변경 가능
 const CTA_HREF = '/consultation'
 
-// 애니메이션 변형 - GSAP 스타일 쿵쿵 쌓이는 효과
-const characterVariants = {
+// 애니메이션 변형 - 첫 줄은 오른쪽에서, 둘째 줄은 왼쪽에서
+const firstLineVariants = {
   hidden: {
-    x: -window.innerWidth,
+    x: window.innerWidth, // 오른쪽에서 시작
     y: -50,
     opacity: 0,
     scale: 0.8
@@ -22,7 +22,28 @@ const characterVariants = {
     scale: [0.8, 1.2, 1],
     transition: {
       duration: 0.8,
-      delay: index * 0.5, // 0.5초 간격
+      delay: index * 0.3, // 0.3초 간격
+      ease: [0.68, -0.55, 0.265, 1.55], // back.out(1.7) 유사
+      times: [0, 0.8, 1]
+    }
+  })
+}
+
+const secondLineVariants = {
+  hidden: {
+    x: -window.innerWidth, // 왼쪽에서 시작
+    y: -50,
+    opacity: 0,
+    scale: 0.8
+  },
+  visible: (index: number) => ({
+    x: 0,
+    y: [0, 10, 0], // 바운스 효과
+    opacity: 1,
+    scale: [0.8, 1.2, 1],
+    transition: {
+      duration: 0.8,
+      delay: index * 0.3, // 0.3초 간격
       ease: [0.68, -0.55, 0.265, 1.55], // back.out(1.7) 유사
       times: [0, 0.8, 1]
     }
@@ -37,7 +58,7 @@ const buttonVariants = {
     scale: 1,
     transition: {
       duration: 0.8,
-      delay: 5.0, // 모든 글자 완성 후 등장 (10글자 * 0.5초 = 5초)
+      delay: 4.5, // 모든 글자 완성 후 등장 (14글자 * 0.3초 = 4.2초 + 여유)
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -50,9 +71,11 @@ export default function FFCTAForm() {
     margin: '-30%' // 30% 이상 뷰포트에 들어올 때
   })
 
-  // 텍스트를 한 글자씩 분할
-  const fullText = "한번의클릭으로고객을사로잡는"
-  const characters = fullText.split("")
+  // 텍스트를 한 글자씩 분할 - 두 줄로 구성
+  const firstLine = "한번의클릭으로"
+  const secondLine = "고객을사로잡는"
+  const firstCharacters = firstLine.split("")
+  const secondCharacters = secondLine.split("")
 
   // GA4 이벤트 트래킹
   const handleCTAClick = () => {
@@ -91,7 +114,8 @@ export default function FFCTAForm() {
             className="font-black tracking-tight leading-none"
             style={{
               fontSize: 'clamp(3rem, 8vw, 10rem)', // 반응형 폰트 크기
-              textShadow: '0 4px 8px rgba(0,0,0,0.5)'
+              textShadow: '0 4px 8px rgba(0,0,0,0.5)',
+              color: '#0FA765' // CHIRO 그린
             }}
           >
             {/* prefers-reduced-motion 지원 */}
@@ -104,27 +128,54 @@ export default function FFCTAForm() {
               }
             `}</style>
             
-            <div className="flex flex-wrap justify-center items-center relative">
-              {characters.map((char, index) => (
-                <motion.span
-                  key={index}
-                  className="motion-text"
-                  variants={characterVariants}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  custom={index}
-                  style={{
-                    display: 'inline-block',
-                    filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
-                    transformOrigin: 'center bottom',
-                    marginRight: char === ' ' ? '1rem' : '0.1rem', // 공백 처리
-                    position: 'relative',
-                    zIndex: 10
-                  }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+            <div className="flex flex-col justify-center items-center gap-4">
+              {/* 첫 번째 줄: 한번의 클릭으로 */}
+              <div className="flex justify-center items-center relative">
+                {firstCharacters.map((char, index) => (
+                  <motion.span
+                    key={`first-${index}`}
+                    className="motion-text"
+                    variants={firstLineVariants}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                    custom={index}
+                    style={{
+                      display: 'inline-block',
+                      filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
+                      transformOrigin: 'center bottom',
+                      marginRight: '0.1rem',
+                      position: 'relative',
+                      zIndex: 10
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </div>
+              
+              {/* 두 번째 줄: 고객을 사로잡는 */}
+              <div className="flex justify-center items-center relative">
+                {secondCharacters.map((char, index) => (
+                  <motion.span
+                    key={`second-${index}`}
+                    className="motion-text"
+                    variants={secondLineVariants}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                    custom={firstCharacters.length + index} // 첫 번째 줄 이후에 시작
+                    style={{
+                      display: 'inline-block',
+                      filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
+                      transformOrigin: 'center bottom',
+                      marginRight: '0.1rem',
+                      position: 'relative',
+                      zIndex: 10
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </div>
             </div>
           </h1>
         </div>
@@ -138,23 +189,23 @@ export default function FFCTAForm() {
           <a
             href={CTA_HREF}
             onClick={handleCTAClick}
-            className="group inline-flex items-center px-12 py-6 text-xl font-bold rounded-full transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-offset-4 focus:ring-offset-black"
+            className="group inline-flex items-center px-12 py-6 text-xl font-bold rounded-full transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#0FA765] focus:ring-offset-4 focus:ring-offset-black"
             style={{
-              backgroundColor: '#10b981', // emerald-500
-              color: '#000000',
+              backgroundColor: '#0FA765', // CHIRO 그린
+              color: '#FFFFFF',
               height: '4rem', // 64px
               minWidth: '16rem',
-              boxShadow: '0 10px 30px rgba(16, 185, 129, 0.3)'
+              boxShadow: '0 10px 30px rgba(15, 167, 101, 0.3)'
             }}
             onMouseEnter={() => {
               // 호버 시 배경/텍스트 반전 효과는 CSS로 처리
             }}
           >
-            <span className="transition-colors group-hover:text-white">
-              성장 시작하기
+            <span className="transition-colors group-hover:text-[#0FA765]">
+              무료견적
             </span>
             <ArrowRight 
-              className="ml-3 w-6 h-6 transition-all group-hover:translate-x-1 group-hover:text-white" 
+              className="ml-3 w-6 h-6 transition-all group-hover:translate-x-1 group-hover:text-[#0FA765]" 
             />
           </a>
           
@@ -162,7 +213,7 @@ export default function FFCTAForm() {
           <style jsx>{`
             a:hover {
               background-color: #ffffff !important;
-              color: #000000 !important;
+              color: #0FA765 !important;
             }
           `}</style>
         </motion.div>
