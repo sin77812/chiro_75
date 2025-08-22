@@ -7,22 +7,23 @@ import { ArrowRight } from 'lucide-react'
 // CTA 링크 상수 - 필요시 변경 가능
 const CTA_HREF = '/consultation'
 
-// 애니메이션 변형 - 화면 밖에서 평행으로 날아와서 꽝하고 착지
+// 애니메이션 변형 - 화면 밖에서 진짜로 날아와서 꽝하고 착지
 const characterVariants = {
   hidden: {
-    x: 800, // 화면 오른쪽 밖에서 시작
-    opacity: 0,
-    scale: 0.5
+    x: '100vw', // 화면 너비만큼 오른쪽 밖에서 시작
+    opacity: 1, // 날아오는 동안 보이게
+    scale: 0.8
   },
   visible: (index: number) => ({
     x: 0,
     opacity: 1,
-    scale: [0.5, 1.4, 0.9, 1.1, 1], // 착지 후 바운스
+    scale: [0.8, 1.3, 0.95, 1.05, 1], // 착지 후 바운스
     transition: {
-      duration: 0.6,
+      type: 'spring',
+      damping: 15,
+      stiffness: 100,
       delay: index * 0.5, // 0.5초 간격
-      ease: [0.25, 0.46, 0.45, 0.94],
-      times: [0, 0.4, 0.7, 0.85, 1]
+      duration: 0.8
     }
   })
 }
@@ -102,25 +103,26 @@ export default function FFCTAForm() {
               }
             `}</style>
             
-            <div className="flex flex-wrap justify-center items-center">
+            <div className="flex flex-wrap justify-center items-center relative">
               {characters.map((char, index) => (
-                <div key={index} className="overflow-hidden">
-                  <motion.span
-                    className="motion-text"
-                    variants={characterVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    custom={index}
-                    style={{
-                      display: 'inline-block',
-                      filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
-                      transformOrigin: 'center bottom',
-                      marginRight: char === ' ' ? '1rem' : '0.1rem' // 공백 처리
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                </div>
+                <motion.span
+                  key={index}
+                  className="motion-text"
+                  variants={characterVariants}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  custom={index}
+                  style={{
+                    display: 'inline-block',
+                    filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))',
+                    transformOrigin: 'center bottom',
+                    marginRight: char === ' ' ? '1rem' : '0.1rem', // 공백 처리
+                    position: 'relative',
+                    zIndex: 10
+                  }}
+                >
+                  {char}
+                </motion.span>
               ))}
             </div>
           </h1>
