@@ -83,13 +83,13 @@ export default function StorytellingHero() {
           ScrollTrigger.create({
             trigger: scene,
             start: 'top top',
-            end: '+=500%', // Extended scroll distance for complete pin
+            end: '+=300%', // Reduced to match actual slide movement
             pin: true,
             scrub: 1,
             anticipatePin: 1,
             onUpdate: (self) => {
               const progress = self.progress
-              const projectIndex = Math.floor(progress * 4)
+              const projectIndex = Math.floor(progress * 3.99) // 3.99 to ensure last item is reached
               setCurrentProject(Math.min(projectIndex, 3))
               
               if (portfolioRef.current) {
@@ -97,8 +97,9 @@ export default function StorytellingHero() {
                 const titleElement = portfolioRef.current.querySelector('h2')
                 
                 if (slider) {
+                  // Adjusted calculation: directly move by progress * 75% (3 slides * 25% each)
                   gsap.to(slider, {
-                    x: -progress * 300 + '%',
+                    x: -progress * 75 + '%',
                     duration: 0.3,
                     ease: 'power2.out'
                   })
@@ -107,9 +108,9 @@ export default function StorytellingHero() {
                 // Hide title completely when portfolio scrolls
                 if (titleElement) {
                   gsap.to(titleElement, {
-                    opacity: progress > 0.1 ? 0 : 1,
-                    y: progress > 0.1 ? -100 : 0,
-                    scale: progress > 0.1 ? 0.8 : 1,
+                    opacity: progress > 0.05 ? 0 : 1,
+                    y: progress > 0.05 ? -100 : 0,
+                    scale: progress > 0.05 ? 0.8 : 1,
                     duration: 0.3,
                     ease: 'power2.out'
                   })
@@ -124,7 +125,7 @@ export default function StorytellingHero() {
                 const titleElement = portfolioRef.current.querySelector('h2')
                 
                 if (slider) {
-                  gsap.set(slider, { x: '-300%' })
+                  gsap.set(slider, { x: '-75%' })
                 }
                 if (titleElement) {
                   gsap.set(titleElement, { opacity: 0, y: -50 })
@@ -380,7 +381,7 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 5: "증명" - Portfolio */}
-      <Scene id="scene-5" className="z-10 relative" style={{ height: '500vh' }}>
+      <Scene id="scene-5" className="z-10 relative" style={{ height: '400vh' }}>
         <div data-scene="4" className="w-full h-screen flex flex-col sticky top-0">
           <div className="text-center mb-8 md:mb-16 flex-shrink-0">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white">
@@ -399,8 +400,8 @@ export default function StorytellingHero() {
           >
             <div 
               id="portfolio-slider"
-              className="flex h-full items-center gap-8 transition-transform duration-300 ease-out"
-              style={{ width: 'calc(100vw * 4)' }}
+              className="flex h-full items-center gap-8 transition-transform duration-300 ease-out pl-[50vw]"
+              style={{ width: 'calc(100vw * 4 + 50vw)' }}
             >
               {/* Portfolio Items */}
               {[
@@ -435,7 +436,7 @@ export default function StorytellingHero() {
               ].map((project, index) => (
                 <div 
                   key={index}
-                  className="w-screen h-full flex items-center justify-center px-4 md:px-16 flex-shrink-0"
+                  className="w-[100vw] h-full flex items-center justify-center px-4 md:px-16 flex-shrink-0"
                 >
                   <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-16 items-center h-full">
                     {/* Project Image */}

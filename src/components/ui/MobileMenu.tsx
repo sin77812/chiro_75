@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { X } from 'lucide-react'
+import { X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -14,6 +14,11 @@ interface MobileMenuProps {
     label: string
     href: string
     isHighlighted?: boolean
+    hasDropdown?: boolean
+    submenu?: Array<{
+      label: string
+      href: string
+    }>
   }>
 }
 
@@ -66,6 +71,7 @@ const itemVariants = {
 
 export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuProps) {
   const pathname = usePathname()
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null)
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -126,8 +132,9 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
             <nav className="px-6 py-8" aria-label="모바일 메뉴">
               <ul className="space-y-1">
                 {menuItems.map((item, index) => {
-                  const isActive = pathname === item.href
+                  const isActive = pathname === item.href || (item.submenu && pathname.startsWith(item.href))
                   const isCTA = item.isHighlighted
+                  const isExpanded = expandedMenu === item.label
 
                   return (
                     <motion.li
@@ -137,23 +144,76 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
                       animate="open"
                       custom={index}
                     >
-                      <Link
-                        href={item.href}
-                        className={cn(
-                          "block px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200",
-                          {
-                            // CTA Button Style
-                            'bg-primary text-dark hover:bg-primary/90 hover:scale-[1.02] shadow-lg': isCTA,
-                            // Active State
-                            'text-primary bg-primary/10 border border-primary/20': isActive && !isCTA,
-                            // Default State
-                            'text-neutral-light hover:text-white hover:bg-shadow-gray/20': !isActive && !isCTA
-                          }
-                        )}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        {item.label}
-                      </Link>
+                      {item.hasDropdown && item.submenu ? (
+                        <div>
+                          <button
+                            onClick={() => setExpandedMenu(isExpanded ? null : item.label)}
+                            className={cn(
+                              "w-full flex items-center justify-between px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200",
+                              {
+                                'text-primary bg-primary/10': isActive,
+                                'text-neutral-light hover:text-white hover:bg-shadow-gray/20': !isActive
+                              }
+                            )}
+                          >
+                            <span>{item.label}</span>
+                            <ChevronDown 
+                              className={cn(
+                                "h-4 w-4 transition-transform duration-200",
+                                isExpanded && "rotate-180"
+                              )}
+                            />
+                          </button>
+                          
+                          {/* Submenu */}
+                          <AnimatePresence>
+                            {isExpanded && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="mt-1 ml-4 space-y-1">
+                                  {item.submenu.map((subItem) => (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className={cn(
+                                        "block px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                                        pathname === subItem.href
+                                          ? "text-primary bg-primary/5"
+                                          : "text-neutral-light/80 hover:text-white hover:bg-shadow-gray/10"
+                                      )}
+                                    >
+                                      {subItem.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "block px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200",
+                            {
+                              // CTA Button Style
+                              'bg-primary text-dark hover:bg-primary/90 hover:scale-[1.02] shadow-lg': isCTA,
+                              // Active State
+                              'text-primary bg-primary/10 border border-primary/20': isActive && !isCTA,
+                              // Default State
+                              'text-neutral-light hover:text-white hover:bg-shadow-gray/20': !isActive && !isCTA
+                            }
+                          )}
+                          aria-current={isActive ? 'page' : undefined}
+                        >
+                          {item.label}
+                        </Link>
+                      )}
                     </motion.li>
                   )
                 })}
