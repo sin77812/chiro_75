@@ -382,7 +382,7 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 5: "증명" - Portfolio */}
-      <Scene id="scene-5" className="z-10 relative" style={{ height: '400vh' }}>
+      <Scene id="scene-5" className="z-10 relative" style={{ height: '400%' }}>
         <div data-scene="4" className="w-full h-screen flex flex-col sticky top-0">
           <div className="text-center mb-8 md:mb-16 flex-shrink-0">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white">
@@ -402,7 +402,7 @@ export default function StorytellingHero() {
             <div 
               id="portfolio-slider"
               className="flex h-full items-center gap-8 transition-transform duration-300 ease-out"
-              style={{ width: 'calc(100vw * 4)' }}
+              style={{ width: '400%' }}
             >
               {/* Portfolio Items */}
               {[
@@ -437,15 +437,15 @@ export default function StorytellingHero() {
               ].map((project, index) => (
                 <div 
                   key={index}
-                  className="w-[100vw] h-full flex items-center justify-center px-8 md:px-20 flex-shrink-0"
+                  className="w-full h-full flex items-center justify-center px-8 md:px-20 flex-shrink-0"
                 >
-                  <div className="w-full max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center h-[90vh]">
+                  <div className="w-full max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
                     {/* Project Image */}
                     <div className="relative group">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl transform rotate-3 group-hover:rotate-1 transition-transform duration-500"></div>
                       <div className="relative">
                         <div 
-                          className="w-full h-72 md:h-96 bg-cover bg-center rounded-2xl border border-primary/30 group-hover:scale-105 transition-transform duration-500"
+                          className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl border border-primary/30 group-hover:scale-105 transition-transform duration-500"
                           style={{ backgroundImage: `url(${project.image})` }}
                         />
                         <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm rounded-lg px-3 py-1">
