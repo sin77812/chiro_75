@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 
 // Core sections - FLASH FORM style
 import FFHero from '@/components/sections/FFHero'
@@ -8,11 +7,6 @@ import FFServices from '@/components/sections/FFServices'
 import FFCaseVideo from '@/components/sections/FFCaseVideo'
 import FFProof from '@/components/sections/FFProof'
 import FFCTAForm from '@/components/sections/FFCTAForm'
-
-// Dynamic imports for heavy components
-const StorytellingHero = dynamic(() => import('@/components/sections/StorytellingHero'), {
-  loading: () => <div className="min-h-screen bg-black" />
-})
 
 export const metadata: Metadata = {
   title: 'CHIRO - 프리미엄 디지털 에이전시',
@@ -65,9 +59,6 @@ export default function Home() {
         
         {/* 6. FLASH FORM Style CTA Form Section */}
         <FFCTAForm />
-        
-        {/* 7. Remaining sections - Dynamically loaded for performance */}
-        <StorytellingHero />
       </main>
     </>
   )
