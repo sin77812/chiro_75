@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Info, ArrowUpRight } from 'lucide-react'
+import { Info, ArrowUpRight, Palette, Settings, Zap, Globe, Cog, Shield } from 'lucide-react'
 import { fadeUp, stagger, serviceTilt, microBounce } from '@/features/motion/variants'
 import { useScrambleText } from '@/features/hooks/useScrambleText'
 
@@ -14,7 +14,8 @@ const servicesData = [
     description: '브랜드 아이덴티티를 반영한 현대적 디자인',
     tooltip: '기존 사이트를 현대적이고 사용자 친화적으로 완전히 새롭게 디자인합니다',
     size: 'large' as const,
-    icon: '🎨',
+    icon: Palette,
+    color: '#0FA765', // accent green
   },
   {
     id: 2,
@@ -22,7 +23,8 @@ const servicesData = [
     description: '사용자 경험 중심의 인터페이스 최적화',
     tooltip: '사용자 행동 분석을 통한 직관적이고 효율적인 사용자 경험 설계',
     size: 'medium' as const,
-    icon: '🔧',
+    icon: Settings,
+    color: '#FF6B35', // orange
   },
   {
     id: 3,
@@ -30,7 +32,8 @@ const servicesData = [
     description: 'Core Web Vitals 개선과 속도 향상',
     tooltip: 'Google Core Web Vitals 지표를 만족하는 초고속 웹사이트 구현',
     size: 'medium' as const,
-    icon: '⚡',
+    icon: Zap,
+    color: '#FFD60A', // yellow
   },
   {
     id: 4,
@@ -38,7 +41,8 @@ const servicesData = [
     description: '해외 진출을 위한 다국어 사이트 구축',
     tooltip: 'i18n 구조와 지역별 최적화를 통한 글로벌 시장 진출 지원',
     size: 'large' as const,
-    icon: '🌍',
+    icon: Globe,
+    color: '#007AFF', // blue
   },
   {
     id: 5,
@@ -46,7 +50,8 @@ const servicesData = [
     description: '콘텐츠 관리 시스템과 업무 자동화',
     tooltip: '헤드리스 CMS와 자동화 워크플로우로 운영 효율성 극대화',
     size: 'small' as const,
-    icon: '⚙️',
+    icon: Cog,
+    color: '#AF52DE', // purple
   },
   {
     id: 6,
@@ -54,7 +59,8 @@ const servicesData = [
     description: '지속적인 관리와 보안 강화',
     tooltip: '정기적인 업데이트와 보안 모니터링으로 안전한 운영 보장',
     size: 'small' as const,
-    icon: '🔒',
+    icon: Shield,
+    color: '#FF3B30', // red
   },
 ]
 
@@ -106,6 +112,8 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
     small: 'p-6',
   }
 
+  const IconComponent = service.icon
+
   return (
     <motion.div
       ref={cardRef}
@@ -132,9 +140,20 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
         }
       }}
     >
-      {/* Icon */}
-      <div className="text-3xl md:text-4xl mb-4 md:mb-6">
-        {service.icon}
+      {/* Custom Color Icon */}
+      <div className="mb-4 md:mb-6">
+        <div 
+          className="w-12 h-12 md:w-16 md:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+          style={{
+            backgroundColor: `${service.color}20`,
+            border: `2px solid ${service.color}40`
+          }}
+        >
+          <IconComponent 
+            className="w-6 h-6 md:w-8 md:h-8" 
+            style={{ color: service.color }}
+          />
+        </div>
       </div>
 
       {/* Title with scramble effect */}

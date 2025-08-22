@@ -172,12 +172,12 @@ export default function ServicesPage() {
                   <AccessibleLink 
                     href="/portfolio" 
                     className="btn-secondary group inline-flex items-center"
-                    aria-label="포트폴리오 사례 연구 보기"
+                    aria-label="포트폴리오 보기"
                     onClick={() => {
-                      ServiceAnalytics.clickServiceCTA('services-overview', 'secondary', 'View Case Studies')
+                      ServiceAnalytics.clickServiceCTA('services-overview', 'secondary', 'View Portfolio')
                     }}
                   >
-                    사례 연구 보기
+                    포트폴리오 보기
                     <Play className="ml-2 h-4 w-4" aria-hidden="true" />
                   </AccessibleLink>
                 </div>

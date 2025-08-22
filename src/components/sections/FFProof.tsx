@@ -8,17 +8,31 @@ import { fadeUp, stagger, barFill, numberReveal, cardInteraction } from '@/featu
 // KPI Data
 const kpiData = [
   {
-    title: '리드 생성',
-    before: 100,
-    after: 287,
-    improvement: '+187%',
-    barWidth: '85%'
+    title: '문의 증가율',
+    before: '1배',
+    after: '2.8배',
+    improvement: '+180% 증가',
+    barWidth: '88%'
   },
   {
-    title: 'LCP 속도',
-    before: '3.8s',
-    after: '1.6s',
-    improvement: '58% 향상',
+    title: '체류 시간',
+    before: '1:20',
+    after: '3:10',
+    improvement: '+137% 향상',
+    barWidth: '90%'
+  },
+  {
+    title: '웹 접근성 점수',
+    before: '55점',
+    after: '92점',
+    improvement: '+67% 개선',
+    barWidth: '95%'
+  },
+  {
+    title: '전환율',
+    before: '3.2%',
+    after: '8.5%',
+    improvement: '+165% 증가',
     barWidth: '92%'
   }
 ]
@@ -301,7 +315,7 @@ export default function FFProof() {
           variants={stagger}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16"
         >
           {kpiData.map((kpi, index) => (
             <KPICard key={index} data={kpi} index={index} isVisible={isInView} />
