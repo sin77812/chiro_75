@@ -1,9 +1,7 @@
 import { Metadata } from 'next'
 
-// Core sections loaded immediately
+// Core section
 import StorytellingHero from '@/components/sections/StorytellingHero'
-import ServicesOverview from '@/components/sections/ServicesOverview'
-import PortfolioShowcase from '@/components/sections/PortfolioShowcase'
 
 export const metadata: Metadata = {
   title: 'CHIRO - 프리미엄 디지털 에이전시',
@@ -39,14 +37,8 @@ export default function Home() {
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
       <main className="overflow-x-hidden">
-        {/* 1. Storytelling Hero - 7 Scene Interactive Journey */}
+        {/* 1. Storytelling Hero - 7 Scene Interactive Journey (Complete Landing Page) */}
         <StorytellingHero />
-        
-        {/* 2. Services Overview - Image-based service cards */}
-        <ServicesOverview />
-        
-        {/* 3. Portfolio Teaser - Visual-first project showcase */}
-        <PortfolioShowcase />
       </main>
     </>
   )
