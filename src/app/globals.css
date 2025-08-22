@@ -4,6 +4,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
 
+/* FLASH FORM brand color variables */
+:root {
+  --bg: #0A0F0A;
+  --fg: #F7F7F5;
+  --accent: #0FA765;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

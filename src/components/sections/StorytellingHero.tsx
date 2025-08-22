@@ -298,11 +298,11 @@ export default function StorytellingHero() {
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white leading-tight px-4">
               당신의 웹사이트,
               <br />
-              <span className="text-red-400">정말 일하고 있나요?</span>
+              <span className="text-accent-green">정말 일하고 있나요?</span>
             </h2>
             
             <div className="text-center">
-              <div className="text-6xl md:text-8xl font-black text-red-400 mb-4">
+              <div className="text-6xl md:text-8xl font-black text-accent-green mb-4">
                 95%
               </div>
               <p className="text-xl md:text-2xl text-white/80">
@@ -314,7 +314,7 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 3: "공감대 형성" - The Pain */}
-      <Scene id="scene-3" className="z-10 relative bg-black/80">
+      <Scene id="scene-3" className="z-10 relative bg-dark/80">
         <div data-scene="2" className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             {[
@@ -323,8 +323,8 @@ export default function StorytellingHero() {
               { title: '복잡한 프로세스', desc: '회의만 몇 번, 결과는 기대 이하' }
             ].map((item, index) => (
               <div key={index} className="text-center space-y-4 md:space-y-6">
-                <div className="w-16 h-16 md:w-20 md:h-20 mx-auto bg-red-500/20 rounded-full flex items-center justify-center">
-                  <X className="w-8 h-8 md:w-10 md:h-10 text-red-400" />
+                <div className="w-16 h-16 md:w-20 md:h-20 mx-auto bg-shadow-gray/30 rounded-full flex items-center justify-center">
+                  <X className="w-8 h-8 md:w-10 md:h-10 text-neutral-light/60" />
                 </div>
                 <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
                   {item.title}
@@ -339,7 +339,7 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 4: "해결책 제시" - The Solution */}
-      <Scene id="scene-4" className="z-10 relative bg-gradient-to-br from-background-primary/90 to-background-secondary/90">
+      <Scene id="scene-4" className="z-10 relative bg-dark/80">
         <div data-scene="3" className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white mb-8">
@@ -352,17 +352,17 @@ export default function StorytellingHero() {
               { 
                 title: '에이전시 퀄리티', 
                 desc: '업계 최고 수준의 전문성',
-                color: 'from-primary to-blue-500'
+                color: 'from-accent-green to-green-400'
               },
               { 
                 title: '프리랜서 가격', 
                 desc: '합리적이고 투명한 비용',
-                color: 'from-accent-green to-green-500'
+                color: 'from-accent-green to-green-400'
               },
               { 
                 title: '2주 완성', 
                 desc: '빠르고 확실한 납기',
-                color: 'from-accent-yellow to-orange-500'
+                color: 'from-accent-green to-green-500'
               }
             ].map((item, index) => (
               <div key={index} className="text-center space-y-4 md:space-y-6">
@@ -386,7 +386,7 @@ export default function StorytellingHero() {
         <div data-scene="4" className="w-full h-screen flex flex-col sticky top-0">
           <div className="text-center mb-8 md:mb-16 flex-shrink-0">
             <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white">
-              <span className="text-gradient">진짜 잘하나?</span>
+              <span className="text-accent-green">진짜 잘하나?</span>
             </h2>
           </div>
           
@@ -442,14 +442,14 @@ export default function StorytellingHero() {
                   <div className="w-full max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center h-full">
                     {/* Project Image */}
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl transform rotate-3 group-hover:rotate-1 transition-transform duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent-green/20 to-accent-green/30 rounded-2xl transform rotate-3 group-hover:rotate-1 transition-transform duration-500"></div>
                       <div className="relative">
                         <div 
-                          className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl border border-primary/30 group-hover:scale-105 transition-transform duration-500"
+                          className="w-full aspect-[4/3] bg-cover bg-center rounded-2xl border border-accent-green/30 group-hover:scale-105 transition-transform duration-500"
                           style={{ backgroundImage: `url(${project.image})` }}
                         />
                         <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-sm rounded-lg px-3 py-1">
-                          <span className="text-primary text-sm font-medium">{project.category}</span>
+                          <span className="text-accent-green text-sm font-medium">{project.category}</span>
                         </div>
                       </div>
                     </div>
@@ -460,7 +460,7 @@ export default function StorytellingHero() {
                         <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3">
                           {project.title}
                         </h3>
-                        <p className="text-xl md:text-2xl text-primary font-medium">
+                        <p className="text-xl md:text-2xl text-accent-green font-medium">
                           {project.client}
                         </p>
                       </div>
@@ -476,7 +476,7 @@ export default function StorytellingHero() {
                       </div>
 
                       <div className="pt-6">
-                        <button className="inline-flex items-center px-6 py-3 bg-primary/20 border border-primary rounded-lg text-primary font-medium hover:bg-primary hover:text-white transition-all duration-300">
+                        <button className="inline-flex items-center px-6 py-3 bg-accent-green/20 border border-accent-green rounded-lg text-accent-green font-medium hover:bg-accent-green hover:text-dark transition-all duration-300">
                           케이스 스터디 보기
                           <ArrowRight className="ml-2 w-4 h-4" />
                         </button>
@@ -513,20 +513,20 @@ export default function StorytellingHero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05),transparent_50%)]"></div>
         
         {/* Animated background elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-accent-green/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent-green/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
         
         <div data-scene="5" className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white mb-16 md:mb-20">
-            <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">믿을 만한가?</span>
+            <span className="text-accent-green">믿을 만한가?</span>
           </h2>
           
           {/* Premium Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-16 md:mb-20">
             {[
-              { number: '100%', label: '만족도', desc: '고객 만족 보장', color: 'from-emerald-400 to-green-500' },
-              { number: '2주', label: '평균 납기', desc: '빠른 프로젝트 완성', color: 'from-blue-400 to-cyan-500' },
-              { number: '50%', label: '비용 절감', desc: '합리적인 가격 정책', color: 'from-purple-400 to-pink-500' }
+              { number: '100%', label: '만족도', desc: '고객 만족 보장', color: 'from-accent-green to-green-500' },
+              { number: '2주', label: '평균 납기', desc: '빠른 프로젝트 완성', color: 'from-accent-green to-green-400' },
+              { number: '50%', label: '비용 절감', desc: '합리적인 가격 정책', color: 'from-accent-green to-green-600' }
             ].map((stat, index) => (
               <div 
                 key={index} 
@@ -599,7 +599,7 @@ export default function StorytellingHero() {
                   {/* Stars */}
                   <div className="flex space-x-1 ml-4">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <svg key={i} className="w-5 h-5 text-accent-green fill-current" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                       </svg>
                     ))}
@@ -612,12 +612,12 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 7: "행동 유도" - CTA */}
-      <Scene id="scene-7" className="z-10 relative bg-gradient-to-br from-primary/90 to-accent-green/90">
+      <Scene id="scene-7" className="z-10 relative bg-gradient-to-br from-dark to-shadow-gray">
         <div data-scene="6" className="text-center max-w-4xl mx-auto px-4">
           <h2 className="font-pretendard font-bold text-4xl sm:text-6xl md:text-8xl text-white mb-8 leading-tight">
             2주 후,
             <br />
-            <span className="text-accent-yellow">당신의 새로운 시작</span>
+            <span className="text-accent-green">당신의 새로운 시작</span>
           </h2>
           
           <div className="space-y-12">
@@ -626,8 +626,8 @@ export default function StorytellingHero() {
               className="group inline-block"
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-white rounded-2xl animate-pulse opacity-20"></div>
-                <button className="relative px-8 sm:px-12 md:px-16 py-6 md:py-8 bg-white text-primary text-lg sm:text-2xl md:text-3xl font-bold rounded-2xl hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-white/25">
+                <div className="absolute inset-0 bg-accent-green rounded-2xl animate-pulse opacity-20"></div>
+                <button className="relative px-8 sm:px-12 md:px-16 py-6 md:py-8 bg-accent-green text-dark text-lg sm:text-2xl md:text-3xl font-bold rounded-2xl hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:shadow-accent-green/25">
                   <span className="flex items-center">
                     무료 상담 시작하기
                     <ArrowRight className="ml-2 sm:ml-4 w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-2 transition-transform" />

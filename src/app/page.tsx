@@ -1,7 +1,14 @@
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 
-// Core section
-import StorytellingHero from '@/components/sections/StorytellingHero'
+// Core sections - FLASH FORM style
+import FFHero from '@/components/sections/FFHero'
+import FFProblem from '@/components/sections/FFProblem'
+
+// Dynamic imports for heavy components
+const StorytellingHero = dynamic(() => import('@/components/sections/StorytellingHero'), {
+  loading: () => <div className="min-h-screen bg-black" />
+})
 
 export const metadata: Metadata = {
   title: 'CHIRO - 프리미엄 디지털 에이전시',
@@ -37,7 +44,13 @@ export default function Home() {
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
       <main className="overflow-x-hidden">
-        {/* 1. Storytelling Hero - 7 Scene Interactive Journey (Complete Landing Page) */}
+        {/* 1. FLASH FORM Style Hero Section */}
+        <FFHero />
+        
+        {/* 2. FLASH FORM Style Problem Section */}
+        <FFProblem />
+        
+        {/* 3. Remaining sections - Dynamically loaded for performance */}
         <StorytellingHero />
       </main>
     </>
