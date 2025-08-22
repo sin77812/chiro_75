@@ -7,23 +7,24 @@ import { ArrowRight } from 'lucide-react'
 // CTA 링크 상수 - 필요시 변경 가능
 const CTA_HREF = '/consultation'
 
-// 애니메이션 변형 - 화면 밖에서 진짜로 날아와서 꽝하고 착지
+// 애니메이션 변형 - GSAP 스타일 쿵쿵 쌓이는 효과
 const characterVariants = {
   hidden: {
-    x: '100vw', // 화면 너비만큼 오른쪽 밖에서 시작
-    opacity: 1, // 날아오는 동안 보이게
+    x: -window.innerWidth,
+    y: -50,
+    opacity: 0,
     scale: 0.8
   },
   visible: (index: number) => ({
     x: 0,
+    y: [0, 10, 0], // 바운스 효과
     opacity: 1,
-    scale: [0.8, 1.3, 0.95, 1.05, 1], // 착지 후 바운스
+    scale: [0.8, 1.2, 1],
     transition: {
-      type: 'spring',
-      damping: 15,
-      stiffness: 100,
+      duration: 0.8,
       delay: index * 0.5, // 0.5초 간격
-      duration: 0.8
+      ease: [0.68, -0.55, 0.265, 1.55], // back.out(1.7) 유사
+      times: [0, 0.8, 1]
     }
   })
 }
