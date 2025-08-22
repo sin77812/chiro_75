@@ -21,7 +21,7 @@ interface SceneProps {
 const Scene = ({ children, id, className = '', style }: SceneProps) => (
   <div 
     id={id}
-    className={`min-h-screen flex items-center justify-center relative ${className}`}
+    className={`${id === 'scene-5' ? 'min-h-screen' : 'h-screen'} flex items-center justify-center relative ${className}`}
     style={style}
   >
     {children}
@@ -70,9 +70,21 @@ export default function StorytellingHero() {
               
               if (portfolioRef.current) {
                 const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                const titleElement = portfolioRef.current.querySelector('h2')
+                
                 if (slider) {
                   gsap.to(slider, {
                     x: -progress * 300 + '%',
+                    duration: 0.3,
+                    ease: 'power2.out'
+                  })
+                }
+                
+                // Hide title as portfolio scrolls
+                if (titleElement) {
+                  gsap.to(titleElement, {
+                    opacity: Math.max(0, 1 - progress * 2),
+                    y: -progress * 50,
                     duration: 0.3,
                     ease: 'power2.out'
                   })
@@ -84,8 +96,13 @@ export default function StorytellingHero() {
               // Ensure proper cleanup when leaving the section
               if (portfolioRef.current) {
                 const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                const titleElement = portfolioRef.current.querySelector('h2')
+                
                 if (slider) {
                   gsap.set(slider, { x: '-300%' })
+                }
+                if (titleElement) {
+                  gsap.set(titleElement, { opacity: 0, y: -50 })
                 }
               }
             },
@@ -94,8 +111,13 @@ export default function StorytellingHero() {
               // Reset position when entering back
               if (portfolioRef.current) {
                 const slider = portfolioRef.current.querySelector('#portfolio-slider')
+                const titleElement = portfolioRef.current.querySelector('h2')
+                
                 if (slider) {
                   gsap.set(slider, { x: '0%' })
+                }
+                if (titleElement) {
+                  gsap.set(titleElement, { opacity: 1, y: 0 })
                 }
               }
             }
@@ -435,38 +457,108 @@ export default function StorytellingHero() {
       </Scene>
 
       {/* Scene 6: "신뢰 구축" - Trust */}
-      <Scene id="scene-6" className="z-10 relative bg-blue-900/80">
-        <div data-scene="5" className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white mb-12 md:mb-16">
-            <span className="text-gradient">믿을 만한가?</span>
+      <Scene id="scene-6" className="z-10 relative overflow-hidden">
+        {/* Premium Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(120,119,198,0.3),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05),transparent_50%)]"></div>
+        
+        {/* Animated background elements */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent-green/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        
+        <div data-scene="5" className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+          <h2 className="font-pretendard font-bold text-3xl sm:text-5xl md:text-7xl text-white mb-16 md:mb-20">
+            <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">믿을 만한가?</span>
           </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-12 md:mb-16">
+          {/* Premium Stats Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 mb-16 md:mb-20">
             {[
-              { number: '100%', label: '만족도', desc: '고객 만족 보장' },
-              { number: '2주', label: '평균 납기', desc: '빠른 프로젝트 완성' },
-              { number: '50%', label: '비용 절감', desc: '합리적인 가격 정책' }
+              { number: '100%', label: '만족도', desc: '고객 만족 보장', color: 'from-emerald-400 to-green-500' },
+              { number: '2주', label: '평균 납기', desc: '빠른 프로젝트 완성', color: 'from-blue-400 to-cyan-500' },
+              { number: '50%', label: '비용 절감', desc: '합리적인 가격 정책', color: 'from-purple-400 to-pink-500' }
             ].map((stat, index) => (
-              <div key={index} className="space-y-4">
-                <div className="text-6xl md:text-8xl font-black text-primary">
-                  {stat.number}
-                </div>
-                <div className="text-xl font-bold text-white">
-                  {stat.label}
-                </div>
-                <div className="text-white/70">
-                  {stat.desc}
+              <div 
+                key={index} 
+                className="group relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:bg-white/10"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)'
+                }}
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r opacity-0 group-hover:opacity-20 transition-opacity duration-500" 
+                     style={{ background: `linear-gradient(135deg, var(--tw-gradient-stops))` }}></div>
+                
+                <div className="relative space-y-4">
+                  {/* Animated number */}
+                  <div className={`text-6xl md:text-7xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300`}>
+                    {stat.number}
+                  </div>
+                  
+                  {/* Label with underline effect */}
+                  <div className="relative">
+                    <div className="text-xl md:text-2xl font-bold text-white group-hover:text-gray-100 transition-colors">
+                      {stat.label}
+                    </div>
+                    <div className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 h-0.5 w-0 group-hover:w-full bg-gradient-to-r ${stat.color} transition-all duration-500`}></div>
+                  </div>
+                  
+                  <div className="text-gray-300 group-hover:text-gray-200 transition-colors">
+                    {stat.desc}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
           
-          <blockquote className="text-2xl md:text-3xl text-white/90 italic border-l-4 border-primary pl-8 max-w-3xl mx-auto">
-            "2주만에 이런 퀄리티가? 진짜 만족합니다!"
-            <footer className="text-white/60 text-lg mt-4 not-italic">
-              - 실제 고객 후기
-            </footer>
-          </blockquote>
+          {/* Premium Testimonial */}
+          <div className="relative">
+            {/* Background glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-accent-green/20 blur-3xl"></div>
+            
+            <blockquote className="relative p-8 md:p-12 rounded-3xl bg-black/30 backdrop-blur-2xl border border-white/10 max-w-4xl mx-auto"
+                        style={{ 
+                          background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.4) 100%)',
+                          boxShadow: '0 25px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)'
+                        }}>
+              {/* Quote marks */}
+              <div className="absolute -top-4 -left-4 text-6xl text-primary/30 font-serif">"</div>
+              <div className="absolute -bottom-4 -right-4 text-6xl text-primary/30 font-serif">"</div>
+              
+              <div className="relative">
+                <p className="text-2xl md:text-3xl text-white font-light leading-relaxed mb-6">
+                  <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                    2주만에 이런 퀄리티가? 진짜 만족합니다!
+                  </span>
+                </p>
+                
+                <footer className="flex items-center justify-center space-x-4">
+                  {/* Avatar placeholder */}
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent-green p-0.5">
+                    <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center">
+                      <span className="text-white font-bold">K</span>
+                    </div>
+                  </div>
+                  
+                  <div className="text-left">
+                    <div className="text-gray-300 font-medium">실제 고객</div>
+                    <div className="text-gray-500 text-sm">CEO, 스타트업</div>
+                  </div>
+                  
+                  {/* Stars */}
+                  <div className="flex space-x-1 ml-4">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </footer>
+              </div>
+            </blockquote>
+          </div>
         </div>
       </Scene>
 
