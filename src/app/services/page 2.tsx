@@ -7,7 +7,6 @@ import Link from 'next/link'
 import servicesData from '@/data/services.json'
 import ScrollReveal, { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
 import PageCTA from '@/components/sections/PageCTA'
-import ProcessFlow from '@/components/sections/ProcessFlow'
 import { SkipNav, AccessibleButton, AccessibleLink, AccordionItem, ScreenReaderText } from '@/components/ui/AccessibleComponents'
 import { LazyImage, OptimizedVideo, LazyContent, ResourceHints, Preload } from '@/components/ui/PerformanceComponents'
 import { OrganizationStructuredData, ServicesPageStructuredData, FAQStructuredData, WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/StructuredData'
@@ -39,6 +38,44 @@ const businessKPIs = [
   { label: '모바일 사용자 참여도', value: '+195%', context: '반응형 디자인 우수성' }
 ]
 
+// 5-step process
+const processSteps = [
+  {
+    step: '01',
+    title: '발견',
+    description: '비즈니스 감사, 경쟁사 분석, 사용자 리서치',
+    duration: '1-2주',
+    deliverables: ['시장 분석 보고서', '사용자 여정 맵', '기술 감사']
+  },
+  {
+    step: '02',
+    title: '정의',
+    description: '전략 수립, 기술 아키텍처, 콘텐츠 기획',
+    duration: '1주',
+    deliverables: ['프로젝트 전략', '기술 사양서', '콘텐츠 프레임워크']
+  },
+  {
+    step: '03',
+    title: '디자인',
+    description: 'UI/UX 디자인, 프로토타이핑, 디자인 시스템 구축',
+    duration: '2-3주',
+    deliverables: ['디자인 시스템', '고품질 목업', '인터랙티브 프로토타입']
+  },
+  {
+    step: '04',
+    title: '개발',
+    description: '개발, 테스트, 최적화, 품질 보증',
+    duration: '3-6주',
+    deliverables: ['운영 웹사이트', '테스트 보고서', '성능 최적화']
+  },
+  {
+    step: '05',
+    title: '최적화',
+    description: '런칭 지원, 애널리틱스 설정, 지속적 개선',
+    duration: '지속적',
+    deliverables: ['애널리틱스 대시보드', '성능 보고서', '개선 로드맵']
+  }
+]
 
 // Differentiation points
 const differentiationPoints = [
@@ -131,7 +168,7 @@ export default function ServicesPage() {
         prefetch={['/portfolio', '/contact']}
         dnsPrefetch={['https://www.google-analytics.com']}
       />
-      <Preload href="/image/CHIRO_service_vd.mp4" as="video" type="video/mp4" />
+      <Preload href="/videos/hero/services-demo.mp4" as="video" type="video/mp4" />
       
       <SkipNav />
       <main id="main-content" className="pt-18" role="main">
@@ -187,28 +224,34 @@ export default function ServicesPage() {
             {/* Hero Video */}
             <FadeRight>
               <div className="relative">
-                <div className="aspect-video rounded-2xl border border-primary/20 overflow-hidden">
-                  <video
-                    className="w-full h-full object-cover object-top scale-110 transform translate-y-[-5%]"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    onLoadStart={() => {
-                      ServiceAnalytics.playVideo('hero-services-demo', 'CHIRO Service Demo Video')
-                    }}
-                  >
-                    <source src="/image/CHIRO_service_vd.mp4" type="video/mp4" />
+                <OptimizedVideo
+                  src={{
+                    mp4: "/videos/hero/services-demo.mp4",
+                    webm: "/videos/hero/services-demo.webm",
+                    poster: "/images/hero/services-poster.jpg"
+                  }}
+                  className="aspect-video rounded-2xl border border-primary/20"
+                  autoPlay={true}
+                  muted={true}
+                  loop={true}
+                  controls={false}
+                  preload="metadata"
+                  lazy={false}
+                  placeholder={
                     <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl flex items-center justify-center border border-primary/20">
                       <div className="text-center space-y-4">
                         <Play className="w-16 h-16 text-primary mx-auto opacity-60" aria-hidden="true" />
                         <p className="text-neutral-light/60 text-sm">
-                          CHIRO 서비스 데모 로딩 중
+                          데모 로딩 중: 와이어프레임 → 고품질 UI 변환
                         </p>
                       </div>
                     </div>
-                  </video>
-                </div>
+                  }
+                  aria-label="Demonstration video showing wireframe to high-fidelity UI transformation process"
+                  onLoad={() => {
+                    ServiceAnalytics.playVideo('hero-services-demo', 'Services Hero Demo - Wireframe to UI Transformation')
+                  }}
+                />
                 {/* Background decoration */}
                 <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" aria-hidden="true" />
                 <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent-green/10 rounded-full blur-2xl" aria-hidden="true" />
@@ -337,8 +380,78 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Process Flow - Using main page component */}
-      <ProcessFlow />
+      {/* 5-Step Process */}
+      <section className="section-padding bg-dark">
+        <div className="container-custom">
+          <div className="text-center mb-16">
+            <FadeUp>
+              <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
+                우리의 프로세스
+              </div>
+              <h2 className="font-pretendard font-bold text-3xl md:text-4xl mb-4">
+                전략적 <span className="text-gradient">개발 방법론</span>
+              </h2>
+              <p className="text-lg text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
+                검증된 5단계 프로세스로 투명하고 예측 가능한 결과 제공
+              </p>
+            </FadeUp>
+          </div>
+
+          <div className="relative">
+            {/* Process Timeline */}
+            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-primary via-accent-green to-primary" />
+            
+            <div className="space-y-16">
+              {processSteps.map((step, index) => (
+                <FadeUp key={index} delay={index * 150}>
+                  <div className={`flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex-col lg:gap-16 gap-8`}>
+                    {/* Content */}
+                    <div className="lg:w-1/2">
+                      <div className={`p-6 rounded-2xl border border-primary/20 bg-primary/5 ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+                            {step.step}
+                          </div>
+                          <div>
+                            <h3 className="text-xl font-pretendard font-bold text-white">{step.title}</h3>
+                            <p className="text-primary font-medium">{step.duration}</p>
+                          </div>
+                        </div>
+                        
+                        <p className="text-neutral-light/80 leading-relaxed mb-6">
+                          {step.description}
+                        </p>
+                        
+                        <div className="space-y-2">
+                          <p className="text-white font-medium text-sm mb-3">주요 결과물:</p>
+                          {step.deliverables.map((deliverable, idx) => (
+                            <div key={idx} className="flex items-center text-sm text-neutral-light/70">
+                              <CheckCircle className="w-4 h-4 text-accent-green mr-2 flex-shrink-0" />
+                              {deliverable}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Process Visual */}
+                    <div className="lg:w-1/2">
+                      <div className={`aspect-video bg-gradient-to-br from-primary/10 to-accent-green/10 rounded-xl flex items-center justify-center border border-primary/20 ${index % 2 === 0 ? 'lg:ml-8' : 'lg:mr-8'}`}>
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span className="text-2xl font-bold text-primary">{step.step}</span>
+                          </div>
+                          <p className="text-neutral-light/60 text-sm">프로세스 시각화</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </FadeUp>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Differentiation Points - Lazy loaded */}
       <LazyContent

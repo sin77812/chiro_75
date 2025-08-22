@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Noto_Sans_KR } from 'next/font/google'
 import Navbar from '@/components/Navbar'
+import SmoothScroll from '@/components/utils/SmoothScroll'
 import './globals.css'
 
 // Optimized font loading with performance improvements
@@ -199,6 +200,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-noto antialiased bg-dark text-white">
+        <SmoothScroll />
         <Navbar />
         {children}
       </body>

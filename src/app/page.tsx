@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 
 // Core sections loaded immediately
-import CinematicHero from '@/components/sections/CinematicHero'
+import StorytellingHero from '@/components/sections/StorytellingHero'
 import LogoStrip from '@/components/sections/LogoStrip'
 import PortfolioShowcase from '@/components/sections/PortfolioShowcase'
 import ServicesOverview from '@/components/sections/ServicesOverview'
@@ -66,8 +66,8 @@ export default function Home() {
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
       <main className="overflow-x-hidden">
-        {/* 1. Cinematic Hero - Fullscreen video background with minimal text */}
-        <CinematicHero />
+        {/* 1. Storytelling Hero - 7 Scene Interactive Journey */}
+        <StorytellingHero />
         
         {/* 2. Trust Indicators - Logo strip with parallax */}
         <LogoStrip />
