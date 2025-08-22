@@ -10,7 +10,7 @@ const CTA_HREF = '/consultation'
 // 애니메이션 변형 - 첫 줄은 오른쪽에서, 둘째 줄은 왼쪽에서
 const firstLineVariants = {
   hidden: {
-    x: window.innerWidth, // 오른쪽에서 시작
+    x: 1000, // 오른쪽에서 시작 (충분히 큰 고정값)
     y: -50,
     opacity: 0,
     scale: 0.8
@@ -31,7 +31,7 @@ const firstLineVariants = {
 
 const secondLineVariants = {
   hidden: {
-    x: -window.innerWidth, // 왼쪽에서 시작
+    x: -1000, // 왼쪽에서 시작 (충분히 큰 고정값)
     y: -50,
     opacity: 0,
     scale: 0.8
