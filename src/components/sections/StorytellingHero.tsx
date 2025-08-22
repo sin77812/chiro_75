@@ -230,26 +230,6 @@ export default function StorytellingHero() {
 
   return (
     <div ref={containerRef} className="relative">
-      {/* Smart Navigation */}
-      <nav 
-        ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          hasScrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-        } ${
-          !hasScrolled || showNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
-        }`}
-      >
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-white font-bold text-xl">CHIRO</div>
-            <div className="hidden md:flex space-x-6">
-              <a href="#scene-1" className="text-white hover:text-primary transition-colors">Home</a>
-              <a href="#scene-5" className="text-white hover:text-primary transition-colors">Portfolio</a>
-              <a href="/consultation" className="text-white hover:text-primary transition-colors">Contact</a>
-            </div>
-          </div>
-        </div>
-      </nav>
       {/* Background Video - Always present */}
       <div className="fixed inset-0 w-full h-full z-0">
         <video

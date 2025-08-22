@@ -257,6 +257,54 @@
     .menu-underline::after {
       transition-duration: 0.15s !important;
     }
+    
+    /* Video controls for accessibility */
+    video {
+      display: none !important;
+    }
+  }
+
+  /* Enhanced focus styles for complex interactions */
+  .focus-ring-inset {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--accent, #0FA765);
+    border-radius: 8px;
+  }
+
+  /* Tooltip accessibility */
+  [data-tooltip] {
+    position: relative;
+    z-index: 50;
+  }
+
+  /* Screen reader optimizations */
+  .sr-only-focusable:not(:focus):not(:active) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .sr-only-focusable:focus,
+  .sr-only-focusable:active {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    background: var(--accent, #0FA765);
+    color: var(--bg, #0A0F0A);
+    border-radius: 4px;
+    font-weight: bold;
+    z-index: 9999;
   }
 }
 

@@ -4,6 +4,10 @@ import dynamic from 'next/dynamic'
 // Core sections - FLASH FORM style
 import FFHero from '@/components/sections/FFHero'
 import FFProblem from '@/components/sections/FFProblem'
+import FFServices from '@/components/sections/FFServices'
+import FFCaseVideo from '@/components/sections/FFCaseVideo'
+import FFProof from '@/components/sections/FFProof'
+import FFCTAForm from '@/components/sections/FFCTAForm'
 
 // Dynamic imports for heavy components
 const StorytellingHero = dynamic(() => import('@/components/sections/StorytellingHero'), {
@@ -50,7 +54,19 @@ export default function Home() {
         {/* 2. FLASH FORM Style Problem Section */}
         <FFProblem />
         
-        {/* 3. Remaining sections - Dynamically loaded for performance */}
+        {/* 3. FLASH FORM Style Services Section */}
+        <FFServices />
+        
+        {/* 4. FLASH FORM Style Case Video Section */}
+        <FFCaseVideo />
+        
+        {/* 5. FLASH FORM Style Proof Section */}
+        <FFProof />
+        
+        {/* 6. FLASH FORM Style CTA Form Section */}
+        <FFCTAForm />
+        
+        {/* 7. Remaining sections - Dynamically loaded for performance */}
         <StorytellingHero />
       </main>
     </>

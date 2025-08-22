@@ -16,10 +16,12 @@ const menuItems = [
     isHighlighted: false,
     hasDropdown: true,
     submenu: [
-      { label: '브랜딩', href: '/services/branding' },
       { label: '웹 개발', href: '/services/web-development' },
-      { label: '마케팅', href: '/services/marketing' },
-      { label: '컨설팅', href: '/services/consulting' }
+      { label: 'UI/UX 디자인', href: '/services/ui-ux-design' },
+      { label: '성능 최적화', href: '/services/performance-optimization' },
+      { label: '브랜딩', href: '/services/branding' },
+      { label: '마케팅 자동화', href: '/services/marketing-automation' },
+      { label: '유지보수', href: '/services/maintenance' }
     ]
   },
   { label: '포트폴리오', href: '/portfolio', isHighlighted: false },
