@@ -12,6 +12,7 @@ import {
 import PageCTA from '@/components/sections/PageCTA'
 import ScrollReveal, { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
 import { AboutAnalytics } from '@/components/analytics/Analytics'
+import TechStackAdvanced from '@/components/sections/TechStackAdvanced'
 import aboutData from '@/data/about.json'
 
 // Metadata handled by layout.tsx for client component
@@ -323,38 +324,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Tech Stack */}
-      <section className="section-padding bg-shadow-gray/10">
-        <div className="container-custom">
-          <div className="text-center mb-16">
-            <FadeUp>
-              <h2 className="font-pretendard font-bold text-white mb-4">
-                기술 <span className="text-gradient">스택</span>
-              </h2>
-              <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                최신 기술과 검증된 도구로 최고의 성능을 구현합니다
-              </p>
-            </FadeUp>
-          </div>
-
-          <div className="space-y-8">
-            {aboutData.techStack.map((category, index) => (
-              <FadeUp key={index} delay={index * 100}>
-                <div className="bg-dark rounded-xl p-6 border border-shadow-gray/30">
-                  <h3 className="text-lg font-bold text-white mb-4">{category.category}</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {category.technologies.map((tech, idx) => (
-                      <span key={idx} className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-medium">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Tech Stack - New Advanced Component */}
+      <TechStackAdvanced />
 
       {/* CSR Declaration */}
       <section className="section-padding bg-dark">
