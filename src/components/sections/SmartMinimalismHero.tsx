@@ -141,6 +141,8 @@ const SmartMinimalismHero = () => {
     )
   })
 
+  TypingChar.displayName = 'TypingChar'
+
   return (
     <section 
       ref={containerRef}
