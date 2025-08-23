@@ -1,12 +1,12 @@
 import { Metadata } from 'next'
 
-// Core sections - FLASH FORM style
-import FFHero from '@/components/sections/FFHero'
-import FFProblem from '@/components/sections/FFProblem'
-import FFServices from '@/components/sections/FFServices'
-import FFCaseVideo from '@/components/sections/FFCaseVideo'
-import FFProof from '@/components/sections/FFProof'
-import FFCTAForm from '@/components/sections/FFCTAForm'
+// New Revolutionary Sections
+import HeroSection from '@/components/sections/HeroSection'
+import LiveDashboard from '@/components/sections/LiveDashboard'
+import ProcessDifferentiation from '@/components/sections/ProcessDifferentiation'
+import VideoShowcase from '@/components/sections/VideoShowcase'
+import PerformanceDashboard from '@/components/sections/PerformanceDashboard'
+import InteractiveCTA from '@/components/sections/InteractiveCTA'
 
 export const metadata: Metadata = {
   title: 'CHIRO - 프리미엄 디지털 에이전시',
@@ -42,23 +42,23 @@ export default function Home() {
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
       <main className="overflow-x-hidden">
-        {/* 1. FLASH FORM Style Hero Section */}
-        <FFHero />
+        {/* 1. Revolutionary Hero Section - Interactive Performance Experience */}
+        <HeroSection />
         
-        {/* 2. FLASH FORM Style Problem Section */}
-        <FFProblem />
+        {/* 2. Live Dashboard Section - Real-time Performance Proof */}
+        <LiveDashboard />
         
-        {/* 3. FLASH FORM Style Services Section */}
-        <FFServices />
+        {/* 3. Process Differentiation Section - HOW WE WORK */}
+        <ProcessDifferentiation />
         
-        {/* 4. FLASH FORM Style Case Video Section */}
-        <FFCaseVideo />
+        {/* 4. Video Showcase Section - Interactive Case Study */}
+        <VideoShowcase />
         
-        {/* 5. FLASH FORM Style Proof Section */}
-        <FFProof />
+        {/* 5. Performance Dashboard Section - Interactive Data & Analytics */}
+        <PerformanceDashboard />
         
-        {/* 6. FLASH FORM Style CTA Form Section */}
-        <FFCTAForm />
+        {/* 6. Interactive CTA Section - Growth Tools & Smart Forms */}
+        <InteractiveCTA />
       </main>
     </>
   )
