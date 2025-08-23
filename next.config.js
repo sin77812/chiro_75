@@ -94,8 +94,10 @@ const nextConfig = {
     ]
   },
 
-  // Output optimization
-  output: 'standalone',
+  // Output optimization (only for production)
+  ...(process.env.NODE_ENV === 'production' && {
+    output: 'standalone',
+  }),
   
   // Webpack customization for performance
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

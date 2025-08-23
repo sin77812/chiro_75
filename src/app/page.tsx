@@ -4,6 +4,8 @@ import { Metadata } from 'next'
 import SmartMinimalismHero from '@/components/sections/SmartMinimalismHero'
 import SmartMinimalismProof from '@/components/sections/SmartMinimalismProof'
 import SmartMinimalismProcess from '@/components/sections/SmartMinimalismProcess'
+import SmartMinimalismWork from '@/components/sections/SmartMinimalismWork'
+import SmartMinimalismTech from '@/components/sections/SmartMinimalismTech'
 import SmartMinimalismContact from '@/components/sections/SmartMinimalismContact'
 
 export const metadata: Metadata = {
@@ -45,7 +47,13 @@ export default function Home() {
         {/* 3. Process Section - Timeline River */}
         <SmartMinimalismProcess />
         
-        {/* 4. Contact Section - CHIRO Orbital Button */}
+        {/* 4. Work Section - Choose Your Project */}
+        <SmartMinimalismWork />
+        
+        {/* 5. Tech Section - Tech Stack + Live Monitor */}
+        <SmartMinimalismTech />
+        
+        {/* 6. Contact Section - CHIRO Orbital Button */}
         <SmartMinimalismContact />
       </main>
     </>

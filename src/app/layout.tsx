@@ -199,7 +199,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-noto antialiased bg-dark text-white">
+      <body className="font-noto antialiased bg-[#0E1111] text-white">
         <SmoothScroll />
         <Navbar />
         {children}

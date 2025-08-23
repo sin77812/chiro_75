@@ -22,11 +22,11 @@
   }
   
   body {
-    @apply bg-dark text-white font-pretendard;
+    @apply bg-[#0E1111] text-white font-pretendard;
   }
 
   * {
-    @apply border-shadow-gray/30;
+    @apply border-neutral-700/30;
   }
 
   h1, h2, h3, h4, h5, h6 {

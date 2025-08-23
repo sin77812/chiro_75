@@ -123,7 +123,7 @@ const SmartMinimalismHero = () => {
     )
   }
 
-  const TypingChar = React.memo(({ char, index }: { char: string; index: number }) => {
+  const TypingChar = ({ char, index }: { char: string; index: number }) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
@@ -139,9 +139,8 @@ const SmartMinimalismHero = () => {
         {char}
       </span>
     )
-  })
+  }
 
-  TypingChar.displayName = 'TypingChar'
 
   return (
     <section 
