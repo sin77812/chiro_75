@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 // New Revolutionary Sections
-import HeroSection from '@/components/sections/HeroSection'
+import SimpleHero from '@/components/sections/SimpleHero'
 import LiveDashboard from '@/components/sections/LiveDashboard'
 import ProcessDifferentiation from '@/components/sections/ProcessDifferentiation'
 import VideoShowcase from '@/components/sections/VideoShowcase'
@@ -43,22 +43,43 @@ export default function Home() {
       
       <main className="overflow-x-hidden">
         {/* 1. Revolutionary Hero Section - Interactive Performance Experience */}
-        <HeroSection />
+        <SimpleHero />
         
-        {/* 2. Live Dashboard Section - Real-time Performance Proof */}
-        <LiveDashboard />
+        {/* 2. Simple test sections */}
+        <section className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4">섹션 2: LiveDashboard</h2>
+            <p className="text-xl text-white/70">실시간 성과 증명 섹션</p>
+          </div>
+        </section>
         
-        {/* 3. Process Differentiation Section - HOW WE WORK */}
-        <ProcessDifferentiation />
+        <section className="min-h-screen bg-gray-800 text-white flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4">섹션 3: ProcessDifferentiation</h2>
+            <p className="text-xl text-white/70">프로세스 차별화 섹션</p>
+          </div>
+        </section>
         
-        {/* 4. Video Showcase Section - Interactive Case Study */}
-        <VideoShowcase />
+        <section className="min-h-screen bg-gray-700 text-white flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4">섹션 4: VideoShowcase</h2>
+            <p className="text-xl text-white/70">비디오 쇼케이스 섹션</p>
+          </div>
+        </section>
         
-        {/* 5. Performance Dashboard Section - Interactive Data & Analytics */}
-        <PerformanceDashboard />
+        <section className="min-h-screen bg-gray-600 text-white flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4">섹션 5: PerformanceDashboard</h2>
+            <p className="text-xl text-white/70">성과 대시보드 섹션</p>
+          </div>
+        </section>
         
-        {/* 6. Interactive CTA Section - Growth Tools & Smart Forms */}
-        <InteractiveCTA />
+        <section className="min-h-screen bg-gray-500 text-white flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-4xl font-bold mb-4">섹션 6: InteractiveCTA</h2>
+            <p className="text-xl text-white/70">인터랙티브 CTA 섹션</p>
+          </div>
+        </section>
       </main>
     </>
   )

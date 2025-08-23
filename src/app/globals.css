@@ -17,7 +17,8 @@
   }
   
   body {
-    @apply bg-dark text-white;
+    background-color: #0E1111;
+    color: #ffffff;
   }
 
   * {
