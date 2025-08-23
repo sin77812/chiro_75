@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import * as THREE from 'three';
+import { threeOptimizer } from '@/utils/threeOptimizer';
+import { CustomIcon } from '../ui/CustomIcons';
 
 interface ProcessCubeProps {
   isActive: boolean;
@@ -16,6 +18,7 @@ const ProcessCube = ({ isActive, onFaceSelect, selectedFace }: ProcessCubeProps)
   const rendererRef = useRef<THREE.WebGLRenderer>();
   const cubeRef = useRef<THREE.Mesh>();
   const mouseRef = useRef({ x: 0, y: 0 });
+  const animationRef = useRef<{ requestRender: () => void; destroy: () => void }>();
   const [isHovered, setIsHovered] = useState(false);
 
   const faceData = [
@@ -72,66 +75,69 @@ const ProcessCube = ({ isActive, onFaceSelect, selectedFace }: ProcessCubeProps)
     // Scene 설정
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-
-    renderer.setSize(width, height);
-    renderer.setClearColor(0x000000, 0);
+    
+    // 최적화된 렌더러 생성
+    const renderer = threeOptimizer.createOptimizedRenderer('processcube', width, height);
     mountRef.current.appendChild(renderer.domElement);
 
     // 큐브 생성
     const geometry = new THREE.BoxGeometry(4, 4, 4);
     
-    // 각 면에 다른 재질 적용
+    // 각 면에 다른 재질 적용 (최적화)
     const materials = faceData.map((face, index) => {
       const canvas = document.createElement('canvas');
-      canvas.width = 512;
-      canvas.height = 512;
+      const canvasSize = threeOptimizer.isLowPower() ? 256 : 512;
+      canvas.width = canvasSize;
+      canvas.height = canvasSize;
       const context = canvas.getContext('2d')!;
       
       // 배경 그라디언트
-      const gradient = context.createLinearGradient(0, 0, 512, 512);
+      const gradient = context.createLinearGradient(0, 0, canvasSize, canvasSize);
       gradient.addColorStop(0, face.color);
       gradient.addColorStop(1, `${face.color}80`);
       context.fillStyle = gradient;
-      context.fillRect(0, 0, 512, 512);
+      context.fillRect(0, 0, canvasSize, canvasSize);
       
       // 테두리
       context.strokeStyle = '#ffffff40';
-      context.lineWidth = 8;
-      context.strokeRect(20, 20, 472, 472);
+      context.lineWidth = threeOptimizer.isLowPower() ? 4 : 8;
+      const padding = threeOptimizer.isLowPower() ? 10 : 20;
+      context.strokeRect(padding, padding, canvasSize - padding * 2, canvasSize - padding * 2);
+      
+      const centerX = canvasSize / 2;
+      const iconFontSize = threeOptimizer.isLowPower() ? 60 : 120;
+      const titleFontSize = threeOptimizer.isLowPower() ? 24 : 48;
+      const subtitleFontSize = threeOptimizer.isLowPower() ? 16 : 32;
       
       // 아이콘
-      context.font = 'bold 120px Arial';
+      context.font = `bold ${iconFontSize}px Arial`;
       context.textAlign = 'center';
       context.textBaseline = 'middle';
       context.fillStyle = '#ffffff';
-      context.fillText(face.icon, 256, 180);
+      context.fillText(face.icon, centerX, centerX - centerX * 0.3);
       
       // 제목
-      context.font = 'bold 48px Arial';
+      context.font = `bold ${titleFontSize}px Arial`;
       context.fillStyle = '#ffffff';
-      context.fillText(face.title, 256, 280);
+      context.fillText(face.title, centerX, centerX + centerX * 0.1);
       
       // 부제목
-      context.font = '32px Arial';
+      context.font = `${subtitleFontSize}px Arial`;
       context.fillStyle = '#ffffffcc';
-      context.fillText(face.subtitle, 256, 340);
+      context.fillText(face.subtitle, centerX, centerX + centerX * 0.33);
       
-      // 글로우 효과
-      context.shadowColor = face.color;
-      context.shadowBlur = 20;
-      context.shadowOffsetX = 0;
-      context.shadowOffsetY = 0;
+      // 글로우 효과 (저성능 모드에서는 제외)
+      if (!threeOptimizer.isLowPower()) {
+        context.shadowColor = face.color;
+        context.shadowBlur = 20;
+        context.shadowOffsetX = 0;
+        context.shadowOffsetY = 0;
+      }
       
-      const texture = new THREE.CanvasTexture(canvas);
-      return new THREE.MeshBasicMaterial({ 
+      const texture = threeOptimizer.optimizeTexture(new THREE.CanvasTexture(canvas));
+      return threeOptimizer.createOptimizedMaterial({ 
         map: texture,
-        transparent: true,
-        side: THREE.DoubleSide
+        transparent: true
       });
     });
 
@@ -185,44 +191,46 @@ const ProcessCube = ({ isActive, onFaceSelect, selectedFace }: ProcessCubeProps)
     mountRef.current.addEventListener('mouseenter', () => setIsHovered(true));
     mountRef.current.addEventListener('mouseleave', () => setIsHovered(false));
 
-    // 애니메이션 루프
-    const animate = () => {
-      requestAnimationFrame(animate);
-      
-      if (cube) {
-        // 자동 회전
-        if (!isHovered) {
-          cube.rotation.y += 0.005;
-          cube.rotation.x += 0.003;
-        } else {
-          // 마우스 따라 회전
-          const targetX = mouseRef.current.y * 0.5;
-          const targetY = mouseRef.current.x * 0.5;
-          cube.rotation.x += (targetX - cube.rotation.x) * 0.05;
-          cube.rotation.y += (targetY - cube.rotation.y) * 0.05;
-        }
+    // 최적화된 애니메이션 루프
+    const animationLoop = threeOptimizer.createOptimizedAnimationLoop(
+      renderer,
+      scene,
+      camera,
+      () => {
+        if (cube) {
+          // 자동 회전 (저성능 모드에서는 감소)
+          const rotationSpeed = threeOptimizer.isLowPower() ? 0.003 : 0.005;
+          if (!isHovered) {
+            cube.rotation.y += rotationSpeed;
+            cube.rotation.x += rotationSpeed * 0.6;
+          } else {
+            // 마우스 따라 회전
+            const targetX = mouseRef.current.y * 0.5;
+            const targetY = mouseRef.current.x * 0.5;
+            cube.rotation.x += (targetX - cube.rotation.x) * 0.05;
+            cube.rotation.y += (targetY - cube.rotation.y) * 0.05;
+          }
 
-        // 선택된 면으로 회전
-        if (selectedFace >= 0) {
-          const faceRotations = [
-            { x: 0, y: 0 },           // 앞면
-            { x: 0, y: Math.PI },     // 뒷면  
-            { x: 0, y: Math.PI / 2 }, // 우면
-            { x: 0, y: -Math.PI / 2 }, // 좌면
-            { x: -Math.PI / 2, y: 0 }, // 윗면
-            { x: Math.PI / 2, y: 0 }   // 아랫면
-          ];
-          
-          const target = faceRotations[selectedFace];
-          cube.rotation.x += (target.x - cube.rotation.x) * 0.1;
-          cube.rotation.y += (target.y - cube.rotation.y) * 0.1;
+          // 선택된 면으로 회전
+          if (selectedFace >= 0) {
+            const faceRotations = [
+              { x: 0, y: 0 },           // 앞면
+              { x: 0, y: Math.PI },     // 뒷면  
+              { x: 0, y: Math.PI / 2 }, // 우면
+              { x: 0, y: -Math.PI / 2 }, // 좌면
+              { x: -Math.PI / 2, y: 0 }, // 윗면
+              { x: Math.PI / 2, y: 0 }   // 아랫면
+            ];
+            
+            const target = faceRotations[selectedFace];
+            cube.rotation.x += (target.x - cube.rotation.x) * 0.1;
+            cube.rotation.y += (target.y - cube.rotation.y) * 0.1;
+          }
         }
       }
-      
-      renderer.render(scene, camera);
-    };
+    );
 
-    animate();
+    animationRef.current = animationLoop;
 
     // 리사이즈 핸들러
     const handleResize = () => {
@@ -239,12 +247,10 @@ const ProcessCube = ({ isActive, onFaceSelect, selectedFace }: ProcessCubeProps)
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (animationRef.current) {
+        animationRef.current.destroy();
       }
-      renderer.dispose();
-      geometry.dispose();
-      materials.forEach(material => material.dispose());
+      threeOptimizer.disposeRenderer('processcube');
     };
   }, [isActive, selectedFace, onFaceSelect, isHovered]);
 

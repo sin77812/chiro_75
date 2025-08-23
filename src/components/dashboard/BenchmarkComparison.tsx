@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CustomIcon } from '../ui/CustomIcons';
 
 interface IndustryData {
   name: string;
@@ -129,7 +130,7 @@ const BenchmarkComparison = ({ isActive }: BenchmarkComparisonProps) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="text-xl">{industry.icon}</span>
+              <CustomIcon name={industry.icon} size={20} />
               <span className="font-medium text-sm">{industry.name}</span>
             </motion.button>
           ))}

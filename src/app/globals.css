@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
+/* 크리티컬 CSS - 히어로 섹션 우선 로드 */
+.hero-critical {
+  height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #0a0014 50%, #0F1F0F 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* 폰트 최적화 - display=swap으로 변경 */
 
 /* FLASH FORM brand color variables */
 :root {

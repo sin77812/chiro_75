@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
+import { threeOptimizer } from '@/utils/threeOptimizer';
+import { CustomIcon } from '../ui/CustomIcons';
 
 interface MetricData {
   id: number;
@@ -37,6 +39,7 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
   const rendererRef = useRef<THREE.WebGLRenderer>();
   const cubesRef = useRef<THREE.Mesh[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
+  const animationRef = useRef<{ requestRender: () => void; destroy: () => void }>();
   const [hoveredCube, setHoveredCube] = useState<number | null>(null);
 
   const metricsData: MetricData[] = [
@@ -107,14 +110,9 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
     // Scene 설정
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      antialias: true, 
-      alpha: true,
-      powerPreference: 'high-performance'
-    });
-
-    renderer.setSize(width, height);
-    renderer.setClearColor(0x000000, 0);
+    
+    // 최적화된 렌더러 생성
+    const renderer = threeOptimizer.createOptimizedRenderer('datacube', width, height);
     mountRef.current.appendChild(renderer.domElement);
 
     // 조명 설정
@@ -128,58 +126,66 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
     // 큐브들 생성
     const cubes: THREE.Mesh[] = [];
     metricsData.forEach((metric, index) => {
-      const geometry = new THREE.BoxGeometry(2, 2, 2);
+      const geometry = new THREE.BoxGeometry(3, 3, 3);
       
       // 각 면에 다른 재질 적용
       const materials = Array.from({length: 6}, (_, faceIndex) => {
         const canvas = document.createElement('canvas');
-        canvas.width = 256;
-        canvas.height = 256;
+        const canvasSize = threeOptimizer.isLowPower() ? 128 : 256;
+        canvas.width = canvasSize;
+        canvas.height = canvasSize;
         const context = canvas.getContext('2d')!;
         
         // 배경
-        const gradient = context.createLinearGradient(0, 0, 256, 256);
+        const gradient = context.createLinearGradient(0, 0, canvasSize, canvasSize);
         gradient.addColorStop(0, metric.color);
         gradient.addColorStop(1, `${metric.color}40`);
         context.fillStyle = gradient;
-        context.fillRect(0, 0, 256, 256);
+        context.fillRect(0, 0, canvasSize, canvasSize);
         
         // 테두리
         context.strokeStyle = '#ffffff60';
-        context.lineWidth = 4;
-        context.strokeRect(10, 10, 236, 236);
+        context.lineWidth = threeOptimizer.isLowPower() ? 2 : 4;
+        context.strokeRect(5, 5, canvasSize - 10, canvasSize - 10);
+        
+        const centerX = canvasSize / 2;
+        const centerY = canvasSize / 2;
+        const fontSize = threeOptimizer.isLowPower() ? 12 : 24;
         
         // 메인 텍스트
         if (faceIndex === 0) { // 앞면
           context.fillStyle = '#ffffff';
-          context.font = 'bold 24px Arial';
+          context.font = `bold ${fontSize}px Arial`;
           context.textAlign = 'center';
-          context.fillText(metric.title, 128, 80);
-          context.font = 'bold 32px Arial';
-          context.fillText(metric.value, 128, 128);
-          context.font = '16px Arial';
-          context.fillText(metric.change, 128, 160);
-          context.font = '48px Arial';
-          context.fillText(metric.icon, 128, 220);
+          context.fillText(metric.title, centerX, centerY - 30);
+          context.font = `bold ${fontSize + 8}px Arial`;
+          context.fillText(metric.value, centerX, centerY);
+          context.font = `${fontSize - 8}px Arial`;
+          context.fillText(metric.change, centerX, centerY + 20);
+          context.font = `${fontSize * 2}px Arial`;
+          context.fillText(metric.icon, centerX, centerY + 50);
         } else {
           // 다른 면들에는 간단한 차트 표현
           context.fillStyle = '#ffffff';
-          context.font = '12px Arial';
+          context.font = `${fontSize / 2}px Arial`;
           context.textAlign = 'center';
-          context.fillText(`Chart ${faceIndex}`, 128, 128);
+          context.fillText(`Chart ${faceIndex}`, centerX, centerY);
           
           // 간단한 차트 시뮬레이션
-          for (let i = 0; i < 4; i++) {
-            const height = Math.random() * 60 + 20;
-            const x = 50 + i * 40;
-            const y = 200 - height;
+          const barCount = threeOptimizer.isLowPower() ? 3 : 4;
+          for (let i = 0; i < barCount; i++) {
+            const height = Math.random() * (canvasSize / 4) + 10;
+            const barWidth = canvasSize / (barCount + 1);
+            const x = (i + 1) * barWidth - barWidth / 4;
+            const y = canvasSize - 20 - height;
             context.fillStyle = `${metric.color}80`;
-            context.fillRect(x, y, 30, height);
+            context.fillRect(x, y, barWidth / 2, height);
           }
         }
         
-        const texture = new THREE.CanvasTexture(canvas);
-        return new THREE.MeshLambertMaterial({ 
+        const texture = threeOptimizer.optimizeTexture(new THREE.CanvasTexture(canvas));
+        
+        return threeOptimizer.createOptimizedMaterial({ 
           map: texture,
           transparent: true
         });
@@ -191,8 +197,8 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
       const gridX = index % 2;
       const gridY = Math.floor(index / 2);
       cube.position.set(
-        (gridX - 0.5) * 5,
-        (gridY - 0.5) * 5,
+        (gridX - 0.5) * 6,
+        (gridY - 0.5) * 6,
         Math.sin(index) * 2
       );
 
@@ -239,57 +245,49 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
     mountRef.current.addEventListener('mousemove', handleMouseMove);
     mountRef.current.addEventListener('click', handleClick);
 
-    // 애니메이션 루프
-    const animate = () => {
-      requestAnimationFrame(animate);
-      
-      cubes.forEach((cube, index) => {
-        // 기본 회전
-        cube.rotation.y += 0.005;
-        cube.rotation.x += 0.003;
+    // 최적화된 애니메이션 루프
+    const animationLoop = threeOptimizer.createOptimizedAnimationLoop(
+      renderer,
+      scene,
+      camera,
+      () => {
+        cubes.forEach((cube, index) => {
+          // 기본 회전 (저성능 모드에서는 감소)
+          const rotationSpeed = threeOptimizer.isLowPower() ? 0.003 : 0.005;
+          cube.rotation.y += rotationSpeed;
+          cube.rotation.x += rotationSpeed * 0.6;
+          
+          // 플로팅 효과
+          cube.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
+          
+          // 선택된 큐브 효과
+          if (selectedCube === index) {
+            cube.scale.setScalar(1.2 + Math.sin(Date.now() * 0.005) * 0.1);
+          } else {
+            cube.scale.setScalar(1);
+          }
+        });
         
-        // 플로팅 효과
-        cube.position.y += Math.sin(Date.now() * 0.001 + index) * 0.002;
-        
-        // 선택된 큐브 효과
-        if (selectedCube === index) {
-          cube.scale.setScalar(1.2 + Math.sin(Date.now() * 0.005) * 0.1);
-        } else {
-          cube.scale.setScalar(1);
-        }
-        
-        // 호버 효과는 이미 스케일링으로 처리됨
-      });
-      
-      // 카메라 회전
-      camera.position.x = Math.sin(Date.now() * 0.0005) * 2;
-      camera.position.y = Math.cos(Date.now() * 0.0003) * 1;
-      camera.lookAt(0, 0, 0);
-      
-      renderer.render(scene, camera);
-    };
+        // 카메라 회전
+        camera.position.x = Math.sin(Date.now() * 0.0005) * 2;
+        camera.position.y = Math.cos(Date.now() * 0.0003) * 1;
+        camera.lookAt(0, 0, 0);
+      }
+    );
 
-    animate();
+    animationRef.current = animationLoop;
 
     // 클린업
     return () => {
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement);
+      if (animationRef.current) {
+        animationRef.current.destroy();
       }
-      renderer.dispose();
-      cubes.forEach(cube => {
-        cube.geometry.dispose();
-        if (Array.isArray(cube.material)) {
-          cube.material.forEach(material => material.dispose());
-        } else {
-          cube.material.dispose();
-        }
-      });
+      threeOptimizer.disposeRenderer('datacube');
     };
   }, [isActive, selectedCube, onCubeSelect, hoveredCube]);
 
   return (
-    <div className="relative w-full h-[500px]">
+    <div className="relative w-full h-[600px]">
       {/* 3D 큐브 마운트 */}
       <div 
         ref={mountRef} 
@@ -298,26 +296,63 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
       
       {/* 파티클 배경 효과 */}
       <div className="absolute inset-0 pointer-events-none">
-        {Array.from({length: 20}).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 1, 0.3],
-              scale: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
+        {Array.from({length: 20}).map((_, i) => {
+          // Use seeded positioning for consistent SSR
+          const leftPos = (i * 19.4) % 100;
+          const topPos = (i * 31.8) % 100;
+          const duration = 3 + (i % 3);
+          const delay = (i * 0.3) % 2;
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-blue-400 rounded-full"
+              style={{
+                left: `${leftPos}%`,
+                top: `${topPos}%`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.3, 1, 0.3],
+                scale: [0.5, 1, 0.5]
+              }}
+              transition={{
+                duration,
+                repeat: Infinity,
+                delay
+              }}
+            />
+          )
+        })}
+      </div>
+
+      {/* 큐브 지표명 표시 */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="grid grid-cols-2 h-full">
+          {metricsData.map((metric, index) => {
+            const gridX = index % 2;
+            const gridY = Math.floor(index / 2);
+            return (
+              <div
+                key={metric.id}
+                className="flex items-end justify-center pb-8"
+                style={{
+                  gridColumn: gridX + 1,
+                  gridRow: gridY + 1,
+                }}
+              >
+                <div className="text-center bg-black/60 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+                  <div className="text-white/80 text-sm font-medium">
+                    {metric.title}
+                  </div>
+                  <div className="text-xs text-white/60 mt-1">
+                    {metric.value}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* 컨트롤 가이드 */}
@@ -332,36 +367,43 @@ const DataCube = ({ isActive, selectedCube, onCubeSelect }: DataCubeProps) => {
 
       {/* 선택된 큐브 상세 정보 */}
       <AnimatePresence>
-        {selectedCube !== null && selectedCube < metricsData.length && (
+        {selectedCube !== null && selectedCube >= 0 && selectedCube < metricsData.length && metricsData[selectedCube] && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, x: 50 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 0.8, x: 50 }}
             className="absolute top-4 right-4 bg-black/90 backdrop-blur-xl rounded-2xl border border-white/20 p-6 min-w-[300px]"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div 
-                className="w-12 h-12 rounded-full flex items-center justify-center text-2xl"
-                style={{ backgroundColor: `${metricsData[selectedCube].color}40` }}
-              >
-                {metricsData[selectedCube].icon}
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-lg">
-                  {metricsData[selectedCube].title}
-                </h3>
-                <p className="text-white/60 text-sm">
-                  {metricsData[selectedCube].change}
-                </p>
-              </div>
-            </div>
+            {(() => {
+              const selectedMetric = metricsData[selectedCube];
+              return (
+                <>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: `${selectedMetric.color}40` }}
+                    >
+                      <CustomIcon name={selectedMetric.icon} size={28} color={selectedMetric.color} />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg">
+                        {selectedMetric.title}
+                      </h3>
+                      <p className="text-white/60 text-sm">
+                        {selectedMetric.change}
+                      </p>
+                    </div>
+                  </div>
 
-            <div 
-              className="text-4xl font-bold mb-4"
-              style={{ color: metricsData[selectedCube].color }}
-            >
-              {metricsData[selectedCube].value}
-            </div>
+                  <div 
+                    className="text-4xl font-bold mb-4"
+                    style={{ color: selectedMetric.color }}
+                  >
+                    {selectedMetric.value}
+                  </div>
+                </>
+              );
+            })()}
 
             {/* 미니 차트들 */}
             <div className="grid grid-cols-2 gap-4 mb-4">

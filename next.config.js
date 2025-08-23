@@ -2,11 +2,11 @@
 const nextConfig = {
   // Remove deprecated appDir (it's stable in Next.js 15)
   experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
   },
 
   // Server external packages (moved from experimental)
-  serverExternalPackages: [],
+  serverExternalPackages: ['three'],
 
   // Performance optimizations
   compiler: {

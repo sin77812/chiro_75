@@ -15,7 +15,7 @@ const HeroSection = () => {
   
   const { ref: inViewRef, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: false // 우선 트리거를 false로 해서 항상 보이게 함
+    triggerOnce: true
   });
 
   const titleControls = useAnimation();
@@ -210,7 +210,7 @@ const HeroSection = () => {
                 key={index}
                 custom={index}
                 initial="hidden"
-                animate="visible"
+                animate={inView ? "visible" : "hidden"}
                 variants={textVariants}
                 className="text-4xl md:text-6xl lg:text-[80px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-green-100 leading-[1.1] tracking-[-0.03em]"
                 style={{

@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import ProcessCube from '../process/ProcessCube';
 import ComparisonTimeline from '../process/ComparisonTimeline';
 import LiveCodeEditor from '../process/LiveCodeEditor';
+import { CustomIcon } from '../ui/CustomIcons';
 
 const ProcessDifferentiation = () => {
   const { ref, inView } = useInView({
@@ -183,7 +184,7 @@ const ProcessDifferentiation = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center">
-                  <span className="text-3xl">⚡</span>
+                  <CustomIcon name="⚡" size={32} color="#2E7D32" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">속도</h4>
                 <p className="text-white/70">2주 스프린트로 빠른 결과</p>
@@ -191,7 +192,7 @@ const ProcessDifferentiation = () => {
               
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-blue-500/20 rounded-full flex items-center justify-center">
-                  <span className="text-3xl">🔍</span>
+                  <CustomIcon name="🔍" size={32} color="#2E7D32" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">투명성</h4>
                 <p className="text-white/70">실시간 진행상황 공유</p>
@@ -199,7 +200,7 @@ const ProcessDifferentiation = () => {
               
               <div className="text-center">
                 <div className="w-16 h-16 mx-auto mb-4 bg-purple-500/20 rounded-full flex items-center justify-center">
-                  <span className="text-3xl">🚀</span>
+                  <CustomIcon name="🚀" size={32} color="#2E7D32" />
                 </div>
                 <h4 className="text-xl font-bold text-white mb-2">기술력</h4>
                 <p className="text-white/70">최신 기술과 최적화</p>
@@ -262,7 +263,7 @@ const ProcessDifferentiation = () => {
               whileHover={{ scale: 1.02 }}
             >
               <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                <span className="text-xl">{item.icon}</span>
+                <CustomIcon name={item.icon} size={24} color="#FFFFFF" />
               </div>
               <h4 className="text-lg font-bold text-white mb-2">{item.title}</h4>
               <p className="text-white/70 text-sm">{item.desc}</p>

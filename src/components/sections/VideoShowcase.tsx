@@ -9,7 +9,7 @@ import ProjectView360 from '../video/ProjectView360';
 const VideoShowcase = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 0.2, // 20% 보일 때 트리거
     triggerOnce: true
   });
 
@@ -64,13 +64,13 @@ const VideoShowcase = () => {
     updatePerformanceData();
   }, [currentVideoTime, inView]);
 
-  // 스포트라이트 효과
+  // 스포트라이트 효과 - CHIRO는 처음에만 보이고 사라짐
   useEffect(() => {
     if (inView) {
       setIsSpotlightMode(true);
       const timer = setTimeout(() => {
         setIsSpotlightMode(false);
-      }, 2000);
+      }, 3000); // 3초 후 사라짐
       return () => clearTimeout(timer);
     }
   }, [inView]);
@@ -96,40 +96,51 @@ const VideoShowcase = () => {
     >
       {/* 스포트라이트 오버레이 */}
       <motion.div
-        className="absolute inset-0 bg-black/90 pointer-events-none z-20"
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: isSpotlightMode ? 20 : 5 }}
         animate={{
           background: isSpotlightMode 
             ? 'radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9) 70%)'
             : 'transparent'
         }}
-        transition={{ duration: 1 }}
+        transition={{ duration: isSpotlightMode ? 1 : 1.5, delay: isSpotlightMode ? 0 : 1 }}
       />
 
-      {/* SHOWTIME 텍스트 */}
+      {/* CHIRO 텍스트 - 자연스럽게 뒤로 가서 덮히게 */}
       <motion.div
         ref={ref}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-none"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none px-4"
+        style={{ 
+          zIndex: isSpotlightMode ? 30 : 5 
+        }}
         initial={{ opacity: 0, scale: 2 }}
         animate={isSpotlightMode ? { 
-          opacity: [0, 1, 1, 0], 
-          scale: [2, 1, 1, 0.5],
-        } : { opacity: 0 }}
-        transition={{ duration: 2, times: [0, 0.3, 0.7, 1] }}
+          opacity: 1,
+          scale: 1.2,
+        } : { 
+          opacity: 0.15, // 매우 투명하게
+          scale: 0.8,
+        }}
+        transition={{ 
+          opacity: { duration: isSpotlightMode ? 1 : 1.5, delay: isSpotlightMode ? 0 : 1.5 },
+          scale: { duration: 1 }
+        }}
       >
-        <div className="text-6xl md:text-8xl font-black text-white text-center">
-          <motion.span
-            animate={{
+        <div className="w-full max-w-4xl text-center">
+          <motion.div
+            className="block text-6xl sm:text-8xl md:text-9xl lg:text-[8rem] xl:text-[10rem] font-black text-white leading-none"
+            animate={isSpotlightMode ? {
               textShadow: [
-                '0 0 20px #ff0000',
-                '0 0 30px #00ff00', 
-                '0 0 40px #0000ff',
-                '0 0 20px #ff0000'
+                '0 0 30px #1DB954',
+                '0 0 45px #0FA765', 
+                '0 0 60px #1DB954',
+                '0 0 30px #0FA765'
               ]
-            }}
-            transition={{ duration: 0.5, repeat: 3 }}
+            } : {}}
+            transition={{ duration: 0.6, repeat: isSpotlightMode ? 3 : 0 }}
           >
-            SHOWTIME
-          </motion.span>
+            CHIRO
+          </motion.div>
         </div>
       </motion.div>
 
@@ -138,7 +149,7 @@ const VideoShowcase = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 2.5 }}
+          transition={{ duration: 0.8, delay: 3.5 }} // CHIRO가 사라진 후 나타남
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -153,7 +164,7 @@ const VideoShowcase = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1, delay: 3 }}
+          transition={{ duration: 1, delay: 4 }}
           className="max-w-6xl mx-auto mb-12"
         >
           <InteractiveVideoPlayer
@@ -171,7 +182,7 @@ const VideoShowcase = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 3.5 }}
+            transition={{ duration: 0.8, delay: 4.5 }}
             className="lg:col-span-1"
           >
             <div className="bg-gray-900/50 backdrop-blur-lg rounded-3xl border border-white/10 p-6">
@@ -190,7 +201,7 @@ const VideoShowcase = () => {
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 4 }}
+            transition={{ duration: 0.8, delay: 5 }}
             className="lg:col-span-1"
           >
             <div className="bg-gray-900/50 backdrop-blur-lg rounded-3xl border border-white/10 p-6">
@@ -266,7 +277,7 @@ const VideoShowcase = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 4.5 }}
+            transition={{ duration: 0.8, delay: 5.5 }}
             className="lg:col-span-1"
           >
             <div className="bg-gray-900/50 backdrop-blur-lg rounded-3xl border border-white/10 p-6">
@@ -280,7 +291,7 @@ const VideoShowcase = () => {
                     key={index}
                     initial={{ opacity: 0, x: 20 }}
                     animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 5 + index * 0.1 }}
+                    transition={{ delay: 6 + index * 0.1 }}
                     className="group cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-2">
@@ -342,7 +353,7 @@ const VideoShowcase = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 5 }}
+          transition={{ duration: 0.8, delay: 6.5 }}
           className="mt-12 bg-gradient-to-r from-green-900/20 to-blue-900/20 backdrop-blur-lg rounded-3xl border border-white/10 p-8"
         >
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">

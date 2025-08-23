@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CustomIcon } from '../ui/CustomIcons';
 
 interface LiveCodeEditorProps {
   isActive: boolean;
@@ -13,6 +14,7 @@ const LiveCodeEditor = ({ isActive, mode }: LiveCodeEditorProps) => {
   const [typedCode, setTypedCode] = useState('');
   const [isBuilding, setIsBuilding] = useState(false);
   const [buildComplete, setBuildComplete] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const codeLines = [
     "// CHIRO가 실제로 작성하는 코드",
@@ -105,7 +107,19 @@ const LiveCodeEditor = ({ isActive, mode }: LiveCodeEditorProps) => {
             timeoutId = setTimeout(typeLine, Math.random() * 50 + 30);
           } else {
             setTypedCode(prev => prev + '\n');
-            setCurrentLine(prev => prev + 1);
+            setCurrentLine(prev => {
+              const newLine = prev + 1;
+              // 15줄이 넘으면 스크롤을 맨 아래로
+              if (newLine > 15 && scrollContainerRef.current) {
+                setTimeout(() => {
+                  scrollContainerRef.current?.scrollTo({
+                    top: scrollContainerRef.current.scrollHeight,
+                    behavior: 'smooth'
+                  });
+                }, 100);
+              }
+              return newLine;
+            });
             timeoutId = setTimeout(typeCode, 200);
           }
         };
@@ -154,7 +168,11 @@ const LiveCodeEditor = ({ isActive, mode }: LiveCodeEditorProps) => {
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* 코드 에디터 영역 */}
         <div className="bg-gray-900 p-4 font-mono text-sm overflow-hidden">
-          <pre className="text-gray-300 whitespace-pre-wrap min-h-[400px]">
+          <div 
+            ref={scrollContainerRef}
+            className="h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+          >
+            <pre className="text-gray-300 whitespace-pre-wrap">
             {typedCode.split('\n').map((line, index) => (
               <div key={index} className="flex">
                 <span className="text-gray-600 select-none w-8 text-right mr-4">
@@ -181,7 +199,8 @@ const LiveCodeEditor = ({ isActive, mode }: LiveCodeEditorProps) => {
                 )}
               </div>
             ))}
-          </pre>
+            </pre>
+          </div>
         </div>
 
         {/* 모드별 콘텐츠 */}
@@ -207,7 +226,7 @@ const LiveCodeEditor = ({ isActive, mode }: LiveCodeEditorProps) => {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3 p-3 bg-gray-700/50 rounded-lg"
                   >
-                    <div className="text-2xl">{feature.icon}</div>
+                    <CustomIcon name={feature.icon} size={24} />
                     <div>
                       <div className="text-white font-semibold">{feature.title}</div>
                       <div className="text-gray-400 text-sm">{feature.desc}</div>

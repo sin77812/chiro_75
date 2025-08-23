@@ -1,12 +1,19 @@
 import { Metadata } from 'next'
 
-// New Revolutionary Sections
-import SimpleHero from '@/components/sections/SimpleHero'
-import LiveDashboard from '@/components/sections/LiveDashboard'
-import ProcessDifferentiation from '@/components/sections/ProcessDifferentiation'
-import VideoShowcase from '@/components/sections/VideoShowcase'
-import PerformanceDashboard from '@/components/sections/PerformanceDashboard'
+// Critical sections - immediate load
+import HeroSection from '@/components/sections/HeroSection'
 import InteractiveCTA from '@/components/sections/InteractiveCTA'
+
+// Non-critical sections - lazy load
+import { 
+  SuspenseLiveDashboard,
+  SuspenseProcessDifferentiation, 
+  SuspenseVideoShowcase,
+  SuspensePerformanceDashboard
+} from '@/components/LazyComponents'
+
+// Performance monitoring (development only)
+import PerformanceDebugger from '@/components/debug/PerformanceDebugger'
 
 export const metadata: Metadata = {
   title: 'CHIRO - 프리미엄 디지털 에이전시',
@@ -37,50 +44,37 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Preload critical resources */}
+      {/* Critical resource preloading */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
+      />
+      
+      {/* Media resources */}
       <link rel="preload" href="/image/backgroundvod.mp4" as="video" type="video/mp4" />
       <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
       
+      {/* DNS prefetch for external resources */}
+      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+      
       <main className="overflow-x-hidden">
-        {/* 1. Revolutionary Hero Section - Interactive Performance Experience */}
-        <SimpleHero />
+        {/* 1. Critical Hero Section - Immediate Load */}
+        <HeroSection />
         
-        {/* 2. Simple test sections */}
-        <section className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">섹션 2: LiveDashboard</h2>
-            <p className="text-xl text-white/70">실시간 성과 증명 섹션</p>
-          </div>
-        </section>
+        {/* 2-5. Non-Critical Sections - Lazy Load */}
+        <SuspenseLiveDashboard />
+        <SuspenseProcessDifferentiation />
+        <SuspenseVideoShowcase />
+        <SuspensePerformanceDashboard />
         
-        <section className="min-h-screen bg-gray-800 text-white flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">섹션 3: ProcessDifferentiation</h2>
-            <p className="text-xl text-white/70">프로세스 차별화 섹션</p>
-          </div>
-        </section>
-        
-        <section className="min-h-screen bg-gray-700 text-white flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">섹션 4: VideoShowcase</h2>
-            <p className="text-xl text-white/70">비디오 쇼케이스 섹션</p>
-          </div>
-        </section>
-        
-        <section className="min-h-screen bg-gray-600 text-white flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">섹션 5: PerformanceDashboard</h2>
-            <p className="text-xl text-white/70">성과 대시보드 섹션</p>
-          </div>
-        </section>
-        
-        <section className="min-h-screen bg-gray-500 text-white flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-4xl font-bold mb-4">섹션 6: InteractiveCTA</h2>
-            <p className="text-xl text-white/70">인터랙티브 CTA 섹션</p>
-          </div>
-        </section>
+        {/* 6. CTA Section - Placeholder */}
+        <InteractiveCTA />
       </main>
+      
+      {/* Performance Debugger - Development Only */}
+      <PerformanceDebugger enabled={process.env.NODE_ENV === 'development'} />
     </>
   )
 }

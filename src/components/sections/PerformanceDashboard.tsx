@@ -5,7 +5,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import DataCube from '../dashboard/DataCube';
 import BenchmarkComparison from '../dashboard/BenchmarkComparison';
-import AIPerformancePredictor from '../dashboard/AIPerformancePredictor';
+import WebsiteAnalyzer from '../dashboard/WebsiteAnalyzer';
+import { CustomIcon } from '../ui/CustomIcons';
 
 const PerformanceDashboard = () => {
   const { ref, inView } = useInView({
@@ -20,13 +21,17 @@ const PerformanceDashboard = () => {
   const backgroundY = useTransform(scrollY, [0, 300], [0, -50]);
 
   const handleCubeSelect = (cubeId: number) => {
-    setSelectedCube(cubeId === selectedCube ? null : cubeId);
+    if (cubeId === -1) {
+      setSelectedCube(null);
+    } else {
+      setSelectedCube(cubeId === selectedCube ? null : cubeId);
+    }
   };
 
   const sections = [
     { id: 'data', name: '데이터 큐브', icon: '📊' },
     { id: 'benchmark', name: '벤치마크 비교', icon: '🏆' },
-    { id: 'ai', name: 'AI 예측', icon: '🤖' }
+    { id: 'ai', name: '웹사이트 분석', icon: '🤖' }
   ];
 
   return (
@@ -49,26 +54,34 @@ const PerformanceDashboard = () => {
         />
         
         {/* Floating Elements */}
-        {Array.from({length: 20}).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-green-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 1, 0.3],
-              scale: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: 4 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
+        {Array.from({length: 20}).map((_, i) => {
+          // Use seeded random values based on index for consistent SSR
+          const leftPos = (i * 17.3) % 100;
+          const topPos = (i * 23.7) % 100;
+          const duration = 4 + (i % 3);
+          const delay = (i * 0.5) % 2;
+          
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-green-400 rounded-full"
+              style={{
+                left: `${leftPos}%`,
+                top: `${topPos}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 1, 0.3],
+                scale: [0.5, 1, 0.5]
+              }}
+              transition={{
+                duration,
+                repeat: Infinity,
+                delay
+              }}
+            />
+          )
+        })}
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -113,7 +126,11 @@ const PerformanceDashboard = () => {
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <span className="text-lg">{section.icon}</span>
+                  <CustomIcon 
+                    name={section.icon} 
+                    size={20} 
+                    color={activeSection === section.id ? '#FFFFFF' : '#2E7D32'}
+                  />
                   <span className="font-medium">{section.name}</span>
                 </button>
               ))}
@@ -174,12 +191,12 @@ const PerformanceDashboard = () => {
               transition={{ duration: 0.6 }}
             >
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">AI 성과 예측기</h3>
+                <h3 className="text-2xl font-bold text-white mb-2">AI 웹사이트 분석기</h3>
                 <p className="text-white/70">
-                  머신러닝 알고리즘으로 당신의 미래 성과를 정확하게 예측합니다
+                  30초 만에 웹사이트 성능을 종합 분석하고 개선 방안을 제시합니다
                 </p>
               </div>
-              <AIPerformancePredictor isActive={activeSection === 'ai'} />
+              <WebsiteAnalyzer isActive={activeSection === 'ai'} />
             </motion.div>
           )}
         </motion.div>

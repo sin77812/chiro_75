@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CustomIcon } from '../ui/CustomIcons';
 
 interface FormData {
   // Step 1: Basic Info
@@ -285,7 +286,9 @@ const SmartForm = ({ onComplete }: SmartFormProps) => {
                         : 'bg-black/40 border-white/10 text-white/70 hover:bg-white/5 hover:border-white/20'
                     }`}
                   >
-                    <div className="text-2xl mb-2">{type.icon}</div>
+                    <div className="mb-2">
+                      <CustomIcon name={type.icon} size={24} />
+                    </div>
                     <div className="font-semibold">{type.name}</div>
                   </button>
                 ))}
@@ -329,7 +332,9 @@ const SmartForm = ({ onComplete }: SmartFormProps) => {
                         : 'bg-black/40 border-white/10 text-white/70 hover:bg-white/5 hover:border-white/20'
                     }`}
                   >
-                    <div className="text-2xl mb-2">{timeline.icon}</div>
+                    <div className="mb-2">
+                      <CustomIcon name={timeline.icon} size={24} />
+                    </div>
                     <div className="font-semibold text-sm">{timeline.name}</div>
                   </button>
                 ))}
@@ -375,7 +380,9 @@ const SmartForm = ({ onComplete }: SmartFormProps) => {
                         : 'bg-black/40 border-white/10 text-white/70 hover:bg-white/5 hover:border-white/20'
                     }`}
                   >
-                    <div className="text-2xl mb-2">{goal.icon}</div>
+                    <div className="mb-2">
+                      <CustomIcon name={goal.icon} size={24} />
+                    </div>
                     <div className="font-semibold">{goal.name}</div>
                   </button>
                 ))}
@@ -397,7 +404,9 @@ const SmartForm = ({ onComplete }: SmartFormProps) => {
                         : 'bg-black/40 border-white/10 text-white/70 hover:bg-white/5 hover:border-white/20'
                     }`}
                   >
-                    <div className="text-2xl mb-2">{metric.icon}</div>
+                    <div className="mb-2">
+                      <CustomIcon name={metric.icon} size={24} />
+                    </div>
                     <div className="font-semibold">{metric.name}</div>
                   </button>
                 ))}
