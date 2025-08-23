@@ -153,7 +153,7 @@ export default function FFCTAForm() {
                 ))}
               </div>
               
-              {/* 두 번째 줄: 고객을 사로잡는 */}
+              {/* 두 번째 줄: 고객을 사로잡을 */}
               <div className="flex justify-center items-center relative">
                 {secondCharacters.map((char, index) => (
                   <motion.span
