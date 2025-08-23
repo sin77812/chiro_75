@@ -6,6 +6,7 @@ import { ChevronLeft, ExternalLink, Calendar, TrendingUp, ArrowLeft, ArrowRight 
 import portfolioData from '@/data/portfolio.json'
 import BeforeAfter from '@/components/ui/BeforeAfter'
 import KPICounter from '@/components/ui/KPICounter'
+import PageCTA from '@/components/sections/PageCTA'
 
 interface CaseStudyPageProps {
   params: Promise<{
@@ -337,6 +338,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       </section>
 
       {/* CTA */}
+      <PageCTA />
     </main>
   )
 }

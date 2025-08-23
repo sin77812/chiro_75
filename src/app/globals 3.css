@@ -2,18 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@100;200;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;400&display=swap');
 
-/* Smart Minimalism brand color variables */
+/* FLASH FORM brand color variables */
 :root {
   --bg: #0A0F0A;
   --fg: #F7F7F5;
   --accent: #0FA765;
-  --chiro-green: #1DB954;
-  --chiro-dark: #0E1111;
-  --chiro-black: #000000;
 }
 
 @layer base {
@@ -22,7 +18,7 @@
   }
   
   body {
-    @apply bg-dark text-white font-pretendard;
+    @apply bg-dark text-white;
   }
 
   * {
@@ -310,59 +306,6 @@
     border-radius: 4px;
     font-weight: bold;
     z-index: 9999;
-  }
-
-  /* Smart Minimalism Specific Utilities */
-  .font-hairline {
-    font-weight: 100;
-  }
-  
-  .font-ultralight {
-    font-weight: 200;
-  }
-  
-  .magnetic-text {
-    font-family: 'Pretendard', 'Inter', sans-serif;
-    font-weight: 200;
-    letter-spacing: -0.02em;
-    line-height: 0.9;
-  }
-  
-  .smart-minimal-bg-grain {
-    background-image: 
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 50%),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255,255,255,0.005) 2px,
-        rgba(255,255,255,0.005) 4px
-      );
-  }
-  
-  .neon-glow {
-    filter: drop-shadow(0 0 20px rgba(29, 185, 84, 0.4));
-  }
-  
-  .text-glow-green {
-    text-shadow: 0 0 30px rgba(29, 185, 84, 0.5);
-  }
-
-  /* Prefers reduced motion overrides for Smart Minimalism */
-  @media (prefers-reduced-motion: reduce) {
-    .magnetic-text * {
-      transform: none !important;
-      transition: none !important;
-    }
-    
-    .orbital-animation {
-      animation: none !important;
-    }
-    
-    .blur-animation {
-      filter: none !important;
-      transition: opacity 0.3s ease !important;
-    }
   }
 }
 

@@ -5,9 +5,7 @@ import React from 'react'
 import { Play, ArrowRight, CheckCircle, TrendingUp, Shield, Zap, Users, Globe, Code, Palette, Search } from 'lucide-react'
 import Link from 'next/link'
 import servicesData from '@/data/services.json'
-import ScrollReveal, { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
-import PageCTA from '@/components/sections/PageCTA'
-import ProcessFlow from '@/components/sections/ProcessFlow'
+import { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
 import { SkipNav, AccessibleButton, AccessibleLink, AccordionItem, ScreenReaderText } from '@/components/ui/AccessibleComponents'
 import { LazyImage, OptimizedVideo, LazyContent, ResourceHints, Preload } from '@/components/ui/PerformanceComponents'
 import { OrganizationStructuredData, ServicesPageStructuredData, FAQStructuredData, WebPageStructuredData, BreadcrumbStructuredData } from '@/components/seo/StructuredData'
@@ -401,7 +399,6 @@ export default function ServicesPage() {
       </section>
 
       {/* Process Flow - Using main page component */}
-      <ProcessFlow />
 
       {/* Differentiation Points - Lazy loaded */}
       <LazyContent

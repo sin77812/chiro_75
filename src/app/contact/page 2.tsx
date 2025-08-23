@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import PageCTA from '@/components/sections/PageCTA'
 import ContactForm from '@/components/ui/ContactForm'
 
 export const metadata: Metadata = {
@@ -275,6 +276,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA */}
+      <PageCTA />
     </main>
   )
 }

@@ -9,10 +9,8 @@ import {
   Zap, Award, FileText, Users, Brain, Shield, 
   Globe, Eye, Lock, Accessibility
 } from 'lucide-react'
-import PageCTA from '@/components/sections/PageCTA'
-import ScrollReveal, { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
+import { FadeUp, FadeLeft, FadeRight } from '@/components/ui/ScrollReveal'
 import { AboutAnalytics } from '@/components/analytics/Analytics'
-import TechStackAdvanced from '@/components/sections/TechStackAdvanced'
 import aboutData from '@/data/about.json'
 
 // Metadata handled by layout.tsx for client component
@@ -324,8 +322,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Tech Stack - New Advanced Component */}
-      <TechStackAdvanced />
 
       {/* CSR Declaration */}
       <section className="section-padding bg-dark">
@@ -439,8 +435,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <PageCTA />
     </main>
   )
 }

@@ -1,27 +1,18 @@
 import { Metadata } from 'next'
 
-// Critical sections - immediate load
-import HeroSection from '@/components/sections/HeroSection'
-import InteractiveCTA from '@/components/sections/InteractiveCTA'
-
-// Non-critical sections - lazy load
-import { 
-  SuspenseLiveDashboard,
-  SuspenseProcessDifferentiation, 
-  SuspenseVideoShowcase,
-  SuspensePerformanceDashboard
-} from '@/components/LazyComponents'
-
-// Performance monitoring (development only)
-import PerformanceDebugger from '@/components/debug/PerformanceDebugger'
+// Smart Minimalism Sections
+import SmartMinimalismHero from '@/components/sections/SmartMinimalismHero'
+import SmartMinimalismProof from '@/components/sections/SmartMinimalismProof'
+import SmartMinimalismProcess from '@/components/sections/SmartMinimalismProcess'
+import SmartMinimalismContact from '@/components/sections/SmartMinimalismContact'
 
 export const metadata: Metadata = {
-  title: 'CHIRO - 프리미엄 디지털 에이전시',
-  description: '국내 최고 수준의 웹 개발과 디지털 전략으로 비즈니스 성장을 가속화하세요.',
+  title: 'CHIRO - 코드가 아닌 성과를 팝니다',
+  description: '2주 만에 완성하는 프리미엄 디지털 솔루션. 340% 전환율 증가, 98% 재계약률의 성과를 경험하세요.',
   keywords: ['웹개발', '디지털에이전시', 'UX디자인', '성능최적화', '브랜딩'],
   openGraph: {
-    title: 'CHIRO - 프리미엄 디지털 에이전시',
-    description: '국내 최고 수준의 웹 개발과 디지털 전략으로 비즈니스 성장을 가속화하세요.',
+    title: 'CHIRO - 코드가 아닌 성과를 팝니다',
+    description: '2주 만에 완성하는 프리미엄 디지털 솔루션. 340% 전환율 증가, 98% 재계약률의 성과를 경험하세요.',
     type: 'website',
     url: 'https://chiro.agency',
     images: [
@@ -35,8 +26,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CHIRO - 프리미엄 디지털 에이전시',
-    description: '국내 최고 수준의 웹 개발과 디지털 전략으로 비즈니스 성장을 가속화하세요.',
+    title: 'CHIRO - 코드가 아닌 성과를 팝니다',
+    description: '2주 만에 완성하는 프리미엄 디지털 솔루션. 340% 전환율 증가, 98% 재계약률의 성과를 경험하세요.',
     images: ['/og-image.jpg'],
   },
 }
@@ -44,37 +35,19 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Critical resource preloading */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap"
-      />
-      
-      {/* Media resources */}
-      <link rel="preload" href="/image/backgroundvod.mp4" as="video" type="video/mp4" />
-      <link rel="preload" href="/images/hero-poster.jpg" as="image" type="image/jpeg" />
-      
-      {/* DNS prefetch for external resources */}
-      <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-      
-      <main className="overflow-x-hidden">
-        {/* 1. Critical Hero Section - Immediate Load */}
-        <HeroSection />
+      <main className="overflow-x-hidden bg-[#0E1111]">
+        {/* 1. Smart Minimalism Hero Section - Magnetic Typography */}
+        <SmartMinimalismHero />
         
-        {/* 2-5. Non-Critical Sections - Lazy Load */}
-        <SuspenseLiveDashboard />
-        <SuspenseProcessDifferentiation />
-        <SuspenseVideoShowcase />
-        <SuspensePerformanceDashboard />
+        {/* 2. Proof Section - Blur to Focus Counter */}
+        <SmartMinimalismProof />
         
-        {/* 6. CTA Section - Placeholder */}
-        <InteractiveCTA />
+        {/* 3. Process Section - Timeline River */}
+        <SmartMinimalismProcess />
+        
+        {/* 4. Contact Section - CHIRO Orbital Button */}
+        <SmartMinimalismContact />
       </main>
-      
-      {/* Performance Debugger - Development Only */}
-      <PerformanceDebugger enabled={process.env.NODE_ENV === 'development'} />
     </>
   )
 }
