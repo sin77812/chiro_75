@@ -80,10 +80,11 @@ const SmartMinimalismContact = () => {
 
   // Typing animation functions
   const typeWriter = (text: string, callback?: () => void) => {
+    setTypingText('') // 먼저 텍스트 초기화
     let i = 0
     const type = () => {
       if (i < text.length) {
-        setTypingText(prev => prev + text.charAt(i))
+        setTypingText(text.substring(0, i + 1))
         i++
         setTimeout(type, 100)
       } else if (callback) {

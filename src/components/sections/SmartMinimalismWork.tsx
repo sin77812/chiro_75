@@ -17,7 +17,7 @@ interface Project {
 const SmartMinimalismWork = () => {
   const router = useRouter()
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [selectedIndex, setSelectedIndex] = useState(1) // Center project starts as selected
+  const [selectedIndex, setSelectedIndex] = useState(2) // Center project starts as selected
   const [isAnimating, setIsAnimating] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
@@ -25,35 +25,66 @@ const SmartMinimalismWork = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "FINTECH",
-      category: "금융 서비스",
-      description: "결제 시스템 혁신으로 사용자 경험 340% 향상",
-      results: "+340% 전환율",
-      image: "/api/placeholder/400/500",
+      title: "MANUFACTURING",
+      category: "제조업",
+      description: "글로벌 B2B 포털로 해외 문의 320% 증가",
+      results: "+320% 문의",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=500&fit=crop",
       color: "#FFD700",
-      url: "/case/fintech-payment-system"
+      url: "/case/nexus-manufacturing"
     },
     {
       id: 2,
-      title: "E-COMMERCE",
-      category: "전자상거래", 
-      description: "AI 추천 시스템으로 매출 280% 증가 달성",
-      results: "+280% 매출",
-      image: "/api/placeholder/400/500",
+      title: "FINTECH",
+      category: "금융 서비스",
+      description: "결제 시스템 혁신으로 전환율 340% 향상",
+      results: "+340% 전환율",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=500&fit=crop",
       color: "#1DB954",
-      url: "/case/ecommerce-ai-system"
+      url: "/case/fintech-payment-system"
     },
     {
       id: 3,
+      title: "E-COMMERCE",
+      category: "전자상거래", 
+      description: "AI 추천으로 매출 280% 증가 달성",
+      results: "+280% 매출",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=500&fit=crop",
+      color: "#00D4FF",
+      url: "/case/ecommerce-ai-system"
+    },
+    {
+      id: 4,
       title: "HEALTHCARE",
       category: "헬스케어",
-      description: "환자 관리 시스템으로 운영 효율성 95% 개선", 
+      description: "환자 관리로 운영 효율성 95% 개선", 
       results: "+95% 효율",
-      image: "/api/placeholder/400/500",
-      color: "#00D4FF",
+      image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=500&fit=crop",
+      color: "#FF6B6B",
       url: "/case/healthcare-management"
+    },
+    {
+      id: 5,
+      title: "CONSULTING",
+      category: "컨설팅",
+      description: "브랜드 리뉴얼로 인지도 180% 증가",
+      results: "+180% 인지도",
+      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=500&fit=crop",
+      color: "#9C27B0",
+      url: "/case/global-dynamics"
     }
   ]
+
+  // Auto rotation every 5 seconds
+  useEffect(() => {
+    if (!isVisible) return
+
+    const interval = setInterval(() => {
+      setSelectedIndex(prev => (prev + 1) % projects.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [isVisible, projects.length])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -157,12 +188,12 @@ const SmartMinimalismWork = () => {
           ${isSelected ? 'transform-gpu' : ''}
         `}
         style={{
-          width: '28vw', 
-          height: '21vw', // 4:3 ratio (28vw * 3/4 = 21vw)
+          width: '42vw',  // 50% 증가 (28vw * 1.5)
+          height: '31.5vw', // 50% 증가 (21vw * 1.5)
           filter: getProjectStyle(index).filter,
           opacity: getProjectStyle(index).opacity,
           zIndex: getProjectStyle(index).zIndex,
-          left: `calc(50% + ${(index - selectedIndex) * 30}vw)`,
+          left: `calc(50% + ${(index - selectedIndex) * 35}vw)`,
           top: '50%',
           transform: `translate(-50%, -50%) ${getProjectStyle(index).perspectiveTransform}`,
           transformOrigin: 'center center',
@@ -183,46 +214,41 @@ const SmartMinimalismWork = () => {
               : '0 10px 30px rgba(0, 0, 0, 0.3)'
           }}
         >
-          {/* Project Image Placeholder */}
+          {/* Project Image */}
           <div 
-            className="absolute inset-0"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
-              background: '#000000'
+              backgroundImage: `url(${project.image})`,
+              backgroundColor: '#000000'
             }}
           />
           
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/40" />
+          
           {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-8">
-            <div className="text-white/60 text-base mb-3">
-              {project.category}
-            </div>
+          <div className="absolute bottom-0 left-0 p-6">
             <h3 
-              className="font-bold mb-4 transition-all duration-500"
+              className="font-bold mb-2 transition-all duration-500"
               style={{
-                fontSize: isSelected ? '2.2rem' : '1.8rem',
-                color: isSelected ? project.color : '#ffffff',
+                fontSize: isSelected ? '1.8rem' : '1.4rem',
+                color: '#ffffff',
                 lineHeight: '1.2'
               }}
             >
               {project.title}
             </h3>
-            <p className={`text-white/80 text-base leading-relaxed mb-6 transition-all duration-500 ${
-              isSelected ? 'opacity-100' : 'opacity-70'
-            }`}>
-              {project.description}
-            </p>
             
             {/* Results Badge */}
             <div 
               className={`
-                inline-block px-6 py-3 rounded-full text-base font-medium
+                inline-block px-4 py-2 rounded-full text-sm font-medium
                 transition-all duration-500
                 ${isSelected ? 'opacity-100 scale-100' : 'opacity-70 scale-95'}
               `}
               style={{
-                background: 'rgba(255,255,255,0.1)',
-                color: '#1DB954',
-                border: '1px solid rgba(29,185,84,0.3)'
+                background: 'rgba(29,185,84,0.9)',
+                color: '#ffffff'
               }}
             >
               {project.results}
@@ -266,12 +292,9 @@ const SmartMinimalismWork = () => {
             letterSpacing: '-0.02em'
           }}
         >
-          Choose Your{' '}
-          <span className="text-[#1DB954]">Project</span>
+          Check Our{' '}
+          <span className="text-[#1DB954]">Results</span>
         </h2>
-        <p className="text-white/60 mt-4 text-lg">
-          스타터를 선택하듯, 프로젝트를 선택하세요
-        </p>
       </div>
 
       {/* Project Selection Area */}
