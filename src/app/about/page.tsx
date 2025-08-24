@@ -53,7 +53,7 @@ export default function AboutPage() {
           <FadeUp delay={200}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-shadow-gray/30">
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">150+</div>
+                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">27+</div>
                 <div className="text-neutral-light/60">완료 프로젝트</div>
               </div>
               <div className="text-center">
@@ -65,8 +65,8 @@ export default function AboutPage() {
                 <div className="text-neutral-light/60">성능 점수</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">4년</div>
-                <div className="text-neutral-light/60">업계 경험</div>
+                <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">2017</div>
+                <div className="text-neutral-light/60">since</div>
               </div>
             </div>
           </FadeUp>
