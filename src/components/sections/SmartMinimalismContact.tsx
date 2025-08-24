@@ -188,16 +188,19 @@ const SmartMinimalismContact = () => {
       {/* Left Text Wall */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 flex gap-8 pl-8 md:pl-16">
         {/* Column 1 */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-12">
           {leftWallTexts
             .filter(item => item.column === 1)
             .map((item, index) => (
               <div
                 key={`left-1-${index}`}
-                className={`text-white/40 text-lg md:text-xl font-bold cursor-pointer transition-all duration-300 ${
+                className={`text-white/40 font-black cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
                 }`}
-                style={getTextAnimation('left', item.delay)}
+                style={{
+                  ...getTextAnimation('left', item.delay),
+                  fontSize: 'clamp(48px, 6vw, 80px)'
+                }}
                 onMouseEnter={() => setHoveredText(item.text)}
                 onMouseLeave={() => setHoveredText(null)}
               >
@@ -206,16 +209,19 @@ const SmartMinimalismContact = () => {
             ))}
         </div>
         {/* Column 2 */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-12">
           {leftWallTexts
             .filter(item => item.column === 2)
             .map((item, index) => (
               <div
                 key={`left-2-${index}`}
-                className={`text-white/30 text-base md:text-lg font-bold cursor-pointer transition-all duration-300 ${
+                className={`text-white/30 font-black cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
                 }`}
-                style={getTextAnimation('left', item.delay)}
+                style={{
+                  ...getTextAnimation('left', item.delay),
+                  fontSize: 'clamp(40px, 5vw, 72px)'
+                }}
                 onMouseEnter={() => setHoveredText(item.text)}
                 onMouseLeave={() => setHoveredText(null)}
               >
@@ -228,16 +234,19 @@ const SmartMinimalismContact = () => {
       {/* Right Text Wall */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-8 pr-8 md:pr-16">
         {/* Column 1 */}
-        <div className="flex flex-col gap-6 text-right">
+        <div className="flex flex-col gap-12 text-right">
           {rightWallTexts
             .filter(item => item.column === 1)
             .map((item, index) => (
               <div
                 key={`right-1-${index}`}
-                className={`text-white/30 text-base md:text-lg font-bold cursor-pointer transition-all duration-300 ${
+                className={`text-white/30 font-black cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
                 }`}
-                style={getTextAnimation('right', item.delay)}
+                style={{
+                  ...getTextAnimation('right', item.delay),
+                  fontSize: 'clamp(40px, 5vw, 72px)'
+                }}
                 onMouseEnter={() => setHoveredText(item.text)}
                 onMouseLeave={() => setHoveredText(null)}
               >
@@ -246,16 +255,19 @@ const SmartMinimalismContact = () => {
             ))}
         </div>
         {/* Column 2 */}
-        <div className="flex flex-col gap-6 text-right">
+        <div className="flex flex-col gap-12 text-right">
           {rightWallTexts
             .filter(item => item.column === 2)
             .map((item, index) => (
               <div
                 key={`right-2-${index}`}
-                className={`text-white/40 text-lg md:text-xl font-bold cursor-pointer transition-all duration-300 ${
+                className={`text-white/40 font-black cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
                 }`}
-                style={getTextAnimation('right', item.delay)}
+                style={{
+                  ...getTextAnimation('right', item.delay),
+                  fontSize: 'clamp(48px, 6vw, 80px)'
+                }}
                 onMouseEnter={() => setHoveredText(item.text)}
                 onMouseLeave={() => setHoveredText(null)}
               >
@@ -269,7 +281,7 @@ const SmartMinimalismContact = () => {
       <div 
         ref={buttonRef}
         className={`
-          relative rounded-full border-2 border-[#1DB954] 
+          relative rounded-3xl border-2 border-[#1DB954] 
           flex items-center justify-center cursor-pointer z-20
           font-bold text-white transition-all duration-500 ease-out
           hover:bg-[#1DB954] hover:text-black hover:scale-110
@@ -277,7 +289,7 @@ const SmartMinimalismContact = () => {
         `}
         style={{
           width: '200px',
-          height: '200px',
+          height: '80px',
           fontSize: '32px',
           fontWeight: 700,
           letterSpacing: '2px',
@@ -302,7 +314,7 @@ const SmartMinimalismContact = () => {
         <span className="relative z-10">{buttonText}</span>
         {/* Rotating border effect */}
         <div 
-          className="absolute inset-0 rounded-full"
+          className="absolute inset-0 rounded-3xl"
           style={{
             background: `conic-gradient(from 0deg, transparent, #1DB954, transparent)`,
             animation: 'rotate 4s linear infinite',
@@ -319,10 +331,18 @@ const SmartMinimalismContact = () => {
         }}
       >
         <div className={`typing-cta ${isTypingComplete ? 'typing-complete' : ''}`}>
-          <span className="typing-text text-white/80 text-xl md:text-2xl font-bold tracking-wide">
+          <span className="typing-text text-white/80 font-bold tracking-wide"
+            style={{
+              fontSize: 'clamp(48px, 7vw, 72px)'
+            }}
+          >
             {typingText}
           </span>
-          <span className="typing-cursor text-[#1DB954] text-xl md:text-2xl font-bold ml-0.5">|</span>
+          <span className="typing-cursor text-[#1DB954] font-bold ml-1"
+            style={{
+              fontSize: 'clamp(48px, 7vw, 72px)'
+            }}
+          >|</span>
         </div>
       </div>
 

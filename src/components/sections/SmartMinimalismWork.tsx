@@ -123,6 +123,23 @@ const SmartMinimalismWork = () => {
     }
   }, [])
 
+  // Get 3 visible projects (previous, current, next) for infinite loop
+  const getVisibleProjects = () => {
+    const total = projects.length
+    const visibleProjects = []
+    
+    for (let i = -1; i <= 1; i++) {
+      const index = (selectedIndex + i + total) % total
+      visibleProjects.push({
+        project: projects[index],
+        index: index,
+        displayIndex: i // -1 (left), 0 (center), 1 (right)
+      })
+    }
+    
+    return visibleProjects
+  }
+
   const handleProjectSelect = (index: number) => {
     if (isAnimating) return
     
@@ -137,14 +154,12 @@ const SmartMinimalismWork = () => {
     
     setTimeout(() => {
       setIsAnimating(false)
-    }, 700)
+    }, 1000)
   }
 
-  const getProjectStyle = (index: number) => {
-    const isSelected = index === selectedIndex
-    const offset = index - selectedIndex
-    
-    if (isSelected) {
+  const getProjectStyle = (displayIndex: number) => {
+    if (displayIndex === 0) {
+      // Center (selected) project
       return {
         perspectiveTransform: `
           perspective(1200px) 
@@ -158,7 +173,8 @@ const SmartMinimalismWork = () => {
       }
     }
     
-    const rotateY = offset > 0 ? -25 : 25
+    // Left (-1) or right (1) projects
+    const rotateY = displayIndex > 0 ? -25 : 25
     const translateZ = -100
     const scale = 0.8
     
@@ -175,8 +191,8 @@ const SmartMinimalismWork = () => {
     }
   }
 
-  const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
-    const isSelected = index === selectedIndex
+  const ProjectCard = ({ project, index, displayIndex }: { project: Project; index: number; displayIndex: number }) => {
+    const isSelected = displayIndex === 0
     const cardRef = useRef<HTMLDivElement>(null)
     
     return (
@@ -184,18 +200,18 @@ const SmartMinimalismWork = () => {
         ref={cardRef}
         className={`
           absolute cursor-pointer
-          transition-all duration-700 ease-out
+          transition-all duration-1000 ease-in-out
           ${isSelected ? 'transform-gpu' : ''}
         `}
         style={{
           width: '42vw',  // 50% 증가 (28vw * 1.5)
           height: '31.5vw', // 50% 증가 (21vw * 1.5)
-          filter: getProjectStyle(index).filter,
-          opacity: getProjectStyle(index).opacity,
-          zIndex: getProjectStyle(index).zIndex,
-          left: `calc(50% + ${(index - selectedIndex) * 35}vw)`,
+          filter: getProjectStyle(displayIndex).filter,
+          opacity: getProjectStyle(displayIndex).opacity,
+          zIndex: getProjectStyle(displayIndex).zIndex,
+          left: `calc(50% + ${displayIndex * 35}vw)`,
           top: '50%',
-          transform: `translate(-50%, -50%) ${getProjectStyle(index).perspectiveTransform}`,
+          transform: `translate(-50%, -50%) ${getProjectStyle(displayIndex).perspectiveTransform}`,
           transformOrigin: 'center center',
           transformStyle: 'preserve-3d'
         }}
@@ -299,8 +315,8 @@ const SmartMinimalismWork = () => {
 
       {/* Project Selection Area */}
       <div className="relative flex-1 flex items-center justify-center w-full" style={{ minHeight: '450px' }}>
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
+        {getVisibleProjects().map(({ project, index, displayIndex }) => (
+          <ProjectCard key={`${project.id}-${displayIndex}`} project={project} index={index} displayIndex={displayIndex} />
         ))}
       </div>
 
@@ -326,9 +342,14 @@ const SmartMinimalismWork = () => {
         ))}
       </div>
 
-      {/* Instructions */}
-      <div className="absolute bottom-10 right-10 text-white/40 text-sm">
-        {selectedIndex !== null ? '다시 클릭하여 자세히 보기' : '클릭하여 프로젝트 선택'}
+      {/* View More Portfolio Button */}
+      <div className="absolute bottom-10 right-10">
+        <button 
+          onClick={() => router.push('/portfolio')}
+          className="px-6 py-3 bg-[#1DB954] text-white font-medium rounded-lg hover:bg-[#1ed760] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1DB954]/30"
+        >
+          더 많은 포트폴리오 보기
+        </button>
       </div>
 
     </section>

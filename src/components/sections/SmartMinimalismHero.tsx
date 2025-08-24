@@ -6,6 +6,7 @@ const SmartMinimalismHero = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isSubtextVisible, setIsSubtextVisible] = useState(false)
+  const [hasAnimationStarted, setHasAnimationStarted] = useState(false)
 
   const mainTextLines = [
     "CHIRO",
@@ -35,15 +36,18 @@ const SmartMinimalismHero = () => {
   const [subtextKey, setSubtextKey] = useState(0)
 
   useEffect(() => {
-    // Show text immediately after 0.5s, independent of mouse events
-    const initialTimer = setTimeout(() => {
-      setIsSubtextVisible(true)
-    }, 500)
+    // Show text immediately after 0.5s, but only once
+    if (!hasAnimationStarted) {
+      const initialTimer = setTimeout(() => {
+        setIsSubtextVisible(true)
+        setHasAnimationStarted(true)
+      }, 500)
 
-    return () => {
-      clearTimeout(initialTimer)
+      return () => {
+        clearTimeout(initialTimer)
+      }
     }
-  }, [])
+  }, [hasAnimationStarted])
 
   const calculateMagneticOffset = (elementRect: DOMRect, mouseX: number, mouseY: number) => {
     const elementCenterX = elementRect.left + elementRect.width / 2
@@ -80,7 +84,11 @@ const SmartMinimalismHero = () => {
           const absoluteMouseY = mousePosition.y + containerRect.top
           
           const newOffset = calculateMagneticOffset(charRect, absoluteMouseX, absoluteMouseY)
-          setOffset(newOffset)
+          
+          // Only update if offset changed significantly to prevent unnecessary rerenders
+          if (Math.abs(newOffset.x - offset.x) > 0.1 || Math.abs(newOffset.y - offset.y) > 0.1) {
+            setOffset(newOffset)
+          }
         }
       }
 
@@ -92,7 +100,7 @@ const SmartMinimalismHero = () => {
           cancelAnimationFrame(animationFrameRef.current)
         }
       }
-    }, [mousePosition])
+    }, [mousePosition, offset.x, offset.y])
 
     return (
       <span
@@ -110,14 +118,18 @@ const SmartMinimalismHero = () => {
 
   const TypingChar = ({ char, index }: { char: string; index: number }) => {
     const [isVisible, setIsVisible] = useState(false)
+    const [hasStarted, setHasStarted] = useState(false)
 
     useEffect(() => {
-      const timer = setTimeout(() => {
-        setIsVisible(true)
-      }, index * 50)
+      if (!hasStarted) {
+        const timer = setTimeout(() => {
+          setIsVisible(true)
+        }, index * 50)
 
-      return () => clearTimeout(timer)
-    }, [index])
+        setHasStarted(true)
+        return () => clearTimeout(timer)
+      }
+    }, [index, hasStarted])
 
     return (
       <span className={`transition-opacity duration-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
