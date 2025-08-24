@@ -132,17 +132,7 @@ const SmartMinimalismHero = () => {
       ref={containerRef}
       className="relative h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center"
       style={{
-        padding: '10vw',
-        backgroundImage: `
-          radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02) 0%, transparent 50%),
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(255,255,255,0.005) 2px,
-            rgba(255,255,255,0.005) 4px
-          )
-        `
+        padding: '10vw'
       }}
     >
       {/* Main Title with Magnetic Typography */}

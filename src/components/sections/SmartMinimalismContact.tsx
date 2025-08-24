@@ -181,15 +181,8 @@ const SmartMinimalismContact = () => {
   return (
     <section 
       ref={containerRef}
-      className="h-[80vh] bg-black flex items-center justify-center relative overflow-hidden"
+      className="h-[80vh] bg-[#0E1111] flex items-center justify-center relative overflow-hidden"
     >
-      {/* Radial gradient background */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, rgba(29, 185, 84, 0.03) 0%, transparent 60%)`,
-        }}
-      />
 
       {/* Left Text Wall */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 flex gap-8 pl-8 md:pl-16">

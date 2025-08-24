@@ -1,4 +1,6 @@
 import { Metadata } from 'next'
+import PortfolioGrid from '@/components/sections/PortfolioGrid'
+import PageCTA from '@/components/sections/PageCTA'
 
 export const metadata: Metadata = {
   title: '포트폴리오 - CHIRO',
@@ -8,9 +10,8 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   return (
     <main className="pt-18">
-      <div className="min-h-screen flex items-center justify-center">
-        <h1 className="text-4xl text-white">Portfolio - Coming Soon</h1>
-      </div>
+      <PortfolioGrid />
+      <PageCTA />
     </main>
   )
 }

@@ -178,7 +178,6 @@ const SmartMinimalismWork = () => {
             ${isSelected ? 'border-[#1DB954]' : 'border-white/20'}
           `}
           style={{
-            background: `linear-gradient(135deg, ${project.color}15, transparent)`,
             boxShadow: isSelected 
               ? `0 20px 60px rgba(29, 185, 84, 0.3), 0 0 0 1px ${project.color}30`
               : '0 10px 30px rgba(0, 0, 0, 0.3)'
@@ -186,9 +185,9 @@ const SmartMinimalismWork = () => {
         >
           {/* Project Image Placeholder */}
           <div 
-            className="absolute inset-0 bg-gradient-to-br"
+            className="absolute inset-0"
             style={{
-              background: `linear-gradient(135deg, ${project.color}20, #000000)`
+              background: '#000000'
             }}
           />
           
@@ -221,9 +220,9 @@ const SmartMinimalismWork = () => {
                 ${isSelected ? 'opacity-100 scale-100' : 'opacity-70 scale-95'}
               `}
               style={{
-                background: `${project.color}20`,
-                color: project.color,
-                border: `1px solid ${project.color}30`
+                background: 'rgba(255,255,255,0.1)',
+                color: '#1DB954',
+                border: '1px solid rgba(29,185,84,0.3)'
               }}
             >
               {project.results}
@@ -235,8 +234,8 @@ const SmartMinimalismWork = () => {
             <div 
               className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full animate-pulse"
               style={{
-                background: project.color,
-                boxShadow: `0 0 20px ${project.color}`
+                background: '#1DB954',
+                boxShadow: '0 0 20px #1DB954'
               }}
             />
           )}
@@ -309,15 +308,6 @@ const SmartMinimalismWork = () => {
         {selectedIndex !== null ? '다시 클릭하여 자세히 보기' : '클릭하여 프로젝트 선택'}
       </div>
 
-      {/* Background decoration */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(circle at 50% 50%, rgba(29, 185, 84, 0.03) 0%, transparent 70%)
-          `
-        }}
-      />
     </section>
   )
 }

@@ -156,16 +156,6 @@ const SmartMinimalismProof = () => {
         ))}
       </div>
 
-      {/* Subtle background decoration */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            radial-gradient(circle at 30% 20%, rgba(29, 185, 84, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 70% 80%, rgba(29, 185, 84, 0.03) 0%, transparent 50%)
-          `
-        }}
-      />
 
       <style jsx>{`
         @keyframes glitch-1 {
