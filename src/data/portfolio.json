@@ -16,6 +16,7 @@
     "year": 2024,
     "category": "manufacturing",
     "tags": ["제조업", "B2B", "반응형", "다국어"],
+    "url": "https://nexus-manufacturing.com",
     "kpis": [
       {
         "metric": "리드 생성",
@@ -56,6 +57,7 @@
     "after": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     "year": 2024,
     "tags": ["SaaS", "기술", "대시보드"],
+    "url": "https://koretech-solutions.com",
     "kpis": [
       {
         "metric": "사용자 참여",
@@ -85,6 +87,7 @@
     "after": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop", 
     "year": 2024,
     "tags": ["컨설팅", "기업", "글로벌"],
+    "url": "https://globaldynamics.com",
     "kpis": [
       {
         "metric": "브랜드 인지도",
