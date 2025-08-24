@@ -35,28 +35,13 @@ const SmartMinimalismHero = () => {
   const [subtextKey, setSubtextKey] = useState(0)
 
   useEffect(() => {
-    const startAnimation = () => {
-      setIsSubtextVisible(false)
-      setSubtextKey(prev => prev + 1)
-      
-      setTimeout(() => {
-        setIsSubtextVisible(true)
-      }, 100)
-    }
-
-    // Initial start
+    // Show text immediately after 0.5s, independent of mouse events
     const initialTimer = setTimeout(() => {
       setIsSubtextVisible(true)
-    }, 2000)
-
-    // Repeat animation
-    const interval = setInterval(() => {
-      startAnimation()
-    }, 10000) // Total cycle: ~3s typing + 7s wait = 10s
+    }, 500)
 
     return () => {
       clearTimeout(initialTimer)
-      clearInterval(interval)
     }
   }, [])
 
