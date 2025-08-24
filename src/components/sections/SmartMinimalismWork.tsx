@@ -21,6 +21,7 @@ const SmartMinimalismWork = () => {
   const [isAnimating, setIsAnimating] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   const projects: Project[] = [
     {
@@ -75,16 +76,16 @@ const SmartMinimalismWork = () => {
     }
   ]
 
-  // Auto rotation every 5 seconds
+  // Auto rotation every 5 seconds (pauses on hover)
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || isPaused) return
 
     const interval = setInterval(() => {
       setSelectedIndex(prev => (prev + 1) % projects.length)
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isVisible, projects.length])
+  }, [isVisible, isPaused, projects.length])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -293,6 +294,8 @@ const SmartMinimalismWork = () => {
       style={{
         perspective: '1500px'
       }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Title */}
       <div 

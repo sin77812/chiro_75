@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 
 interface TextWallItem {
@@ -21,32 +21,10 @@ const SmartMinimalismContact = () => {
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [typingStarted, setTypingStarted] = useState(false)
 
-  // Left wall texts - 2 columns
-  const leftWallTexts: TextWallItem[] = [
-    // Column 1 (fast)
-    { text: '2주 완성', column: 1, delay: 0 },
-    { text: '빠른 응답', column: 1, delay: 0.05 },
-    { text: '즉시 시작', column: 1, delay: 0.1 },
-    { text: '바로 런칭', column: 1, delay: 0.15 },
-    // Column 2 (slow)
-    { text: '340% 성장', column: 2, delay: 0.2 },
-    { text: '최고 품질', column: 2, delay: 0.25 },
-    { text: '완벽 보장', column: 2, delay: 0.3 },
-    { text: '프리미엄', column: 2, delay: 0.35 },
-  ]
-
-  // Right wall texts - 2 columns
-  const rightWallTexts: TextWallItem[] = [
-    // Column 1 (slow)
-    { text: '무료 상담', column: 1, delay: 0.4 },
-    { text: '투명 가격', column: 1, delay: 0.45 },
-    { text: '24/7 지원', column: 1, delay: 0.5 },
-    { text: '사후 관리', column: 1, delay: 0.55 },
-    // Column 2 (fast)
-    { text: '98% 만족', column: 2, delay: 0.6 },
-    { text: '27+ 프로젝트', column: 2, delay: 0.65 },
-    { text: 'since 2017', column: 2, delay: 0.7 },
-    { text: '검증된 성과', column: 2, delay: 0.75 },
+  // Hashtags for bottom display
+  const hashtags = [
+    '#2주완성', '#빠른응답', '#즉시시작', '#바로런칭', 
+    '#98%만족', '#27+프로젝트', '#since2017', '#검증된성과'
   ]
 
   // Intersection observer for scroll trigger
@@ -59,7 +37,9 @@ const SmartMinimalismContact = () => {
             // Start typing sequence after text wall animation
             if (!typingStarted) {
               setTypingStarted(true)
-              setTimeout(() => startTypingSequence(), 1500)
+              const timer = setTimeout(() => {
+                startTypingSequence()
+              }, 800) // 애니메이션 딜레이 줄임
             }
           }
         })
@@ -110,36 +90,37 @@ const SmartMinimalismContact = () => {
     }, 50)
   }
 
-  const startTypingSequence = () => {
+  const startTypingSequence = useCallback(() => {
     const questions = [
-      { text: "새로운 프로젝트를 시작할까요?", hold: 2000, erase: true },
-      { text: "함께 성장하고 싶으신가요?", hold: 2000, erase: true },
-      { text: "지금 바로 시작해보세요", hold: 0, erase: false }
+      { text: "진짜 변화와 성장을 원하시나요?", hold: 2000, erase: true },
+      { text: "그럼 이제", hold: 1500, erase: true },
+      { text: "클릭해보세요.", hold: 0, erase: false }
     ]
     
     let currentIndex = 0
     
     const processQuestion = () => {
+      if (currentIndex >= questions.length) return
+      
       const current = questions[currentIndex]
       
       typeWriter(current.text, () => {
-        if (current.erase) {
+        if (current.erase && currentIndex < questions.length - 1) {
           setTimeout(() => {
             eraseText(() => {
               currentIndex++
-              if (currentIndex < questions.length) {
-                processQuestion()
-              }
+              processQuestion()
             })
           }, current.hold)
         } else {
+          // 마지막 문장은 지우지 않고 고정
           setIsTypingComplete(true)
         }
       })
     }
     
     processQuestion()
-  }
+  }, [])
 
   const handleButtonClick = () => {
     if (isAnimating) return
@@ -185,142 +166,76 @@ const SmartMinimalismContact = () => {
       className="h-[80vh] bg-[#0E1111] flex items-center justify-center relative overflow-hidden"
     >
 
-      {/* Left Text Wall */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 flex gap-8 pl-8 md:pl-16">
-        {/* Column 1 */}
-        <div className="flex flex-col gap-12">
-          {leftWallTexts
-            .filter(item => item.column === 1)
-            .map((item, index) => (
-              <div
-                key={`left-1-${index}`}
-                className={`text-white/40 font-black cursor-pointer transition-all duration-300 ${
-                  hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
-                }`}
-                style={{
-                  ...getTextAnimation('left', item.delay),
-                  fontSize: 'clamp(48px, 6vw, 80px)'
-                }}
-                onMouseEnter={() => setHoveredText(item.text)}
-                onMouseLeave={() => setHoveredText(null)}
-              >
-                {item.text}
-              </div>
-            ))}
-        </div>
-        {/* Column 2 */}
-        <div className="flex flex-col gap-12">
-          {leftWallTexts
-            .filter(item => item.column === 2)
-            .map((item, index) => (
-              <div
-                key={`left-2-${index}`}
-                className={`text-white/30 font-black cursor-pointer transition-all duration-300 ${
-                  hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
-                }`}
-                style={{
-                  ...getTextAnimation('left', item.delay),
-                  fontSize: 'clamp(40px, 5vw, 72px)'
-                }}
-                onMouseEnter={() => setHoveredText(item.text)}
-                onMouseLeave={() => setHoveredText(null)}
-              >
-                {item.text}
-              </div>
-            ))}
+      {/* Hashtags at bottom */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-4xl px-8">
+        <div className="flex flex-wrap justify-center gap-4">
+          {hashtags.map((tag, index) => (
+            <span 
+              key={index}
+              className="text-white/40 text-sm font-medium opacity-0"
+              style={{
+                animation: isInView ? `fadeInUp 0.5s ease-out ${index * 0.1}s forwards` : 'none'
+              }}
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Right Text Wall */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 flex gap-8 pr-8 md:pr-16">
-        {/* Column 1 */}
-        <div className="flex flex-col gap-12 text-right">
-          {rightWallTexts
-            .filter(item => item.column === 1)
-            .map((item, index) => (
-              <div
-                key={`right-1-${index}`}
-                className={`text-white/30 font-black cursor-pointer transition-all duration-300 ${
-                  hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
-                }`}
-                style={{
-                  ...getTextAnimation('right', item.delay),
-                  fontSize: 'clamp(40px, 5vw, 72px)'
-                }}
-                onMouseEnter={() => setHoveredText(item.text)}
-                onMouseLeave={() => setHoveredText(null)}
-              >
-                {item.text}
-              </div>
-            ))}
-        </div>
-        {/* Column 2 */}
-        <div className="flex flex-col gap-12 text-right">
-          {rightWallTexts
-            .filter(item => item.column === 2)
-            .map((item, index) => (
-              <div
-                key={`right-2-${index}`}
-                className={`text-white/40 font-black cursor-pointer transition-all duration-300 ${
-                  hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
-                }`}
-                style={{
-                  ...getTextAnimation('right', item.delay),
-                  fontSize: 'clamp(48px, 6vw, 80px)'
-                }}
-                onMouseEnter={() => setHoveredText(item.text)}
-                onMouseLeave={() => setHoveredText(null)}
-              >
-                {item.text}
-              </div>
-            ))}
-        </div>
-      </div>
-
-      {/* Central CTA Button */}
-      <div 
-        ref={buttonRef}
-        className={`
-          relative rounded-3xl border-2 border-[#1DB954] 
-          flex items-center justify-center cursor-pointer z-20
-          font-bold text-white transition-all duration-500 ease-out
-          hover:bg-[#1DB954] hover:text-black hover:scale-110
-          ${isAnimating ? 'scale-125 bg-[#1DB954] text-black' : ''}
-        `}
-        style={{
-          width: '200px',
-          height: '80px',
-          fontSize: '32px',
-          fontWeight: 700,
-          letterSpacing: '2px',
-          filter: hoveredText ? 'none' : 'drop-shadow(0 0 40px rgba(29, 185, 84, 0.5))',
-          animation: isInView && !isAnimating ? 'pulse 3s ease-in-out infinite' : 'none'
-        }}
-        onClick={handleButtonClick}
-        onMouseEnter={() => {
-          // Pull texts slightly toward center on button hover
-          const texts = document.querySelectorAll('.text-wall-item')
-          texts.forEach(text => {
-            text.classList.add('translate-x-2')
-          })
-        }}
-        onMouseLeave={() => {
-          const texts = document.querySelectorAll('.text-wall-item')
-          texts.forEach(text => {
-            text.classList.remove('translate-x-2')
-          })
-        }}
-      >
-        <span className="relative z-10">{buttonText}</span>
-        {/* Rotating border effect */}
+      {/* Central CTA Button with Saturn Ring Dots */}
+      <div className="relative" style={{ transform: 'translateY(-30px)' }}>
+        {/* Back Ring Dots (behind button) */}
+        {[...Array(4)].map((_, index) => (
+          <div
+            key={`back-${index}`}
+            className="absolute w-2 h-2 bg-[#1DB954] rounded-full opacity-40"
+            style={{
+              animation: `orbitBack 6s linear infinite`,
+              animationDelay: `${index * 1.5}s`,
+              transformOrigin: '150px 60px',
+              zIndex: 10
+            }}
+          />
+        ))}
+        
         <div 
-          className="absolute inset-0 rounded-3xl"
+          ref={buttonRef}
+          className={`
+            relative rounded-3xl border-2 border-[#1DB954] 
+            flex items-center justify-center cursor-pointer
+            font-bold text-white transition-all duration-500 ease-out
+            hover:bg-[#1DB954] hover:text-black hover:scale-105
+            ${isAnimating ? 'scale-110 bg-[#1DB954] text-black' : ''}
+          `}
           style={{
-            background: `conic-gradient(from 0deg, transparent, #1DB954, transparent)`,
-            animation: 'rotate 4s linear infinite',
-            opacity: 0.3
+            width: '300px',
+            height: '120px',
+            fontSize: '48px',
+            fontWeight: 700,
+            letterSpacing: '3px',
+            filter: 'drop-shadow(0 0 50px rgba(29, 185, 84, 0.4))',
+            animation: isInView && !isAnimating ? 'gentleGlow 4s ease-in-out infinite' : 'none',
+            zIndex: 20
           }}
-        />
+          onClick={handleButtonClick}
+        >
+          <span className="relative z-10">{buttonText}</span>
+        </div>
+
+        {/* Front Ring Dots (in front of button) */}
+        {[...Array(4)].map((_, index) => (
+          <div
+            key={`front-${index}`}
+            className="absolute w-2 h-2 bg-[#1DB954] rounded-full"
+            style={{
+              animation: `orbitFront 6s linear infinite`,
+              animationDelay: `${index * 1.5}s`,
+              transformOrigin: '150px 60px',
+              zIndex: 30
+            }}
+          />
+        ))}
       </div>
 
       {/* Typing Question CTA */}
@@ -333,27 +248,19 @@ const SmartMinimalismContact = () => {
         <div className={`typing-cta ${isTypingComplete ? 'typing-complete' : ''}`}>
           <span className="typing-text text-white/80 font-bold tracking-wide"
             style={{
-              fontSize: 'clamp(48px, 7vw, 72px)'
+              fontSize: 'clamp(28px, 4vw, 43px)'
             }}
           >
             {typingText}
           </span>
           <span className="typing-cursor text-[#1DB954] font-bold ml-1"
             style={{
-              fontSize: 'clamp(48px, 7vw, 72px)'
+              fontSize: 'clamp(28px, 4vw, 43px)'
             }}
           >|</span>
         </div>
       </div>
 
-      {/* Mobile responsive text (bottom) */}
-      <div className="md:hidden absolute bottom-8 left-0 right-0 px-8">
-        <div className="flex justify-between text-white/40 text-sm font-bold">
-          <span>2주 완성</span>
-          <span>340% 성장</span>
-          <span>무료 상담</span>
-        </div>
-      </div>
 
       <style jsx>{`
         @keyframes pulse {
@@ -398,6 +305,68 @@ const SmartMinimalismContact = () => {
           50% {
             opacity: 1;
             text-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes orbitBack {
+          0% {
+            transform: rotate(0deg) translateX(150px) rotateY(0deg) scale(1);
+            opacity: 0;
+          }
+          25% {
+            opacity: 0.4;
+          }
+          50% {
+            transform: rotate(180deg) translateX(150px) rotateY(180deg) scale(0.5);
+            opacity: 0;
+          }
+          75% {
+            opacity: 0.4;
+          }
+          100% {
+            transform: rotate(360deg) translateX(150px) rotateY(360deg) scale(1);
+            opacity: 0;
+          }
+        }
+
+        @keyframes orbitFront {
+          0% {
+            transform: rotate(180deg) translateX(150px) rotateY(180deg) scale(0.5);
+            opacity: 0;
+          }
+          25% {
+            opacity: 1;
+          }
+          50% {
+            transform: rotate(360deg) translateX(150px) rotateY(360deg) scale(1);
+            opacity: 1;
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            transform: rotate(540deg) translateX(150px) rotateY(540deg) scale(0.5);
+            opacity: 0;
+          }
+        }
+
+        @keyframes gentleGlow {
+          0%, 100% {
+            filter: drop-shadow(0 0 50px rgba(29, 185, 84, 0.4));
+          }
+          50% {
+            filter: drop-shadow(0 0 80px rgba(29, 185, 84, 0.7));
           }
         }
 
