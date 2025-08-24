@@ -172,7 +172,7 @@ const SmartMinimalismProcess = () => {
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
             <span className="text-[#1DB954] font-medium">CHIRO</span>
-            <span className="text-white/80">18일</span>
+            <span className="text-white/80">14일</span>
             <span className="text-[#1DB954] text-xl">✓</span>
           </div>
           <div className="flex items-center space-x-3">

@@ -44,8 +44,8 @@ const SmartMinimalismContact = () => {
     { text: '사후 관리', column: 1, delay: 0.55 },
     // Column 2 (fast)
     { text: '98% 만족', column: 2, delay: 0.6 },
-    { text: '27+ 프로젝트', column: 2, delay: 0.65 },
-    { text: 'since 2017', column: 2, delay: 0.7 },
+    { text: '150+ 프로젝트', column: 2, delay: 0.65 },
+    { text: '5년 경험', column: 2, delay: 0.7 },
     { text: '검증된 성과', column: 2, delay: 0.75 },
   ]
 

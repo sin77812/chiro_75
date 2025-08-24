@@ -14,7 +14,7 @@ const SmartMinimalismProof = () => {
   const [counters, setCounters] = useState([
     { current: 0, target: 340, unit: '%', description: '평균 전환율 증가' },
     { current: 0, target: 98, unit: '%', description: '재계약률' },
-    { current: 0, target: 18, unit: '일', description: '평균 완성 기간' }
+    { current: 0, target: 14, unit: '일', description: '평균 완성 기간' }
   ])
 
   useEffect(() => {
