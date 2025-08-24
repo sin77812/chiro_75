@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 // Smart Minimalism Sections
 import SmartMinimalismHero from '@/components/sections/SmartMinimalismHero'
 import SmartMinimalismProof from '@/components/sections/SmartMinimalismProof'
-import SmartMinimalismProcess from '@/components/sections/SmartMinimalismProcess'
 import SmartMinimalismWork from '@/components/sections/SmartMinimalismWork'
 import SmartMinimalismTech from '@/components/sections/SmartMinimalismTech'
 import SmartMinimalismContact from '@/components/sections/SmartMinimalismContact'
@@ -44,16 +43,13 @@ export default function Home() {
         {/* 2. Proof Section - Blur to Focus Counter */}
         <SmartMinimalismProof />
         
-        {/* 3. Process Section - Timeline River */}
-        <SmartMinimalismProcess />
-        
-        {/* 4. Work Section - Choose Your Project */}
+        {/* 3. Work Section - Choose Your Project */}
         <SmartMinimalismWork />
         
-        {/* 5. Tech Section - Tech Stack + Live Monitor */}
+        {/* 4. Tech Section - Tech Stack + Live Monitor */}
         <SmartMinimalismTech />
         
-        {/* 6. Contact Section - CHIRO Orbital Button */}
+        {/* 5. Contact Section - CHIRO Orbital Button */}
         <SmartMinimalismContact />
       </main>
     </>

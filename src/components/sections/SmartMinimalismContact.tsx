@@ -44,8 +44,8 @@ const SmartMinimalismContact = () => {
     { text: '사후 관리', column: 1, delay: 0.55 },
     // Column 2 (fast)
     { text: '98% 만족', column: 2, delay: 0.6 },
-    { text: '150+ 프로젝트', column: 2, delay: 0.65 },
-    { text: '5년 경험', column: 2, delay: 0.7 },
+    { text: '27+ 프로젝트', column: 2, delay: 0.65 },
+    { text: 'since 2017', column: 2, delay: 0.7 },
     { text: '검증된 성과', column: 2, delay: 0.75 },
   ]
 
@@ -111,9 +111,9 @@ const SmartMinimalismContact = () => {
 
   const startTypingSequence = () => {
     const questions = [
-      { text: "준비되셨나요?", hold: 2000, erase: true },
-      { text: "시작하시겠습니까?", hold: 2000, erase: true },
-      { text: "클릭하세요", hold: 0, erase: false }
+      { text: "새로운 프로젝트를 시작할까요?", hold: 2000, erase: true },
+      { text: "함께 성장하고 싶으신가요?", hold: 2000, erase: true },
+      { text: "지금 바로 시작해보세요", hold: 0, erase: false }
     ]
     
     let currentIndex = 0
