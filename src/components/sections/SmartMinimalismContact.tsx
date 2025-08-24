@@ -17,6 +17,9 @@ const SmartMinimalismContact = () => {
   const [buttonText, setButtonText] = useState('CHIRO')
   const [isInView, setIsInView] = useState(false)
   const [hoveredText, setHoveredText] = useState<string | null>(null)
+  const [typingText, setTypingText] = useState('')
+  const [isTypingComplete, setIsTypingComplete] = useState(false)
+  const [typingStarted, setTypingStarted] = useState(false)
 
   // Left wall texts - 2 columns
   const leftWallTexts: TextWallItem[] = [
@@ -53,6 +56,11 @@ const SmartMinimalismContact = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsInView(true)
+            // Start typing sequence after text wall animation
+            if (!typingStarted) {
+              setTypingStarted(true)
+              setTimeout(() => startTypingSequence(), 1500)
+            }
           }
         })
       },
@@ -68,13 +76,77 @@ const SmartMinimalismContact = () => {
         observer.unobserve(containerRef.current)
       }
     }
-  }, [])
+  }, [typingStarted])
+
+  // Typing animation functions
+  const typeWriter = (text: string, callback?: () => void) => {
+    let i = 0
+    const type = () => {
+      if (i < text.length) {
+        setTypingText(prev => prev + text.charAt(i))
+        i++
+        setTimeout(type, 100)
+      } else if (callback) {
+        callback()
+      }
+    }
+    type()
+  }
+
+  const eraseText = (callback?: () => void) => {
+    const interval = setInterval(() => {
+      setTypingText(prev => {
+        if (prev.length > 0) {
+          return prev.substring(0, prev.length - 1)
+        } else {
+          clearInterval(interval)
+          if (callback) {
+            setTimeout(callback, 500)
+          }
+          return ''
+        }
+      })
+    }, 50)
+  }
+
+  const startTypingSequence = () => {
+    const questions = [
+      { text: "준비되셨나요?", hold: 2000, erase: true },
+      { text: "시작하시겠습니까?", hold: 2000, erase: true },
+      { text: "클릭하세요", hold: 0, erase: false }
+    ]
+    
+    let currentIndex = 0
+    
+    const processQuestion = () => {
+      const current = questions[currentIndex]
+      
+      typeWriter(current.text, () => {
+        if (current.erase) {
+          setTimeout(() => {
+            eraseText(() => {
+              currentIndex++
+              if (currentIndex < questions.length) {
+                processQuestion()
+              }
+            })
+          }, current.hold)
+        } else {
+          setIsTypingComplete(true)
+        }
+      })
+    }
+    
+    processQuestion()
+  }
 
   const handleButtonClick = () => {
     if (isAnimating) return
     
     setIsAnimating(true)
     setButtonText('시작합니다')
+    setTypingText('시작합니다...')
+    setIsTypingComplete(false)
     
     // Navigate to contact page after animation
     setTimeout(() => {
@@ -128,7 +200,7 @@ const SmartMinimalismContact = () => {
             .map((item, index) => (
               <div
                 key={`left-1-${index}`}
-                className={`text-white/40 text-lg md:text-xl font-light cursor-pointer transition-all duration-300 ${
+                className={`text-white/40 text-lg md:text-xl font-bold cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
                 }`}
                 style={getTextAnimation('left', item.delay)}
@@ -146,7 +218,7 @@ const SmartMinimalismContact = () => {
             .map((item, index) => (
               <div
                 key={`left-2-${index}`}
-                className={`text-white/30 text-base md:text-lg font-light cursor-pointer transition-all duration-300 ${
+                className={`text-white/30 text-base md:text-lg font-bold cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
                 }`}
                 style={getTextAnimation('left', item.delay)}
@@ -168,7 +240,7 @@ const SmartMinimalismContact = () => {
             .map((item, index) => (
               <div
                 key={`right-1-${index}`}
-                className={`text-white/30 text-base md:text-lg font-light cursor-pointer transition-all duration-300 ${
+                className={`text-white/30 text-base md:text-lg font-bold cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/50'
                 }`}
                 style={getTextAnimation('right', item.delay)}
@@ -186,7 +258,7 @@ const SmartMinimalismContact = () => {
             .map((item, index) => (
               <div
                 key={`right-2-${index}`}
-                className={`text-white/40 text-lg md:text-xl font-light cursor-pointer transition-all duration-300 ${
+                className={`text-white/40 text-lg md:text-xl font-bold cursor-pointer transition-all duration-300 ${
                   hoveredText === item.text ? 'text-[#1DB954] scale-110' : 'hover:text-white/60'
                 }`}
                 style={getTextAnimation('right', item.delay)}
@@ -205,7 +277,7 @@ const SmartMinimalismContact = () => {
         className={`
           relative rounded-full border-2 border-[#1DB954] 
           flex items-center justify-center cursor-pointer z-20
-          font-normal text-white transition-all duration-500 ease-out
+          font-bold text-white transition-all duration-500 ease-out
           hover:bg-[#1DB954] hover:text-black hover:scale-110
           ${isAnimating ? 'scale-125 bg-[#1DB954] text-black' : ''}
         `}
@@ -213,7 +285,7 @@ const SmartMinimalismContact = () => {
           width: '200px',
           height: '200px',
           fontSize: '32px',
-          fontWeight: 300,
+          fontWeight: 700,
           letterSpacing: '2px',
           filter: hoveredText ? 'none' : 'drop-shadow(0 0 40px rgba(29, 185, 84, 0.5))',
           animation: isInView && !isAnimating ? 'pulse 3s ease-in-out infinite' : 'none'
@@ -245,9 +317,24 @@ const SmartMinimalismContact = () => {
         />
       </div>
 
+      {/* Typing Question CTA */}
+      <div 
+        className="absolute left-1/2 -translate-x-1/2"
+        style={{
+          bottom: 'calc(50% - 180px)',
+        }}
+      >
+        <div className={`typing-cta ${isTypingComplete ? 'typing-complete' : ''}`}>
+          <span className="typing-text text-white/80 text-xl md:text-2xl font-bold tracking-wide">
+            {typingText}
+          </span>
+          <span className="typing-cursor text-[#1DB954] text-xl md:text-2xl font-bold ml-0.5">|</span>
+        </div>
+      </div>
+
       {/* Mobile responsive text (bottom) */}
       <div className="md:hidden absolute bottom-8 left-0 right-0 px-8">
-        <div className="flex justify-between text-white/40 text-sm">
+        <div className="flex justify-between text-white/40 text-sm font-bold">
           <span>2주 완성</span>
           <span>340% 성장</span>
           <span>무료 상담</span>
@@ -270,6 +357,33 @@ const SmartMinimalismContact = () => {
           }
           to {
             transform: rotate(360deg);
+          }
+        }
+
+        .typing-cursor {
+          animation: cursorBlink 1s infinite;
+        }
+
+        @keyframes cursorBlink {
+          0%, 49% {
+            opacity: 1;
+          }
+          50%, 100% {
+            opacity: 0;
+          }
+        }
+
+        .typing-complete {
+          animation: gentlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes gentlePulse {
+          0%, 100% {
+            opacity: 0.8;
+          }
+          50% {
+            opacity: 1;
+            text-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
           }
         }
 
