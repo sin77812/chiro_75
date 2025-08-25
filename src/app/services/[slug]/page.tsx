@@ -696,7 +696,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               <div className="space-y-8">
                 <h2 className="font-pretendard font-bold text-white leading-tight">
                   준비 되셨나요?
-                  <span className="text-gradient block">{service.title} Project?</span>
+                  <span className="text-gradient block">비즈니스를 성장으로 이끌 프로젝트</span>
                 </h2>
                 
                 <p className="text-xl text-neutral-light/70 leading-relaxed">
@@ -705,9 +705,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="btn-primary group">
+                  <Link href="/contact" className="btn-primary group">
                     프로젝트 시작하기
-                  </button>
+                  </Link>
                   <Link href="/contact" className="btn-secondary group">
                     상담 예약하기 <Clock className="ml-2 h-4 w-4" />
                   </Link>

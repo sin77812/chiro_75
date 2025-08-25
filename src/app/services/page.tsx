@@ -1,7 +1,8 @@
 'use client'
 
 import React from 'react'
-// import { Metadata } from 'next' // Removed for client component
+// import { Metadata } from 'next'
+import UnifiedCTA from '@/components/sections/UnifiedCTA' // Removed for client component
 import { Play, ArrowRight, CheckCircle, TrendingUp, Shield, Zap, Users, Globe, Code, Palette, Search } from 'lucide-react'
 import Link from 'next/link'
 import servicesData from '@/data/services.json'
@@ -622,6 +623,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+      
+      {/* Unified CTA Section */}
+      <UnifiedCTA />
     </main>
     </>
   )
