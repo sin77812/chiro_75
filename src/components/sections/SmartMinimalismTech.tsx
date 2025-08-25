@@ -209,8 +209,8 @@ const SmartMinimalismTech = () => {
 
   const renderTechIcon = (nodeId: string, isHovered: boolean, isScrambling: boolean) => {
     const iconProps = {
-      width: 32,
-      height: 32,
+      width: 28,
+      height: 28,
       className: `transition-all duration-300 ${isScrambling ? 'opacity-0' : 'opacity-100'}`,
       style: {
         filter: isHovered ? 'drop-shadow(0 2px 8px rgba(29, 185, 84, 0.4))' : 'none'
@@ -287,7 +287,7 @@ const SmartMinimalismTech = () => {
     return (
       <div
         className={`
-          bg-black border-2 border-[#1DB954]/30 rounded-xl p-4
+          bg-black border-2 border-[#1DB954]/30 rounded-xl p-3
           cursor-pointer transition-all duration-300 hover:border-[#1DB954]
           flex flex-col items-center justify-center text-center
           ${isHovered ? 'border-[#1DB954] scale-105' : ''}
@@ -301,7 +301,7 @@ const SmartMinimalismTech = () => {
       >
         {/* Custom SVG Icons for tech nodes */}
         {!isChiro && (
-          <div className="mb-3">
+          <div className="mb-2">
             {renderTechIcon(node.id, isHovered, isScrambling)}
           </div>
         )}
@@ -310,7 +310,7 @@ const SmartMinimalismTech = () => {
         <div 
           className={`
             font-medium transition-all duration-300
-            ${isChiro ? 'text-6xl font-black' : 'text-sm'}
+            ${isChiro ? 'text-5xl font-black' : 'text-xs'}
             ${isHovered ? 'text-[#1DB954]' : 'text-white/70'}
             ${isScrambling ? 'text-white' : ''}
             ${isChiro ? 'font-sans tracking-wider leading-tight text-center' : 'font-mono'}
@@ -333,7 +333,7 @@ const SmartMinimalismTech = () => {
     >
       {/* Unified Bento Box Layout */}
       <div 
-        className="w-full h-full grid gap-3"
+        className="w-full h-full grid gap-5"
         style={{
           gridTemplateColumns: 'repeat(6, 1fr)',
           gridTemplateRows: 'repeat(4, 1fr)',
@@ -358,7 +358,7 @@ const SmartMinimalismTech = () => {
 
         {/* Comprehensive Performance Monitor - Combined */}
         <div 
-          className="bg-black/40 border border-[#1DB954]/20 rounded-xl p-4 backdrop-blur-sm"
+          className="bg-black/40 border border-[#1DB954]/20 rounded-xl p-3 backdrop-blur-sm"
           style={{ gridArea: 'monitor-1' }}
         >
           <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#1DB954]/30">
@@ -409,35 +409,35 @@ const SmartMinimalismTech = () => {
 
         {/* Stats Boxes */}
         <div 
-          className="bg-black/40 border border-[#1DB954]/20 rounded-xl p-4 backdrop-blur-sm flex flex-col justify-center items-center"
+          className="bg-black/40 border border-[#1DB954]/20 rounded-xl p-3 backdrop-blur-sm flex flex-col justify-center items-center"
           style={{ gridArea: 'stats-1' }}
         >
-          <div className="text-xl font-bold text-[#1DB954] mb-1">340%</div>
-          <div className="text-xs text-white/60 text-center">평균 성과 향상</div>
+          <div className="text-lg font-bold text-[#1DB954] mb-1">340%</div>
+          <div className="text-[10px] text-white/60 text-center">평균 성과 향상</div>
         </div>
 
         <div 
-          className="bg-black/40 border border-[#FFD700]/20 rounded-xl p-4 backdrop-blur-sm flex flex-col justify-center items-center"
+          className="bg-black/40 border border-[#FFD700]/20 rounded-xl p-3 backdrop-blur-sm flex flex-col justify-center items-center"
           style={{ gridArea: 'stats-2' }}
         >
-          <div className="text-xl font-bold text-[#FFD700] mb-1">0.8s</div>
-          <div className="text-xs text-white/60 text-center">평균 로딩 속도</div>
+          <div className="text-lg font-bold text-[#FFD700] mb-1">0.8s</div>
+          <div className="text-[10px] text-white/60 text-center">평균 로딩 속도</div>
         </div>
 
         <div 
-          className="bg-black/40 border border-[#00D4FF]/20 rounded-xl p-4 backdrop-blur-sm flex flex-col justify-center items-center"
+          className="bg-black/40 border border-[#00D4FF]/20 rounded-xl p-3 backdrop-blur-sm flex flex-col justify-center items-center"
           style={{ gridArea: 'stats-3' }}
         >
-          <div className="text-xl font-bold text-[#00D4FF] mb-1">99.9%</div>
-          <div className="text-xs text-white/60 text-center">시스템 가동률</div>
+          <div className="text-lg font-bold text-[#00D4FF] mb-1">99.9%</div>
+          <div className="text-[10px] text-white/60 text-center">시스템 가동률</div>
         </div>
 
         <div 
-          className="bg-black/40 border border-white/20 rounded-xl p-4 backdrop-blur-sm flex flex-col justify-center items-center"
+          className="bg-black/40 border border-white/20 rounded-xl p-3 backdrop-blur-sm flex flex-col justify-center items-center"
           style={{ gridArea: 'stats-4' }}
         >
-          <div className="text-xl font-bold text-white mb-1">24/7</div>
-          <div className="text-xs text-white/60 text-center">실시간 모니터링</div>
+          <div className="text-lg font-bold text-white mb-1">24/7</div>
+          <div className="text-[10px] text-white/60 text-center">실시간 모니터링</div>
         </div>
       </div>
 

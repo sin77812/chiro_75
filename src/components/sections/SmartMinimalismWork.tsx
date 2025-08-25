@@ -205,12 +205,12 @@ const SmartMinimalismWork = () => {
           ${isSelected ? 'transform-gpu' : ''}
         `}
         style={{
-          width: '42vw',  // 50% 증가 (28vw * 1.5)
-          height: '31.5vw', // 50% 증가 (21vw * 1.5)
+          width: '33.6vw',  // 80% of 42vw
+          height: '25.2vw', // 80% of 31.5vw
           filter: getProjectStyle(displayIndex).filter,
           opacity: getProjectStyle(displayIndex).opacity,
           zIndex: getProjectStyle(displayIndex).zIndex,
-          left: `calc(50% + ${displayIndex * 35}vw)`,
+          left: `calc(50% + ${displayIndex * 28}vw)`,
           top: '50%',
           transform: `translate(-50%, -50%) ${getProjectStyle(displayIndex).perspectiveTransform}`,
           transformOrigin: 'center center',
