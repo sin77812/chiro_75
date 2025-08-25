@@ -10,6 +10,8 @@
     "gallery": [
       "https://lpt-nu.vercel.app/og-image.jpg"
     ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://lpt-nu.vercel.app/og-image.jpg",
     "year": 2024,
     "category": "service",
     "tags": ["교육", "코칭", "예약시스템", "온라인플랫폼"],
@@ -48,6 +50,8 @@
     "gallery": [
       "https://vercel.com/lpt-webs-projects/grace-speech/og-image.jpg"
     ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://vercel.com/lpt-webs-projects/grace-speech/og-image.jpg",
     "year": 2024,
     "category": "education",
     "tags": ["교육", "스피치", "학원", "프리미엄"],
@@ -86,6 +90,8 @@
     "gallery": [
       "https://nbpkorea.vercel.app/og-image.jpg"
     ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://nbpkorea.vercel.app/og-image.jpg",
     "year": 2024,
     "category": "manufacturing",
     "tags": ["제조업", "B2B", "친환경", "가스설비"],
@@ -124,6 +130,8 @@
     "gallery": [
       "https://www.s-lightings.com/og-image.jpg"
     ],
+    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
+    "after": "https://www.s-lightings.com/og-image.jpg",
     "year": 2024,
     "category": "manufacturing",
     "tags": ["제조업", "조명", "B2B", "중소기업"],
