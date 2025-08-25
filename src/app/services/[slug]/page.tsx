@@ -705,10 +705,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/contact" className="btn-primary group">
+                  <Link href="/consultation" className="btn-primary group">
                     프로젝트 시작하기
                   </Link>
-                  <Link href="/contact" className="btn-secondary group">
+                  <Link href="/consultation" className="btn-secondary group">
                     상담 예약하기 <Clock className="ml-2 h-4 w-4" />
                   </Link>
                 </div>

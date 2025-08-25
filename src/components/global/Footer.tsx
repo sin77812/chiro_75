@@ -37,7 +37,7 @@ export default function Footer({ className = '' }: FooterProps) {
     company: [
       { href: '/about', label: '회사 소개' },
       { href: '/portfolio', label: '포트폴리오' },
-      { href: '/contact', label: '문의하기' },
+      { href: '/consultation', label: '문의하기' },
       { href: '/careers', label: '채용 정보' }
     ],
     legal: [

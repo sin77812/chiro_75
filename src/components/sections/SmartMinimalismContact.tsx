@@ -132,7 +132,7 @@ const SmartMinimalismContact = () => {
     
     // Navigate to contact page after animation
     setTimeout(() => {
-      router.push('/contact')
+      router.push('/consultation')
     }, 1500)
   }
 
