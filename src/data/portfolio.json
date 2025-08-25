@@ -1,104 +1,154 @@
 [
   {
-    "id": "nexus-manufacturing",
-    "title": "넥서스 제조업 포털",
-    "slug": "nexus-manufacturing",
-    "client": "Nexus Manufacturing",
-    "industry": "manufacturing",
-    "services": ["웹 개발", "UX/UI 디자인", "다국어 지원", "SEO 최적화"],
-    "thumbnail": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+    "id": "life-pt",
+    "title": "1대1 자기계발 코칭 플랫폼",
+    "slug": "life-pt",
+    "client": "LIFE PT",
+    "industry": "education",
+    "services": ["웹 개발", "UX/UI 디자인", "예약 시스템", "결제 통합"],
+    "thumbnail": "https://lpt-nu.vercel.app/og-image.jpg",
     "gallery": [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=600&fit=crop"
+      "https://lpt-nu.vercel.app/og-image.jpg"
     ],
-    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
-    "after": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
     "year": 2024,
-    "category": "manufacturing",
-    "tags": ["제조업", "B2B", "반응형", "다국어"],
-    "url": "https://nexus-manufacturing.com",
+    "category": "service",
+    "tags": ["교육", "코칭", "예약시스템", "온라인플랫폼"],
+    "url": "https://lpt-nu.vercel.app",
     "kpis": [
       {
-        "metric": "리드 생성",
-        "value": "+187%",
-        "improvement": "187%"
+        "metric": "예약 전환율",
+        "value": "+245%",
+        "improvement": "245%"
       },
       {
-        "metric": "페이지 로딩 속도",
-        "value": "LCP 1.6s",
-        "improvement": "65%"
+        "metric": "페이지 체류시간",
+        "value": "+180%",
+        "improvement": "180%"
       },
       {
-        "metric": "해외 문의",
+        "metric": "월간 활성 사용자",
         "value": "+320%",
         "improvement": "320%"
       }
     ],
-    "description": "글로벌 제조업 기업의 디지털 전환을 위한 종합 포털 사이트 구축",
-    "problem": "기존 웹사이트가 단순 회사 소개에 그쳐 해외 바이어들의 관심을 끌지 못했습니다",
-    "approach": "다국어 지원 시스템 구축, 제품 카탈로그 최적화, B2B 특화 UX 설계로 글로벌 시장 진출을 지원했습니다",
-    "result": "해외 문의 320% 증가, 리드 생성 187% 향상으로 실질적인 비즈니스 성과를 달성했습니다",
-    "completedAt": "2024-09-15"
+    "description": "개인 맞춤형 자기계발 코칭 서비스를 위한 온라인 플랫폼 구축",
+    "problem": "오프라인 중심의 코칭 서비스로 접근성이 제한적이었고, 체계적인 예약 관리가 어려웠습니다",
+    "approach": "직관적인 예약 시스템, 온라인 화상 코칭 기능, 진도 추적 대시보드를 통합한 올인원 플랫폼 개발",
+    "result": "예약 전환율 245% 증가, 월간 활성 사용자 320% 증가로 비즈니스 확장에 성공했습니다",
+    "completedAt": "2024-11-20"
   },
   {
-    "id": "koretech-solutions",
-    "title": "코리텍 솔루션즈",
-    "slug": "koretech-solutions",
-    "client": "KoreTech Solutions",
-    "industry": "technology",
-    "services": ["SaaS 플랫폼", "대시보드 개발", "API 통합"],
-    "category": "service",
-    "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    "id": "grace-speech",
+    "title": "1대1 프리미엄 스피치 학원",
+    "slug": "grace-speech",
+    "client": "GRACE SPEECH",
+    "industry": "education",
+    "services": ["웹 개발", "브랜딩", "콘텐츠 관리", "SEO 최적화"],
+    "thumbnail": "https://vercel.com/lpt-webs-projects/grace-speech/og-image.jpg",
     "gallery": [
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
+      "https://vercel.com/lpt-webs-projects/grace-speech/og-image.jpg"
     ],
-    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
-    "after": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
     "year": 2024,
-    "tags": ["SaaS", "기술", "대시보드"],
-    "url": "https://koretech-solutions.com",
+    "category": "education",
+    "tags": ["교육", "스피치", "학원", "프리미엄"],
+    "url": "https://vercel.com/lpt-webs-projects/grace-speech",
     "kpis": [
       {
-        "metric": "사용자 참여",
-        "value": "+250%",
-        "improvement": "250%"
+        "metric": "상담 문의",
+        "value": "+312%",
+        "improvement": "312%"
+      },
+      {
+        "metric": "검색 순위",
+        "value": "1페이지",
+        "improvement": "95%"
+      },
+      {
+        "metric": "브랜드 신뢰도",
+        "value": "+220%",
+        "improvement": "220%"
       }
     ],
-    "description": "기업용 SaaS 플랫폼의 사용자 경험 개선",
-    "problem": "복잡한 기업용 솔루션이 사용자들에게 직관적이지 않았습니다",
-    "approach": "사용자 중심의 인터페이스 설계와 대시보드 최적화를 진행했습니다",
-    "result": "사용자 참여도 250% 증가와 함께 고객 만족도가 크게 향상되었습니다",
-    "completedAt": "2024-08-20"
+    "description": "프리미엄 스피치 교육 기관의 온라인 브랜드 구축 및 마케팅 플랫폼 개발",
+    "problem": "높은 교육 품질에도 불구하고 온라인 인지도가 부족하여 신규 수강생 유치에 어려움이 있었습니다",
+    "approach": "프리미엄 브랜드 아이덴티티 구축, 강사 소개 및 커리큘럼 시스템, SEO 최적화를 통한 검색 가시성 확보",
+    "result": "상담 문의 312% 증가, 주요 키워드 검색 1페이지 진입으로 시장 점유율을 확대했습니다",
+    "completedAt": "2024-10-15"
   },
   {
-    "id": "global-dynamics",
-    "title": "글로벌 다이나믹스",
-    "slug": "global-dynamics", 
-    "client": "Global Dynamics Corp",
-    "industry": "consulting",
-    "services": ["기업 웹사이트", "브랜딩", "SEO"],
-    "category": "corporate",
-    "thumbnail": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop",
+    "id": "nbp-korea",
+    "title": "친환경 가스설비 제조업체",
+    "slug": "nbp-korea",
+    "client": "NBP KOREA",
+    "industry": "manufacturing",
+    "services": ["웹 개발", "제품 카탈로그", "다국어 지원", "B2B 최적화"],
+    "thumbnail": "https://nbpkorea.vercel.app/og-image.jpg",
     "gallery": [
-      "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop"
+      "https://nbpkorea.vercel.app/og-image.jpg"
     ],
-    "before": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop",
-    "after": "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop", 
     "year": 2024,
-    "tags": ["컨설팅", "기업", "글로벌"],
-    "url": "https://globaldynamics.com",
+    "category": "manufacturing",
+    "tags": ["제조업", "B2B", "친환경", "가스설비"],
+    "url": "https://nbpkorea.vercel.app",
     "kpis": [
       {
-        "metric": "브랜드 인지도",
-        "value": "+180%",
-        "improvement": "180%"
+        "metric": "해외 바이어 문의",
+        "value": "+428%",
+        "improvement": "428%"
+      },
+      {
+        "metric": "제품 카탈로그 다운로드",
+        "value": "+356%",
+        "improvement": "356%"
+      },
+      {
+        "metric": "평균 체류시간",
+        "value": "+195%",
+        "improvement": "195%"
       }
     ],
-    "description": "글로벌 컨설팅 기업의 브랜드 아이덴티티 구축",
-    "problem": "해외 시장에서 브랜드 인지도가 부족했습니다",
-    "approach": "전문성을 강조한 브랜딩과 SEO 최적화를 통한 온라인 가시성 확보",
-    "result": "브랜드 인지도 180% 증가로 시장 입지를 강화했습니다",
-    "completedAt": "2024-07-10"
+    "description": "친환경 가스설비 전문 제조업체의 글로벌 B2B 플랫폼 구축",
+    "problem": "제품의 기술적 우수성을 효과적으로 전달하지 못하고, 해외 시장 진출에 한계가 있었습니다",
+    "approach": "인터랙티브 제품 카탈로그, 기술 사양 비교 도구, 다국어 지원을 통한 글로벌 접근성 강화",
+    "result": "해외 바이어 문의 428% 증가, 수출 계약 체결로 이어지는 실질적 성과를 달성했습니다",
+    "completedAt": "2024-09-25"
+  },
+  {
+    "id": "s-lighting",
+    "title": "품질 조명 솔루션 중소기업",
+    "slug": "s-lighting",
+    "client": "S-LIGHTING",
+    "industry": "manufacturing",
+    "services": ["웹 개발", "제품 쇼케이스", "견적 시스템", "포트폴리오"],
+    "thumbnail": "https://www.s-lightings.com/og-image.jpg",
+    "gallery": [
+      "https://www.s-lightings.com/og-image.jpg"
+    ],
+    "year": 2024,
+    "category": "manufacturing",
+    "tags": ["제조업", "조명", "B2B", "중소기업"],
+    "url": "https://www.s-lightings.com",
+    "kpis": [
+      {
+        "metric": "온라인 견적 요청",
+        "value": "+267%",
+        "improvement": "267%"
+      },
+      {
+        "metric": "제품 페이지 전환율",
+        "value": "+189%",
+        "improvement": "189%"
+      },
+      {
+        "metric": "신규 거래처",
+        "value": "+145%",
+        "improvement": "145%"
+      }
+    ],
+    "description": "중소 조명 제조업체의 디지털 쇼룸 및 B2B 영업 플랫폼 구축",
+    "problem": "오프라인 영업에만 의존하여 시장 확대가 제한적이고, 제품 포트폴리오를 효과적으로 보여주지 못했습니다",
+    "approach": "3D 제품 뷰어, 프로젝트 포트폴리오 갤러리, 실시간 견적 시스템을 통한 온라인 영업 채널 구축",
+    "result": "온라인 견적 요청 267% 증가, 신규 거래처 145% 증가로 매출 성장을 달성했습니다",
+    "completedAt": "2024-08-30"
   }
 ]

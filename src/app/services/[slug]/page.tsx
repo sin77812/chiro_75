@@ -396,15 +396,26 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
             <FadeRight>
               <div className="relative">
-                <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent-green/20 rounded-2xl flex items-center justify-center border border-primary/20">
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 bg-primary/20 rounded-xl flex items-center justify-center mx-auto">
-                      <Code className="w-10 h-10 text-primary" />
-                    </div>
-                    <p className="text-neutral-light/60 text-sm">
-                      전/후 비교 비디오
-                    </p>
-                  </div>
+                <div className="aspect-video rounded-2xl overflow-hidden border border-primary/20">
+                  {(() => {
+                    const serviceImages: Record<string, string> = {
+                      'web-development': '/image/webuild.png',
+                      'ui-ux-design': '/image/webicon.png',
+                      'performance-optimization': '/image/webengin.png',
+                      'digital-marketing': '/image/webdigital.png',
+                      'maintenance-support': '/image/webuild.png',
+                      'global-expansion': '/image/webdigital.png'
+                    }
+                    const imageSrc = serviceImages[slug] || '/image/webuild.png'
+                    
+                    return (
+                      <img 
+                        src={imageSrc}
+                        alt={`${service.title} 서비스 이미지`}
+                        className="w-full h-full object-cover"
+                      />
+                    )
+                  })()}
                 </div>
               </div>
             </FadeRight>
