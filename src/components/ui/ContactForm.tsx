@@ -23,11 +23,11 @@ interface ContactFormProps {
 
 const budgetOptions = [
   { value: '', label: '예산을 선택해주세요' },
-  { value: 'under-1000', label: '1,000만원 미만' },
-  { value: '1000-3000', label: '1,000만원 - 3,000만원' },
-  { value: '3000-5000', label: '3,000만원 - 5,000만원' },
-  { value: '5000-10000', label: '5,000만원 - 1억원' },
-  { value: 'over-10000', label: '1억원 이상' },
+  { value: 'under-200', label: '200만원 미만' },
+  { value: '300-800', label: '300만원 - 800만원' },
+  { value: '800-1200', label: '800만원 - 1,200만원' },
+  { value: '1200-3000', label: '1200만원 - 3000만원' },
+  { value: 'over-3000', label: '3천만원 이상' },
   { value: 'discuss', label: '상담 후 결정' }
 ]
 

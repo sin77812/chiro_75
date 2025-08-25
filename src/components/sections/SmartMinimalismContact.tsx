@@ -127,7 +127,7 @@ const SmartMinimalismContact = () => {
     
     setIsAnimating(true)
     setButtonText('시작합니다')
-    setTypingText('시작합니다...')
+    setTypingText('선택에 후회없는 결과로 보답하겠습니다.')
     setIsTypingComplete(false)
     
     // Navigate to contact page after animation

@@ -2,7 +2,7 @@
   {
     "id": "web-development",
     "title": "웹사이트 개발",
-    "shortBenefit": "비즈니스 성과를 만드는 전략적 웹사이트",
+    "shortBenefit": "성과를 만들 <br> 전략적 웹사이트",
     "description": "최신 기술 스택으로 구축하는 고성능 반응형 웹사이트. 사용자 경험과 검색 엔진 최적화를 고려한 전문적인 개발 서비스를 제공합니다.",
     "icon": "code",
     "miniCase": {
@@ -27,13 +27,13 @@
   {
     "id": "ui-ux-design",
     "title": "UI/UX 디자인",
-    "shortBenefit": "전환율을 높이는 사용자 중심 디자인",
+    "shortBenefit": "전환율을 높히는 <br> 사용자 중심 디자인",
     "description": "사용자 중심의 인터페이스 설계와 브랜드 아이덴티티를 반영한 시각적 디자인. 전환율 향상을 위한 전략적 UX 설계를 제공합니다.",
     "icon": "palette",
     "miniCase": {
-      "client": "Organic Kitchen Co.",
+      "client": "NBPKOREA",
       "result": "CVR 개선 +300%",
-      "description": "감성적 브랜드 스토리텔링으로 젊은 소비층 공략 성공"
+      "description": "반응형과 사용자 경험 강화로 체류시간 증가."
     },
     "benefits": [
       "사용자 행동 분석 기반 UX 설계",
@@ -52,7 +52,7 @@
   {
     "id": "performance-optimization",
     "title": "성능 최적화",
-    "shortBenefit": "3초 이내 로딩으로 이탈률 최소화",
+    "shortBenefit": "최적화된 속도로 이탈률 최소화",
     "description": "웹사이트 속도 개선과 사용자 경험 향상을 위한 종합적인 성능 최적화 서비스. Core Web Vitals 기준 충족으로 SEO 효과까지 극대화합니다.",
     "icon": "zap",
     "miniCase": {

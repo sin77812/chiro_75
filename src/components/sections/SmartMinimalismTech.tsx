@@ -310,7 +310,7 @@ const SmartMinimalismTech = () => {
         <div 
           className={`
             font-medium transition-all duration-300
-            ${isChiro ? 'text-5xl font-black' : 'text-xs'}
+            ${isChiro ? 'text-8xl font-black' : 'text-xs'}
             ${isHovered ? 'text-[#1DB954]' : 'text-white/70'}
             ${isScrambling ? 'text-white' : ''}
             ${isChiro ? 'font-sans tracking-wider leading-tight text-center' : 'font-mono'}
@@ -333,7 +333,7 @@ const SmartMinimalismTech = () => {
     >
       {/* Unified Bento Box Layout */}
       <div 
-        className="w-full h-full grid gap-5"
+        className="w-full h-full grid gap-6"
         style={{
           gridTemplateColumns: 'repeat(6, 1fr)',
           gridTemplateRows: 'repeat(4, 1fr)',

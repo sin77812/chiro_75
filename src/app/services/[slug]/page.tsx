@@ -607,67 +607,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </section>
       )}
 
-      {/* Pricing Packages */}
-      {extensions.packages && (
-        <section className="section-padding bg-gradient-to-b from-shadow-gray/5 to-dark">
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <FadeUp>
-                <h2 className="font-pretendard font-bold mb-6">
-                  Flexible <span className="text-gradient">Packages</span>
-                </h2>
-                <p className="text-xl text-neutral-light/70 max-w-2xl mx-auto leading-relaxed">
-                  Choose the package that best fits your project scope and budget
-                </p>
-              </FadeUp>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {extensions.packages.map((pkg: any, index: number) => (
-                <FadeUp key={index} delay={index * 150}>
-                  <div className={`relative p-8 rounded-2xl border transition-all duration-300 h-full ${
-                    pkg.popular 
-                      ? 'bg-primary/10 border-primary/30 scale-105 shadow-2xl' 
-                      : 'bg-shadow-gray/20 border-shadow-gray/30 hover:border-primary/20'
-                  }`}>
-                    {pkg.popular && (
-                      <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <div className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
-                          Most Popular
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="text-center mb-8">
-                      <h3 className="text-2xl font-pretendard font-bold text-white mb-4">{pkg.name}</h3>
-                      <div className="text-3xl font-bold text-primary mb-2">{pkg.price}</div>
-                      <p className="text-neutral-light/60 text-sm mb-4">{pkg.duration}</p>
-                      <p className="text-neutral-light/80 leading-relaxed">{pkg.description}</p>
-                    </div>
-
-                    <div className="space-y-4 mb-8">
-                      {pkg.features.map((feature: string, idx: number) => (
-                        <div key={idx} className="flex items-center space-x-3">
-                          <CheckCircle className="w-5 h-5 text-accent-green flex-shrink-0" />
-                          <span className="text-neutral-light/80 text-sm">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <button className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
-                      pkg.popular
-                        ? 'bg-primary hover:bg-primary/90 text-white'
-                        : 'bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20'
-                    }`}>
-                      {pkg.price === 'Custom Quote' ? 'Get Custom Quote' : 'Start Project'}
-                    </button>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Client Testimonial */}
       {extensions.testimonials && (
@@ -756,7 +695,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <FadeUp>
               <div className="space-y-8">
                 <h2 className="font-pretendard font-bold text-white leading-tight">
-                  Ready to Start Your
+                  준비 되셨나요?
                   <span className="text-gradient block">{service.title} Project?</span>
                 </h2>
                 
@@ -770,8 +709,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     프로젝트 시작하기
                   </button>
                   <Link href="/contact" className="btn-secondary group">
-                    상담 예약하기
-                    <Clock className="ml-2 h-4 w-4" />
+                    상담 예약하기 <Clock className="ml-2 h-4 w-4" />
                   </Link>
                 </div>
 
