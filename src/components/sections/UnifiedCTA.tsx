@@ -26,7 +26,7 @@ export default function UnifiedCTA() {
                   프로젝트 시작하기
                 </Link>
                 <Link href="/consultation" className="btn-secondary group">
-                  상담 예약하기 <Clock className="ml-2 h-4 w-4" />
+                  상담 예약하기
                 </Link>
               </div>
 

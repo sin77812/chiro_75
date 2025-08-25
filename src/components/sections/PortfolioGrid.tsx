@@ -253,9 +253,9 @@ export default function PortfolioGrid() {
         {/* View All Button */}
         <div className="text-center mt-12">
           {/* TODO: Implement infinite scroll or pagination based on user preference and performance considerations */}
-          <button className="btn-primary group">
+          <button className="btn-primary group inline-flex items-center">
             전체 포트폴리오 보기
-            <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform inline-block" />
           </button>
         </div>
       </div>
