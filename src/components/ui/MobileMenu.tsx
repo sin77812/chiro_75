@@ -120,9 +120,13 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
                 메뉴
               </h2>
               <button
-                onClick={onClose}
-                onTouchStart={onClose}
-                className="p-3 -mr-2 text-neutral-light/60 hover:text-white hover:bg-shadow-gray/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30"
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  onClose()
+                  console.log('Close button clicked, menu should close')
+                }}
+                className="p-3 -mr-2 text-neutral-light/60 hover:text-white hover:bg-shadow-gray/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30 relative z-[70]"
                 aria-label="메뉴 닫기"
                 style={{ WebkitTapHighlightColor: 'transparent' }}
               >
@@ -149,8 +153,11 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
                       {item.hasDropdown && item.submenu ? (
                         <div>
                           <button
-                            onClick={() => setExpandedMenu(isExpanded ? null : item.label)}
-                            onTouchStart={() => setExpandedMenu(isExpanded ? null : item.label)}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              setExpandedMenu(isExpanded ? null : item.label)
+                            }}
                             className={cn(
                               "w-full flex items-center justify-between px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200 touch-manipulation select-none active:scale-[0.98]",
                               {

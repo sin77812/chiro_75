@@ -245,12 +245,17 @@ export default function Navbar() {
 
             {/* 모바일 햄버거 버튼 */}
             <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              onTouchStart={() => setIsMobileMenuOpen(true)}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                setIsMobileMenuOpen(true)
+                console.log('Hamburger clicked, menu should open')
+              }}
               className={cn(
                 "lg:hidden p-3 text-neutral-light hover:text-white hover:bg-shadow-gray/20 rounded-lg",
                 "transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50",
-                "touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30"
+                "touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30",
+                "relative z-[60]" // z-index를 높여서 확실히 클릭 가능하도록
               )}
               aria-label="메뉴 열기"
               aria-expanded={isMobileMenuOpen}
