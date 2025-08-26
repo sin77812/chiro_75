@@ -178,19 +178,19 @@ const SmartMinimalismHero = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center"
-      style={{
-        padding: '10vw'
-      }}
+      className="relative h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center px-[10%]"
     >
       {/* Main Title with Magnetic Typography */}
-      <div className="text-center">
+      <div className="text-center w-full">
         {mainTextLines.map((line, lineIndex) => (
           <div
             key={lineIndex}
             className="block text-white font-bold tracking-tight"
             style={{
-              fontSize: lineIndex === 0 ? 'clamp(3rem, 12vw, 14.625rem)' : 'clamp(2rem, 6vw, 7.5rem)',
+              // 반응형 크기: 화면 너비의 80%를 글자 수로 나눔
+              fontSize: lineIndex === 0 
+                ? `clamp(3.5rem, 16vw, 14.625rem)`  // CHIRO - 모바일에서 더 크게
+                : `clamp(2.5rem, 8.8vw, 7.5rem)`,   // WEBDESIGN - 비율 맞춤
               lineHeight: 0.9,
               letterSpacing: '-0.02em'
             }}

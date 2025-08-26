@@ -72,6 +72,9 @@ const itemVariants = {
 export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuProps) {
   const pathname = usePathname()
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null)
+  
+  // 디버깅을 위한 로그
+  console.log('MobileMenu rendered, isOpen:', isOpen)
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -86,16 +89,18 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
     }
   }, [isOpen])
 
-  // Close menu on pathname change
+  // Close menu on pathname change (only when actually navigating)
   useEffect(() => {
-    onClose()
-  }, [pathname, onClose])
+    if (isOpen) {
+      onClose()
+    }
+  }, [pathname]) // onClose를 dependency에서 제거하여 무한 루프 방지
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[60] lg:hidden"
+          className="fixed inset-0 z-[60]"  // lg:hidden 제거하여 모든 화면에서 표시
           variants={overlayVariants}
           initial="closed"
           animate="open"
