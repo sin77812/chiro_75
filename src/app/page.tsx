@@ -77,7 +77,6 @@ export const metadata: Metadata = {
   
   verification: {
     google: 'google-site-verification-code',
-    naver: 'naver-site-verification-code',
   },
   
   authors: [{ name: 'CHIRO', url: 'https://chiro-75.vercel.app' }],
@@ -88,7 +87,6 @@ export const metadata: Metadata = {
   
   // 추가 설정
   other: {
-    'naver-site-verification': 'your-naver-code',
     'og:phone_number': '02-1234-5678',
     'og:email': 'hello@chiro.agency',
     'og:latitude': '37.5665',
