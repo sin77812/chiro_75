@@ -150,10 +150,7 @@ const SmartMinimalismHero = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center"
-      style={{
-        padding: '10vw'
-      }}
+      className="relative min-h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 py-20"
     >
       {/* Main Title with Magnetic Typography */}
       <div className="text-center">
@@ -162,9 +159,10 @@ const SmartMinimalismHero = () => {
             key={lineIndex}
             className="block text-white font-bold tracking-tight"
             style={{
-              fontSize: lineIndex === 0 ? 'clamp(117px, 15.6vw, 234px)' : 'clamp(60px, 8vw, 120px)',
-              lineHeight: 0.9,
-              letterSpacing: '-0.02em'
+              fontSize: lineIndex === 0 ? 'clamp(60px, 12vw, 234px)' : 'clamp(32px, 7vw, 120px)',
+              lineHeight: lineIndex === 0 ? 1 : 0.9,
+              letterSpacing: '-0.02em',
+              marginBottom: lineIndex === 0 ? 'clamp(8px, 2vw, 24px)' : 0
             }}
           >
             {line.split('').map((char, charIndex) => (
@@ -180,13 +178,14 @@ const SmartMinimalismHero = () => {
 
       {/* Subtext with Typing Effect - Isolated from mouse events */}
       <div 
-        className="absolute text-white/60 text-xl left-1/2 transform -translate-x-1/2 pointer-events-none"
+        className="absolute text-white/60 text-sm sm:text-base md:text-lg lg:text-xl left-1/2 transform -translate-x-1/2 pointer-events-none px-4 text-center"
         style={{
-          bottom: '15vh'
+          bottom: 'clamp(60px, 10vh, 120px)',
+          maxWidth: '90vw'
         }}
       >
         {isSubtextVisible && (
-          <div className="whitespace-nowrap">
+          <div className="whitespace-normal sm:whitespace-nowrap">
             {subtextChars.map((char, index) => (
               <TypingChar key={`typing-${index}`} char={char} index={index} />
             ))}
@@ -197,7 +196,7 @@ const SmartMinimalismHero = () => {
 
       {/* Scroll Indicator */}
       <div 
-        className="absolute flex flex-col items-center"
+        className="absolute flex flex-col items-center hidden sm:flex"
         style={{ bottom: '5vh' }}
       >
         <div 

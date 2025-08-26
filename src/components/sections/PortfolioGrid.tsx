@@ -111,16 +111,16 @@ export default function PortfolioGrid() {
         </div>
 
         {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {filteredAndSortedProjects.slice(0, 9).map((project, index) => (
             <div
               key={project.id}
-              className="group relative bg-shadow-gray/20 rounded-2xl overflow-hidden border border-shadow-gray/30 hover:border-primary/30 transition-all duration-500 card-hover"
+              className="group relative bg-shadow-gray/20 rounded-xl sm:rounded-2xl overflow-hidden border border-shadow-gray/30 hover:border-primary/30 transition-all duration-500 card-hover"
               onMouseEnter={() => setHoveredItem(project.id)}
               onMouseLeave={() => setHoveredItem(null)}
             >
               {/* Image Container */}
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                 <Image
                   src={project.thumbnail}
                   alt={project.title}
@@ -128,36 +128,18 @@ export default function PortfolioGrid() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 
-                {/* Before/After Toggle on Hover */}
-                {project.before && project.after && hoveredItem === project.id && (
-                  <div className="absolute inset-0 bg-dark/90 flex items-center justify-center z-10">
-                    <div className="text-center space-y-4">
-                      <div className="text-primary font-medium">Before → After</div>
-                      <div className="flex space-x-4">
-                        <div className="w-24 h-16 relative rounded overflow-hidden">
-                          <Image
-                            src={project.before}
-                            alt="Before"
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 bg-red-500/80 text-white text-xs text-center py-1">
-                            Before
-                          </div>
-                        </div>
-                        <ChevronRight className="h-6 w-6 text-primary self-center" />
-                        <div className="w-24 h-16 relative rounded overflow-hidden">
-                          <Image
-                            src={project.after}
-                            alt="After"
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 bg-primary text-white text-xs text-center py-1">
-                            After
-                          </div>
-                        </div>
-                      </div>
+                {/* Project Description on Hover */}
+                {hoveredItem === project.id && (
+                  <div className="absolute inset-0 bg-dark/90 flex items-center justify-center z-10 p-6">
+                    <div className="text-center space-y-3 max-w-xs">
+                      <h4 className="text-primary font-semibold text-lg">{project.title}</h4>
+                      <p className="text-white/90 text-sm leading-relaxed">
+                        {project.id === 'coaching-platform' && '간단한 강의 소개를 위한 홈페이지'}
+                        {project.id === 'speech-academy' && '스피치 학원의 더욱 깔끔한 웹을 위한 리모델링'}
+                        {project.id === 'gas-equipment' && '기존에 양산형 웹으로 반응형도 무너지고 최신 기술 스택과 맞지않는 노후된 웹 개선'}
+                        {project.id === 'lighting-company' && '기존에 카달로그만 존재하던 것을 웹 사이트로 탈바꿈'}
+                        {!['coaching-platform', 'speech-academy', 'gas-equipment', 'lighting-company'].includes(project.id) && project.description}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -204,9 +186,9 @@ export default function PortfolioGrid() {
               </div>
 
               {/* Content */}
-              <div className="p-6 space-y-4">
+              <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
                 <div>
-                  <h3 className="text-xl font-pretendard font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-lg sm:text-xl font-pretendard font-semibold text-white mb-2 group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-neutral-light/70 text-sm leading-relaxed line-clamp-2">
@@ -215,11 +197,11 @@ export default function PortfolioGrid() {
                 </div>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {project.tags.slice(0, 3).map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full"
+                      className="px-2 py-1 bg-primary/10 text-primary text-[10px] sm:text-xs rounded-full"
                     >
                       {tag}
                     </span>
@@ -228,9 +210,9 @@ export default function PortfolioGrid() {
 
                 {/* KPIs */}
                 {project.kpis.length > 0 && (
-                  <div className="border-t border-shadow-gray/30 pt-4 space-y-2">
+                  <div className="border-t border-shadow-gray/30 pt-3 sm:pt-4 space-y-1.5 sm:space-y-2">
                     {project.kpis.slice(0, 2).map((kpi, idx) => (
-                      <div key={idx} className="flex items-center justify-between text-sm">
+                      <div key={idx} className="flex items-center justify-between text-xs sm:text-sm">
                         <span className="text-neutral-light/60">{kpi.metric}</span>
                         <div className="flex items-center space-x-1">
                           <span className="text-primary font-semibold">{kpi.value}</span>

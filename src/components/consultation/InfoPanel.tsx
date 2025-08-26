@@ -11,12 +11,6 @@ interface InfoPanelProps {
 export default function InfoPanel({ currentStep }: InfoPanelProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
-  const getEstimate = () => {
-    let base = 300
-    let additional = currentStep * 50
-    return base + additional
-  }
-
   const faqs = [
     {
       question: "상담만 받아도 되나요?",
@@ -38,35 +32,8 @@ export default function InfoPanel({ currentStep }: InfoPanelProps) {
 
   return (
     <div className="space-y-6">
-      {/* Real-time Estimate */}
-      <FadeUp>
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 sticky top-24">
-          <h3 className="text-xl font-bold text-white mb-4 flex items-center">
-            💰 예상 견적
-          </h3>
-          
-          <div className="space-y-3 mb-4">
-            <div className="flex justify-between items-center">
-              <span className="text-white/70">기본 제작비</span>
-              <span className="text-white font-medium">300만원~</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-white/70">선택 기능</span>
-              <span className="text-white font-medium">+{(currentStep - 1) * 50}만원</span>
-            </div>
-            <hr className="border-white/20" />
-            <div className="flex justify-between items-center text-lg">
-              <span className="text-white font-semibold">예상 총액</span>
-              <span className="text-primary font-bold">{getEstimate()}만원~</span>
-            </div>
-          </div>
-          
-          <p className="text-white/50 text-xs">* 정확한 견적은 상담 후 제공됩니다</p>
-        </div>
-      </FadeUp>
-
       {/* Process Timeline */}
-      <FadeUp delay={100}>
+      <FadeUp>
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <h3 className="text-xl font-bold text-white mb-6 flex items-center">
             📋 상담 후 프로세스
@@ -111,7 +78,7 @@ export default function InfoPanel({ currentStep }: InfoPanelProps) {
       </FadeUp>
 
       {/* FAQ */}
-      <FadeUp delay={200}>
+      <FadeUp delay={100}>
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
           <h3 className="text-xl font-bold text-white mb-6 flex items-center">
             ❓ 자주 묻는 질문
@@ -143,7 +110,7 @@ export default function InfoPanel({ currentStep }: InfoPanelProps) {
       </FadeUp>
 
       {/* Contact Card */}
-      <FadeUp delay={300}>
+      <FadeUp delay={200}>
         <div className="bg-gradient-to-br from-primary/20 to-accent-green/20 backdrop-blur-sm rounded-2xl p-6 border border-primary/30">
           <div className="text-center">
             <h3 className="text-white font-bold mb-2">급하신가요?</h3>
@@ -171,7 +138,7 @@ export default function InfoPanel({ currentStep }: InfoPanelProps) {
       </FadeUp>
 
       {/* Real-time Activity */}
-      <FadeUp delay={400}>
+      <FadeUp delay={300}>
         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
           <div className="flex items-center space-x-3">
             <div className="w-3 h-3 bg-accent-green rounded-full animate-pulse"></div>

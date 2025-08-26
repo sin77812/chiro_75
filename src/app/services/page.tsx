@@ -236,7 +236,7 @@ export default function ServicesPage() {
           </div>
 
           {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
             {[
               {
                 id: 'web-development',
@@ -285,7 +285,7 @@ export default function ServicesPage() {
                 <FadeUp key={service.id} delay={index * 150}>
                   <Link href={service.link}>
                     <article 
-                      className="group relative overflow-hidden rounded-2xl cursor-pointer h-[350px] lg:h-[400px]"
+                      className="group relative overflow-hidden rounded-2xl cursor-pointer h-[280px] sm:h-[320px] lg:h-[360px] xl:h-[380px]"
                       onClick={() => {
                         ServiceAnalytics.viewService(service.id, service.title)
                       }}
@@ -303,43 +303,38 @@ export default function ServicesPage() {
                       </div>
 
                       {/* Content */}
-                      <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-10">
+                      <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 lg:p-7 xl:p-8">
                         {/* Icon & Category */}
                         <div className="flex items-start justify-between">
-                          <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 bg-white/10 backdrop-blur-sm group-hover:bg-primary group-hover:scale-110">
-                            <IconComponent className="w-7 h-7 text-primary group-hover:text-white transition-colors duration-300" />
-                          </div>
-                          
-                          {/* Hover indicator */}
-                          <div className="w-12 h-12 rounded-full border-2 border-white/30 group-hover:border-primary group-hover:bg-primary/20 group-hover:scale-110 flex items-center justify-center transition-all duration-300">
-                            <div className="w-4 h-4 border-t-2 border-r-2 rotate-45 border-white group-hover:border-primary transition-colors duration-300" />
+                          <div className="w-12 h-12 lg:w-14 lg:h-14 rounded-2xl flex items-center justify-center transition-all duration-300 bg-white/10 backdrop-blur-sm group-hover:bg-primary group-hover:scale-110">
+                            <IconComponent className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
                           </div>
                         </div>
 
                         {/* Service Info */}
                         <div className="space-y-4">
                           {/* Title */}
-                          <h3 className="text-2xl lg:text-3xl font-pretendard font-bold text-white">
+                          <h3 className="text-lg sm:text-xl lg:text-xl xl:text-2xl font-pretendard font-bold text-white">
                             {service.title}
                           </h3>
 
                           {/* Value Proposition */}
-                          <p className="text-lg text-white/90 leading-relaxed font-light">
+                          <p className="text-sm sm:text-base lg:text-base xl:text-lg text-white/90 leading-relaxed font-light">
                             {service.value}
                           </p>
 
                           {/* Description */}
-                          <p className="text-white/70 leading-relaxed">
+                          <p className="text-xs sm:text-sm lg:text-sm xl:text-base text-white/70 leading-relaxed">
                             {service.description}
                           </p>
 
                           {/* Stats */}
-                          <div className="pt-4 border-t border-white/20">
+                          <div className="pt-3 sm:pt-4 border-t border-white/20">
                             <div className="flex items-center justify-between">
-                              <span className="text-accent-green font-semibold text-sm">
+                              <span className="text-accent-green font-semibold text-xs sm:text-sm">
                                 {service.stats}
                               </span>
-                              <span className="text-sm font-medium text-white/60 group-hover:text-primary transition-colors duration-300">
+                              <span className="text-[10px] sm:text-xs lg:text-xs xl:text-sm font-medium text-white/60 group-hover:text-primary transition-colors duration-300">
                                 자세히 보기
                               </span>
                             </div>

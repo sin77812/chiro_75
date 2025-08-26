@@ -181,17 +181,27 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     setSubmitStatus('submitting')
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Send form data to API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          budget: formData.budget,
+          services: formData.services,
+          message: formData.message
+        })
+      })
       
-      // Here you would make actual API call
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
+      const result = await response.json()
       
-      setSubmitStatus('success')
+      if (response.ok) {
+        setSubmitStatus('success')
+      } else {
+        throw new Error(result.error || '전송 중 오류가 발생했습니다')
+      }
     } catch (error) {
       setSubmitStatus('error')
       console.error('Form submission error:', error)
