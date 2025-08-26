@@ -97,6 +97,7 @@ export default function Navbar() {
             'translate-y-0': !isHidden
           }
         )}
+        data-lenis-prevent
       >
         {/* 하단 그라디언트 테두리 */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-30" />
@@ -105,13 +106,15 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-full">
             
             {/* 로고 */}
-            <Logo 
-              variant={isScrolled ? 'compact' : 'default'}
-              className="transition-all duration-300"
-            />
+            <div data-lenis-prevent>
+              <Logo 
+                variant={isScrolled ? 'compact' : 'default'}
+                className="transition-all duration-300"
+              />
+            </div>
 
             {/* 데스크톱 네비게이션 */}
-            <nav className="hidden lg:flex items-center space-x-1" aria-label="메인 메뉴">
+            <nav className="hidden lg:flex items-center space-x-1" aria-label="메인 메뉴" data-lenis-prevent>
               {menuItems.map((item) => {
                 const isActive = pathname === item.href
                 const isCTA = item.isHighlighted
@@ -252,6 +255,7 @@ export default function Navbar() {
               aria-label="메뉴 열기"
               aria-expanded={isMobileMenuOpen}
               style={{ WebkitTapHighlightColor: 'transparent' }}
+              data-lenis-prevent
             >
               <Menu className="h-6 w-6" />
             </button>

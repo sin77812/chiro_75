@@ -25,6 +25,7 @@ export default function Logo({
         linkClassName
       )}
       aria-label="CHIRO 홈페이지"
+      data-lenis-prevent
     >
       {/* Logo Symbol */}
       <div className={cn(

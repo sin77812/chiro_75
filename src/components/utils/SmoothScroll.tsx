@@ -32,13 +32,21 @@ export default function SmoothScroll() {
       }
     }
 
-    // Initialize Lenis only on desktop
+    // Initialize Lenis only on desktop with navbar exception
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       wheelMultiplier: 1,
       touchMultiplier: 2,
       infinite: false,
+      // Prevent smooth scroll from interfering with navigation touch events
+      prevent: (node: Element) => {
+        // Allow normal touch behavior on navbar and navigation elements
+        return node.closest('nav') !== null || 
+               node.closest('header') !== null || 
+               node.closest('[role="navigation"]') !== null ||
+               node.hasAttribute('data-lenis-prevent')
+      }
     })
 
     // Integrate with GSAP
