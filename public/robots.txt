@@ -1,21 +1,27 @@
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://chiro.co.kr/sitemap.xml
+# Sitemaps
+Sitemap: https://chiro-75.vercel.app/sitemap.xml
 
-# Disallow admin and private areas
-Disallow: /admin/
+# Specific bots optimization
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Yeti
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Disallow sensitive areas
 Disallow: /api/
 Disallow: /_next/
+Disallow: /admin/
 Disallow: /private/
 
-# Allow important paths for SEO
+# Allow important SEO paths
 Allow: /portfolio
 Allow: /services
 Allow: /about
-Allow: /contact
-Allow: /case/*
-
-# Crawl delay for better server performance
-Crawl-delay: 1
+Allow: /consultation

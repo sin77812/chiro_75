@@ -68,11 +68,15 @@ export default function Navbar() {
   const handleDropdownEnter = (label: string) => {
     if (dropdownTimeoutRef.current) {
       clearTimeout(dropdownTimeoutRef.current)
+      dropdownTimeoutRef.current = null
     }
     setActiveDropdown(label)
   }
 
   const handleDropdownLeave = () => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current)
+    }
     dropdownTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null)
     }, 150)
@@ -82,7 +86,7 @@ export default function Navbar() {
     <>
       <header 
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
           {
             // 스크롤 전: 반투명 + 큰 높이
             'bg-dark/70 backdrop-blur-md h-18': !isScrolled,
@@ -136,7 +140,7 @@ export default function Navbar() {
                   return (
                     <div
                       key={item.href}
-                      className="relative"
+                      className="relative group"
                       onMouseEnter={() => handleDropdownEnter(item.label)}
                       onMouseLeave={handleDropdownLeave}
                     >
@@ -175,11 +179,11 @@ export default function Navbar() {
                       {/* 드롭다운 메뉴 */}
                       <div
                         className={cn(
-                          "absolute top-full left-0 mt-2 w-56 rounded-xl bg-dark/95 backdrop-blur-xl border border-shadow-gray/20 shadow-xl",
-                          "transition-all duration-200 ease-out",
+                          "absolute top-full left-0 mt-2 w-56 rounded-xl bg-dark/95 backdrop-blur-xl border border-shadow-gray/20 shadow-xl z-50",
+                          "transition-all duration-200 ease-out pointer-events-auto",
                           activeDropdown === item.label
-                            ? "opacity-100 translate-y-0 visible"
-                            : "opacity-0 -translate-y-2 invisible"
+                            ? "opacity-100 translate-y-0 visible pointer-events-auto"
+                            : "opacity-0 -translate-y-2 invisible pointer-events-none"
                         )}
                       >
                         <div className="py-2">

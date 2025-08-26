@@ -387,8 +387,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     프로젝트 시작하기
                   </button>
                   <button className="btn-secondary group">
-                    사례 연구 보기
-                    <Play className="ml-2 h-4 w-4" />
+                    <span className="flex items-center whitespace-nowrap">
+                      사례 연구 보기 <Play className="ml-2 h-4 w-4" />
+                    </span>
                   </button>
                 </div>
               </div>
@@ -720,7 +721,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     프로젝트 시작하기
                   </Link>
                   <Link href="/consultation" className="btn-secondary group">
-                    상담 예약하기 <Clock className="ml-2 h-4 w-4" />
+                    <span className="flex items-center whitespace-nowrap">
+                      상담 예약하기 <Clock className="ml-2 h-4 w-4" />
+                    </span>
                   </Link>
                 </div>
 

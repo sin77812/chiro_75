@@ -8,6 +8,7 @@ const SmartMinimalismHero = () => {
   const [isSubtextVisible, setIsSubtextVisible] = useState(false)
   const [hasAnimationStarted, setHasAnimationStarted] = useState(false)
   const animationFrameRef = useRef<number>()
+  const [isMobile, setIsMobile] = useState(false)
 
   const mainTextLines = [
     "CHIRO",
@@ -34,6 +35,21 @@ const SmartMinimalismHero = () => {
       return () => container.removeEventListener('mousemove', handleMouseMove)
     }
   }, [handleMouseMove])
+
+  // Device detection and initialization
+  useEffect(() => {
+    const checkDevice = () => {
+      const width = window.innerWidth
+      setIsMobile(width <= 480) // Only disable on mobile phones, not tablets
+    }
+    
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    
+    return () => {
+      window.removeEventListener('resize', checkDevice)
+    }
+  }, [])
 
   // Start typing animation independently of mouse events
   useEffect(() => {
@@ -76,6 +92,16 @@ const SmartMinimalismHero = () => {
     const animationFrameRef = useRef<number>()
 
     useEffect(() => {
+      // Skip magnetic effects on mobile devices
+      if (isMobile) {
+        if (charRef.current) {
+          charRef.current.style.transform = 'none'
+          charRef.current.style.color = 'white'
+          charRef.current.style.textShadow = 'none'
+        }
+        return
+      }
+
       const updateOffset = () => {
         if (charRef.current && containerRef.current) {
           const charRect = charRef.current.getBoundingClientRect()
@@ -105,14 +131,16 @@ const SmartMinimalismHero = () => {
         animationFrameRef.current = requestAnimationFrame(updateOffset)
       }
 
-      animationFrameRef.current = requestAnimationFrame(updateOffset)
+      if (!isMobile) {
+        animationFrameRef.current = requestAnimationFrame(updateOffset)
+      }
       
       return () => {
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current)
         }
       }
-    }, [])
+    }, [isMobile, calculateMagneticOffset])
 
     return (
       <span
@@ -150,7 +178,10 @@ const SmartMinimalismHero = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center px-4 sm:px-6 md:px-8 py-20"
+      className="relative h-screen bg-[#0E1111] overflow-hidden flex items-center justify-center"
+      style={{
+        padding: '10vw'
+      }}
     >
       {/* Main Title with Magnetic Typography */}
       <div className="text-center">
@@ -159,10 +190,9 @@ const SmartMinimalismHero = () => {
             key={lineIndex}
             className="block text-white font-bold tracking-tight"
             style={{
-              fontSize: lineIndex === 0 ? 'clamp(60px, 12vw, 234px)' : 'clamp(32px, 7vw, 120px)',
-              lineHeight: lineIndex === 0 ? 1 : 0.9,
-              letterSpacing: '-0.02em',
-              marginBottom: lineIndex === 0 ? 'clamp(8px, 2vw, 24px)' : 0
+              fontSize: lineIndex === 0 ? 'clamp(3rem, 12vw, 14.625rem)' : 'clamp(2rem, 6vw, 7.5rem)',
+              lineHeight: 0.9,
+              letterSpacing: '-0.02em'
             }}
           >
             {line.split('').map((char, charIndex) => (
@@ -178,25 +208,23 @@ const SmartMinimalismHero = () => {
 
       {/* Subtext with Typing Effect - Isolated from mouse events */}
       <div 
-        className="absolute text-white/60 text-sm sm:text-base md:text-lg lg:text-xl left-1/2 transform -translate-x-1/2 pointer-events-none px-4 text-center"
+        className="absolute text-white/60 text-xl left-1/2 transform -translate-x-1/2 pointer-events-none"
         style={{
-          bottom: 'clamp(60px, 10vh, 120px)',
-          maxWidth: '90vw'
+          bottom: '15vh'
         }}
       >
         {isSubtextVisible && (
-          <div className="whitespace-normal sm:whitespace-nowrap">
+          <div className="whitespace-nowrap">
             {subtextChars.map((char, index) => (
               <TypingChar key={`typing-${index}`} char={char} index={index} />
             ))}
-            <span className="animate-pulse ml-1">|</span>
           </div>
         )}
       </div>
 
       {/* Scroll Indicator */}
       <div 
-        className="absolute flex flex-col items-center hidden sm:flex"
+        className="absolute flex flex-col items-center"
         style={{ bottom: '5vh' }}
       >
         <div 

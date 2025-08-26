@@ -128,22 +128,6 @@ export default function PortfolioGrid() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 
-                {/* Project Description on Hover */}
-                {hoveredItem === project.id && (
-                  <div className="absolute inset-0 bg-dark/90 flex items-center justify-center z-10 p-6">
-                    <div className="text-center space-y-3 max-w-xs">
-                      <h4 className="text-primary font-semibold text-lg">{project.title}</h4>
-                      <p className="text-white/90 text-sm leading-relaxed">
-                        {project.id === 'coaching-platform' && '간단한 강의 소개를 위한 홈페이지'}
-                        {project.id === 'speech-academy' && '스피치 학원의 더욱 깔끔한 웹을 위한 리모델링'}
-                        {project.id === 'gas-equipment' && '기존에 양산형 웹으로 반응형도 무너지고 최신 기술 스택과 맞지않는 노후된 웹 개선'}
-                        {project.id === 'lighting-company' && '기존에 카달로그만 존재하던 것을 웹 사이트로 탈바꿈'}
-                        {!['coaching-platform', 'speech-academy', 'gas-equipment', 'lighting-company'].includes(project.id) && project.description}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
                 {/* Performance Badge - Shows on Hover */}
                 {hoveredItem === project.id && project.kpis.length > 0 && (
                   <div className="absolute top-4 left-4 z-20 animate-fade-in">
@@ -158,29 +142,31 @@ export default function PortfolioGrid() {
                   {filters.find(f => f.key === project.category || f.key === project.industry)?.label || project.industry}
                 </div>
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-dark/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="text-center space-y-3">
-                    <h3 className="text-lg font-bold text-white">{project.title}</h3>
-                    <div className="flex space-x-2">
-                      <Link 
-                        href={`/case/${project.slug}`}
-                        className="px-3 py-2 bg-primary hover:bg-primary/90 text-white text-sm rounded-lg transition-colors"
-                      >
-                        <ExternalLink className="h-3 w-3 inline mr-1" />
-                        사례 보기
-                      </Link>
-                      {project.url && (
+                {/* Combined Hover Overlay - Description + Buttons */}
+                <div className="absolute inset-0 bg-dark/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                  <div className="text-center space-y-4 max-w-xs px-4">
+                    <h3 className="text-primary font-semibold text-lg">{project.title}</h3>
+                    <p className="text-white/90 text-sm leading-relaxed">
+                      {project.id === 'coaching-platform' && '간단한 강의 소개를 위한 홈페이지'}
+                      {project.id === 'speech-academy' && '스피치 학원의 더욱 깔끔한 웹을 위한 리모델링'}
+                      {project.id === 'gas-equipment' && '기존에 양산형 웹으로 반응형도 무너지고 최신 기술 스택과 맞지않는 노후된 웹 개선'}
+                      {project.id === 'lighting-company' && '기존에 카달로그만 존재하던 것을 웹 사이트로 탈바꿈'}
+                      {!['coaching-platform', 'speech-academy', 'gas-equipment', 'lighting-company'].includes(project.id) && project.description}
+                    </p>
+                    {/* Single Button - Site Visit Only */}
+                    {project.url && (
+                      <div className="pt-2">
                         <a 
                           href={project.url} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="px-3 py-2 bg-white/20 hover:bg-white/30 text-white text-sm rounded-lg transition-colors"
+                          className="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
                         >
-                          사이트 방문
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          사이트 보기
                         </a>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

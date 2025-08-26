@@ -20,12 +20,27 @@ const SmartMinimalismContact = () => {
   const [typingText, setTypingText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
   const [typingStarted, setTypingStarted] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   // Hashtags for bottom display
   const hashtags = [
     '#2주완성', '#빠른응답', '#즉시시작', '#바로런칭', 
     '#98%만족', '#27+프로젝트', '#since2017', '#검증된성과'
   ]
+
+  // Device detection
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+    
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    
+    return () => {
+      window.removeEventListener('resize', checkDevice)
+    }
+  }, [])
 
   // Intersection observer for scroll trigger
   useEffect(() => {
@@ -209,11 +224,11 @@ const SmartMinimalismContact = () => {
             ${isAnimating ? 'scale-110 bg-[#1DB954] text-black' : ''}
           `}
           style={{
-            width: '300px',
-            height: '120px',
-            fontSize: '48px',
+            width: isMobile ? '250px' : '300px',
+            height: isMobile ? '80px' : '120px',
+            fontSize: isMobile ? '32px' : '48px',
             fontWeight: 700,
-            letterSpacing: '3px',
+            letterSpacing: isMobile ? '2px' : '3px',
             filter: 'drop-shadow(0 0 50px rgba(29, 185, 84, 0.4))',
             animation: isInView && !isAnimating ? 'gentleGlow 4s ease-in-out infinite' : 'none',
             zIndex: 20
@@ -248,14 +263,14 @@ const SmartMinimalismContact = () => {
         <div className={`typing-cta ${isTypingComplete ? 'typing-complete' : ''}`}>
           <span className="typing-text text-white/80 font-bold tracking-wide"
             style={{
-              fontSize: 'clamp(28px, 4vw, 43px)'
+              fontSize: isMobile ? 'clamp(18px, 5vw, 28px)' : 'clamp(28px, 4vw, 43px)'
             }}
           >
             {typingText}
           </span>
           <span className="typing-cursor text-[#1DB954] font-bold ml-1"
             style={{
-              fontSize: 'clamp(28px, 4vw, 43px)'
+              fontSize: isMobile ? 'clamp(18px, 5vw, 28px)' : 'clamp(28px, 4vw, 43px)'
             }}
           >|</span>
         </div>

@@ -95,7 +95,7 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 lg:hidden"
+          className="fixed inset-0 z-[60] lg:hidden"
           variants={overlayVariants}
           initial="closed"
           animate="open"

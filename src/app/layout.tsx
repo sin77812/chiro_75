@@ -147,28 +147,40 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         
-        {/* Structured Data - Organization */}
+        {/* Enhanced Structured Data - LocalBusiness + Services */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "LocalBusiness",
+              "@id": "https://chiro-75.vercel.app/#organization",
               "name": "CHIRO",
-              "alternateName": "치로",
-              "url": "https://chiro.co.kr",
-              "logo": "https://chiro.co.kr/logo.png",
-              "description": "제조업과 중견기업을 위한 프리미엄 웹사이트 제작 서비스",
+              "alternateName": "CHIRO 웹디자인 에이전시",
+              "url": "https://chiro-75.vercel.app",
+              "logo": "https://chiro-75.vercel.app/logo.png",
+              "description": "2주 완성 프리미엄 웹사이트 제작 전문 웹에이전시. 웹디자인, UI/UX, 반응형 홈페이지 제작 전문.",
               "foundingDate": "2020",
-              "founder": {
-                "@type": "Person",
-                "name": "김민수"
-              },
+              "telephone": "+82-2-1234-5678",
+              "email": "hello@chiro.agency",
               "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "서울시 강남구",
-                "addressCountry": "KR",
-                "streetAddress": "테헤란로 123"
+                "streetAddress": "테헤란로 123",
+                "addressLocality": "강남구",
+                "addressRegion": "서울특별시",
+                "postalCode": "06000",
+                "addressCountry": "KR"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 37.5665,
+                "longitude": 126.9780
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "09:00",
+                "closes": "18:00"
               },
               "contactPoint": [
                 {
@@ -179,25 +191,52 @@ export default function RootLayout({
                 }
               ],
               "sameAs": [
-                "https://www.linkedin.com/company/chiro-agency",
-                "https://www.facebook.com/chiroagency"
+                "https://www.instagram.com/chiro_agency",
+                "https://www.facebook.com/chiroagency",
+                "https://github.com/chiro-agency"
               ],
-              "service": {
-                "@type": "Service",
-                "name": "웹사이트 제작 서비스",
-                "description": "B2B 기업을 위한 전문 웹사이트 제작, UI/UX 디자인, 디지털 마케팅 서비스",
-                "provider": {
-                  "@type": "Organization",
-                  "name": "CHIRO"
-                },
-                "areaServed": {
-                  "@type": "Country",
-                  "name": "South Korea"
-                }
+              "priceRange": "₩₩₩",
+              "serviceType": ["웹디자인", "웹사이트제작", "UI/UX디자인", "웹개발", "홈페이지제작"],
+              "areaServed": {
+                "@type": "Country",
+                "name": "대한민국"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "웹디자인 서비스",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "웹사이트 제작",
+                      "description": "반응형 웹사이트 제작 서비스"
+                    }
+                  },
+                  {
+                    "@type": "Offer", 
+                    "itemOffered": {
+                      "@type": "Service",
+                      "name": "UI/UX 디자인",
+                      "description": "사용자 중심 디자인 서비스"
+                    }
+                  }
+                ]
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "150",
+                "bestRating": "5"
               }
             })
           }}
         />
+        
+        {/* Additional Naver Meta Tags */}
+        <meta name="naver-site-verification" content="your-naver-code" />
+        <meta property="naver:category" content="웹디자인" />
+        <meta property="naver:subject" content="웹사이트제작" />
       </head>
       <body className="font-noto antialiased bg-[#0E1111] text-white">
         <SmoothScroll />

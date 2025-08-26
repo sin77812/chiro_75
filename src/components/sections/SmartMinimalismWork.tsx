@@ -23,19 +23,6 @@ const SmartMinimalismWork = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
-  
-  // Handle responsive state
-  useEffect(() => {
-    const checkResponsive = () => {
-      setIsMobile(window.innerWidth < 768)
-      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024)
-    }
-    
-    checkResponsive()
-    window.addEventListener('resize', checkResponsive)
-    return () => window.removeEventListener('resize', checkResponsive)
-  }, [])
 
   const projects: Project[] = [
     {
@@ -101,6 +88,20 @@ const SmartMinimalismWork = () => {
     return () => clearInterval(interval)
   }, [isVisible, isPaused, projects.length])
 
+  // Device detection
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth <= 768) // Mobile/tablet detection for layout changes
+    }
+    
+    checkDevice()
+    window.addEventListener('resize', checkDevice)
+    
+    return () => {
+      window.removeEventListener('resize', checkDevice)
+    }
+  }, [])
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -121,6 +122,9 @@ const SmartMinimalismWork = () => {
   }, [])
 
   useEffect(() => {
+    // Skip mouse tracking on mobile
+    if (isMobile) return
+
     const handleMouseMove = (e: MouseEvent) => {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect()
@@ -136,30 +140,20 @@ const SmartMinimalismWork = () => {
       section.addEventListener('mousemove', handleMouseMove)
       return () => section.removeEventListener('mousemove', handleMouseMove)
     }
-  }, [])
+  }, [isMobile])
 
-  // Get visible projects based on screen size
+  // Get 3 visible projects (previous, current, next) for infinite loop
   const getVisibleProjects = () => {
     const total = projects.length
     const visibleProjects = []
     
-    if (isMobile) {
-      // Only show current project on mobile
+    for (let i = -1; i <= 1; i++) {
+      const index = (selectedIndex + i + total) % total
       visibleProjects.push({
-        project: projects[selectedIndex],
-        index: selectedIndex,
-        displayIndex: 0
+        project: projects[index],
+        index: index,
+        displayIndex: i // -1 (left), 0 (center), 1 (right)
       })
-    } else {
-      // Show 3 projects on tablet/desktop
-      for (let i = -1; i <= 1; i++) {
-        const index = (selectedIndex + i + total) % total
-        visibleProjects.push({
-          project: projects[index],
-          index: index,
-          displayIndex: i // -1 (left), 0 (center), 1 (right)
-        })
-      }
     }
     
     return visibleProjects
@@ -228,17 +222,25 @@ const SmartMinimalismWork = () => {
           transition-all duration-1000 ease-in-out
           ${isSelected ? 'transform-gpu' : ''}
         `}
-        style={{
-          width: isMobile ? '80vw' : isTablet ? '40vw' : '33.6vw',
-          height: isMobile ? '100vw' : isTablet ? '30vw' : '25.2vw',
-          filter: isMobile ? 'none' : getProjectStyle(displayIndex).filter,
-          opacity: isMobile ? 1 : getProjectStyle(displayIndex).opacity,
-          zIndex: isMobile ? 30 : getProjectStyle(displayIndex).zIndex,
-          left: isMobile ? '50%' : `calc(50% + ${displayIndex * (isTablet ? 25 : 28)}vw)`,
+        style={isMobile ? {
+          // Mobile: Simple full-width card
+          width: '100%',
+          height: '280px',
+          position: 'relative',
+          filter: 'none',
+          opacity: 1,
+          zIndex: 1,
+          transform: 'none'
+        } : {
+          // Desktop: 3D carousel
+          width: '33.6vw',  // 80% of 42vw
+          height: '25.2vw', // 80% of 31.5vw
+          filter: getProjectStyle(displayIndex).filter,
+          opacity: getProjectStyle(displayIndex).opacity,
+          zIndex: getProjectStyle(displayIndex).zIndex,
+          left: `calc(50% + ${displayIndex * 28}vw)`,
           top: '50%',
-          transform: isMobile 
-            ? 'translate(-50%, -50%)' 
-            : `translate(-50%, -50%) ${getProjectStyle(displayIndex).perspectiveTransform}`,
+          transform: `translate(-50%, -50%) ${getProjectStyle(displayIndex).perspectiveTransform}`,
           transformOrigin: 'center center',
           transformStyle: 'preserve-3d'
         }}
@@ -316,7 +318,7 @@ const SmartMinimalismWork = () => {
   return (
     <section 
       ref={sectionRef}
-      className="min-h-[80vh] bg-[#0E1111] relative overflow-hidden flex flex-col justify-center py-16 md:py-0"
+      className="min-h-[90vh] bg-[#0E1111] relative overflow-hidden flex flex-col justify-center"
       style={{
         perspective: '1500px'
       }}
@@ -326,7 +328,7 @@ const SmartMinimalismWork = () => {
       {/* Title */}
       <div 
         className={`
-          text-center mb-8 md:mb-20 transition-all duration-1000 ease-out px-4
+          text-center mb-20 transition-all duration-1000 ease-out
           ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
         `}
       >
@@ -343,19 +345,34 @@ const SmartMinimalismWork = () => {
       </div>
 
       {/* Project Selection Area */}
-      <div className="relative flex-1 flex items-center justify-center w-full" style={{ minHeight: isMobile ? '400px' : '450px' }}>
-        {getVisibleProjects().map(({ project, index, displayIndex }) => (
-          <ProjectCard key={`${project.id}-${displayIndex}`} project={project} index={index} displayIndex={displayIndex} />
-        ))}
-      </div>
+      {isMobile ? (
+        /* Mobile: Single Card Layout */
+        <div className="relative flex-1 flex items-center justify-center w-full px-4" style={{ minHeight: '400px' }}>
+          <div className="w-full max-w-sm">
+            <ProjectCard 
+              key={projects[selectedIndex].id} 
+              project={projects[selectedIndex]} 
+              index={selectedIndex} 
+              displayIndex={0} 
+            />
+          </div>
+        </div>
+      ) : (
+        /* Desktop: 3D Carousel */
+        <div className="relative flex-1 flex items-center justify-center w-full" style={{ minHeight: '450px' }}>
+          {getVisibleProjects().map(({ project, index, displayIndex }) => (
+            <ProjectCard key={`${project.id}-${displayIndex}`} project={project} index={index} displayIndex={displayIndex} />
+          ))}
+        </div>
+      )}
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-4 md:bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2 md:space-x-4">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4 z-50">
         {projects.map((_, index) => (
           <button
             key={index}
             className={`
-              w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ease-out
+              w-3 h-3 rounded-full transition-all duration-300 ease-out
               ${index === selectedIndex 
                 ? 'bg-[#1DB954] scale-125' 
                 : 'bg-white/30 hover:bg-white/50'
@@ -371,29 +388,20 @@ const SmartMinimalismWork = () => {
         ))}
       </div>
 
-      {/* View More Portfolio Button - Mobile */}
-      {isMobile && (
-        <div className="text-center mt-8">
-          <button 
-            onClick={() => router.push('/portfolio')}
-            className="px-4 py-2 bg-[#1DB954] text-white text-sm font-medium rounded-lg hover:bg-[#1ed760] transition-all duration-300"
-          >
-            더 많은 포트폴리오 보기
-          </button>
-        </div>
-      )}
-      
-      {/* View More Portfolio Button - Desktop */}
-      {!isMobile && (
-        <div className="absolute bottom-10 right-10">
-          <button 
-            onClick={() => router.push('/portfolio')}
-            className="px-6 py-3 bg-[#1DB954] text-white font-medium rounded-lg hover:bg-[#1ed760] transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#1DB954]/30"
-          >
-            더 많은 포트폴리오 보기
-          </button>
-        </div>
-      )}
+      {/* View More Portfolio Button - Mobile Optimized Overlap */}
+      <div className={`${isMobile ? 'absolute bottom-4 right-4 z-50' : 'absolute bottom-10 right-10'}`}>
+        <button 
+          onClick={() => router.push('/portfolio')}
+          className={`
+            bg-[#1DB954] text-white font-medium rounded-lg 
+            hover:bg-[#1ed760] transition-all duration-300 hover:scale-105 
+            hover:shadow-lg hover:shadow-[#1DB954]/30
+            ${isMobile ? 'px-4 py-2 text-sm' : 'px-6 py-3'}
+          `}
+        >
+          {isMobile ? '더보기' : '더 많은 포트폴리오 보기'}
+        </button>
+      </div>
 
     </section>
   )
