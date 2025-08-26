@@ -243,12 +243,15 @@ export default function Navbar() {
             {/* 모바일 햄버거 버튼 */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
+              onTouchStart={() => setIsMobileMenuOpen(true)}
               className={cn(
-                "lg:hidden p-2 text-neutral-light hover:text-white hover:bg-shadow-gray/20 rounded-lg",
-                "transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                "lg:hidden p-3 text-neutral-light hover:text-white hover:bg-shadow-gray/20 rounded-lg",
+                "transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50",
+                "touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30"
               )}
               aria-label="메뉴 열기"
               aria-expanded={isMobileMenuOpen}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <Menu className="h-6 w-6" />
             </button>

@@ -121,8 +121,10 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
               </h2>
               <button
                 onClick={onClose}
-                className="p-2 -mr-2 text-neutral-light/60 hover:text-white hover:bg-shadow-gray/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50"
+                onTouchStart={onClose}
+                className="p-3 -mr-2 text-neutral-light/60 hover:text-white hover:bg-shadow-gray/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 touch-manipulation select-none active:scale-95 active:bg-shadow-gray/30"
                 aria-label="메뉴 닫기"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 <X className="h-6 w-6" />
               </button>
@@ -148,13 +150,15 @@ export default function MobileMenu({ isOpen, onClose, menuItems }: MobileMenuPro
                         <div>
                           <button
                             onClick={() => setExpandedMenu(isExpanded ? null : item.label)}
+                            onTouchStart={() => setExpandedMenu(isExpanded ? null : item.label)}
                             className={cn(
-                              "w-full flex items-center justify-between px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200",
+                              "w-full flex items-center justify-between px-4 py-3 rounded-xl font-inter font-medium text-base transition-all duration-200 touch-manipulation select-none active:scale-[0.98]",
                               {
                                 'text-primary bg-primary/10': isActive,
-                                'text-neutral-light hover:text-white hover:bg-shadow-gray/20': !isActive
+                                'text-neutral-light hover:text-white hover:bg-shadow-gray/20 active:bg-shadow-gray/30': !isActive
                               }
                             )}
+                            style={{ WebkitTapHighlightColor: 'transparent' }}
                           >
                             <span>{item.label}</span>
                             <ChevronDown 
