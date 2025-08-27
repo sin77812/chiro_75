@@ -27,7 +27,7 @@ const SmartMinimalismTech = () => {
   const [lastUpdated, setLastUpdated] = useState(0)
   const [projectData, setProjectData] = useState<ProjectData[]>([
     {
-      name: 'Project A',
+      name: 'LIFE PT',
       status: 'live',
       conversion: 312,
       duration: '3:24',
@@ -35,7 +35,7 @@ const SmartMinimalismTech = () => {
       trend: [65, 72, 68, 78, 85, 82, 89]
     },
     {
-      name: 'Project B', 
+      name: 'NBPKOREA', 
       status: 'live',
       conversion: 256,
       duration: '2:45',
@@ -43,7 +43,7 @@ const SmartMinimalismTech = () => {
       trend: [58, 61, 67, 72, 69, 75, 78]
     },
     {
-      name: 'Project C',
+      name: 'GRACE SPEECH',
       status: 'live',
       conversion: 428,
       duration: '4:12', 
@@ -347,7 +347,7 @@ const SmartMinimalismTech = () => {
                   <span className="tabular-nums">0.96s</span>
                 </div>
                 <div>
-                  이번 주 최고 기록: <span className="text-[#1DB954]">Project C</span>
+                  이번 주 최고 기록: <span className="text-[#1DB954]">GRACE SPEECH</span>
                 </div>
               </div>
             </div>
