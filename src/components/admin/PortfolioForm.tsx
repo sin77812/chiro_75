@@ -91,6 +91,7 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
   const [serviceInput, setServiceInput] = useState('')
   const [tagInput, setTagInput] = useState('')
   const [uploading, setUploading] = useState(false)
+  const [saving, setSaving] = useState(false)
 
   const generateSlug = (title: string) => {
     return title
@@ -235,7 +236,7 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!formData.title || !formData.client || !formData.description) {
@@ -243,7 +244,20 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
       return
     }
 
-    onSave(formData)
+    if (saving) {
+      return // 중복 제출 방지
+    }
+
+    setSaving(true)
+    
+    try {
+      await onSave(formData)
+    } catch (error) {
+      console.error('Error saving portfolio:', error)
+      alert('저장 중 오류가 발생했습니다. 다시 시도해주세요.')
+    } finally {
+      setSaving(false)
+    }
   }
 
   return (
@@ -263,9 +277,16 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
           <button
             type="submit"
             form="portfolio-form"
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+            disabled={saving || uploading}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors duration-200 flex items-center gap-2"
           >
-            {isEditing ? '수정하기' : '추가하기'}
+            {saving && (
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            )}
+            {saving ? (isEditing ? '수정 중...' : '추가 중...') : (isEditing ? '수정하기' : '추가하기')}
           </button>
         </div>
       </div>

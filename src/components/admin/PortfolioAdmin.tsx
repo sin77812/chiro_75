@@ -74,11 +74,15 @@ export default function PortfolioAdmin() {
         await loadPortfolioData()
         setViewMode('list')
         setEditingItem(null)
+        alert(editingItem ? '포트폴리오가 성공적으로 수정되었습니다!' : '새 포트폴리오가 성공적으로 추가되었습니다!')
       } else {
-        console.error('Failed to save portfolio item')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        console.error('Failed to save portfolio item:', errorData)
+        throw new Error(errorData.error || 'Failed to save portfolio item')
       }
     } catch (error) {
       console.error('Error saving portfolio item:', error)
+      throw error // 폼에서 에러를 처리할 수 있도록 다시 throw
     }
   }
 
