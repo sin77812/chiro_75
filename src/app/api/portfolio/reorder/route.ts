@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
+import { kv } from '@vercel/kv'
 
 const PORTFOLIO_FILE = path.join(process.cwd(), 'src/data/portfolio.json')
+const KV_KEY = 'portfolio_data'
+const isProduction = process.env.NODE_ENV === 'production'
 
 interface PortfolioItem {
   id: string
@@ -57,8 +60,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Item IDs do not match' }, { status: 400 })
     }
 
-    // 새 순서로 파일에 저장
-    await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(items, null, 2))
+    // 새 순서로 저장
+    if (isProduction && process.env.KV_URL) {
+      await kv.set(KV_KEY, items)
+    } else {
+      await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(items, null, 2))
+    }
 
     return NextResponse.json({ success: true, message: 'Portfolio order updated successfully' })
   } catch (error) {
