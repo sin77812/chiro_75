@@ -92,12 +92,19 @@ const SmartMinimalismProof = () => {
       }
     }
 
+    const handleTouch = (e: TouchEvent) => {
+      if (isActive) {
+        e.preventDefault()
+        // 터치 이벤트는 단순히 차단만 하고 별도 로직 없음
+      }
+    }
+
     // 스크롤 이벤트들을 더 강력하게 제어
     const scrollOptions = { passive: false, capture: true }
     
     window.addEventListener('scroll', handleScroll, scrollOptions)
     window.addEventListener('wheel', handleWheel, scrollOptions)
-    window.addEventListener('touchmove', handleWheel, scrollOptions) // 모바일 터치 지원
+    window.addEventListener('touchmove', handleTouch, scrollOptions) // 모바일 터치 지원
 
     // 키보드 스크롤도 제어
     const handleKeydown = (e: KeyboardEvent) => {
@@ -114,7 +121,7 @@ const SmartMinimalismProof = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll, scrollOptions)
       window.removeEventListener('wheel', handleWheel, scrollOptions)
-      window.removeEventListener('touchmove', handleWheel, scrollOptions)
+      window.removeEventListener('touchmove', handleTouch, scrollOptions)
       window.removeEventListener('keydown', handleKeydown)
       
       // 컴포넌트 언마운트 시 body 스타일 완전 초기화
