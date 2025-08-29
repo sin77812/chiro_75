@@ -22,27 +22,26 @@ const SmartMinimalismProof = () => {
     const section = sectionRef.current
     if (!section) return
 
-    const handleScroll = (e?: Event) => {
-      if (isActive) {
-        // 활성화된 상태에서는 스크롤 이벤트 자체를 막기
-        e?.preventDefault?.()
-        return
-      }
+    let currentScrollPosition = 0
 
+    const handleScroll = (e?: Event) => {
       const rect = section.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      const sectionHeight = rect.height
-
-      // 섹션이 화면 중앙에 있는지 확인
-      const centerY = windowHeight / 2
+      
+      // 섹션이 화면 중앙 근처에 있는지 확인 (더 넓은 범위)
       const sectionTop = rect.top
       const sectionBottom = rect.bottom
+      const centerY = windowHeight / 2
 
-      // 섹션이 화면에 충분히 들어왔을 때만 활성화
-      if (sectionTop <= centerY && sectionBottom >= centerY) {
-        setIsActive(true)
-        document.body.style.overflow = 'hidden'
-        window.scrollTo({ top: window.scrollY, behavior: 'auto' }) // 스크롤 위치 고정
+      if (sectionTop <= centerY * 1.2 && sectionBottom >= centerY * 0.8) {
+        if (!isActive) {
+          currentScrollPosition = window.scrollY
+          setIsActive(true)
+          document.body.style.overflow = 'hidden'
+          document.body.style.position = 'fixed'
+          document.body.style.top = `-${currentScrollPosition}px`
+          document.body.style.width = '100%'
+        }
       }
     }
 
@@ -75,11 +74,19 @@ const SmartMinimalismProof = () => {
               setIsCompleted(false)
               setExtraScrollProgress(0)
               setScrollProgress(0)
-              document.body.style.overflow = 'auto'
               
-              // 자연스러운 스크롤 재개를 위한 작은 스크롤
-              window.scrollBy({ top: 50, behavior: 'smooth' })
-            }, 100)
+              // body 스타일 완전 초기화
+              document.body.style.overflow = ''
+              document.body.style.position = ''
+              document.body.style.top = ''
+              document.body.style.width = ''
+              
+              // 원래 스크롤 위치 + 약간의 추가로 복원
+              window.scrollTo({ 
+                top: currentScrollPosition + 100, 
+                behavior: 'smooth' 
+              })
+            }, 200)
           }
         }
       }
@@ -109,7 +116,12 @@ const SmartMinimalismProof = () => {
       window.removeEventListener('wheel', handleWheel, scrollOptions)
       window.removeEventListener('touchmove', handleWheel, scrollOptions)
       window.removeEventListener('keydown', handleKeydown)
-      document.body.style.overflow = 'auto'
+      
+      // 컴포넌트 언마운트 시 body 스타일 완전 초기화
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.width = ''
     }
   }, [isActive, scrollProgress, isCompleted, extraScrollProgress])
 
