@@ -143,7 +143,7 @@ const SmartMinimalismProof = () => {
 
       <section 
         ref={sectionRef}
-        className="h-[150vh] relative overflow-hidden text-sequence-section"
+        className="h-screen relative overflow-hidden text-sequence-section"
         style={{
           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)'
         }}
