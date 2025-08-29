@@ -6,6 +6,8 @@ const SmartMinimalismProof = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isActive, setIsActive] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
+  const [extraScrollProgress, setExtraScrollProgress] = useState(0)
 
   // 단계별 텍스트 정의
   const textSteps = [
@@ -29,19 +31,16 @@ const SmartMinimalismProof = () => {
       const centerY = windowHeight / 2
       const sectionCenterY = rect.top + sectionHeight / 2
       const distanceFromCenter = Math.abs(centerY - sectionCenterY)
-      const threshold = windowHeight * 0.3 // 30% 여유
+      const threshold = windowHeight * 0.2 // 20% 여유로 더 엄격하게
 
       if (distanceFromCenter < threshold) {
         setIsActive(true)
-        
-        // 스크롤 진행도 계산 (0-1 범위)
-        const progress = Math.min(Math.max((centerY - rect.top) / sectionHeight, 0), 1)
-        setScrollProgress(progress)
-        
-        // 세로 스크롤 잠금 (body 스크롤 방지)
         document.body.style.overflow = 'hidden'
-      } else {
+      } else if (!isCompleted || extraScrollProgress >= 1) {
+        // 완성되지 않았거나 추가 스크롤이 완료된 경우에만 해제
         setIsActive(false)
+        setIsCompleted(false)
+        setExtraScrollProgress(0)
         document.body.style.overflow = 'auto'
       }
     }
@@ -50,10 +49,32 @@ const SmartMinimalismProof = () => {
       if (isActive) {
         e.preventDefault()
         
-        // 휠 델타를 이용한 가로 스크롤 시뮬레이션
         const delta = e.deltaY
-        const newProgress = Math.min(Math.max(scrollProgress + delta * 0.001, 0), 1)
-        setScrollProgress(newProgress)
+        
+        if (!isCompleted) {
+          // 문장 완성 전: 일반적인 진행도 증가
+          const newProgress = Math.min(Math.max(scrollProgress + delta * 0.001, 0), 1)
+          setScrollProgress(newProgress)
+          
+          // 문장 완성 체크
+          if (newProgress >= 0.99 && !isCompleted) {
+            setIsCompleted(true)
+            setScrollProgress(1) // 정확히 1로 설정
+          }
+        } else {
+          // 문장 완성 후: 추가 스크롤 진행도 계산
+          const newExtraProgress = Math.min(Math.max(extraScrollProgress + delta * 0.002, 0), 1)
+          setExtraScrollProgress(newExtraProgress)
+          
+          // 추가 스크롤 완료 시 섹션 해제
+          if (newExtraProgress >= 1) {
+            setIsActive(false)
+            setIsCompleted(false)
+            setExtraScrollProgress(0)
+            setScrollProgress(0)
+            document.body.style.overflow = 'auto'
+          }
+        }
       }
     }
 
@@ -68,7 +89,7 @@ const SmartMinimalismProof = () => {
       window.removeEventListener('wheel', handleWheel)
       document.body.style.overflow = 'auto'
     }
-  }, [isActive, scrollProgress])
+  }, [isActive, scrollProgress, isCompleted, extraScrollProgress])
 
   // 현재 표시할 텍스트 결정
   const getCurrentText = () => {
@@ -152,17 +173,35 @@ const SmartMinimalismProof = () => {
       </div>
 
       {/* 하단 가이드 텍스트 */}
-      {isActive && scrollProgress < 1 && (
+      {isActive && (
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center">
-          <div className="text-white/60 text-sm mb-2">
-            계속 스크롤하세요
-          </div>
-          <div className="w-16 h-1 bg-white/20 rounded-full mx-auto">
-            <div 
-              className="h-full bg-white rounded-full transition-all duration-300"
-              style={{ width: `${scrollProgress * 100}%` }}
-            />
-          </div>
+          {!isCompleted ? (
+            // 문장 완성 전
+            <>
+              <div className="text-white/60 text-sm mb-2">
+                계속 스크롤하세요
+              </div>
+              <div className="w-16 h-1 bg-white/20 rounded-full mx-auto">
+                <div 
+                  className="h-full bg-white rounded-full transition-all duration-300"
+                  style={{ width: `${scrollProgress * 100}%` }}
+                />
+              </div>
+            </>
+          ) : (
+            // 문장 완성 후
+            <>
+              <div className="text-white/60 text-sm mb-2">
+                계속 스크롤하여 다음으로
+              </div>
+              <div className="w-16 h-1 bg-green-500/30 rounded-full mx-auto">
+                <div 
+                  className="h-full bg-green-500 rounded-full transition-all duration-300"
+                  style={{ width: `${extraScrollProgress * 100}%` }}
+                />
+              </div>
+            </>
+          )}
         </div>
       )}
 
