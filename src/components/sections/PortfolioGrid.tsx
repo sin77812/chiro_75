@@ -1,18 +1,47 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight, ExternalLink, TrendingUp, ArrowUpDown, Calendar, Award } from 'lucide-react'
-import portfolioData from '@/data/portfolio.json'
 
 type FilterType = 'all' | 'manufacturing' | 'food' | 'service' | 'corporate' | 'logistics' | 'consulting' | 'fintech' | 'healthcare'
 type SortType = 'latest' | 'performance'
+
+interface PortfolioItem {
+  id: string
+  title: string
+  slug: string
+  client: string
+  industry: string
+  services: string[]
+  thumbnail: string
+  gallery: string[]
+  before?: string
+  after?: string
+  year: number
+  category: string
+  tags: string[]
+  url?: string
+  kpis: Array<{
+    metric: string
+    value: string
+    improvement: string
+  }>
+  description: string
+  problem?: string
+  approach?: string
+  result?: string
+  completedAt?: string
+}
 
 export default function PortfolioGrid() {
   const [filter, setFilter] = useState<FilterType>('all')
   const [sort, setSort] = useState<SortType>('latest')
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const filters = [
     { key: 'all' as FilterType, label: '전체' },
@@ -24,6 +53,31 @@ export default function PortfolioGrid() {
     { key: 'healthcare' as FilterType, label: '헬스케어' },
   ]
 
+  // API에서 포트폴리오 데이터 가져오기
+  useEffect(() => {
+    const fetchPortfolioData = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch('/api/portfolio')
+        if (!response.ok) {
+          throw new Error('포트폴리오 데이터를 불러올 수 없습니다')
+        }
+        
+        const data = await response.json()
+        setPortfolioData(data)
+      } catch (err) {
+        console.error('Error fetching portfolio data:', err)
+        setError(err instanceof Error ? err.message : '데이터 로딩 중 오류가 발생했습니다')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPortfolioData()
+  }, [])
+
   const getMaxKpiImprovement = (project: any) => {
     return Math.max(...project.kpis.map((kpi: any) => parseInt(kpi.improvement) || 0))
   }
@@ -32,11 +86,60 @@ export default function PortfolioGrid() {
     .filter(project => filter === 'all' || project.category === filter || project.industry === filter)
     .sort((a, b) => {
       if (sort === 'latest') {
-        return new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+        return new Date(b.completedAt || '').getTime() - new Date(a.completedAt || '').getTime()
       } else {
         return getMaxKpiImprovement(b) - getMaxKpiImprovement(a)
       }
     })
+
+  // 로딩 상태
+  if (loading) {
+    return (
+      <section className="section-padding bg-dark">
+        <div className="container-custom">
+          <div className="text-center">
+            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
+              PORTFOLIO
+            </div>
+            <h2 className="font-pretendard font-bold mb-6">
+              성공적인 <span className="text-gradient">디지털 전환</span> 사례들
+            </h2>
+            <div className="flex items-center justify-center mt-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+              <span className="ml-3 text-neutral-light/70">포트폴리오를 불러오는 중...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // 에러 상태
+  if (error) {
+    return (
+      <section className="section-padding bg-dark">
+        <div className="container-custom">
+          <div className="text-center">
+            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-4">
+              PORTFOLIO
+            </div>
+            <h2 className="font-pretendard font-bold mb-6">
+              성공적인 <span className="text-gradient">디지털 전환</span> 사례들
+            </h2>
+            <div className="text-center mt-12">
+              <p className="text-red-400 mb-4">{error}</p>
+              <button 
+                onClick={() => window.location.reload()}
+                className="btn-primary"
+              >
+                다시 시도
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="section-padding bg-dark">
