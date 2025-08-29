@@ -1,17 +1,178 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
+
 const SmartMinimalismProof = () => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+
+  // 단계별 텍스트 정의
+  const textSteps = [
+    "우리는",
+    "우리는 디자인을",
+    "우리는 디자인을 넘어", 
+    "우리는 디자인을 넘어 비즈니스를",
+    "우리는 디자인을 넘어 비즈니스를 만듭니다"
+  ]
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const handleScroll = () => {
+      const rect = section.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const sectionHeight = rect.height
+
+      // 섹션이 화면 중앙에 있는지 확인
+      const centerY = windowHeight / 2
+      const sectionCenterY = rect.top + sectionHeight / 2
+      const distanceFromCenter = Math.abs(centerY - sectionCenterY)
+      const threshold = windowHeight * 0.3 // 30% 여유
+
+      if (distanceFromCenter < threshold) {
+        setIsActive(true)
+        
+        // 스크롤 진행도 계산 (0-1 범위)
+        const progress = Math.min(Math.max((centerY - rect.top) / sectionHeight, 0), 1)
+        setScrollProgress(progress)
+        
+        // 세로 스크롤 잠금 (body 스크롤 방지)
+        document.body.style.overflow = 'hidden'
+      } else {
+        setIsActive(false)
+        document.body.style.overflow = 'auto'
+      }
+    }
+
+    const handleWheel = (e: WheelEvent) => {
+      if (isActive) {
+        e.preventDefault()
+        
+        // 휠 델타를 이용한 가로 스크롤 시뮬레이션
+        const delta = e.deltaY
+        const newProgress = Math.min(Math.max(scrollProgress + delta * 0.001, 0), 1)
+        setScrollProgress(newProgress)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('wheel', handleWheel, { passive: false })
+
+    // 초기 상태 확인
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('wheel', handleWheel)
+      document.body.style.overflow = 'auto'
+    }
+  }, [isActive, scrollProgress])
+
+  // 현재 표시할 텍스트 결정
+  const getCurrentText = () => {
+    const stepIndex = Math.floor(scrollProgress * (textSteps.length - 1))
+    return textSteps[Math.min(stepIndex, textSteps.length - 1)]
+  }
+
+  // 단어별 애니메이션을 위한 배열 생성
+  const getAnimatedWords = () => {
+    const currentText = getCurrentText()
+    const words = currentText.split(' ')
+    const totalWords = "우리는 디자인을 넘어 비즈니스를 만듭니다".split(' ')
+    
+    // 현재 단계 계산 (0~4)
+    const currentStep = Math.floor(scrollProgress * (textSteps.length - 1))
+    const stepProgress = (scrollProgress * (textSteps.length - 1)) % 1
+    
+    return totalWords.map((word, index) => {
+      let translateX = 0
+      let opacity = 0
+      let scale = 0.8
+      
+      if (index < words.length) {
+        // 이미 보이는 단어들
+        opacity = 1
+        scale = 1
+        translateX = 0
+      } else if (index === words.length && stepProgress > 0) {
+        // 다음에 등장할 단어 (부드러운 전환)
+        opacity = stepProgress
+        scale = 0.8 + (stepProgress * 0.2)
+        translateX = 50 * (1 - stepProgress)
+      } else {
+        // 아직 등장하지 않은 단어들
+        opacity = 0
+        scale = 0.8
+        translateX = 100
+      }
+      
+      return {
+        word: index < words.length ? words[index] : word,
+        translateX,
+        opacity,
+        scale,
+        isVisible: index < words.length
+      }
+    })
+  }
+
   return (
-    <section className="h-[30vh] bg-[#0E1111] flex flex-col justify-center items-center relative">
-      <div 
-        className="text-white/60 text-center font-medium"
-        style={{
-          fontSize: 'clamp(20px, 3vw, 28px)',
-          letterSpacing: '-0.02em'
-        }}
-      >
-        추후 추가예정
+    <section 
+      ref={sectionRef}
+      className="h-[100vh] bg-[#0E1111] flex flex-col justify-center items-center relative overflow-hidden"
+    >
+      {/* 스크롤 진행도 인디케이터 */}
+      {isActive && (
+        <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-white/40 text-sm">
+          스크롤하여 문장을 완성하세요 ({Math.round(scrollProgress * 100)}%)
+        </div>
+      )}
+
+      {/* 메인 텍스트 영역 */}
+      <div className="relative w-full max-w-6xl mx-auto px-8">
+        <div className="flex items-center justify-center space-x-6 h-32">
+          {getAnimatedWords().map((wordData, index) => (
+            <div
+              key={index}
+              className="transform transition-all duration-500 ease-out font-pretendard font-bold text-white whitespace-nowrap"
+              style={{
+                fontSize: 'clamp(32px, 6vw, 80px)',
+                letterSpacing: '-0.03em',
+                transform: `translateX(${wordData.translateX}px) scale(${wordData.scale})`,
+                opacity: wordData.opacity,
+                transformOrigin: 'left center'
+              }}
+            >
+              {wordData.word}
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* 하단 가이드 텍스트 */}
+      {isActive && (
+        <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center">
+          <div className="text-white/60 text-sm mb-2">
+            {scrollProgress < 1 ? '계속 스크롤하세요' : '완성!'}
+          </div>
+          <div className="w-16 h-1 bg-white/20 rounded-full mx-auto">
+            <div 
+              className="h-full bg-white rounded-full transition-all duration-300"
+              style={{ width: `${scrollProgress * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* 배경 그라데이션 효과 */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at center, rgba(29, 185, 84, ${scrollProgress * 0.1}) 0%, transparent 70%)`
+        }}
+      />
     </section>
   )
 }
