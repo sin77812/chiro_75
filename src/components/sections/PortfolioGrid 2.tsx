@@ -1,18 +1,70 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight, ExternalLink, TrendingUp, ArrowUpDown, Calendar, Award } from 'lucide-react'
-import portfolioData from '@/data/portfolio.json'
 
 type FilterType = 'all' | 'manufacturing' | 'food' | 'service' | 'corporate' | 'logistics' | 'consulting' | 'fintech' | 'healthcare'
 type SortType = 'latest' | 'performance'
+
+interface PortfolioItem {
+  id: string
+  title: string
+  slug: string
+  client: string
+  industry: string
+  services: string[]
+  thumbnail: string
+  gallery: string[]
+  before?: string
+  after?: string
+  year: number
+  category: string
+  tags: string[]
+  url?: string
+  kpis: Array<{
+    metric: string
+    value: string
+    improvement: string
+  }>
+  description: string
+  problem?: string
+  approach?: string
+  result?: string
+  completedAt?: string
+}
 
 export default function PortfolioGrid() {
   const [filter, setFilter] = useState<FilterType>('all')
   const [sort, setSort] = useState<SortType>('latest')
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+  const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    loadPortfolioData()
+  }, [])
+
+  const loadPortfolioData = async () => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/portfolio')
+      if (response.ok) {
+        const data = await response.json()
+        setPortfolioData(data)
+        setError(null)
+      } else {
+        setError('포트폴리오 데이터를 불러오는데 실패했습니다.')
+      }
+    } catch (error) {
+      console.error('Error loading portfolio data:', error)
+      setError('포트폴리오 데이터를 불러오는데 실패했습니다.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const filters = [
     { key: 'all' as FilterType, label: '전체' },
@@ -32,11 +84,44 @@ export default function PortfolioGrid() {
     .filter(project => filter === 'all' || project.category === filter || project.industry === filter)
     .sort((a, b) => {
       if (sort === 'latest') {
-        return new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime()
+        const dateA = a.completedAt ? new Date(a.completedAt).getTime() : 0
+        const dateB = b.completedAt ? new Date(b.completedAt).getTime() : 0
+        return dateB - dateA
       } else {
         return getMaxKpiImprovement(b) - getMaxKpiImprovement(a)
       }
     })
+
+  if (loading) {
+    return (
+      <section className="section-padding bg-dark">
+        <div className="container-custom">
+          <div className="text-center py-20">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p className="mt-4 text-neutral-light/60">포트폴리오 로딩 중...</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="section-padding bg-dark">
+        <div className="container-custom">
+          <div className="text-center py-20">
+            <p className="text-red-400 mb-4">{error}</p>
+            <button 
+              onClick={loadPortfolioData}
+              className="btn-primary"
+            >
+              다시 시도
+            </button>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="section-padding bg-dark">

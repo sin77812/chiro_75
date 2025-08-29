@@ -83,34 +83,79 @@ export async function POST(request: NextRequest) {
 
 // PUT - 포트폴리오 수정
 export async function PUT(request: NextRequest) {
+  console.log('PUT request received for portfolio update')
+  
   try {
     const updatedItem: PortfolioItem = await request.json()
+    console.log('Updated item received:', {
+      id: updatedItem.id,
+      title: updatedItem.title,
+      client: updatedItem.client,
+      hasDescription: !!updatedItem.description
+    })
     
     // 필수 필드 검증
     if (!updatedItem.id || !updatedItem.title || !updatedItem.client || !updatedItem.description) {
+      console.error('Missing required fields:', {
+        id: !!updatedItem.id,
+        title: !!updatedItem.title,
+        client: !!updatedItem.client,
+        description: !!updatedItem.description
+      })
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
+    console.log('Reading existing portfolio data...')
     // 기존 데이터 로드
-    const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
-    let portfolioData: PortfolioItem[] = JSON.parse(data)
+    let data: string
+    try {
+      data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
+      console.log('Portfolio file read successfully')
+    } catch (readError) {
+      console.error('Error reading portfolio file:', readError)
+      return NextResponse.json({ error: 'Failed to read portfolio data' }, { status: 500 })
+    }
+
+    let portfolioData: PortfolioItem[]
+    try {
+      portfolioData = JSON.parse(data)
+      console.log('Portfolio data parsed successfully, items count:', portfolioData.length)
+    } catch (parseError) {
+      console.error('Error parsing portfolio data:', parseError)
+      return NextResponse.json({ error: 'Failed to parse portfolio data' }, { status: 500 })
+    }
 
     // 항목 찾기
     const itemIndex = portfolioData.findIndex(item => item.id === updatedItem.id)
+    console.log('Item index found:', itemIndex)
+    
     if (itemIndex === -1) {
+      console.error('Portfolio item not found with ID:', updatedItem.id)
+      console.log('Available IDs:', portfolioData.map(item => item.id))
       return NextResponse.json({ error: 'Portfolio item not found' }, { status: 404 })
     }
 
+    console.log('Updating item at index:', itemIndex)
     // 항목 업데이트
     portfolioData[itemIndex] = updatedItem
 
+    console.log('Writing updated data to file...')
     // 파일에 저장
-    await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(portfolioData, null, 2))
+    try {
+      await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(portfolioData, null, 2))
+      console.log('Portfolio file updated successfully')
+    } catch (writeError) {
+      console.error('Error writing portfolio file:', writeError)
+      return NextResponse.json({ error: 'Failed to save portfolio data' }, { status: 500 })
+    }
 
+    console.log('Portfolio update completed successfully')
     return NextResponse.json({ success: true, item: updatedItem })
   } catch (error) {
     console.error('Error updating portfolio item:', error)
-    return NextResponse.json({ error: 'Failed to update portfolio item' }, { status: 500 })
+    return NextResponse.json({ 
+      error: `Failed to update portfolio item: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    }, { status: 500 })
   }
 }
 

@@ -40,6 +40,11 @@ export default function PortfolioAdmin() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // 컴포넌트 마운트 시 API를 미리 워밍업
+    fetch('/api/portfolio')
+      .then(() => console.log('API warmed up'))
+      .catch(() => console.log('API warmup failed'))
+    
     loadPortfolioData()
   }, [])
 
@@ -60,28 +65,69 @@ export default function PortfolioAdmin() {
   }
 
   const handleSave = async (item: PortfolioItem) => {
+    console.log('handleSave called with item:', {
+      id: item.id,
+      title: item.title,
+      client: item.client,
+      method: editingItem ? 'PUT' : 'POST'
+    })
+
     try {
       const method = editingItem ? 'PUT' : 'POST'
+      console.log('Making API request:', method, '/api/portfolio')
+      
+      // 긴 타임아웃 설정 (개발 모드에서 첫 API 호출 시 컴파일 시간 필요)
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 30000) // 30초 타임아웃
+
       const response = await fetch('/api/portfolio', {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(item),
+        signal: controller.signal
       })
 
+      clearTimeout(timeoutId)
+
+      console.log('API response status:', response.status)
+      console.log('API response ok:', response.ok)
+
       if (response.ok) {
+        const result = await response.json()
+        console.log('API response data:', result)
+        
         await loadPortfolioData()
         setViewMode('list')
         setEditingItem(null)
         alert(editingItem ? '포트폴리오가 성공적으로 수정되었습니다!' : '새 포트폴리오가 성공적으로 추가되었습니다!')
       } else {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
-        console.error('Failed to save portfolio item:', errorData)
-        throw new Error(errorData.error || 'Failed to save portfolio item')
+        console.error('API response not ok, status:', response.status)
+        let errorData
+        try {
+          errorData = await response.json()
+          console.error('API error data:', errorData)
+        } catch (jsonError) {
+          console.error('Failed to parse error response as JSON:', jsonError)
+          errorData = { error: `HTTP ${response.status}: ${response.statusText}` }
+        }
+        
+        throw new Error(errorData.error || `서버 오류 (${response.status})`)
       }
     } catch (error) {
-      console.error('Error saving portfolio item:', error)
+      console.error('Error in handleSave:', error)
+      
+      // 타임아웃 에러
+      if (error instanceof Error && error.name === 'AbortError') {
+        throw new Error('요청 시간이 초과되었습니다. 개발 서버 첫 실행 시에는 시간이 오래 걸릴 수 있습니다. 다시 시도해보세요.')
+      }
+      
+      // 네트워크 오류인지 확인
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error('네트워크 연결을 확인해주세요.')
+      }
+      
       throw error // 폼에서 에러를 처리할 수 있도록 다시 throw
     }
   }

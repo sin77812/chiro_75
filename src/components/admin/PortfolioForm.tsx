@@ -92,6 +92,7 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
   const [tagInput, setTagInput] = useState('')
   const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const generateSlug = (title: string) => {
     return title
@@ -238,9 +239,10 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSaveError(null) // 에러 메시지 초기화
     
     if (!formData.title || !formData.client || !formData.description) {
-      alert('필수 필드를 모두 채워주세요.')
+      setSaveError('필수 필드를 모두 채워주세요.')
       return
     }
 
@@ -251,10 +253,19 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
     setSaving(true)
     
     try {
+      console.log('Form submitting with data:', {
+        id: formData.id,
+        title: formData.title,
+        client: formData.client,
+        hasDescription: !!formData.description
+      })
+      
       await onSave(formData)
+      setSaveError(null) // 성공시 에러 메시지 클리어
     } catch (error) {
       console.error('Error saving portfolio:', error)
-      alert('저장 중 오류가 발생했습니다. 다시 시도해주세요.')
+      const errorMessage = error instanceof Error ? error.message : '저장 중 오류가 발생했습니다. 다시 시도해주세요.'
+      setSaveError(errorMessage)
     } finally {
       setSaving(false)
     }
@@ -290,6 +301,18 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
           </button>
         </div>
       </div>
+
+      {/* 에러 메시지 표시 */}
+      {saveError && (
+        <div className="mb-6 p-4 bg-red-900/20 border border-red-500/30 rounded-lg">
+          <div className="flex items-center gap-2">
+            <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="text-red-400 text-sm">{saveError}</p>
+          </div>
+        </div>
+      )}
 
       <form id="portfolio-form" onSubmit={handleSubmit} className="space-y-8">
         {/* 기본 정보 */}

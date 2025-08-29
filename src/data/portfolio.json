@@ -1,11 +1,16 @@
 [
   {
     "id": "nbp-korea",
-    "title": "친환경 가스설비 제조업체",
+    "title": "친환경 가스설비 제조업체 테스트",
     "slug": "nbp-korea",
     "client": "NBP KOREA",
     "industry": "manufacturing",
-    "services": ["웹 개발", "제품 카탈로그", "다국어 지원", "B2B 최적화"],
+    "services": [
+      "웹 개발",
+      "제품 카탈로그",
+      "다국어 지원",
+      "B2B 최적화"
+    ],
     "thumbnail": "/image/nbpkorea af.png",
     "gallery": [
       "/image/nbpkorea af.png"
@@ -14,7 +19,12 @@
     "after": "/image/nbpkorea af.png",
     "year": 2024,
     "category": "manufacturing",
-    "tags": ["제조업", "B2B", "친환경", "가스설비"],
+    "tags": [
+      "제조업",
+      "B2B",
+      "친환경",
+      "가스설비"
+    ],
     "url": "https://nbpkorea.vercel.app",
     "kpis": [
       {
@@ -33,7 +43,7 @@
         "improvement": "195%"
       }
     ],
-    "description": "친환경 가스설비 전문 제조업체의 글로벌 B2B 플랫폼 구축",
+    "description": "친환경 가스설비 전문 제조업체의 글로벌 B2B 플랫폼 구축 - 수정됨",
     "problem": "제품의 기술적 우수성을 효과적으로 전달하지 못하고, 해외 시장 진출에 한계가 있었습니다",
     "approach": "인터랙티브 제품 카탈로그, 기술 사양 비교 도구, 다국어 지원을 통한 글로벌 접근성 강화",
     "result": "해외 바이어 문의 428% 증가, 수출 계약 체결로 이어지는 실질적 성과를 달성했습니다",
@@ -45,7 +55,12 @@
     "slug": "life-pt",
     "client": "LIFE PT",
     "industry": "education",
-    "services": ["웹 개발", "UX/UI 디자인", "예약 시스템", "결제 통합"],
+    "services": [
+      "웹 개발",
+      "UX/UI 디자인",
+      "예약 시스템",
+      "결제 통합"
+    ],
     "thumbnail": "/image/LIFE PT af.png",
     "gallery": [
       "/image/LIFE PT af.png"
@@ -54,7 +69,12 @@
     "after": "/image/LIFE PT af.png",
     "year": 2024,
     "category": "service",
-    "tags": ["교육", "코칭", "예약시스템", "온라인플랫폼"],
+    "tags": [
+      "교육",
+      "코칭",
+      "예약시스템",
+      "온라인플랫폼"
+    ],
     "url": "https://lpt-nu.vercel.app",
     "kpis": [
       {
@@ -85,7 +105,12 @@
     "slug": "grace-speech",
     "client": "GRACE SPEECH",
     "industry": "education",
-    "services": ["웹 개발", "브랜딩", "콘텐츠 관리", "SEO 최적화"],
+    "services": [
+      "웹 개발",
+      "브랜딩",
+      "콘텐츠 관리",
+      "SEO 최적화"
+    ],
     "thumbnail": "/image/grace speech af.png",
     "gallery": [
       "/image/grace speech af.png"
@@ -94,7 +119,12 @@
     "after": "/image/grace speech af.png",
     "year": 2024,
     "category": "education",
-    "tags": ["교육", "스피치", "학원", "프리미엄"],
+    "tags": [
+      "교육",
+      "스피치",
+      "학원",
+      "프리미엄"
+    ],
     "url": "https://vercel.com/lpt-webs-projects/grace-speech",
     "kpis": [
       {
@@ -125,7 +155,12 @@
     "slug": "s-lighting",
     "client": "S-LIGHTING",
     "industry": "manufacturing",
-    "services": ["웹 개발", "제품 쇼케이스", "견적 시스템", "포트폴리오"],
+    "services": [
+      "웹 개발",
+      "제품 쇼케이스",
+      "견적 시스템",
+      "포트폴리오"
+    ],
     "thumbnail": "https://www.s-lightings.com",
     "gallery": [
       "https://www.s-lightings.com"
@@ -134,7 +169,12 @@
     "after": "https://www.s-lightings.com",
     "year": 2024,
     "category": "manufacturing",
-    "tags": ["제조업", "조명", "B2B", "중소기업"],
+    "tags": [
+      "제조업",
+      "조명",
+      "B2B",
+      "중소기업"
+    ],
     "url": "https://www.s-lightings.com",
     "kpis": [
       {
