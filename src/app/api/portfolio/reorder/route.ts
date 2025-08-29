@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Redis } from '@upstash/redis'
 import fs from 'fs/promises'
 import path from 'path'
-import { kv } from '@vercel/kv'
 
 const PORTFOLIO_FILE = path.join(process.cwd(), 'src/data/portfolio.json')
-const KV_KEY = 'portfolio_data'
-const isProduction = process.env.NODE_ENV === 'production'
+const REDIS_KEY = 'portfolio_data'
 
 interface PortfolioItem {
   id: string
@@ -34,6 +33,20 @@ interface PortfolioItem {
   completedAt?: string
 }
 
+// Redis 클라이언트 초기화
+let redis: Redis | null = null
+
+try {
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    redis = new Redis({
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
+    })
+  }
+} catch (error) {
+  console.error('Failed to initialize Redis client for reorder:', error)
+}
+
 // POST - 포트폴리오 순서 변경
 export async function POST(request: NextRequest) {
   try {
@@ -43,33 +56,76 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid items data' }, { status: 400 })
     }
 
-    // 기존 데이터 로드하여 검증
-    const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
-    const existingData: PortfolioItem[] = JSON.parse(data)
+    // Redis 사용 가능한 경우
+    if (redis) {
+      try {
+        // 기존 데이터와 비교하여 검증
+        const existingDataStr = await redis.get<string>(REDIS_KEY)
+        if (existingDataStr) {
+          const existingData = JSON.parse(existingDataStr) as PortfolioItem[]
+          
+          // 모든 기존 항목이 새 순서에도 포함되어 있는지 확인
+          if (items.length !== existingData.length) {
+            return NextResponse.json({ error: 'Item count mismatch' }, { status: 400 })
+          }
 
-    // 모든 기존 항목이 새 순서에도 포함되어 있는지 확인
-    if (items.length !== existingData.length) {
-      return NextResponse.json({ error: 'Item count mismatch' }, { status: 400 })
-    }
+          const existingIds = new Set(existingData.map(item => item.id))
+          const newIds = new Set(items.map(item => item.id))
+          
+          if (existingIds.size !== newIds.size || 
+              [...existingIds].some(id => !newIds.has(id))) {
+            return NextResponse.json({ error: 'Item IDs do not match' }, { status: 400 })
+          }
+        }
 
-    const existingIds = new Set(existingData.map(item => item.id))
-    const newIds = new Set(items.map(item => item.id))
-    
-    if (existingIds.size !== newIds.size || 
-        [...existingIds].some(id => !newIds.has(id))) {
-      return NextResponse.json({ error: 'Item IDs do not match' }, { status: 400 })
-    }
-
-    // 새 순서로 저장
-    if (isProduction && process.env.KV_URL) {
-      await kv.set(KV_KEY, items)
+        // 새 순서로 Redis에 저장
+        await redis.set(REDIS_KEY, JSON.stringify(items))
+        console.log('Portfolio order updated in Redis')
+        
+        return NextResponse.json({ success: true, message: 'Portfolio order updated successfully' })
+      } catch (error) {
+        console.error('Error updating order in Redis:', error)
+        return NextResponse.json({ 
+          error: 'Failed to update portfolio order',
+          details: error instanceof Error ? error.message : 'Unknown error'
+        }, { status: 500 })
+      }
     } else {
-      await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(items, null, 2))
-    }
+      // Redis 없으면 파일 시스템 사용
+      try {
+        const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
+        const existingData: PortfolioItem[] = JSON.parse(data)
 
-    return NextResponse.json({ success: true, message: 'Portfolio order updated successfully' })
+        // 검증
+        if (items.length !== existingData.length) {
+          return NextResponse.json({ error: 'Item count mismatch' }, { status: 400 })
+        }
+
+        const existingIds = new Set(existingData.map(item => item.id))
+        const newIds = new Set(items.map(item => item.id))
+        
+        if (existingIds.size !== newIds.size || 
+            [...existingIds].some(id => !newIds.has(id))) {
+          return NextResponse.json({ error: 'Item IDs do not match' }, { status: 400 })
+        }
+
+        // 파일에 저장
+        await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(items, null, 2))
+        
+        return NextResponse.json({ success: true, message: 'Portfolio order updated successfully' })
+      } catch (error) {
+        console.error('Error updating order in file system:', error)
+        return NextResponse.json({ 
+          error: 'Failed to update portfolio order',
+          details: error instanceof Error ? error.message : 'Unknown error'
+        }, { status: 500 })
+      }
+    }
   } catch (error) {
     console.error('Error reordering portfolio items:', error)
-    return NextResponse.json({ error: 'Failed to reorder portfolio items' }, { status: 500 })
+    return NextResponse.json({ 
+      error: 'Failed to reorder portfolio items',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }

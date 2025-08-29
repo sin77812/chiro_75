@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Redis } from '@upstash/redis'
 import fs from 'fs/promises'
 import path from 'path'
-import { kv } from '@vercel/kv'
 
 const PORTFOLIO_FILE = path.join(process.cwd(), 'src/data/portfolio.json')
-const KV_KEY = 'portfolio_data'
+const REDIS_KEY = 'portfolio_data'
 
 interface PortfolioItem {
   id: string
@@ -33,58 +33,96 @@ interface PortfolioItem {
   completedAt?: string
 }
 
-// 프로덕션 환경인지 확인
-const isProduction = process.env.NODE_ENV === 'production'
+// Redis 클라이언트 초기화
+let redis: Redis | null = null
+
+try {
+  if (process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+    redis = new Redis({
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
+    })
+    console.log('Redis client initialized successfully')
+  } else {
+    console.warn('Redis environment variables not found, will use file system')
+  }
+} catch (error) {
+  console.error('Failed to initialize Redis client:', error)
+}
 
 // 데이터 읽기 헬퍼
 async function readPortfolioData(): Promise<PortfolioItem[]> {
-  if (isProduction && process.env.KV_URL) {
-    // 프로덕션: Vercel KV에서 읽기
+  // Redis 사용 가능한 경우
+  if (redis) {
     try {
-      console.log('Reading from Vercel KV...')
-      const data = await kv.get<PortfolioItem[]>(KV_KEY)
+      console.log('Attempting to read from Redis...')
+      const data = await redis.get<PortfolioItem[]>(REDIS_KEY)
       
-      if (data) {
-        console.log('Data found in KV, items count:', data.length)
+      if (data && Array.isArray(data)) {
+        console.log('Data found in Redis, items count:', data.length)
         return data
       }
       
-      // KV에 데이터가 없으면 초기 데이터 로드
-      console.log('No data in KV, loading initial data...')
+      // Redis에 데이터가 없으면 JSON 파일에서 초기 데이터 로드 및 마이그레이션
+      console.log('No data in Redis, migrating from JSON file...')
       const fileData = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
-      const portfolioData = JSON.parse(fileData)
+      const portfolioData = JSON.parse(fileData) as PortfolioItem[]
       
-      // KV에 초기 데이터 저장
-      await kv.set(KV_KEY, portfolioData)
-      console.log('Initial data saved to KV')
+      // Redis에 초기 데이터 저장
+      await redis.set(REDIS_KEY, JSON.stringify(portfolioData))
+      console.log('Initial data migrated to Redis successfully')
       
       return portfolioData
     } catch (error) {
-      console.error('Error with KV, falling back to file:', error)
-      // KV 에러 시 파일에서 읽기
-      const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
-      return JSON.parse(data)
+      console.error('Error reading from Redis, falling back to file system:', error)
+      // Redis 에러 시 파일 시스템으로 폴백
+      try {
+        const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
+        return JSON.parse(data)
+      } catch (fileError) {
+        console.error('Error reading from file system:', fileError)
+        return []
+      }
     }
-  } else {
-    // 개발: 파일에서 읽기
-    console.log('Reading from file system (development)...')
+  }
+  
+  // Redis 없으면 파일 시스템 사용 (개발 환경)
+  console.log('Redis not available, reading from file system...')
+  try {
     const data = await fs.readFile(PORTFOLIO_FILE, 'utf-8')
     return JSON.parse(data)
+  } catch (error) {
+    console.error('Error reading from file system:', error)
+    return []
   }
 }
 
 // 데이터 쓰기 헬퍼
 async function writePortfolioData(data: PortfolioItem[]): Promise<void> {
-  if (isProduction && process.env.KV_URL) {
-    // 프로덕션: Vercel KV에 쓰기
-    console.log('Writing to Vercel KV...')
-    await kv.set(KV_KEY, data)
-    console.log('Data written to KV successfully')
+  if (redis) {
+    try {
+      console.log('Writing to Redis...')
+      await redis.set(REDIS_KEY, JSON.stringify(data))
+      console.log('Data written to Redis successfully')
+      
+      // 백업: 로컬 파일에도 저장 (개발 환경에서만)
+      if (process.env.NODE_ENV === 'development') {
+        try {
+          await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(data, null, 2))
+          console.log('Backup saved to local file')
+        } catch (error) {
+          console.warn('Failed to save backup to local file:', error)
+        }
+      }
+    } catch (error) {
+      console.error('Error writing to Redis:', error)
+      throw new Error('Failed to save data to database')
+    }
   } else {
-    // 개발: 파일에 쓰기
-    console.log('Writing to file system (development)...')
+    // Redis 없으면 파일 시스템 사용
+    console.log('Redis not available, writing to file system...')
     await fs.writeFile(PORTFOLIO_FILE, JSON.stringify(data, null, 2))
-    console.log('Data written to file successfully')
+    console.log('Data written to file system successfully')
   }
 }
 
@@ -94,8 +132,11 @@ export async function GET() {
     const portfolioData = await readPortfolioData()
     return NextResponse.json(portfolioData)
   } catch (error) {
-    console.error('Error reading portfolio data:', error)
-    return NextResponse.json({ error: 'Failed to load portfolio data' }, { status: 500 })
+    console.error('Error in GET /api/portfolio:', error)
+    return NextResponse.json({ 
+      error: 'Failed to load portfolio data',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 })
   }
 }
 
@@ -107,6 +148,11 @@ export async function POST(request: NextRequest) {
     // 필수 필드 검증
     if (!newItem.title || !newItem.client || !newItem.description) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    // ID가 없으면 생성
+    if (!newItem.id) {
+      newItem.id = newItem.slug || newItem.title.toLowerCase().replace(/\s+/g, '-')
     }
 
     // 기존 데이터 로드
@@ -125,9 +171,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, item: newItem })
   } catch (error) {
-    console.error('Error adding portfolio item:', error)
+    console.error('Error in POST /api/portfolio:', error)
     return NextResponse.json({ 
-      error: `Failed to add portfolio item: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      error: 'Failed to add portfolio item',
+      details: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 })
   }
 }
@@ -135,8 +182,7 @@ export async function POST(request: NextRequest) {
 // PUT - 포트폴리오 수정
 export async function PUT(request: NextRequest) {
   console.log('PUT request received for portfolio update')
-  console.log('Environment:', isProduction ? 'Production' : 'Development')
-  console.log('KV_URL available:', !!process.env.KV_URL)
+  console.log('Redis available:', !!redis)
   
   try {
     const updatedItem: PortfolioItem = await request.json()
@@ -149,12 +195,7 @@ export async function PUT(request: NextRequest) {
     
     // 필수 필드 검증
     if (!updatedItem.id || !updatedItem.title || !updatedItem.client || !updatedItem.description) {
-      console.error('Missing required fields:', {
-        id: !!updatedItem.id,
-        title: !!updatedItem.title,
-        client: !!updatedItem.client,
-        description: !!updatedItem.description
-      })
+      console.error('Missing required fields')
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -168,12 +209,10 @@ export async function PUT(request: NextRequest) {
     
     if (itemIndex === -1) {
       console.error('Portfolio item not found with ID:', updatedItem.id)
-      console.log('Available IDs:', portfolioData.map(item => item.id))
       return NextResponse.json({ error: 'Portfolio item not found' }, { status: 404 })
     }
 
     console.log('Updating item at index:', itemIndex)
-    // 항목 업데이트
     portfolioData[itemIndex] = updatedItem
 
     console.log('Writing updated data...')
@@ -182,22 +221,10 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json({ success: true, item: updatedItem })
   } catch (error) {
-    console.error('Error updating portfolio item:', error)
-    
-    // 더 자세한 에러 메시지
-    let errorMessage = 'Failed to update portfolio item'
-    if (error instanceof Error) {
-      errorMessage = error.message
-      
-      // 권한 관련 에러 처리
-      if (error.message.includes('EROFS') || error.message.includes('read-only')) {
-        errorMessage = 'Cannot save in production environment. Please set up Vercel KV database.'
-      }
-    }
-    
+    console.error('Error in PUT /api/portfolio:', error)
     return NextResponse.json({ 
-      error: errorMessage,
-      details: isProduction ? 'Production environment detected. Ensure Vercel KV is configured.' : undefined
+      error: 'Failed to update portfolio item',
+      details: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 })
   }
 }
@@ -228,9 +255,12 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ success: true, deletedItem })
   } catch (error) {
-    console.error('Error deleting portfolio item:', error)
+    console.error('Error in DELETE /api/portfolio:', error)
     return NextResponse.json({ 
-      error: `Failed to delete portfolio item: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      error: 'Failed to delete portfolio item',
+      details: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 })
   }
 }
+
+// 백업 기능은 별도의 API 라우트로 이동 (/api/portfolio/backup)
