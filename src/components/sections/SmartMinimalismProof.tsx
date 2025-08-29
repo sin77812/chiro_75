@@ -152,10 +152,10 @@ const SmartMinimalismProof = () => {
       </div>
 
       {/* 하단 가이드 텍스트 */}
-      {isActive && (
+      {isActive && scrollProgress < 1 && (
         <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 text-center">
           <div className="text-white/60 text-sm mb-2">
-            {scrollProgress < 1 ? '계속 스크롤하세요' : '완성!'}
+            계속 스크롤하세요
           </div>
           <div className="w-16 h-1 bg-white/20 rounded-full mx-auto">
             <div 
