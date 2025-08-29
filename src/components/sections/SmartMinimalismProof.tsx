@@ -22,26 +22,27 @@ const SmartMinimalismProof = () => {
     const section = sectionRef.current
     if (!section) return
 
-    const handleScroll = () => {
+    const handleScroll = (e?: Event) => {
+      if (isActive) {
+        // 활성화된 상태에서는 스크롤 이벤트 자체를 막기
+        e?.preventDefault?.()
+        return
+      }
+
       const rect = section.getBoundingClientRect()
       const windowHeight = window.innerHeight
       const sectionHeight = rect.height
 
       // 섹션이 화면 중앙에 있는지 확인
       const centerY = windowHeight / 2
-      const sectionCenterY = rect.top + sectionHeight / 2
-      const distanceFromCenter = Math.abs(centerY - sectionCenterY)
-      const threshold = windowHeight * 0.2 // 20% 여유로 더 엄격하게
+      const sectionTop = rect.top
+      const sectionBottom = rect.bottom
 
-      if (distanceFromCenter < threshold) {
+      // 섹션이 화면에 충분히 들어왔을 때만 활성화
+      if (sectionTop <= centerY && sectionBottom >= centerY) {
         setIsActive(true)
         document.body.style.overflow = 'hidden'
-      } else if (!isCompleted || extraScrollProgress >= 1) {
-        // 완성되지 않았거나 추가 스크롤이 완료된 경우에만 해제
-        setIsActive(false)
-        setIsCompleted(false)
-        setExtraScrollProgress(0)
-        document.body.style.overflow = 'auto'
+        window.scrollTo({ top: window.scrollY, behavior: 'auto' }) // 스크롤 위치 고정
       }
     }
 
@@ -63,30 +64,51 @@ const SmartMinimalismProof = () => {
           }
         } else {
           // 문장 완성 후: 추가 스크롤 진행도 계산
-          const newExtraProgress = Math.min(Math.max(extraScrollProgress + delta * 0.002, 0), 1)
+          const newExtraProgress = Math.min(Math.max(extraScrollProgress + delta * 0.003, 0), 1.2)
           setExtraScrollProgress(newExtraProgress)
           
-          // 추가 스크롤 완료 시 섹션 해제
-          if (newExtraProgress >= 1) {
-            setIsActive(false)
-            setIsCompleted(false)
-            setExtraScrollProgress(0)
-            setScrollProgress(0)
-            document.body.style.overflow = 'auto'
+          // 추가 스크롤 완료 시 섹션 해제 (더 많은 스크롤 필요)
+          if (newExtraProgress >= 1.2) {
+            // 해제 전 약간의 지연
+            setTimeout(() => {
+              setIsActive(false)
+              setIsCompleted(false)
+              setExtraScrollProgress(0)
+              setScrollProgress(0)
+              document.body.style.overflow = 'auto'
+              
+              // 자연스러운 스크롤 재개를 위한 작은 스크롤
+              window.scrollBy({ top: 50, behavior: 'smooth' })
+            }, 100)
           }
         }
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('wheel', handleWheel, { passive: false })
+    // 스크롤 이벤트들을 더 강력하게 제어
+    const scrollOptions = { passive: false, capture: true }
+    
+    window.addEventListener('scroll', handleScroll, scrollOptions)
+    window.addEventListener('wheel', handleWheel, scrollOptions)
+    window.addEventListener('touchmove', handleWheel, scrollOptions) // 모바일 터치 지원
+
+    // 키보드 스크롤도 제어
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (isActive && (e.key === 'ArrowUp' || e.key === 'ArrowDown' || e.key === 'PageUp' || e.key === 'PageDown' || e.key === ' ')) {
+        e.preventDefault()
+      }
+    }
+    
+    window.addEventListener('keydown', handleKeydown)
 
     // 초기 상태 확인
     handleScroll()
 
     return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('scroll', handleScroll, scrollOptions)
+      window.removeEventListener('wheel', handleWheel, scrollOptions)
+      window.removeEventListener('touchmove', handleWheel, scrollOptions)
+      window.removeEventListener('keydown', handleKeydown)
       document.body.style.overflow = 'auto'
     }
   }, [isActive, scrollProgress, isCompleted, extraScrollProgress])
@@ -197,7 +219,7 @@ const SmartMinimalismProof = () => {
               <div className="w-16 h-1 bg-green-500/30 rounded-full mx-auto">
                 <div 
                   className="h-full bg-green-500 rounded-full transition-all duration-300"
-                  style={{ width: `${extraScrollProgress * 100}%` }}
+                  style={{ width: `${Math.min(extraScrollProgress / 1.2 * 100, 100)}%` }}
                 />
               </div>
             </>
