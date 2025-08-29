@@ -33,8 +33,23 @@ export default function AboutPage() {
   return (
     <main className="pt-18">
       {/* Mission & Positioning */}
-      <section className="section-padding bg-dark">
-        <div className="container-custom">
+      <section className="section-padding bg-dark relative overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/about-background.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/70"></div>
+        </div>
+        
+        <div className="container-custom relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <FadeUp>
               <div className="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary font-medium text-sm mb-6">
