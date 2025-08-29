@@ -193,21 +193,49 @@ export default function PortfolioForm({ initialData, onSave, onCancel, isEditing
       const formDataUpload = new FormData()
       formDataUpload.append('file', file)
       
+      console.log(`Starting upload for ${field}:`, file.name)
+      
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formDataUpload
       })
       
       if (response.ok) {
-        const { url } = await response.json()
-        handleInputChange(field, url)
+        const result = await response.json()
+        console.log('Upload successful:', result)
+        
+        handleInputChange(field, result.url)
+        
+        // 성공 메시지 (저장소 타입 포함)
+        const storageType = result.storage === 'vercel-blob' ? '클라우드' : '로컬'
+        alert(`✅ 이미지가 성공적으로 업로드되었습니다! (${storageType} 저장소)`)
       } else {
         const errorData = await response.json()
-        alert(`파일 업로드에 실패했습니다: ${errorData.error || '알 수 없는 오류'}`)
+        console.error('Upload failed:', errorData)
+        
+        let errorMessage = '파일 업로드에 실패했습니다.'
+        if (errorData.error) {
+          if (errorData.error.includes('read-only file system')) {
+            errorMessage = '프로덕션 환경에서는 클라우드 스토리지가 필요합니다. Vercel Blob을 설정해주세요.'
+          } else if (errorData.error.includes('Invalid file type')) {
+            errorMessage = '지원하지 않는 파일 형식입니다. JPEG, PNG, WebP, GIF만 가능합니다.'
+          } else if (errorData.error.includes('File size too large')) {
+            errorMessage = '파일 크기가 너무 큽니다. 5MB 이하의 파일만 업로드 가능합니다.'
+          } else {
+            errorMessage = errorData.error
+          }
+        }
+        
+        alert(`❌ ${errorMessage}`)
       }
     } catch (error) {
       console.error('File upload error:', error)
-      alert('파일 업로드 중 오류가 발생했습니다.')
+      
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        alert('❌ 네트워크 연결을 확인해주세요.')
+      } else {
+        alert('❌ 파일 업로드 중 오류가 발생했습니다. 다시 시도해주세요.')
+      }
     } finally {
       setUploading(false)
     }
