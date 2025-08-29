@@ -61,7 +61,7 @@ const SmartMinimalismProof = () => {
 
     // 모바일 최적화 체크
     const isMobile = window.innerWidth < 768
-    const scrollDistance = isMobile ? '+=100%' : '+=200%'
+    const scrollDistance = isMobile ? '+=50%' : '+=100%'
 
     // 메인 타임라인 생성
     const tl = gsap.timeline({
@@ -143,7 +143,7 @@ const SmartMinimalismProof = () => {
 
       <section 
         ref={sectionRef}
-        className="h-[200vh] relative overflow-hidden text-sequence-section"
+        className="h-[150vh] relative overflow-hidden text-sequence-section"
         style={{
           background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)'
         }}
