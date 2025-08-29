@@ -35,17 +35,38 @@ export default function ConsultationPage() {
   const [isComplete, setIsComplete] = useState(false)
   const [formData, setFormData] = useState<Partial<FormData>>({})
 
-  const handleStepComplete = (stepData: Partial<FormData>) => {
+  const handleStepComplete = async (stepData: Partial<FormData>) => {
     const updatedFormData = { ...formData, ...stepData }
     setFormData(updatedFormData)
     
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1)
     } else {
-      // Submit form and show success screen
-      setIsComplete(true)
-      // Here you would typically send the data to your backend
-      console.log('Final form data:', updatedFormData)
+      // Submit form to backend and show success screen
+      try {
+        console.log('Sending consultation data:', updatedFormData)
+        
+        const response = await fetch('/api/consultation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedFormData),
+        })
+
+        if (response.ok) {
+          const result = await response.json()
+          console.log('Email sent successfully:', result)
+          setIsComplete(true)
+        } else {
+          const error = await response.json()
+          console.error('Failed to send consultation:', error)
+          alert('견적 신청 전송에 실패했습니다. 다시 시도해주세요.')
+        }
+      } catch (error) {
+        console.error('Error sending consultation:', error)
+        alert('네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.')
+      }
     }
   }
 
