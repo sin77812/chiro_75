@@ -3,8 +3,35 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+interface PortfolioItem {
+  id: string
+  title: string
+  slug: string
+  client: string
+  industry: string
+  services: string[]
+  thumbnail: string
+  gallery: string[]
+  before?: string
+  after?: string
+  year: number
+  category: string
+  tags: string[]
+  url?: string
+  kpis: Array<{
+    metric: string
+    value: string
+    improvement: string
+  }>
+  description: string
+  problem?: string
+  approach?: string
+  result?: string
+  completedAt?: string
+}
+
 interface Project {
-  id: number
+  id: string
   title: string
   category: string
   description: string
@@ -17,69 +44,81 @@ interface Project {
 const SmartMinimalismWork = () => {
   const router = useRouter()
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [selectedIndex, setSelectedIndex] = useState(2) // Center project starts as selected
+  const [selectedIndex, setSelectedIndex] = useState(0) // Start with first project (NBP)
   const [isAnimating, setIsAnimating] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [portfolioData, setPortfolioData] = useState<PortfolioItem[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: "MANUFACTURING",
-      category: "제조업",
-      description: "글로벌 B2B 포털로 해외 문의 320% 증가",
-      results: "+320% 문의",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=500&fit=crop",
-      color: "#FFD700",
-      url: "/case/nexus-manufacturing"
-    },
-    {
-      id: 2,
-      title: "FINTECH",
-      category: "금융 서비스",
-      description: "결제 시스템 혁신으로 전환율 340% 향상",
-      results: "+340% 전환율",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=500&fit=crop",
-      color: "#1DB954",
-      url: "/case/fintech-payment-system"
-    },
-    {
-      id: 3,
-      title: "E-COMMERCE",
-      category: "전자상거래", 
-      description: "AI 추천으로 매출 280% 증가 달성",
-      results: "+280% 매출",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=500&fit=crop",
-      color: "#00D4FF",
-      url: "/case/ecommerce-ai-system"
-    },
-    {
-      id: 4,
-      title: "HEALTHCARE",
-      category: "헬스케어",
-      description: "환자 관리로 운영 효율성 95% 개선", 
-      results: "+95% 효율",
-      image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=500&fit=crop",
-      color: "#FF6B6B",
-      url: "/case/healthcare-management"
-    },
-    {
-      id: 5,
-      title: "CONSULTING",
-      category: "컨설팅",
-      description: "브랜드 리뉴얼로 인지도 180% 증가",
-      results: "+180% 인지도",
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=500&fit=crop",
-      color: "#9C27B0",
-      url: "/case/global-dynamics"
+  // API에서 포트폴리오 데이터 가져오기
+  useEffect(() => {
+    const fetchPortfolioData = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch('/api/portfolio')
+        if (!response.ok) {
+          throw new Error('포트폴리오 데이터를 불러올 수 없습니다')
+        }
+        
+        const data: PortfolioItem[] = await response.json()
+        setPortfolioData(data)
+        
+        // 포트폴리오 데이터를 Project 형식으로 변환
+        const transformedProjects: Project[] = data.slice(0, 5).map((item, index) => {
+          // 카테고리별 색상 정의
+          const categoryColors: { [key: string]: string } = {
+            'manufacturing': '#FFD700',
+            'education': '#1DB954', 
+            'service': '#00D4FF',
+            'technology': '#FF6B6B',
+            'healthcare': '#9C27B0',
+            'finance': '#FF9500',
+            'ecommerce': '#00D4FF'
+          }
+          
+          // 카테고리별 한국어 라벨
+          const categoryLabels: { [key: string]: string } = {
+            'manufacturing': '제조업',
+            'education': '교육',
+            'service': '서비스',
+            'technology': '기술',
+            'healthcare': '헬스케어',
+            'finance': '금융',
+            'ecommerce': '전자상거래'
+          }
+          
+          return {
+            id: item.id,
+            title: item.client.toUpperCase(),
+            category: categoryLabels[item.category] || item.industry,
+            description: item.description,
+            results: item.kpis.length > 0 ? item.kpis[0].value + ' ' + item.kpis[0].metric : '+성과 달성',
+            image: item.thumbnail,
+            color: categoryColors[item.category] || '#1DB954',
+            url: item.url || `/case/${item.slug}`
+          }
+        })
+        
+        setProjects(transformedProjects)
+      } catch (error) {
+        console.error('Error fetching portfolio data:', error)
+        // 에러 발생 시 빈 배열로 설정하여 컴포넌트가 깨지지 않도록 함
+        setProjects([])
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    fetchPortfolioData()
+  }, [])
 
   // Auto rotation every 5 seconds (pauses on hover)
   useEffect(() => {
-    if (!isVisible || isPaused) return
+    if (!isVisible || isPaused || projects.length === 0) return
 
     const interval = setInterval(() => {
       setSelectedIndex(prev => (prev + 1) % projects.length)
@@ -145,6 +184,8 @@ const SmartMinimalismWork = () => {
   // Get 3 visible projects (previous, current, next) for infinite loop
   const getVisibleProjects = () => {
     const total = projects.length
+    if (total === 0) return []
+    
     const visibleProjects = []
     
     for (let i = -1; i <= 1; i++) {
@@ -160,7 +201,7 @@ const SmartMinimalismWork = () => {
   }
 
   const handleProjectSelect = (index: number) => {
-    if (isAnimating) return
+    if (isAnimating || projects.length === 0) return
     
     if (index === selectedIndex) {
       // Navigate to project page if already selected
@@ -312,6 +353,45 @@ const SmartMinimalismWork = () => {
           )}
         </div>
       </div>
+    )
+  }
+
+  // 로딩 또는 데이터가 없을 때 간단한 UI 표시
+  if (loading || projects.length === 0) {
+    return (
+      <section 
+        ref={sectionRef}
+        className="min-h-[90vh] bg-[#0E1111] relative overflow-hidden flex flex-col justify-center"
+      >
+        {/* Title */}
+        <div className="text-center mb-20">
+          <h2 
+            className="font-bold text-white"
+            style={{
+              fontSize: 'clamp(28px, 4.5vw, 48px)',
+              letterSpacing: '-0.02em'
+            }}
+          >
+            Check Our{' '}
+            <span className="text-[#1DB954]">Results</span>
+          </h2>
+        </div>
+        
+        {/* Loading indicator */}
+        {loading && (
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1DB954]"></div>
+            <span className="ml-3 text-white/70">포트폴리오를 불러오는 중...</span>
+          </div>
+        )}
+        
+        {/* No data message */}
+        {!loading && projects.length === 0 && (
+          <div className="text-center">
+            <p className="text-white/70">포트폴리오 데이터를 불러올 수 없습니다.</p>
+          </div>
+        )}
+      </section>
     )
   }
 
