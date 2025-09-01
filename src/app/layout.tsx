@@ -234,7 +234,7 @@ export default function RootLayout({
         />
         
         {/* Additional Naver Meta Tags */}
-        <meta name="naver-site-verification" content="your-naver-code" />
+        <meta name="naver-site-verification" content="d90c62d5016150c42c4ef8b998e3971f82a9897b" />
         <meta property="naver:category" content="웹디자인" />
         <meta property="naver:subject" content="웹사이트제작" />
       </head>
