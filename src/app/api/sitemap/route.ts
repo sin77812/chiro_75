@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 // Generate dynamic sitemap based on actual pages
 export async function GET() {
-  const baseUrl = 'https://chiro.co.kr'
+  const baseUrl = 'https://www.chiroweb.co.kr'
   
   // Static pages
   const staticPages = [

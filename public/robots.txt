@@ -1,27 +1,21 @@
+# 기본: 전 크롤러 허용
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://chiro-75.vercel.app/sitemap.xml
-
-# Specific bots optimization
-User-agent: Googlebot
-Crawl-delay: 0
-
+# 네이버 Yeti 명시 허용
 User-agent: Yeti
-Crawl-delay: 0
+Allow: /
 
-User-agent: Bingbot
-Crawl-delay: 1
+# 구글봇 명시 허용 (가독성 목적)
+User-agent: Googlebot
+Allow: /
 
-# Disallow sensitive areas
-Disallow: /api/
-Disallow: /_next/
+# 불필요/민감 경로 차단 (필요 시 조정)
 Disallow: /admin/
-Disallow: /private/
+Disallow: /login/
+Disallow: /api/private/
+Disallow: /tmp/
+Disallow: /draft/
 
-# Allow important SEO paths
-Allow: /portfolio
-Allow: /services
-Allow: /about
-Allow: /consultation
+# 사이트맵 위치
+Sitemap: https://www.chiroweb.co.kr/sitemap.xml

@@ -21,18 +21,18 @@ const notoSansKR = Noto_Sans_KR({
 
 // Comprehensive metadata for SEO
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chiro.co.kr'),
+  metadataBase: new URL('https://www.chiroweb.co.kr'),
   title: {
-    default: 'CHIRO - 프리미엄 웹에이전시 | B2B 기업 전문',
+    default: 'CHIRO | B2B 웹에이전시',
     template: '%s - CHIRO'
   },
-  description: '제조업과 중견기업을 위한 프리미엄 웹사이트 제작 서비스. 150+ 프로젝트 경험, 98% 고객 만족도. 성과 중심 디지털 솔루션 제공.',
+  description: '제조·중견기업 특화 프리미엄 웹에이전시. 성과 중심 리디자인/리빌딩.',
   keywords: [
     '웹에이전시', 'B2B 웹사이트', '기업 홈페이지 제작', '제조업 웹사이트', '중견기업 디지털 마케팅',
     '웹개발', '디지털 전환', '반응형 웹사이트', 'UI/UX 디자인', '성능 최적화',
     '글로벌 진출 지원', '다국어 웹사이트', 'SEO 최적화', '웹 접근성', 'CHIRO'
   ],
-  authors: [{ name: 'CHIRO', url: 'https://chiro.co.kr' }],
+  authors: [{ name: 'CHIRO', url: 'https://www.chiroweb.co.kr' }],
   creator: 'CHIRO',
   publisher: 'CHIRO',
   formatDetection: {
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
   
   // OpenGraph
   openGraph: {
-    title: 'CHIRO - 프리미엄 웹에이전시 | B2B 기업 전문',
-    description: '제조업과 중견기업을 위한 프리미엄 웹사이트 제작 서비스. 150+ 프로젝트 경험, 98% 고객 만족도.',
-    url: 'https://chiro.co.kr',
+    title: 'CHIRO | B2B 웹에이전시',
+    description: '성과 중심 리디자인/리빌딩',
+    url: 'https://www.chiroweb.co.kr',
     siteName: 'CHIRO',
     type: 'website',
     locale: 'ko_KR',
@@ -107,18 +107,15 @@ export const metadata: Metadata = {
 
   // Verification
   verification: {
-    google: 'google-site-verification-code', // Replace with actual code
-    other: {
-      'naver-site-verification': 'naver-verification-code', // Replace with actual code
-    }
+    google: 'ANdrpoeRy-ZYfdNF8-eIP7CWL7ZmgI1EQIOwAAZrbXM'
   },
 
   // Alternates for i18n
   alternates: {
-    canonical: 'https://chiro.co.kr',
+    canonical: 'https://www.chiroweb.co.kr',
     languages: {
-      'ko-KR': 'https://chiro.co.kr',
-      'en-US': 'https://chiro.co.kr/en',
+      'ko-KR': 'https://www.chiroweb.co.kr',
+      'en-US': 'https://www.chiroweb.co.kr/en',
     },
   },
 }
@@ -147,96 +144,22 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         
-        {/* Enhanced Structured Data - LocalBusiness + Services */}
+        {/* Organization Structured Data (ProfessionalService) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "@id": "https://chiro-75.vercel.app/#organization",
+              "@type": "ProfessionalService",
               "name": "CHIRO",
-              "alternateName": "CHIRO 웹디자인 에이전시",
-              "url": "https://chiro-75.vercel.app",
-              "logo": "https://chiro-75.vercel.app/logo.png",
-              "description": "2주 완성 프리미엄 웹사이트 제작 전문 웹에이전시. 웹디자인, UI/UX, 반응형 홈페이지 제작 전문.",
-              "foundingDate": "2020",
-              "telephone": "+82-2-1234-5678",
-              "email": "hello@chiro.agency",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "테헤란로 123",
-                "addressLocality": "강남구",
-                "addressRegion": "서울특별시",
-                "postalCode": "06000",
-                "addressCountry": "KR"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 37.5665,
-                "longitude": 126.9780
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-              },
-              "contactPoint": [
-                {
-                  "@type": "ContactPoint",
-                  "telephone": "+82-2-1234-5678",
-                  "contactType": "customer service",
-                  "availableLanguage": ["ko", "en"]
-                }
-              ],
-              "sameAs": [
-                "https://www.instagram.com/chiro_agency",
-                "https://www.facebook.com/chiroagency",
-                "https://github.com/chiro-agency"
-              ],
-              "priceRange": "₩₩₩",
-              "serviceType": ["웹디자인", "웹사이트제작", "UI/UX디자인", "웹개발", "홈페이지제작"],
-              "areaServed": {
-                "@type": "Country",
-                "name": "대한민국"
-              },
-              "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "웹디자인 서비스",
-                "itemListElement": [
-                  {
-                    "@type": "Offer",
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "웹사이트 제작",
-                      "description": "반응형 웹사이트 제작 서비스"
-                    }
-                  },
-                  {
-                    "@type": "Offer", 
-                    "itemOffered": {
-                      "@type": "Service",
-                      "name": "UI/UX 디자인",
-                      "description": "사용자 중심 디자인 서비스"
-                    }
-                  }
-                ]
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.9",
-                "reviewCount": "150",
-                "bestRating": "5"
-              }
+              "url": "https://www.chiroweb.co.kr",
+              "description": "B2B 웹사이트 리디자인/리빌딩 전문",
+              "areaServed": "KR",
+              "sameAs": [] as string[],
+              "address": { "@type": "PostalAddress", "addressCountry": "KR" }
             })
           }}
         />
-        
-        {/* Additional Naver Meta Tags */}
-        <meta name="naver-site-verification" content="d90c62d5016150c42c4ef8b998e3971f82a9897b" />
-        <meta property="naver:category" content="웹디자인" />
-        <meta property="naver:subject" content="웹사이트제작" />
       </head>
       <body className="font-noto antialiased bg-[#0E1111] text-white">
         <SmoothScroll />

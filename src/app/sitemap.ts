@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://chiro-75.vercel.app'
+  const baseUrl = 'https://www.chiroweb.co.kr'
   
   return [
     {
