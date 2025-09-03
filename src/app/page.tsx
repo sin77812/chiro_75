@@ -10,7 +10,7 @@ import SmartMinimalismContact from '@/components/sections/SmartMinimalismContact
 export const metadata: Metadata = {
   // 핵심 메타 태그
   title: '웹디자인 전문 | CHIRO - 2주 완성 프리미엄 웹사이트 제작',
-  description: '웹에이전시 CHIRO는 2주 만에 완성하는 웹사이트 제작 전문 기업입니다. 웹디자인, UI/UX, 반응형 홈페이지 제작, 340% 전환율 상승 보장.',
+  description: '당신의 비즈니스를 진짜 이해하는 웹 파트너, CHIRO. 맞춤 브랜딩, 합리적 가격, 완벽한 유지보수까지 파트너니까.',
   
   keywords: [
     // 핵심 키워드 (순서 중요!)
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    url: 'https://chiro-75.vercel.app',
+    url: 'https://www.chiroweb.co.kr',
     siteName: 'CHIRO - 웹디자인 전문 에이전시',
     title: '웹디자인 전문 | CHIRO - 2주 완성 프리미엄 웹사이트 제작',
-    description: '웹에이전시 CHIRO와 함께 2주 만에 완벽한 웹사이트를 제작하세요. 340% 전환율 상승, 98% 재계약률 보장.',
+    description: '당신의 비즈니스를 진짜 이해하는 웹 파트너, CHIRO. 맞춤 브랜딩, 합리적 가격, 완벽한 유지보수까지 파트너니까.',
     images: [
       {
         url: '/og-image.jpg',
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: '웹디자인 전문 | CHIRO',
-    description: '2주 완성 프리미엄 웹사이트 제작',
+    description: '당신의 비즈니스를 진짜 이해하는 웹 파트너, CHIRO. 맞춤 브랜딩, 합리적 가격, 완벽한 유지보수까지 파트너니까.',
     images: ['/twitter-image.jpg'],
     creator: '@chiro_agency',
   },
   
   // 추가 메타 태그
   alternates: {
-    canonical: 'https://chiro-75.vercel.app',
+    canonical: 'https://www.chiroweb.co.kr',
   },
   
   robots: {
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     google: 'google-site-verification-code',
   },
   
-  authors: [{ name: 'CHIRO', url: 'https://chiro-75.vercel.app' }],
+  authors: [{ name: 'CHIRO', url: 'https://www.chiroweb.co.kr' }],
   creator: 'CHIRO Web Agency',
   publisher: 'CHIRO',
   
