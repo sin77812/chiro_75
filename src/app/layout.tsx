@@ -23,11 +23,12 @@ const notoSansKR = Noto_Sans_KR({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.chiroweb.co.kr'),
   title: {
-    default: 'CHIRO | B2B 웹에이전시',
-    template: '%s - CHIRO'
+    default: '치로(CHIRO) | 치로 웹디자인 - 프리미엄 홈페이지 제작 전문',
+    template: '%s - 치로(CHIRO)'
   },
-  description: '제조·중견기업 특화 프리미엄 웹에이전시. 성과 중심 리디자인/리빌딩.',
+  description: '치로 웹디자인 - 중소기업을 위한 프리미엄 홈페이지 제작, 리디자인 전문. 트렌디한 웹사이트로 브랜드 가치를 높여드립니다.',
   keywords: [
+    '치로', '치로 웹디자인', 'chiroweb', 'chiroweb design', '홈페이지 제작', '홈페이지 리디자인',
     '웹에이전시', 'B2B 웹사이트', '기업 홈페이지 제작', '제조업 웹사이트', '중견기업 디지털 마케팅',
     '웹개발', '디지털 전환', '반응형 웹사이트', 'UI/UX 디자인', '성능 최적화',
     '글로벌 진출 지원', '다국어 웹사이트', 'SEO 최적화', '웹 접근성', 'CHIRO'
@@ -45,8 +46,8 @@ export const metadata: Metadata = {
   
   // OpenGraph
   openGraph: {
-    title: 'CHIRO | B2B 웹에이전시',
-    description: '성과 중심 리디자인/리빌딩',
+    title: '치로(CHIRO) | 치로 웹디자인 - 프리미엄 홈페이지 제작 전문',
+    description: '치로 웹디자인 - 중소기업을 위한 프리미엄 홈페이지 제작, 리디자인 전문. 트렌디한 웹사이트로 브랜드 가치를 높여드립니다.',
     url: 'https://www.chiroweb.co.kr',
     siteName: 'CHIRO',
     type: 'website',
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'CHIRO - 프리미엄 웹에이전시',
+        alt: '치로 웹디자인 - 프리미엄 홈페이지 제작 전문',
         type: 'image/jpeg',
       }
     ],
@@ -66,8 +67,8 @@ export const metadata: Metadata = {
   // Twitter
   twitter: {
     card: 'summary_large_image',
-    title: 'CHIRO - 프리미엄 웹에이전시',
-    description: '제조업과 중견기업을 위한 프리미엄 웹사이트 제작 서비스',
+    title: '치로 웹디자인 - 프리미엄 홈페이지 제작 전문',
+    description: '치로 웹디자인이 트렌디한 웹사이트로 브랜드 가치를 높여드립니다',
     creator: '@chiro_agency',
     site: '@chiro_agency',
     images: ['/og-image.jpg'],
@@ -151,9 +152,10 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              "name": "CHIRO",
+              "name": "치로(CHIRO) 웹디자인",
               "url": "https://www.chiroweb.co.kr",
-              "description": "B2B 웹사이트 리디자인/리빌딩 전문",
+              "description": "치로 웹디자인 - 프리미엄 홈페이지 제작, 리디자인 전문",
+              "alternateName": ["CHIRO", "치로", "chiroweb"],
               "areaServed": "KR",
               "sameAs": [] as string[],
               "address": { "@type": "PostalAddress", "addressCountry": "KR" }

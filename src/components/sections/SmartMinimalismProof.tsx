@@ -44,8 +44,8 @@ const SmartMinimalismProof = () => {
         .join('')
     }
 
-    splitText(text1, '디자인을 넘어')
-    splitText(text2, '비즈니스를 만듭니다')
+    splitText(text1, '치로와 함께')
+    splitText(text2, '브랜드 가치를 높이세요')
 
     const chars1 = text1.querySelectorAll('.char')
     const chars2 = text2.querySelectorAll('.char')

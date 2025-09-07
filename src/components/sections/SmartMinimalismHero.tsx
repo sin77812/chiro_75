@@ -15,7 +15,7 @@ const SmartMinimalismHero = () => {
     "WEBDESIGN"
   ]
 
-  const subtextChars = "코드가 아닌 성장을 빌드하는 기업".split('')
+  const subtextChars = "치로 웹디자인이 성장을 빌드하는 기업".split('')
 
   // Throttled mouse handling with requestAnimationFrame
   const handleMouseMove = useCallback((e: MouseEvent) => {
