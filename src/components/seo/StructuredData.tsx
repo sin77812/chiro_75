@@ -152,21 +152,21 @@ export function OrganizationStructuredData() {
   const organizationSchema: OrganizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'CHIRO',
-    url: 'https://chiro.agency',
-    logo: 'https://chiro.agency/images/logo.png',
-    description: 'AI-powered web development and digital strategy agency specializing in enterprise solutions. We deliver high-performance websites and digital experiences that drive measurable business results.',
-    foundingDate: '2024',
+    name: '치로 웹디자인',
+    url: 'https://www.chiroweb.co.kr',
+    logo: 'https://www.chiroweb.co.kr/images/logo.png',
+    description: '치로는 중소기업 전문 웹디자인 에이전시입니다. 2주 완성 프리미엄 웹사이트 제작으로 평균 전환율 332% 향상을 도와드립니다.',
+    foundingDate: '2017',
     founder: {
       '@type': 'Person',
-      name: 'CHIRO Team'
+      name: '정원'
     },
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+1-800-CHIRO-AI',
       email: 'chiroweb75@gmail.com',
       contactType: 'customer service',
-      availableLanguage: ['English', 'Korean']
+      availableLanguage: ['Korean', 'English']
     },
     sameAs: [
       'https://linkedin.com/company/chiro-agency',
@@ -175,9 +175,9 @@ export function OrganizationStructuredData() {
     ],
     address: {
       '@type': 'PostalAddress',
-      addressCountry: 'US',
-      addressRegion: 'CA',
-      addressLocality: 'San Francisco'
+      addressCountry: 'KR',
+      addressRegion: '서울특별시',
+      addressLocality: '강남구'
     }
   }
 
@@ -200,8 +200,8 @@ export function ServicesPageStructuredData() {
     description: 'Comprehensive digital services including AI-powered web development, UX/UI design, performance optimization, and digital strategy consulting.',
     provider: {
       '@type': 'Organization',
-      name: 'CHIRO',
-      url: 'https://chiro.agency'
+      name: '치로 웹디자인',
+      url: 'https://www.chiroweb.co.kr'
     },
     serviceType: 'Digital Agency Services',
     category: 'Web Development & Digital Strategy',
@@ -293,13 +293,13 @@ export function ServiceDetailStructuredData({ service }: { service: Service }) {
     description: service.description,
     provider: {
       '@type': 'Organization',
-      name: 'CHIRO',
-      url: 'https://chiro.agency'
+      name: '치로 웹디자인',
+      url: 'https://www.chiroweb.co.kr'
     },
     serviceType: service.category,
     category: service.category,
     areaServed: ['US', 'CA', 'Global'],
-    url: `https://chiro.agency/services/${service.id}`,
+    url: `https://www.chiroweb.co.kr/services/${service.id}`,
     // Add offers if packages exist
     ...(service.packages && {
       offers: service.packages.map(pkg => ({
@@ -405,8 +405,8 @@ export function WebPageStructuredData({ title, description, url, breadcrumbs }: 
     description,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'CHIRO',
-      url: 'https://chiro.agency'
+      name: '치로 웹디자인',
+      url: 'https://www.chiroweb.co.kr'
     },
     about: {
       '@type': 'Thing',

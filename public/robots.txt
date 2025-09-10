@@ -1,21 +1,14 @@
-# 기본: 전 크롤러 허용
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Allow: /_next/static/
+Allow: /_next/image
 
-# 네이버 Yeti 명시 허용
 User-agent: Yeti
 Allow: /
 
-# 구글봇 명시 허용 (가독성 목적)
 User-agent: Googlebot
 Allow: /
 
-# 불필요/민감 경로 차단 (필요 시 조정)
-Disallow: /admin/
-Disallow: /login/
-Disallow: /api/private/
-Disallow: /tmp/
-Disallow: /draft/
-
-# 사이트맵 위치
 Sitemap: https://www.chiroweb.co.kr/sitemap.xml
