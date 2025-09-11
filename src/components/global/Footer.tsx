@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Youtube } from 'lucide-react'
+import { ArrowRight, Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Youtube, Download, BookOpen } from 'lucide-react'
 import { AccessibleButton, AccessibleLink } from '@/components/ui/AccessibleComponents'
 import { ServiceAnalytics } from '@/components/analytics/Analytics'
 
@@ -99,6 +99,69 @@ export default function Footer({ className = '' }: FooterProps) {
   return (
     <footer className={`bg-background-primary border-t border-shadow-gray/30 ${className}`} role="contentinfo">
       <div className="container-custom">
+        {/* Quick Access Section */}
+        <div className="py-12 border-b border-shadow-gray/30">
+          <div className="text-center">
+            <h2 className="font-pretendard font-bold text-text-primary mb-8 text-2xl md:text-3xl">
+              CHIRO와 함께 <span className="text-gradient">성장하세요</span>
+            </h2>
+            
+            {/* Social Media & Download Buttons */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              {/* Blog Button */}
+              <AccessibleLink
+                href="https://blog.naver.com/tlsdnjs812"
+                className="group relative flex items-center gap-2 px-6 py-3 bg-[#03CF5D] hover:bg-[#02B04E] text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                showExternalIcon={false}
+                onClick={() => handleSocialClick('Naver Blog')}
+                aria-label="네이버 블로그 바로가기"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16.273 12.845L7.376 0H0v24h7.726V11.156L16.624 24H24V0h-7.727v12.845z"/>
+                </svg>
+                <span className="font-medium">블로그 바로가기</span>
+              </AccessibleLink>
+
+              {/* Instagram Button */}
+              <AccessibleLink
+                href="#"
+                className="group relative flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:from-[#6E2E9A] hover:via-[#E11818] hover:to-[#E56A2C] text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                showExternalIcon={false}
+                onClick={() => handleSocialClick('Instagram')}
+                aria-label="인스타그램 바로가기"
+              >
+                <Instagram className="w-5 h-5" />
+                <span className="font-medium">인스타 바로가기</span>
+              </AccessibleLink>
+
+              {/* YouTube Button */}
+              <AccessibleLink
+                href="#"
+                className="group relative flex items-center gap-2 px-6 py-3 bg-[#FF0000] hover:bg-[#CC0000] text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                showExternalIcon={false}
+                onClick={() => handleSocialClick('YouTube')}
+                aria-label="유튜브 바로가기"
+              >
+                <Youtube className="w-5 h-5" />
+                <span className="font-medium">유튜브 바로가기</span>
+              </AccessibleLink>
+
+              {/* Catalog Download Button */}
+              <AccessibleLink
+                href="/chiro-catalog.pdf"
+                download
+                className="group relative flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-hover text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+                showExternalIcon={false}
+                onClick={() => ServiceAnalytics.clickServiceCTA('footer-download', 'primary', 'Catalog Download')}
+                aria-label="카탈로그 다운로드"
+              >
+                <Download className="w-5 h-5" />
+                <span className="font-medium">카탈로그 다운로드</span>
+              </AccessibleLink>
+            </div>
+          </div>
+        </div>
+
         {/* Newsletter Section */}
         <div className="py-12 border-b border-shadow-gray/30">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
